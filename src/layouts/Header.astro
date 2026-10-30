@@ -1,0 +1,258 @@
+---
+// src/components/Header.astro
+
+// Добавляем массив subItems (по 3 подпункта для каждой кнопки)
+const navLinks = [
+  {
+    name: 'Каталог товарів',
+    href: '/catalog',
+    subItems: [
+      { name: 'Комплектуючі', href: '/catalog/components' },
+      { name: 'Периферія', href: '/catalog/peripherals' },
+      { name: 'Готові ПК', href: '/catalog/prebuilt' },
+    ],
+  },
+  {
+    name: 'Послуги',
+    href: '/services',
+    subItems: [
+      { name: 'Збірка ПК', href: '/services/assembly' },
+      { name: 'Ремонт та діагностика', href: '/services/repair' },
+      { name: 'Чистка та обслуговування', href: '/services/cleaning' },
+    ],
+  },
+  {
+    name: 'Конфігуратор ПК',
+    href: '/configurator',
+    subItems: [
+      { name: 'Ігровий ПК', href: '/configurator/gaming' },
+      { name: 'Офісний ПК', href: '/configurator/office' },
+      { name: 'Робоча станція', href: '/configurator/workstation' },
+    ],
+  },
+  {
+    name: 'Інформаційні сторінки',
+    href: '/info',
+    subItems: [
+      { name: 'Про нас', href: '/info/about' },
+      { name: 'Доставка та оплата', href: '/info/shipping' },
+      { name: 'Гарантія', href: '/info/warranty' },
+    ],
+  },
+];
+
+const actionLinks = [
+  {
+    name: 'Кошик та оформлення',
+    href: '/cart',
+    subItems: [
+      { name: 'Мій кошик', href: '/cart' },
+      { name: 'Оформлення замовлення', href: '/cart/checkout' },
+      { name: 'Історія замовлень', href: '/cart/history' },
+    ],
+  },
+  {
+    name: 'Особистий кабінет',
+    href: '/profile',
+    subItems: [
+      { name: 'Мій профіль', href: '/profile/details' },
+      { name: 'Мої бонуси', href: '/profile/bonuses' },
+      { name: 'Налаштування', href: '/profile/settings' },
+    ],
+  },
+];
+---
+
+<header class="header">
+  <div class="header-container">
+    {/* Основная группа */}
+    <nav class="nav-group main-nav">
+      {
+        navLinks.map((link) => (
+          <div class="dropdown">
+            <button class="btn btn-pill dropdown-toggle" type="button">
+              {link.name}
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              {link.subItems.map((sub) => (
+                <a href={sub.href} class="dropdown-item">
+                  {sub.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </nav>
+
+    {/* Правая группа */}
+    <div class="nav-group action-nav">
+      {
+        actionLinks.map((link) => (
+          <div class="dropdown">
+            <button class="btn btn-pill dropdown-toggle" type="button">
+              {link.name}
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              {link.subItems.map((sub) => (
+                <a href={sub.href} class="dropdown-item">
+                  {sub.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Основной контейнер шапки */
+  .header {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 16px 24px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  /* Группы кнопок */
+  .nav-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* Оболочка для каждой кнопки с выпадающим меню */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Стиль сиреневых овальных кнопок */
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background-color: #f0d5f8;
+    color: #1a1a1a;
+    border: 2px solid #d4a5e6;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .btn-pill:hover {
+    background-color: #e3b3f2;
+    border-color: #c078dc;
+  }
+
+  /* Стрелочка */
+  .arrow {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+  }
+
+  /* Поворот стрелочки при открытии */
+  .dropdown.is-open .arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Выпадающее меню */
+  .dropdown-menu {
+    display: none; /* По умолчанию скрыто */
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 180px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+
+  /* Класс открытия */
+  .dropdown.is-open .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Пункты выпадающего списка */
+  .dropdown-item {
+    padding: 8px 14px;
+    color: #333333;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 8px;
+    transition: background-color 0.15s ease;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f0d5f8;
+    color: #1a1a1a;
+  }
+
+  /* Адаптивность для мобилок */
+  @media (max-width: 768px) {
+    .header-container {
+      justify-content: center;
+    }
+
+    .main-nav,
+    .action-nav {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Скрипт выполняется на клиенте для обработки кликов
+  document.addEventListener('DOMContentLoaded', () => {
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    dropdowns.forEach((dropdown) => {
+      const toggleBtn = dropdown.querySelector('.dropdown-toggle');
+
+      toggleBtn?.addEventListener('click', (e) => {
+        e.stopPropagation(); // Предотвращаем всплытие
+
+        // Закрываем все остальные открытые менюшки
+        dropdowns.forEach((other) => {
+          if (other !== dropdown) {
+            other.classList.remove('is-open');
+          }
+        });
+
+        // Открываем/закрываем текущее
+        dropdown.classList.toggle('is-open');
+      });
+    });
+
+    // Закрывать выпадающие списки при клике в любое место за пределами кнопок
+    document.addEventListener('click', () => {
+      dropdowns.forEach((dropdown) => {
+        dropdown.classList.remove('is-open');
+      });
+    });
+  });
+</script>
