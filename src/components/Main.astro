@@ -1,0 +1,436 @@
+---
+---
+    <!-- ГОЛОВНИЙ БАНЕР -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="badge">Нове надходження</span>
+                <h1>
+                    Створи ПК своєї мрії з <span class="accent-text"
+                        >PC STORE</span>
+                </h1>
+                <p>
+                    Ігрові станції, потужні комплектуючі та професійна
+                    периферія. Збери ідеальний комп'ютер у нашому конфігураторі
+                    або обери готове рішення.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/configurator" class="btn btn-primary"
+                        >Зібрати ПК</a
+                    >
+                    <a href="/catalog" class="btn btn-outline">В каталог</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-placeholder">Тут буде фото ПК</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КАТЕГОРІЇ -->
+    <section class="categories-section container">
+        <h2 class="section-title">Що ви шукаєте?</h2>
+        <div class="categories-grid">
+            <a href="/services/diagnostic" class="category-card">
+                <h3>Діагностика</h3>
+            </a>
+            <a href="/catalog/components" class="category-card">
+                <h3>Комплектуючі</h3>
+            </a>
+            <a href="/catalog/peripherals" class="category-card">
+                <h3>Периферія</h3>
+            </a>
+            <a href="/catalog/laptops" class="category-card">
+                <h3>Ноутбуки</h3>
+            </a>
+            <a href="/services/assembly" class="category-card">
+                <h3>Збірки</h3>
+            </a>
+        </div>
+    </section>
+
+    <!-- ЕТАПИ ЗАМОВЛЕННЯ -->
+    <section class="steps-section">
+        <div class="container">
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h3>Обираєш</h3>
+                    <p>Конфігуруєш ПК під свої задачі або береш готовий</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h3>Збираємо</h3>
+                    <p>Наші майстри професійно збирають та тестують систему</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h3>Граєш</h3>
+                    <p>Отримуєш готовий до бою ПК з гарантією</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ХІТИ ПРОДАЖУ -->
+    <section class="bestsellers-section container">
+        <div class="section-header">
+            <h2 class="section-title">Хіти продажу</h2>
+            <a href="/catalog" class="view-all">Дивитись всі →</a>
+        </div>
+
+        <div class="products-grid">
+            <!-- Товар 1 -->
+            <div class="product-card">
+                <div class="product-img-placeholder">Фото товару</div>
+                <div class="product-info">
+                    <h4 class="product-title">
+                        Ігровий ПК "Cyber Neon" (RTX 4070, i5-13600K)
+                    </h4>
+                    <div class="product-bottom">
+                        <span class="price">64 999 ₴</span>
+                        <button class="btn-cart">🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 2 -->
+            <div class="product-card">
+                <div class="product-img-placeholder">Фото товару</div>
+                <div class="product-info">
+                    <h4 class="product-title">
+                        Відеокарта NVIDIA GeForce RTX 4060 Ti
+                    </h4>
+                    <div class="product-bottom">
+                        <span class="price">18 500 ₴</span>
+                        <button class="btn-cart">🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 3 -->
+            <div class="product-card">
+                <div class="product-img-placeholder">Фото товару</div>
+                <div class="product-info">
+                    <h4 class="product-title">Ігровий монітор 27" 2K 165Hz</h4>
+                    <div class="product-bottom">
+                        <span class="price">12 300 ₴</span>
+                        <button class="btn-cart">🛒</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .section-title {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .accent-text {
+        color: var(--color-accent);
+    }
+
+    .hero-section {
+        background-color: var(--color-surface);
+        padding: 80px 0;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero-content {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .hero-text {
+        flex: 1;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 6px 12px;
+        background-color: rgba(0, 255, 204, 0.1);
+        color: var(--color-accent);
+        border: 1px solid var(--color-accent);
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .hero-text h1 {
+        font-size: 48px;
+        line-height: 1.2;
+        margin-bottom: 20px;
+    }
+
+    .hero-text p {
+        color: var(--color-text-muted);
+        font-size: 18px;
+        margin-bottom: 30px;
+        max-width: 500px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 16px;
+    }
+
+    .btn {
+        padding: 14px 28px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: var(--color-accent);
+        color: #000;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: var(--color-accent-hover);
+        transform: translateY(-2px);
+    }
+
+    .btn-outline {
+        background-color: transparent;
+        color: var(--color-text-main);
+        border: 1px solid var(--color-border);
+    }
+
+    .btn-outline:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+    }
+
+    .hero-image {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .image-placeholder {
+        width: 100%;
+        max-width: 500px;
+        height: 350px;
+        background: linear-gradient(
+            135deg,
+            var(--color-card) 0%,
+            var(--color-base) 100%
+        );
+        border: 1px dashed var(--color-border);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-muted);
+    }
+
+    .categories-section {
+        padding: 80px 24px;
+    }
+
+    .categories-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .category-card {
+        flex: 1 1 calc(33.333% - 20px);
+        min-width: 250px;
+        max-width: 350px;
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        padding: 40px 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .category-card:hover {
+        border-color: var(--color-accent);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 255, 204, 0.1);
+    }
+
+    .category-card h3 {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .steps-section {
+        background-color: var(--color-surface);
+        padding: 60px 0;
+        border-top: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .steps-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    .step-card {
+        flex: 1;
+        text-align: center;
+    }
+
+    .step-number {
+        font-size: 48px;
+        font-weight: 800;
+        color: var(--color-border);
+        margin-bottom: 10px;
+    }
+
+    .step-card h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: var(--color-accent);
+    }
+
+    .step-card p {
+        color: var(--color-text-muted);
+        font-size: 15px;
+    }
+
+    .bestsellers-section {
+        padding: 80px 24px 100px;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 30px;
+    }
+
+    .section-header .section-title {
+        margin-bottom: 0;
+    }
+
+    .view-all {
+        color: var(--color-text-muted);
+        font-weight: 600;
+        transition: color 0.2s;
+    }
+
+    .view-all:hover {
+        color: var(--color-accent);
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+
+    .product-card {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s;
+    }
+
+    .product-card:hover {
+        border-color: var(--color-text-muted);
+        transform: translateY(-5px);
+    }
+
+    .product-img-placeholder {
+        height: 220px;
+        background-color: var(--color-surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-muted);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .product-info {
+        padding: 20px;
+    }
+
+    .product-title {
+        font-size: 16px;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        min-height: 44px;
+    }
+
+    .product-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .price {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--color-accent);
+    }
+
+    .btn-cart {
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .btn-cart:hover {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #000;
+    }
+
+    @media (max-width: 992px) {
+        .hero-content {
+            flex-direction: column;
+            text-align: center;
+        }
+        .hero-buttons {
+            justify-content: center;
+        }
+        .hero-text p {
+            margin: 0 auto 30px;
+        }
+        .products-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .category-card {
+            flex: 1 1 100%;
+        }
+        .steps-grid {
+            flex-direction: column;
+            gap: 40px;
+        }
+        .products-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

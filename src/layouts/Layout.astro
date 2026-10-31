@@ -1,28 +1,23 @@
 ---
-import Header from './Header.astro';
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="uk">
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>PC STORE | Магазин комп'ютерної техніки</title>
 	</head>
 	<body>
 		<Header />
-		<slot />
+
+		<main>
+			<slot />
+		</main>
+
+		<Footer />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

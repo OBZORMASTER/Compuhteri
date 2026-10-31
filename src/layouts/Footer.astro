@@ -1,0 +1,190 @@
+---
+---
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      
+      <!-- Лого та опис -->
+      <div class="footer-col brand-col">
+        <a href="/" class="logo">
+          <span class="logo-text">PC<span class="accent">STORE</span></span>
+        </a>
+        <p class="brand-desc">Ваш надійний партнер у світі високопродуктивних комп'ютерів, комплектуючих та геймерської периферії.</p>
+      </div>
+
+      <!-- Навігація -->
+      <div class="footer-col">
+        <h3 class="col-title">Клієнтам</h3>
+        <ul class="footer-links">
+          <li><a href="/catalog">Каталог товарів</a></li>
+          <li><a href="/configurator">Конфігуратор ПК</a></li>
+          <li><a href="/services">Наші послуги</a></li>
+          <li><a href="/profile">Особистий кабінет</a></li>
+        </ul>
+      </div>
+
+      <!-- Інформація -->
+      <div class="footer-col">
+        <h3 class="col-title">Інформація</h3>
+        <ul class="footer-links">
+          <li><a href="/info/about">Про нас</a></li>
+          <li><a href="/info/shipping">Доставка та оплата</a></li>
+          <li><a href="/info/warranty">Гарантія та повернення</a></li>
+        </ul>
+      </div>
+
+      <!-- Контакти -->
+      <div class="footer-col contacts-col">
+        <h3 class="col-title">Контакти</h3>
+        <ul class="footer-contacts">
+          <li>
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>м. Запоріжжя, просп. Соборний, 74</span>
+          </li>
+          <li>
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <a href="tel:+380800112233">+38 (0800) 11-22-33</a>
+          </li>
+          <li>
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <a href="mailto:support@pcstore.ua">support@pcstore.ua</a>
+          </li>
+          <li>
+            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Пн-Нд: 10:00 - 20:00</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 PC STORE. Всі права захищені.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-family: 'Inter', sans-serif;
+    padding-top: 60px;
+    margin-top: auto;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+
+  .logo {
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-text-main);
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+
+  .logo .accent {
+    color: var(--color-accent);
+  }
+
+  .brand-desc {
+    line-height: 1.6;
+    font-size: 15px;
+    max-width: 300px;
+  }
+
+  .col-title {
+    color: var(--color-text-main);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .footer-links,
+  .footer-contacts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer-links a,
+  .footer-contacts a {
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-accent);
+    padding-left: 6px; 
+  }
+
+  .footer-contacts a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-contacts li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .contact-icon {
+    flex-shrink: 0;
+    color: var(--color-accent);
+    margin-top: 2px;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--color-border);
+    padding: 24px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+  }
+
+  @media (max-width: 992px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .brand-desc {
+      max-width: 100%;
+    }
+  }
+</style>
