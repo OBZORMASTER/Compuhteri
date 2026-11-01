@@ -1,0 +1,1215 @@
+---
+
+---
+
+<section class="configurator-container">
+    <div class="configurator-main">
+        <h1 class="page-title">Конфігуратор ПК</h1>
+
+        <!-- Секція: Базові -->
+        <div class="config-section">
+            <h2 class="section-heading">
+                Базові <span class="required-asterisk">*</span>
+            </h2>
+
+            <div class="component-list">
+                <!-- Процесор (Приклад вже обраного) -->
+                <div class="component-row is-selected" data-type="cpu">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><rect
+                                    x="4"
+                                    y="4"
+                                    width="16"
+                                    height="16"
+                                    rx="2"
+                                    ry="2"></rect><rect
+                                    x="9"
+                                    y="9"
+                                    width="6"
+                                    height="6"></rect><line
+                                    x1="9"
+                                    y1="1"
+                                    x2="9"
+                                    y2="4"></line><line
+                                    x1="15"
+                                    y1="1"
+                                    x2="15"
+                                    y2="4"></line><line
+                                    x1="9"
+                                    y1="20"
+                                    x2="9"
+                                    y2="23"></line><line
+                                    x1="15"
+                                    y1="20"
+                                    x2="15"
+                                    y2="23"></line><line
+                                    x1="20"
+                                    y1="9"
+                                    x2="23"
+                                    y2="9"></line><line
+                                    x1="20"
+                                    y1="14"
+                                    x2="23"
+                                    y2="14"></line><line
+                                    x1="1"
+                                    y1="9"
+                                    x2="4"
+                                    y2="9"></line><line
+                                    x1="1"
+                                    y1="14"
+                                    x2="4"
+                                    y2="14"></line></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name">Процесор</span>
+                            <span class="selected-item-name"
+                                >Процесор AMD Ryzen 7 7800X3D 4.2(5.0)GHz</span
+                            >
+                        </div>
+                    </div>
+                    <div class="component-actions">
+                        <span class="item-price">15 999 ₴</span>
+                        <button
+                            class="btn-action btn-replace"
+                            onclick="openModal('cpu')"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><path
+                                    d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-5.67"
+                                ></path></svg
+                            >
+                        </button>
+                        <button class="btn-action btn-remove">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><line x1="18" y1="6" x2="6" y2="18"
+                                ></line><line x1="6" y1="6" x2="18" y2="18"
+                                ></line></svg
+                            >
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Материнська плата -->
+                <div class="component-row" data-type="mb">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><rect
+                                    x="3"
+                                    y="3"
+                                    width="18"
+                                    height="18"
+                                    rx="2"
+                                    ry="2"></rect><line
+                                    x1="3"
+                                    y1="9"
+                                    x2="21"
+                                    y2="9"></line><line
+                                    x1="9"
+                                    y1="21"
+                                    x2="9"
+                                    y2="9"></line></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name">Материнська плата</span
+                            >
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('mb')"
+                        >+ Обрати</button
+                    >
+                </div>
+
+                <!-- Відеокарта -->
+                <div class="component-row" data-type="gpu">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><rect
+                                    x="2"
+                                    y="4"
+                                    width="20"
+                                    height="16"
+                                    rx="2"
+                                    ry="2"></rect><path
+                                    d="M7 15h0M12 15h0M17 15h0"></path><line
+                                    x1="8"
+                                    y1="4"
+                                    x2="8"
+                                    y2="20"></line></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name">Відеокарта</span>
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('gpu')"
+                        >+ Обрати</button
+                    >
+                </div>
+
+                <!-- ОЗП -->
+                <div class="component-row" data-type="ram">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><rect
+                                    x="2"
+                                    y="7"
+                                    width="20"
+                                    height="10"
+                                    rx="2"
+                                    ry="2"></rect><line
+                                    x1="6"
+                                    y1="7"
+                                    x2="6"
+                                    y2="17"></line><line
+                                    x1="10"
+                                    y1="7"
+                                    x2="10"
+                                    y2="17"></line><line
+                                    x1="14"
+                                    y1="7"
+                                    x2="14"
+                                    y2="17"></line></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name">Модулі пам'яті</span>
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('ram')"
+                        >+ Обрати</button
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- Секція: Обов'язкові -->
+        <div class="config-section">
+            <h2 class="section-heading">
+                Обов'язкові <span class="required-asterisk">*</span>
+            </h2>
+            <div class="component-list">
+                <!-- SSD -->
+                <div class="component-row" data-type="ssd">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><rect
+                                    x="2"
+                                    y="6"
+                                    width="20"
+                                    height="12"
+                                    rx="2"
+                                    ry="2"></rect><line
+                                    x1="6"
+                                    y1="12"
+                                    x2="6.01"
+                                    y2="12"></line><line
+                                    x1="10"
+                                    y1="12"
+                                    x2="10.01"
+                                    y2="12"></line><line
+                                    x1="14"
+                                    y1="12"
+                                    x2="14.01"
+                                    y2="12"></line></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name">SSD накопичувач</span>
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('ssd')"
+                        >+ Обрати</button
+                    >
+                </div>
+
+                <!-- HDD -->
+                <div class="component-row" data-type="hdd">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><ellipse cx="12" cy="5" rx="9" ry="3"
+                                ></ellipse><path
+                                    d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"
+                                ></path><path
+                                    d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"
+                                ></path></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name">HDD диск</span>
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('hdd')"
+                        >+ Обрати</button
+                    >
+                </div>
+
+                <!-- Охолодження -->
+                <div class="component-row" data-type="cooler">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><circle cx="12" cy="12" r="10"></circle><path
+                                    d="M12 12 12 2M12 12 21.5 12M12 12 6.5 20.5"
+                                ></path></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name"
+                                >Система охолодження</span
+                            >
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('cooler')"
+                        >+ Обрати</button
+                    >
+                </div>
+
+                <!-- Блок живлення -->
+                <div class="component-row" data-type="psu">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><rect
+                                    x="3"
+                                    y="6"
+                                    width="18"
+                                    height="12"
+                                    rx="2"
+                                    ry="2"></rect><path d="M13 12h2"
+                                ></path><path d="M13 8h2"></path><path
+                                    d="M13 16h2"></path><path d="M7 12h.01"
+                                ></path></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name">Блок живлення</span>
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('psu')"
+                        >+ Обрати</button
+                    >
+                </div>
+
+                <!-- Корпус -->
+                <div class="component-row" data-type="case">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><rect
+                                    x="4"
+                                    y="2"
+                                    width="16"
+                                    height="20"
+                                    rx="2"
+                                    ry="2"></rect><line
+                                    x1="12"
+                                    y1="18"
+                                    x2="12.01"
+                                    y2="18"></line><line
+                                    x1="8"
+                                    y1="6"
+                                    x2="16"
+                                    y2="6"></line></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name">Корпус</span>
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('case')"
+                        >+ Обрати</button
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- Секція: Додатково -->
+        <div class="config-section">
+            <h2 class="section-heading">Додаткові опції</h2>
+            <div class="component-list">
+                <!-- Вентилятори -->
+                <div class="component-row" data-type="fans">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><path
+                                    d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.042c.521-2.52 2.6-5.018 5.253-5.32 1.35-.153 2.7.275 3.65 1.135M10.828 16.38a6.08 6.08 0 0 0 8.018 2.946c2.316-.967 4.286-3.23 4.225-5.91-.03-1.357-.655-2.617-1.688-3.415M10.828 16.38a6.081 6.081 0 0 1 .6-8.586c1.942-1.637 5.176-2.28 7.643-.918 1.253.69 2.222 1.88 2.6 3.256"
+                                ></path><circle cx="12" cy="12" r="2"
+                                ></circle></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name"
+                                >Корпусні вентилятори</span
+                            >
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('fans')"
+                        >+ Обрати</button
+                    >
+                </div>
+
+                <!-- Мережева карта -->
+                <div class="component-row" data-type="network">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><path d="M5 12.55a11 11 0 0 1 14.08 0"
+                                ></path><path d="M1.42 9a16 16 0 0 1 21.16 0"
+                                ></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"
+                                ></path><line x1="12" y1="20" x2="12.01" y2="20"
+                                ></line></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name"
+                                >Мережеві карти (Wi-Fi/LAN)</span
+                            >
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('network')"
+                        >+ Обрати</button
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- Секція: Периферія -->
+        <div class="config-section">
+            <h2 class="section-heading">Периферія</h2>
+            <div class="component-list">
+                <!-- Монітор -->
+                <div class="component-row" data-type="monitor">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><rect
+                                    x="2"
+                                    y="3"
+                                    width="20"
+                                    height="14"
+                                    rx="2"
+                                    ry="2"></rect><line
+                                    x1="8"
+                                    y1="21"
+                                    x2="16"
+                                    y2="21"></line><line
+                                    x1="12"
+                                    y1="17"
+                                    x2="12"
+                                    y2="21"></line></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name">Монітор</span>
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('monitor')"
+                        >+ Обрати</button
+                    >
+                </div>
+
+                <!-- Клавіатура -->
+                <div class="component-row" data-type="keyboard">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><rect
+                                    x="2"
+                                    y="4"
+                                    width="20"
+                                    height="16"
+                                    rx="2"
+                                    ry="2"></rect><line
+                                    x1="6"
+                                    y1="8"
+                                    x2="6.01"
+                                    y2="8"></line><line
+                                    x1="10"
+                                    y1="8"
+                                    x2="10.01"
+                                    y2="8"></line><line
+                                    x1="14"
+                                    y1="8"
+                                    x2="14.01"
+                                    y2="8"></line><line
+                                    x1="18"
+                                    y1="8"
+                                    x2="18.01"
+                                    y2="8"></line><line
+                                    x1="8"
+                                    y1="12"
+                                    x2="8.01"
+                                    y2="12"></line><line
+                                    x1="12"
+                                    y1="12"
+                                    x2="12.01"
+                                    y2="12"></line><line
+                                    x1="16"
+                                    y1="12"
+                                    x2="16.01"
+                                    y2="12"></line><line
+                                    x1="7"
+                                    y1="16"
+                                    x2="17"
+                                    y2="16"></line></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name">Клавіатура</span>
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('keyboard')"
+                        >+ Обрати</button
+                    >
+                </div>
+
+                <!-- Миша -->
+                <div class="component-row" data-type="mouse">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                            <svg
+                                class="comp-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><rect x="5" y="2" width="14" height="20" rx="7"
+                                ></rect><line x1="12" y1="2" x2="12" y2="12"
+                                ></line></svg
+                            >
+                        </div>
+                        <div class="component-details">
+                            <span class="component-name">Миша</span>
+                            <span class="selected-item-name empty-state"
+                                >Не обрано</span
+                            >
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('mouse')"
+                        >+ Обрати</button
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Права панель (Підсумок) -->
+    <aside class="configurator-sidebar">
+        <div class="summary-card">
+            <div class="summary-header">
+                <h3>Ваша збірка</h3>
+                <span class="summary-count">1 / 8 обрано</span>
+            </div>
+
+            <div class="summary-status">
+                <div class="status-warning">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path
+                            d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                        ></path><line x1="12" y1="9" x2="12" y2="13"
+                        ></line><line x1="12" y1="17" x2="12.01" y2="17"
+                        ></line></svg
+                    >
+                    <span>Збірка не повна</span>
+                </div>
+            </div>
+
+            <div class="summary-price-block">
+                <span class="total-label">Загальна сума:</span>
+                <span class="total-price">15 999 ₴</span>
+            </div>
+
+            <div class="summary-actions">
+                <button class="btn-buy">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><circle cx="9" cy="21" r="1"></circle><circle
+                            cx="20"
+                            cy="21"
+                            r="1"></circle><path
+                            d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                        ></path></svg
+                    >
+                    У кошик
+                </button>
+                <button class="btn-outline-small">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path
+                            d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
+                        ></path><polyline points="17 21 17 13 7 13 7 21"
+                        ></polyline><polyline points="7 3 7 8 15 8"
+                        ></polyline></svg
+                    >
+                    Зберегти конфігурацію
+                </button>
+            </div>
+
+            <div class="service-addon">
+                <div class="service-header">
+                    <span>Послуга збірки</span>
+                </div>
+                <div class="service-body">
+                    <div class="service-price-box">
+                        <span class="price-val">499 ₴</span>
+                        <span class="price-plus">+ 1%</span>
+                        <span class="price-desc"
+                            >від вартості комплектуючих</span
+                        >
+                    </div>
+                    <p class="service-note">
+                        Доступно лише для повної та сумісної збірки.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<!-- Модальне вікно вибору (Імітація) -->
+<div id="selectionModal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Вибір компонента</h3>
+            <button class="btn-close-modal" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <p>
+                Тут буде каталог товарів відповідної категорії з фільтрами та
+                пошуком.
+            </p>
+            <button
+                class="btn-buy"
+                style="margin-top: 20px;"
+                onclick="closeModal()">Закрити</button
+            >
+        </div>
+    </div>
+</div>
+
+<style>
+    .configurator-container {
+        display: flex;
+        gap: 40px;
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 24px;
+        align-items: flex-start;
+    }
+
+    .configurator-main {
+        flex: 1;
+    }
+
+    .page-title {
+        font-size: 32px;
+        margin-bottom: 40px;
+        color: var(--color-text-main);
+        font-weight: 700;
+    }
+
+    .config-section {
+        margin-bottom: 40px;
+    }
+
+    .section-heading {
+        font-size: 22px;
+        margin-bottom: 20px;
+        color: var(--color-text-main);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .required-asterisk {
+        color: var(--color-accent);
+    }
+
+    .component-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .component-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        padding: 16px 24px;
+        transition: all 0.2s;
+    }
+
+    .component-row:hover {
+        border-color: #444;
+        background-color: #282828;
+    }
+
+    .component-row.is-selected {
+        border-color: var(--color-accent);
+        background-color: rgba(0, 255, 204, 0.03);
+    }
+
+    .component-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .icon-wrapper {
+        width: 48px;
+        height: 48px;
+        background-color: var(--color-element);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-muted);
+    }
+
+    .is-selected .icon-wrapper {
+        background-color: rgba(0, 255, 204, 0.1);
+        color: var(--color-accent);
+    }
+
+    .comp-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .component-details {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .component-name {
+        font-weight: 600;
+        font-size: 16px;
+        color: var(--color-text-main);
+    }
+
+    .selected-item-name {
+        font-size: 14px;
+        color: var(--color-text-muted);
+    }
+
+    .empty-state {
+        font-style: italic;
+        opacity: 0.5;
+    }
+
+    .component-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .item-price {
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--color-text-main);
+        margin-right: 8px;
+    }
+
+    .btn-add {
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+
+    .btn-add:hover {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #000;
+    }
+
+    .btn-action {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .btn-action:hover {
+        background-color: #333;
+        color: var(--color-text-main);
+    }
+
+    .btn-remove:hover {
+        background-color: rgba(255, 77, 77, 0.1);
+        color: #ff4d4d;
+        border-color: #ff4d4d;
+    }
+
+    /* Бічна панель */
+    .configurator-sidebar {
+        width: 350px;
+        position: sticky;
+        top: 24px;
+    }
+
+    .summary-card {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .summary-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--color-border);
+        padding-bottom: 16px;
+    }
+
+    .summary-header h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .summary-count {
+        color: var(--color-text-muted);
+        font-size: 14px;
+    }
+
+    .status-warning {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background-color: rgba(255, 170, 0, 0.1);
+        color: #ffaa00;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        margin-bottom: 24px;
+        border: 1px solid rgba(255, 170, 0, 0.2);
+    }
+
+    .summary-price-block {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 24px;
+    }
+
+    .total-label {
+        font-size: 14px;
+        color: var(--color-text-muted);
+    }
+
+    .total-price {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--color-accent);
+    }
+
+    .summary-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 32px;
+    }
+
+    .btn-buy {
+        background-color: var(--color-accent);
+        color: #000;
+        border: none;
+        padding: 14px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: transform 0.2s;
+    }
+
+    .btn-buy:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn-outline-small {
+        background: transparent;
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: background 0.2s;
+    }
+
+    .btn-outline-small:hover {
+        background-color: var(--color-element);
+    }
+
+    .service-addon {
+        background-color: var(--color-base);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .service-header {
+        padding: 16px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-text-main);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .service-body {
+        padding: 16px;
+    }
+
+    .service-price-box {
+        background-color: var(--color-card);
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .price-val,
+    .price-plus {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--color-text-main);
+    }
+
+    .price-plus {
+        color: var(--color-accent);
+        margin: 0 4px;
+    }
+
+    .price-desc {
+        color: var(--color-text-muted);
+    }
+
+    .service-note {
+        font-size: 12px;
+        color: var(--color-text-muted);
+        text-align: center;
+        margin: 0;
+    }
+
+    /* Стилі для модального вікна */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.hidden {
+        display: none;
+    }
+
+    .modal-content {
+        background-color: var(--color-card);
+        width: 90%;
+        max-width: 600px;
+        border-radius: 16px;
+        border: 1px solid var(--color-border);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--color-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-header h3 {
+        margin: 0;
+    }
+
+    .btn-close-modal {
+        background: none;
+        border: none;
+        color: var(--color-text-muted);
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .modal-body {
+        padding: 40px 24px;
+        text-align: center;
+        color: var(--color-text-muted);
+    }
+
+    @media (max-width: 992px) {
+        .configurator-container {
+            flex-direction: column;
+        }
+        .configurator-sidebar {
+            width: 100%;
+            position: static;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .component-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        .component-actions,
+        .btn-add {
+            width: 100%;
+            justify-content: flex-end;
+        }
+    }
+</style>
+
+<script>
+    // Проста логіка для модального вікна
+    function openModal(type) {
+        document.getElementById("selectionModal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+        document.getElementById("selectionModal").classList.add("hidden");
+    }
+
+    // Закриття по кліку поза вікном
+    document
+        .getElementById("selectionModal")
+        .addEventListener("click", function (e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+</script>
