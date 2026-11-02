@@ -1,0 +1,21 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="6.85742" y="3.42859" width="25.1429" height="33.1429" rx="2" fill="url(#paint0_linear_244_37323)"/>
+<circle cx="29.1427" cy="6.28572" r="0.571429" stroke="black" stroke-width="1.4"/>
+<circle cx="9.71498" cy="6.28572" r="0.571429" stroke="black" stroke-width="1.4"/>
+<path d="M27.4287 36.5714V35.2857C27.4287 34.7334 26.981 34.2857 26.4287 34.2857H12.4287C11.8764 34.2857 11.4287 34.7334 11.4287 35.2857V36.5714" stroke="black" stroke-width="1.4"/>
+<path d="M13.7148 35.4286V36.5714" stroke="black" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M16 35.4286V36.5714" stroke="black" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M18.2861 35.4286V36.5714" stroke="black" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M20.5713 35.4286V36.5714" stroke="black" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M22.8574 35.4286V36.5714" stroke="black" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M25.1426 35.4286V36.5714" stroke="black" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M14.8576 15.4286V15.4286C14.8576 14.4818 14.09 13.7143 13.1433 13.7143H11.805C10.9661 13.7143 10.2861 14.3943 10.2861 15.2332V15.2332C10.2861 15.8663 10.6789 16.433 11.2717 16.6553L13.872 17.6304C14.4648 17.8527 14.8576 18.4195 14.8576 19.0526V19.0526C14.8576 19.8914 14.1775 20.5714 13.3387 20.5714H12.0004C11.0536 20.5714 10.2861 19.8039 10.2861 18.8572V18.8572" stroke="black" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M21.715 15.4286V15.4286C21.715 14.4818 20.9475 13.7143 20.0007 13.7143H18.6624C17.8236 13.7143 17.1436 14.3943 17.1436 15.2332V15.2332C17.1436 15.8663 17.5363 16.433 18.1291 16.6553L20.7294 17.6304C21.3222 17.8527 21.715 18.4195 21.715 19.0526V19.0526C21.715 19.8914 21.035 20.5714 20.1961 20.5714H18.8578C17.9111 20.5714 17.1436 19.8039 17.1436 18.8572V18.8572" stroke="black" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M24 13.7143H26.5714C27.676 13.7143 28.5714 14.6097 28.5714 15.7143V18.5714C28.5714 19.676 27.676 20.5714 26.5714 20.5714H24V13.7143Z" stroke="black" stroke-width="1.4" stroke-linejoin="round"/>
+<defs>
+<linearGradient id="paint0_linear_244_37323" x1="15.9835" y1="41.6149" x2="34.8992" y2="-1.50681" gradientUnits="userSpaceOnUse">
+<stop stop-color="#9A9A9A" stop-opacity="0.5"/>
+<stop offset="1" stop-color="#D9D9D9" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

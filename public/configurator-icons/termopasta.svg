@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="px" viewBox="0 0 40 40" version="1.1">
+<defs>
+<linearGradient id="linear0" gradientUnits="userSpaceOnUse" x1="15.1332" y1="3.9844" x2="28.1564" y2="43.1198" gradientTransform="matrix(1,0,0,-1,0,42)">
+<stop offset="0" style="stop-color:rgb(60.392157%,60.392157%,60.392157%);stop-opacity:0.501961;"/>
+<stop offset="1" style="stop-color:rgb(85.098039%,85.098039%,85.098039%);stop-opacity:0;"/>
+</linearGradient>
+</defs>
+<g id="surface1">
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#linear0);" d="M 35 20.398438 C 35 28.132812 28.730469 34.398438 21 34.398438 C 13.269531 34.398438 7 28.132812 7 20.398438 C 7 12.667969 13.269531 6.398438 21 6.398438 C 28.730469 6.398438 35 12.667969 35 20.398438 Z M 35 20.398438 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 2.675781 9.765625 L 9.746094 2.695312 L 10.949219 3.898438 L 3.878906 10.96875 Z M 2.675781 9.765625 "/>
+<path style="fill:none;stroke-width:1.4;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 7.000358 6.202027 L 11.301045 6.199265 L 11.298283 12.300881 L 7.000358 12.300881 Z M 7.000358 6.202027 " transform="matrix(0.7071,-0.7071,0.7071,0.7071,-3.8315,9.1895)"/>
+<path style="fill:none;stroke-width:1.4;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 5.70143 11.399829 L 18.197453 11.399829 L 18.200215 12.501931 L 5.70143 12.499169 Z M 5.70143 11.399829 " transform="matrix(0.7071,-0.7071,0.7071,0.7071,-4.9673,11.9316)"/>
+<path style="fill:none;stroke-width:1.4;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 33.101562 32 L 31.898438 33.199219 C 30.699219 34.398438 28.601562 34.398438 27.398438 33.199219 L 9 14.800781 L 14.699219 9.101562 L 33.101562 27.5 C 34.300781 28.800781 34.300781 30.800781 33.101562 32 Z M 33.101562 32 "/>
+<path style="fill:none;stroke-width:1.4;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 30.699219 34 L 34 37.300781 C 34.300781 37.300781 35.398438 37.101562 36.300781 36.101562 C 37.101562 35.199219 37.300781 34.199219 37.300781 33.898438 C 36.199219 32.800781 35.101562 31.699219 33.898438 30.5 "/>
+</g>
+</svg>

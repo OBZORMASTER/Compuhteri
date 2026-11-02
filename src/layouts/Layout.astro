@@ -1,4 +1,14 @@
 ---
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "PC STORE | Магазин комп'ютерної техніки",
+	description = "Магазин комп'ютерної техніки та комплектуючих PC STORE",
+} = Astro.props;
+
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import "../styles/global.css";
@@ -9,7 +19,8 @@ import "../styles/global.css";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>PC STORE | Магазин комп'ютерної техніки</title>
+		<title>{title}</title>
+		<meta name="description" content={description} />
 	</head>
 	<body>
 		<Header />
