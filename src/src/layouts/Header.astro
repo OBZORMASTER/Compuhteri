@@ -1,0 +1,409 @@
+---
+const navLinks = [
+  {
+    name: 'Каталог товарів',
+    href: '/catalog',
+    subItems: [
+      { name: 'Комплектуючі', href: '/catalog/components' },
+      { name: 'Периферія', href: '/catalog/peripherals' },
+      { name: 'Готові ПК', href: '/catalog/prebuilt' },
+      { name: 'Ноутбуки', href: '/catalog/laptops' },
+      { name: 'Програмне забезпечення', href: '/catalog/software' },
+      { name: 'Консолі', href: '/catalog/consoles' },
+    ],
+  },
+  {
+    name: 'Послуги',
+    href: '/services',
+    subItems: [
+      { name: 'Збірка ПК на замовлення', href: '/services/assembly' },
+      { name: 'Діагностика та апгрейд', href: '/services/diagnostic' },
+    ],
+  },
+  {
+    name: 'Конфігуратор ПК',
+    href: '/configurator',
+  },
+  {
+    name: 'Інформація',
+    href: '/info',
+    subItems: [
+      { name: 'Про нас', href: '/info/about' },
+      { name: 'Доставка та оплата', href: '/delivery' },
+      { name: 'Гарантія повернення', href: '/info/warranty' },
+      { name: 'Контакти', href: '/info/contacts' },
+    ],
+  },
+];
+---
+
+<header class="site-header">
+  <!-- Лого, Пошук, Кошик, Профіль -->
+  <div class="header-top">
+    <div class="header-container top-container">
+      <a href="/" class="logo">
+        <span class="logo-text">PC<span class="accent">STORE</span></span>
+      </a>
+
+      <div class="search-wrapper">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Пошук комплектуючих (наприклад: RTX 4070)..."
+        />
+        <button class="search-btn">Знайти</button>
+      </div>
+
+      <div class="user-actions">
+        <a href="/cart" class="action-btn">
+          <svg
+            class="icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path
+              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+            ></path>
+          </svg>
+          Кошик
+        </a>
+        <a href="/profile" class="action-btn">
+          <svg
+            class="icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          Профіль
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Навігаційне меню -->
+  <div class="header-bottom">
+    <div class="header-container">
+      <nav class="main-nav">
+        {
+          navLinks.map((link) => (
+            link.subItems ? (
+              <div class="dropdown">
+                <button class="nav-item dropdown-toggle" type="button">
+                  {link.name}
+                  <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="dropdown-menu">
+                  {link.subItems.map((sub) => (
+                    <a href={sub.href} class="dropdown-item">
+                      {sub.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <a href={link.href} class="nav-item">
+                {link.name}
+              </a>
+            )
+          ))
+        }
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    width: 100%;
+    color: var(--text-main);
+    font-family: "Inter", sans-serif;
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .header-top {
+    background-color: var(--color-surface);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .logo {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: 1px;
+  }
+
+  .logo .accent {
+    color: var(--color-accent);
+  }
+
+  .search-wrapper {
+    flex-grow: 1;
+    max-width: 600px;
+    display: flex;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: var(--color-element);
+    border: 1px solid var(--color-border);
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    color: var(--text-main);
+    outline: none;
+  }
+
+  .search-input:focus {
+    border-color: var(--color-accent);
+  }
+
+  .search-btn {
+    padding: 0 24px;
+    background-color: var(--color-accent);
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .search-btn:hover {
+    background-color: var(--color-accent-hover);
+  }
+
+  .user-actions {
+    display: flex;
+    gap: 16px;
+  }
+
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: var(--color-element-hover);
+    color: var(--color-accent);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .action-btn:hover {
+    background-color: var(--color-element-hover);
+    color: var(--color-accent);
+  }
+
+  .header-bottom {
+    background-color: var(--color-base);
+    padding: 0;
+  }
+
+  .main-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 0;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 17px;
+    font-weight: 600;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .nav-item:hover {
+    color: var(--color-accent);
+  }
+
+  .arrow-icon {
+    transition:
+      transform 0.3s ease,
+      color 0.3s ease;
+    margin-top: 2px;
+  }
+
+  .dropdown.is-open .arrow-icon {
+    transform: rotate(180deg);
+    color: var(--color-accent);
+  }
+
+  .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    min-width: 260px;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s ease;
+  }
+
+  .dropdown.is-open .dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .dropdown-item {
+    position: relative;
+    padding: 12px 16px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      background-color 0.3s ease,
+      color 0.3s ease,
+      padding-left 0.3s ease;
+  }
+
+  .dropdown.is-open .dropdown-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .dropdown.is-open .dropdown-item:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+  .dropdown.is-open .dropdown-item:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+  .dropdown.is-open .dropdown-item:nth-child(3) {
+    transition-delay: 0.15s;
+  }
+  .dropdown.is-open .dropdown-item:nth-child(4) {
+    transition-delay: 0.2s;
+  }
+
+  .dropdown-item:hover {
+    background-color: var(--color-element);
+    color: var(--color-text-main);
+    padding-left: 24px;
+    transition-delay: 0s !important;
+  }
+
+  .dropdown-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: var(--color-accent);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+  }
+
+  .dropdown-item:hover::before {
+    transform: scaleY(1);
+  }
+
+  @media (max-width: 768px) {
+    .top-container {
+      flex-direction: column;
+    }
+    .search-wrapper {
+      width: 100%;
+    }
+    .main-nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    dropdowns.forEach((dropdown) => {
+      const toggleBtn = dropdown.querySelector(".dropdown-toggle");
+
+      toggleBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        dropdowns.forEach((other) => {
+          if (other !== dropdown) {
+            other.classList.remove("is-open");
+          }
+        });
+
+        dropdown.classList.toggle("is-open");
+      });
+    });
+
+    document.addEventListener("click", () => {
+      dropdowns.forEach((dropdown) => {
+        dropdown.classList.remove("is-open");
+      });
+    });
+  });
+</script>

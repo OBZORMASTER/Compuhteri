@@ -1,0 +1,32 @@
+:root {
+  --color-base: #121212; /* Головний фон сайту */
+  --color-surface: #1a1a1a; /* Фон шапки, футера, модалок */
+  --color-card: #242424; /* Фон карток товарів, випадаючого списку */
+  --color-element: #2a2a2a; /* Фон кнопок пошуку, інпутів */
+  --color-element-hover: #3a3a3a; /* Ховер для елементів */
+  --color-border: #333333; /* Колір ліній та границь */
+
+  --color-text-main: #ffffff; /* Основний текст */
+  --color-text-muted: #a0a0a0; /* Вторинний текст, описи */
+
+  --color-accent: #00ffcc; /* Акцент, зелений */
+  --color-accent-hover: #00cca3;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-text-main);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

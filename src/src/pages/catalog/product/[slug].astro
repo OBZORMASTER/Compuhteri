@@ -1,0 +1,221 @@
+---
+export const prerender = false;
+import Layout from "../../../layouts/Layout.astro";
+
+const { slug } = Astro.params;
+
+// Карта соответствия категорий для хлебных крошек и ссылок
+const categoryMap: Record<string, { title: string; link: string }> = {
+    "Процесори": { title: "Процесори", link: "/catalog/components/processors" },
+    "Відеокарти": { title: "Відеокарти", link: "/catalog/components/gpus" },
+    "Материнські плати": { title: "Материнські плати", link: "/catalog/components/motherboards" },
+    "Оперативна пам'ять": { title: "Оперативна пам'ять", link: "/catalog/components/ram" },
+    "SSD накопичувачі": { title: "SSD накопичувачі", link: "/catalog/components/ssd" },
+    "Жорсткі диски HDD": { title: "Жорсткі диски HDD", link: "/catalog/components/hdd" },
+    "Корпуси": { title: "Корпуси", link: "/catalog/components/cases" },
+    "Блоки живлення": { title: "Блоки живлення", link: "/catalog/components/psu" },
+    "Системи охолодження": { title: "Системи охолодження", link: "/catalog/components/coolers" },
+    "Звукові карти": { title: "Звукові карти", link: "/catalog/components/sound-cards" }
+};
+
+const productsDatabase: Record<string, { title: string; category: string; price: string; desc: string; specs: string[]; img?: string }> = {
+    "intel-core-i7": {
+        title: "Процесор Intel Core i7-14700K",
+        category: "Процесори",
+        price: "17 999 ₴",
+        desc: "Високопродуктивний процесор для ігор та робочих станцій.",
+        specs: ["Ядра: 20", "Потоки: 28", "Частота: до 5.6 ГГц", "Socket: LGA1700"]
+    },
+    "amd-ryzen-7": {
+        title: "Процесор AMD Ryzen 7 7800X3D",
+        category: "Процесори",
+        price: "19 500 ₴",
+        desc: "Найкращий ігровий процесор з технологією 3D V-Cache.",
+        specs: ["Ядра: 8", "Потоки: 16", "Частота: до 5.0 ГГц", "Socket: AM5"]
+    },
+    "asus-rtx-4070": {
+        title: "Відеокарта ASUS GeForce RTX 4070 12GB",
+        category: "Відеокарти",
+        price: "28 500 ₴",
+        desc: "Сучасна відеокарта з підтримкою DLSS 3 та трасування променів.",
+        specs: ["Пам'ять: 12 GB GDDR6X", "Шина: 192-bit", "Живлення: 1x 16-pin"]
+    },
+    "msi-z790": {
+        title: "Материнська плата MSI MAG Z790 TOMAHAWK",
+        category: "Материнські плати",
+        price: "11 200 ₴",
+        desc: "Надійна основа для потужної ігрової збірки з відмінним охолодженням VRM.",
+        specs: ["Чіпсет: Intel Z790", "Форм-фактор: ATX", "Пам'ять: 4x DDR5"]
+    },
+    "kingston-ddr5-32gb": {
+        title: "Оперативна пам'ять Kingston Fury DDR5 32GB",
+        category: "Оперативна пам'ять",
+        price: "4 500 ₴",
+        desc: "Швидкий комплект пам'яті нового покоління з підтримкою XMP профілів.",
+        specs: ["Об'єм: 32 GB (2x16)", "Частота: 6000 MHz", "Таймінги: CL30"]
+    },
+    "samsung-990-pro-2tb": {
+        title: "SSD накопичувач Samsung 990 PRO 2TB M.2",
+        category: "SSD накопичувачі",
+        price: "7 800 ₴",
+        desc: "Максимальна швидкість читання та запису для геймерів та професіоналів.",
+        specs: ["Об'єм: 2 TB", "Швидкість читання: 7450 МБ/с", "Інтерфейс: PCIe 4.0 NVMe"]
+    },
+    "wd-blue-2tb": {
+        title: "Жорсткий диск WD Blue 2TB HDD",
+        category: "Жорсткі диски HDD",
+        price: "2 400 ₴",
+        desc: "Надійне сховище для зберігання великих файлів, фільмів та архівів.",
+        specs: ["Об'єм: 2 TB", "Швидкість шпинделя: 7200 об/хв", "Буфер: 256 MB"]
+    },
+    "nzxt-h5-flow": {
+        title: "Корпус NZXT H5 Flow Black",
+        category: "Корпуси",
+        price: "4 100 ₴",
+        desc: "Стильний корпус з перфорованою передньою панеллю для ідеального продуву.",
+        specs: ["Тип: Midi Tower", "Матеріал: Сталь, загартоване скло", "Вентилятори в комплекті: 2"]
+    },
+    "msi-mpg-850w": {
+        title: "Блок живлення MSI MPG A850G PCIE5 850W",
+        category: "Блоки живлення",
+        price: "5 900 ₴",
+        desc: "Повністю модульний блок живлення з сертифікатом 80 PLUS Gold та підтримкою PCIe 5.0.",
+        specs: ["Потужність: 850 W", "Сертифікат: 80 PLUS Gold", "Роз'єм 12VHPWR: Є"]
+    },
+    "deepcool-ak620": {
+        title: "Кулер для процесора DeepCool AK620",
+        category: "Системи охолодження",
+        price: "2 600 ₴",
+        desc: "Ефективна двосекційна баштова система охолодження для гарячих процесорів.",
+        specs: ["Розсіювальна потужність (TDP): 260W", "Вентилятори: 2x 120 мм", "Висота: 160 мм"]
+    },
+    "asus-xonar-se": {
+        title: "Звукова карта ASUS Xonar SE",
+        category: "Звукові карти",
+        price: "1 850 ₴",
+        desc: "Внутрішня звукова карта для чистішого звуку та об'ємного звучання в іграх.",
+        specs: ["Інтерфейс: PCIe", "Співвідношення сигнал/шум: 116 дБ", "Підтримка: 5.1 каналів"]
+    }
+};
+
+const product = slug ? productsDatabase[slug] : null;
+const currentCategoryInfo = product ? categoryMap[product.category] : null;
+---
+
+<Layout>
+    <main class="product-page container">
+        <div class="breadcrumb">
+            <a href="/catalog">Каталог</a> / 
+            <a href="/catalog/components">Комплектуючі</a> / 
+            {currentCategoryInfo ? (
+                <>
+                    <a href={currentCategoryInfo.link}>{currentCategoryInfo.title}</a> / 
+                </>
+            ) : null}
+            <span>{product ? product.title : "Товар не знайдено"}</span>
+        </div>
+
+        {product ? (
+            <div class="product-grid">
+                <div class="product-image-section">
+                    <div class="image-placeholder-large">
+                        <span>Фото товару</span>
+                    </div>
+                </div>
+
+                <div class="product-details-section">
+                    <span class="product-category-tag">{product.category}</span>
+                    <h1 class="product-title">{product.title}</h1>
+                    <div class="product-price">{product.price}</div>
+                    <p class="product-desc">{product.desc}</p>
+
+                    <div class="specs-box">
+                        <h3>Характеристики:</h3>
+                        <ul>
+                            {product.specs.map((spec) => <li>{spec}</li>)}
+                        </ul>
+                    </div>
+
+                    <button class="btn-buy">Додати в кошик</button>
+                </div>
+            </div>
+        ) : (
+            <div style="text-align: center; padding: 60px 0;">
+                <h2>Товар не знайдено</h2>
+                <a href="/catalog/components" class="btn-back">Повернутися до комплектуючих</a>
+            </div>
+        )}
+    </main>
+</Layout>
+
+<script>
+    const pathSegments = window.location.pathname.split('/');
+    const currentSlug = pathSegments[pathSegments.length - 1];
+    const buyButton = document.querySelector('.btn-buy');
+
+    if (buyButton) {
+        buyButton.addEventListener('click', () => {
+            const titleElement = document.querySelector('.product-title');
+            const priceElement = document.querySelector('.product-price');
+            const categoryElement = document.querySelector('.product-category-tag');
+
+            if (!titleElement || !priceElement) return;
+
+            const title = titleElement.textContent?.trim() || '';
+            const priceStr = priceElement.textContent?.trim() || '0 ₴';
+            const priceNum = parseInt(priceStr.replace(/\D/g, ''), 10) || 0;
+            const category = categoryElement ? categoryElement.textContent?.trim() || '' : '';
+
+            const productItem = {
+                id: currentSlug,
+                title: title,
+                price: priceStr,
+                priceNum: priceNum,
+                category: category,
+                quantity: 1,
+                img: ""
+            };
+
+            let cart = JSON.parse(localStorage.getItem('pcstore_cart') || '[]');
+            const existingIndex = cart.findIndex((item: any) => item.id === currentSlug);
+
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push(productItem);
+            }
+
+            localStorage.setItem('pcstore_cart', JSON.stringify(cart));
+
+            const originalText = buyButton.textContent;
+            buyButton.textContent = 'Додано в кошик! ✓';
+            (buyButton as HTMLElement).style.backgroundColor = '#10B981';
+            (buyButton as HTMLElement).style.color = '#fff';
+
+            setTimeout(() => {
+                buyButton.textContent = originalText;
+                (buyButton as HTMLElement).style.backgroundColor = '';
+                (buyButton as HTMLElement).style.color = '';
+            }, 2000);
+        });
+    }
+</script>
+
+<style>
+    .product-page { max-width: 1200px; margin: 40px auto 80px; padding: 0 24px; }
+    .breadcrumb { font-size: 14px; color: var(--color-text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--color-text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--color-accent); }
+    .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .image-placeholder-large { width: 100%; height: 420px; background-color: var(--color-card); border: 1px dashed var(--color-border); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); font-weight: 600; }
+    .product-details-section { display: flex; flex-direction: column; gap: 16px; }
+    .product-category-tag { display: inline-block; background-color: var(--color-element); color: var(--color-accent); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; width: fit-content; border: 1px solid var(--color-border); }
+    .product-title { font-size: 28px; color: var(--color-text-main); margin: 0; font-weight: 700; }
+    .product-price { font-size: 32px; font-weight: 800; color: var(--color-accent); }
+    .product-desc { color: var(--color-text-muted); font-size: 15px; margin: 0; }
+    .specs-box { background-color: var(--color-card); border: 1px solid var(--color-border); border-radius: 12px; padding: 16px 20px; }
+    .specs-box h3 { font-size: 16px; color: var(--color-text-main); margin: 0 0 10px; }
+    .specs-box ul { margin: 0; padding-left: 20px; color: var(--color-text-muted); font-size: 14px; display: flex; flex-direction: column; gap: 6px; }
+    .btn-buy { background-color: var(--color-accent); color: #000; border: none; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.2s; }
+    .btn-back { display: inline-block; margin-top: 20px; background: var(--color-element); color: var(--color-accent); padding: 10px 20px; border-radius: 8px; text-decoration: none; }
+</style>
