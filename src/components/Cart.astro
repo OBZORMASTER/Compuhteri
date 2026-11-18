@@ -1632,10 +1632,10 @@
 </style>
 
 <script>
-    // Інтерактивна логіка кошика
+    // Інтерактивна логіка кошика з підтримкою localStorage
     document.addEventListener("DOMContentLoaded", () => {
-        let appliedPromo = null; // { code: 'PCSTORE', percent: 5 }
-        let extraWarranty = false; // +1499
+        let appliedPromo = null; 
+        let extraWarranty = false; 
         const WARRANTY_PRICE = 1499;
         const FREE_SHIPPING_THRESHOLD = 20000;
 
@@ -1649,8 +1649,79 @@
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₴";
         };
 
-        const updateCart = () => {
-            const items = document.querySelectorAll("#cart-items-container .cart-item");
+        // Функція синхронізації кошика з localStorage
+        const getCartFromStorage = () => {
+            try {
+                return JSON.parse(localStorage.getItem("pcstore_cart")) || [];
+            } catch (e) {
+                return [];
+            }
+        };
+
+        const saveCartToStorage = (cart) => {
+            localStorage.setItem("pcstore_cart", JSON.stringify(cart));
+        };
+
+        // Рендеринг товарів у контейнері
+        const renderCartItems = () => {
+            const container = document.getElementById("cart-items-container");
+            const template = document.getElementById("cart-item-template");
+            if (!container) return;
+
+            let cart = getCartFromStorage();
+            
+            // Якщо localStorage порожній, але на сторінці є статичні товари (для прикладу/тесту) - збережемо їх у сховище вперше
+            const staticItems = container.querySelectorAll(".cart-item:not([data-dynamic])");
+            if (cart.length === 0 && staticItems.length > 0) {
+                cart = Array.from(staticItems).map(item => ({
+                    id: item.dataset.id || Math.random().toString(36).substr(2, 9),
+                    title: item.querySelector(".item-title")?.textContent.trim() || "",
+                    code: item.querySelector(".item-code")?.textContent.replace("Код:", "").trim() || "",
+                    priceNum: parseInt(item.dataset.price || "0", 10),
+                    quantity: parseInt(item.querySelector(".qty-input")?.value || "1", 10),
+                    img: item.querySelector(".item-img")?.src || ""
+                }));
+                saveCartToStorage(cart);
+            }
+
+            container.innerHTML = "";
+
+            if (cart.length === 0) {
+                updateCartUI(cart);
+                return;
+            }
+
+            cart.forEach((prod, index) => {
+                if (template) {
+                    const clone = template.content.cloneNode(true);
+                    const itemEl = clone.querySelector(".cart-item");
+                    itemEl.setAttribute("data-dynamic", "true");
+                    itemEl.dataset.id = prod.id;
+                    itemEl.dataset.price = prod.priceNum;
+
+                    const imgEl = itemEl.querySelector(".item-img");
+                    if (imgEl) { imgEl.src = prod.img || ""; imgEl.alt = prod.title; }
+
+                    const titleEl = itemEl.querySelector(".item-title");
+                    if (titleEl) titleEl.textContent = prod.title;
+
+                    const codeEl = itemEl.querySelector(".item-code");
+                    if (codeEl) codeEl.textContent = prod.code ? `Код: ${prod.code}` : "В наявності";
+
+                    const qtyInput = itemEl.querySelector(".qty-input");
+                    if (qtyInput) qtyInput.value = prod.quantity;
+
+                    const priceEl = itemEl.querySelector(".item-price");
+                    if (priceEl) priceEl.textContent = formatPrice(prod.priceNum * prod.quantity);
+
+                    container.appendChild(clone);
+                }
+            });
+
+            updateCartUI(cart);
+        };
+
+        const updateCartUI = (cart) => {
             const headerBadge = document.getElementById("header-items-badge");
             const summaryItemsLabel = document.getElementById("summary-items-label");
             const summaryItemsSum = document.getElementById("summary-items-sum");
@@ -1665,7 +1736,7 @@
             const bannerDesc = document.getElementById("shipping-banner-desc");
             const clearBtn = document.getElementById("btn-clear-cart");
 
-            if (items.length === 0) {
+            if (cart.length === 0) {
                 if (cartLayout) cartLayout.style.display = "none";
                 if (freeShippingBanner) freeShippingBanner.style.display = "none";
                 if (clearBtn) clearBtn.style.display = "none";
@@ -1681,22 +1752,11 @@
             let totalQty = 0;
             let subtotal = 0;
 
-            items.forEach((item) => {
-                const singlePrice = parseInt(item.dataset.price || "0", 10);
-                const qtyInput = item.querySelector(".qty-input");
-                const qty = parseInt(qtyInput ? qtyInput.value : "1", 10);
-                const itemTotal = singlePrice * qty;
-
-                totalQty += qty;
-                subtotal += itemTotal;
-
-                const priceEl = item.querySelector(".item-price");
-                if (priceEl) {
-                    priceEl.textContent = formatPrice(itemTotal);
-                }
+            cart.forEach(item => {
+                totalQty += item.quantity;
+                subtotal += item.priceNum * item.quantity;
             });
 
-            // Підпис кількості товарів
             if (headerBadge) headerBadge.textContent = totalQty.toString();
             if (summaryItemsLabel) {
                 let word = "товарів";
@@ -1709,7 +1769,6 @@
 
             if (summaryItemsSum) summaryItemsSum.textContent = formatPrice(subtotal);
 
-            // Промокод
             let discountAmount = 0;
             if (appliedPromo) {
                 discountAmount = Math.round((subtotal * appliedPromo.percent) / 100);
@@ -1725,15 +1784,12 @@
                 }
             }
 
-            // Додаткова гарантія
             let servicesSum = extraWarranty ? WARRANTY_PRICE : 0;
-
-            // Загальна сума
             const grandTotal = Math.max(0, subtotal - discountAmount + servicesSum);
+            
             if (summaryTotal) summaryTotal.textContent = formatPrice(grandTotal);
             if (modalTotal) modalTotal.textContent = formatPrice(grandTotal);
 
-            // Прогрес безкоштовної доставки
             if (freeShippingBanner && progressBar && bannerTitle && bannerDesc) {
                 freeShippingBanner.style.display = "flex";
                 if (subtotal >= FREE_SHIPPING_THRESHOLD) {
@@ -1750,68 +1806,101 @@
             }
         };
 
-        // Кількість + та -
-        document.addEventListener("click", (e) => {
-            const plusBtn = e.target.closest(".qty-btn.plus");
-            const minusBtn = e.target.closest(".qty-btn.minus");
-            const removeBtn = e.target.closest(".item-remove");
+        // Обробка кліків всередині списку товарів (кількість та видалення)
+        const containerEl = document.getElementById("cart-items-container");
+        if (containerEl) {
+            containerEl.addEventListener("click", (e) => {
+                const plusBtn = e.target.closest(".qty-btn.plus");
+                const minusBtn = e.target.closest(".qty-btn.minus");
+                const removeBtn = e.target.closest(".item-remove");
 
-            if (plusBtn) {
-                const item = plusBtn.closest(".cart-item");
-                const input = item.querySelector(".qty-input");
-                let val = parseInt(input.value || "1", 10);
-                input.value = (val + 1).toString();
-                updateCart();
-            }
+                if (!plusBtn && !minusBtn && !removeBtn) return;
 
-            if (minusBtn) {
-                const item = minusBtn.closest(".cart-item");
-                const input = item.querySelector(".qty-input");
-                let val = parseInt(input.value || "1", 10);
-                if (val > 1) {
-                    input.value = (val - 1).toString();
-                    updateCart();
+                const cartItemEl = e.target.closest(".cart-item");
+                const itemId = cartItemEl.dataset.id;
+                let cart = getCartFromStorage();
+                const prodIndex = cart.findIndex(i => String(i.id) === String(itemId));
+
+                if (prodIndex === -1 && !cartItemEl.hasAttribute("data-dynamic")) {
+                    // Якщо товар був статичним в HTML
+                    return;
                 }
-            }
 
-            if (removeBtn) {
-                const item = removeBtn.closest(".cart-item");
-                const crossId = item.dataset.crossId;
-                if (crossId) {
-                    const addBtn = document.querySelector(`.btn-cross-add[data-id="${crossId}"]`);
-                    if (addBtn) {
-                        addBtn.classList.remove("added");
-                        addBtn.textContent = "+ Додати";
+                if (plusBtn && prodIndex > -1) {
+                    cart[prodIndex].quantity += 1;
+                    saveCartToStorage(cart);
+                    renderCartItems();
+                }
+
+                if (minusBtn && prodIndex > -1) {
+                    if (cart[prodIndex].quantity > 1) {
+                        cart[prodIndex].quantity -= 1;
+                        saveCartToStorage(cart);
+                        renderCartItems();
                     }
                 }
-                item.classList.add("removing");
-                setTimeout(() => {
-                    item.remove();
-                    updateCart();
-                }, 250);
+
+                if (removeBtn) {
+                    if (prodIndex > -1) {
+                        cart.splice(prodIndex, 1);
+                        saveCartToStorage(cart);
+                    }
+                    cartItemEl.classList.add("removing");
+                    setTimeout(() => {
+                        renderCartItems();
+                    }, 250);
+                }
+            });
+        }
+
+        // Глобальна функція для додавання товару з каталогу (викликайте її з каталогу: addToCart({id, title, priceNum, img, code}))
+        window.addToCart = function(product) {
+            let cart = getCartFromStorage();
+            const existing = cart.find(i => String(i.id) === String(product.id));
+            if (existing) {
+                existing.quantity += (product.quantity || 1);
+            } else {
+                cart.push({
+                    id: product.id,
+                    title: product.title,
+                    priceNum: product.priceNum,
+                    code: product.code || "",
+                    img: product.img || "",
+                    quantity: product.quantity || 1
+                });
             }
-        });
+            saveCartToStorage(cart);
+            renderCartItems();
+        };
 
         // Очистити кошик
         const clearBtn = document.getElementById("btn-clear-cart");
         if (clearBtn) {
             clearBtn.addEventListener("click", () => {
                 if (confirm("Ви дійсно бажаєте видалити всі товари з кошика?")) {
-                    const items = document.querySelectorAll("#cart-items-container .cart-item");
-                    items.forEach((it) => it.remove());
-
-                    const crossBtns = document.querySelectorAll(".btn-cross-add.added");
-                    crossBtns.forEach((b) => {
-                        b.classList.remove("added");
-                        b.textContent = "+ Додати";
-                    });
-
-                    updateCart();
+                    localStorage.removeItem("pcstore_cart");
+                    renderCartItems();
                 }
             });
         }
 
-        // Accordion для промокоду
+        // Логіка для Cross-sell (супутніх товарів)
+        document.querySelectorAll(".btn-cross-add").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const name = btn.dataset.name;
+                const price = parseInt(btn.dataset.price || "0", 10);
+                const code = btn.dataset.code;
+                const img = btn.dataset.img;
+                const id = btn.dataset.id;
+
+                window.addToCart({ id, title: name, priceNum: price, code, img, quantity: 1 });
+                
+                btn.classList.add("added");
+                btn.textContent = "✓ У кошику";
+            });
+        });
+
+        // Ініціалізація промокодів, гарантій, модалок (залишається незмінною)
         const promoAccordion = document.getElementById("promo-accordion");
         const promoToggle = document.getElementById("promo-toggle");
         if (promoToggle && promoAccordion) {
@@ -1825,7 +1914,6 @@
             });
         }
 
-        // Застосування промокоду
         const applyPromoBtn = document.getElementById("btn-apply-promo");
         const promoInput = document.getElementById("promo-input");
         const promoFeedback = document.getElementById("promo-feedback");
@@ -1837,125 +1925,54 @@
 
         const applyPromo = (codeStr) => {
             const cleanCode = (codeStr || "").trim().toUpperCase();
-            if (!cleanCode) {
-                if (promoFeedback) {
-                    promoFeedback.textContent = "Будь ласка, введіть код";
-                    promoFeedback.className = "promo-feedback error";
-                }
-                return;
-            }
-
+            if (!cleanCode) return;
             if (promoCodes[cleanCode]) {
                 appliedPromo = { code: cleanCode, ...promoCodes[cleanCode] };
                 if (promoFeedback) {
-                    promoFeedback.textContent = `✓ Промокод ${cleanCode} успішно застосовано!`;
+                    promoFeedback.textContent = `✓ Промокод ${cleanCode} застосовано!`;
                     promoFeedback.className = "promo-feedback success";
                 }
                 if (promoActiveChip) promoActiveChip.style.display = "flex";
                 if (chipName) chipName.textContent = cleanCode;
                 if (chipSave) chipSave.textContent = `-${appliedPromo.percent}%`;
                 if (promoInput) promoInput.value = "";
-                updateCart();
+                renderCartItems();
             } else {
                 if (promoFeedback) {
-                    promoFeedback.textContent = "✕ Недійсний або застарілий промокод";
+                    promoFeedback.textContent = "✕ Недійсний промокод";
                     promoFeedback.className = "promo-feedback error";
                 }
             }
         };
 
         if (applyPromoBtn && promoInput) {
-            applyPromoBtn.addEventListener("click", () => {
-                applyPromo(promoInput.value);
-            });
+            applyPromoBtn.addEventListener("click", () => applyPromo(promoInput.value));
             promoInput.addEventListener("keydown", (e) => {
-                if (e.key === "Enter") {
-                    e.preventDefault();
-                    applyPromo(promoInput.value);
-                }
+                if (e.key === "Enter") { e.preventDefault(); applyPromo(promoInput.value); }
             });
         }
 
         if (sampleCodeBtn && promoInput) {
-            sampleCodeBtn.addEventListener("click", () => {
-                promoInput.value = "PCSTORE";
-                applyPromo("PCSTORE");
-            });
+            sampleCodeBtn.addEventListener("click", () => { promoInput.value = "PCSTORE"; applyPromo("PCSTORE"); });
         }
 
         if (removePromoBtn) {
             removePromoBtn.addEventListener("click", () => {
                 appliedPromo = null;
                 if (promoActiveChip) promoActiveChip.style.display = "none";
-                if (promoFeedback) {
-                    promoFeedback.textContent = "Промокод скасовано";
-                    promoFeedback.className = "promo-feedback";
-                }
-                updateCart();
+                if (promoFeedback) promoFeedback.textContent = "";
+                renderCartItems();
             });
         }
 
-        // Додаткова гарантія
         const warrantyCheckbox = document.getElementById("addon-warranty");
         if (warrantyCheckbox) {
             warrantyCheckbox.addEventListener("change", (e) => {
                 extraWarranty = e.target.checked;
-                updateCart();
+                renderCartItems();
             });
         }
 
-        // Додавання супутніх товарів (Cross-sell) через Template
-        document.querySelectorAll(".btn-cross-add").forEach((btn) => {
-            btn.addEventListener("click", () => {
-                if (btn.classList.contains("added")) return;
-
-                const name = btn.dataset.name;
-                const price = btn.dataset.price;
-                const code = btn.dataset.code;
-                const img = btn.dataset.img;
-                const id = btn.dataset.id;
-
-                const container = document.getElementById("cart-items-container");
-                const template = document.getElementById("cart-item-template");
-                if (container && template) {
-                    const clone = template.content.cloneNode(true);
-                    const itemEl = clone.querySelector(".cart-item");
-                    itemEl.dataset.id = id;
-                    itemEl.dataset.price = price;
-                    itemEl.dataset.crossId = id;
-
-                    const imgEl = itemEl.querySelector(".item-img");
-                    if (imgEl) {
-                        imgEl.src = img;
-                        imgEl.alt = name;
-                    }
-
-                    const titleEl = itemEl.querySelector(".item-title");
-                    if (titleEl) {
-                        titleEl.textContent = name;
-                    }
-
-                    const codeEl = itemEl.querySelector(".item-code");
-                    if (codeEl) {
-                        codeEl.textContent = `Код: ${code}`;
-                    }
-
-                    const priceEl = itemEl.querySelector(".item-price");
-                    if (priceEl) {
-                        priceEl.dataset.singlePrice = price;
-                        priceEl.textContent = formatPrice(parseInt(price, 10));
-                    }
-
-                    container.appendChild(clone);
-
-                    btn.classList.add("added");
-                    btn.textContent = "✓ У кошику";
-                    updateCart();
-                }
-            });
-        });
-
-        // Модалка швидкого замовлення
         const quickModal = document.getElementById("quick-order-modal");
         const openQuickBtn = document.getElementById("btn-quick-order");
         const closeQuickBtn = document.getElementById("modal-close-btn");
@@ -1968,22 +1985,11 @@
                 quickModal.style.display = "flex";
                 if (quickForm) quickForm.style.display = "flex";
                 if (successScreen) successScreen.style.display = "none";
-                const phoneInput = document.getElementById("quick-phone");
-                if (phoneInput) setTimeout(() => phoneInput.focus(), 100);
             });
         }
-
-        const closeModal = () => {
-            if (quickModal) quickModal.style.display = "none";
-        };
-
+        const closeModal = () => { if (quickModal) quickModal.style.display = "none"; };
         if (closeQuickBtn) closeQuickBtn.addEventListener("click", closeModal);
         if (doneBtn) doneBtn.addEventListener("click", closeModal);
-        if (quickModal) {
-            quickModal.addEventListener("click", (e) => {
-                if (e.target === quickModal) closeModal();
-            });
-        }
 
         if (quickForm) {
             quickForm.addEventListener("submit", (e) => {
@@ -1993,15 +1999,14 @@
             });
         }
 
-        // Кнопка основного оформлення
         const checkoutBtn = document.getElementById("btn-checkout");
         if (checkoutBtn) {
             checkoutBtn.addEventListener("click", () => {
-                alert("Перехід до оформлення замовлення (вибір адреси та способу оплати)");
+                alert("Перехід до оформлення замовлення");
             });
         }
 
-        // Початкова ініціалізація
-        updateCart();
+        // Первинний запуск рендеру
+        renderCartItems();
     });
 </script>

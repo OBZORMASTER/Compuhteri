@@ -1,0 +1,339 @@
+---
+const componentCategories = [
+  {
+    title: "Процесори",
+    slug: "processors",
+    desc: "Основа продуктивності ПК",
+    tags: [
+      { name: "Intel", href: "/catalog/components/intel-core-i7" },
+      { name: "AMD", href: "/catalog/components/amd-ryzen-7" },
+      { name: "Socket AM4", href: "/catalog/components/amd-ryzen-7" },
+      { name: "AMD Ryzen 5", href: "/catalog/components/amd-ryzen-7" },
+      { name: "Socket 1700", href: "/catalog/components/intel-core-i7" },
+      { name: "Socket AM5", href: "/catalog/components/amd-ryzen-7" },
+      { name: "Intel Core i5", href: "/catalog/components/intel-core-i7" },
+      { name: "Intel Core i7", href: "/catalog/components/intel-core-i7" }
+    ],
+    allLink: { text: "Усі процесори", href: "/catalog/components/processors" }
+  },
+  {
+    title: "Материнські плати",
+    slug: "motherboards",
+    desc: "База для сумісної збірки",
+    tags: [
+      { name: "Intel", href: "/catalog/components/msi-z790" },
+      { name: "AMD", href: "/catalog/components/msi-z790" },
+      { name: "Asus", href: "/catalog/components/msi-z790" },
+      { name: "Gigabyte", href: "/catalog/components/msi-z790" },
+      { name: "MSI", href: "/catalog/components/msi-z790" },
+      { name: "Socket AM4", href: "/catalog/components/msi-z790" },
+      { name: "Socket AM5", href: "/catalog/components/msi-z790" },
+      { name: "Socket 1700", href: "/catalog/components/msi-z790" }
+    ],
+    allLink: { text: "Усі материнські плати", href: "/catalog/components/motherboards" }
+  },
+  {
+    title: "Відеокарти",
+    slug: "gpus",
+    desc: "Для ігор, графіки та стрімінгу",
+    tags: [
+      { name: "NVIDIA (GeForce)", href: "/catalog/components/asus-rtx-4070" },
+      { name: "AMD (Radeon)", href: "/catalog/components/asus-rtx-4070" },
+      { name: "GeForce RTX 5000", href: "/catalog/components/asus-rtx-4070" },
+      { name: "GeForce RTX 4000", href: "/catalog/components/asus-rtx-4070" },
+      { name: "Radeon RX 9000", href: "/catalog/components/asus-rtx-4070" }
+    ],
+    allLink: { text: "Усі відеокарти", href: "/catalog/components/gpus" }
+  },
+  {
+    title: "Оперативна пам'ять",
+    slug: "ram",
+    desc: "Швидкий апгрейд системи",
+    tags: [
+      { name: "DDR5 на 64 ГБ", href: "/catalog/components/kingston-ddr5-32gb" },
+      { name: "DDR5 на 32 ГБ", href: "/catalog/components/kingston-ddr5-32gb" },
+      { name: "DDR4 на 32 ГБ", href: "/catalog/components/kingston-ddr5-32gb" },
+      { name: "DDR4 на 16 ГБ", href: "/catalog/components/kingston-ddr5-32gb" },
+      { name: "Для ноутбука", href: "/catalog/components/kingston-ddr5-32gb" }
+    ],
+    allLink: { text: "Усі ОЗП", href: "/catalog/components/ram" }
+  },
+  {
+    title: "SSD накопичувачі",
+    slug: "ssd",
+    desc: "Для пришвидшення завантаження та роботи",
+    tags: [
+      { name: "SSD на 2 ТБ", href: "/catalog/components/samsung-990-pro-2tb" },
+      { name: "SSD на 960 ГБ - 1 ТБ", href: "/catalog/components/samsung-990-pro-2tb" },
+      { name: "SSD на 480 ГБ - 512 ГБ", href: "/catalog/components/samsung-990-pro-2tb" },
+      { name: "Зовнішні SSD", href: "/catalog/components/samsung-990-pro-2tb" }
+    ],
+    allLink: { text: "Усі SSD", href: "/catalog/components/ssd" }
+  },
+  {
+    title: "HDD диск",
+    slug: "hdd",
+    desc: "Для зберігання великих обсягів даних",
+    tags: [
+      { name: "HDD на 2 ТБ", href: "/catalog/components/wd-blue-2tb" },
+      { name: "HDD на 1 ТБ", href: "/catalog/components/wd-blue-2tb" },
+      { name: "Для ноутбука", href: "/catalog/components/wd-blue-2tb" }
+    ],
+    allLink: { text: "Усі HDD", href: "/catalog/components/hdd" }
+  },
+  {
+    title: "Корпуси",
+    slug: "cases",
+    desc: "Основа зручної та акуратної збірки",
+    tags: [
+      { name: "Без блока живлення", href: "/catalog/components/nzxt-h5-flow" },
+      { name: "З блоками живлення", href: "/catalog/components/nzxt-h5-flow" },
+      { name: "Кастомні", href: "/catalog/components/nzxt-h5-flow" },
+      { name: "Передня панель Airflow-Mesh", href: "/catalog/components/nzxt-h5-flow" },
+      { name: "Прозора бокова панель", href: "/catalog/components/nzxt-h5-flow" }
+    ],
+    allLink: { text: "Усі корпуси", href: "/catalog/components/cases" }
+  },
+  {
+    title: "Блоки живлення",
+    slug: "psu",
+    desc: "Стабільність і запас потужності",
+    tags: [
+      { name: "80 PLUS White", href: "/catalog/components/msi-mpg-850w" },
+      { name: "80 PLUS Bronze", href: "/catalog/components/msi-mpg-850w" },
+      { name: "80 PLUS Gold", href: "/catalog/components/msi-mpg-850w" },
+      { name: "80 PLUS Platinum/Titanium", href: "/catalog/components/msi-mpg-850w" }
+    ],
+    allLink: { text: "Усі блоки живлення", href: "/catalog/components/psu" }
+  },
+  {
+    title: "Системи охолодження",
+    slug: "coolers",
+    desc: "Тихіша та холодніша збірка",
+    tags: [
+      { name: "Кулери для процесорів", href: "/catalog/components/deepcool-ak620" },
+      { name: "Баштові кулери", href: "/catalog/components/deepcool-ak620" },
+      { name: "Низькопрофільні", href: "/catalog/components/deepcool-ak620" },
+      { name: "Корпусні вентилятори", href: "/catalog/components/deepcool-ak620" }
+    ],
+    allLink: { text: "Усі системи охолодження", href: "/catalog/components/coolers" }
+  },
+  {
+    title: "Звукові карти",
+    slug: "sound-cards",
+    desc: "Для покращення якості звуку",
+    tags: [
+      { name: "Внутрішні звукові карти Asus", href: "/catalog/components/asus-xonar-se" },
+      { name: "Зовнішні USB ЦАП", href: "/catalog/components/asus-xonar-se" }
+    ],
+    allLink: { text: "Усі звукові карти", href: "/catalog/components/sound-cards" }
+  }
+];
+---
+
+<section class="components-container">
+    <div class="page-header">
+        <h1 class="page-title">Комплектуючі до ПК</h1>
+        <p class="page-subtitle">Оберіть необхідну категорію деталей для вашого комп'ютера</p>
+    </div>
+
+    <div class="components-grid">
+        {componentCategories.map((cat) => (
+            <div class="comp-category-card">
+                <div class="card-content-top">
+                    <!-- Заглушка під майбутню картинку -->
+                    <div class="image-placeholder">
+                        <!-- <img src="/images/categories/example.png" alt={cat.title} class="category-real-img" /> -->
+                        <span class="placeholder-text">Фото</span>
+                    </div>
+
+                    <div class="card-titles">
+                        <h3>{cat.title}</h3>
+                        <p>{cat.desc}</p>
+                    </div>
+
+                    <div class="tags-list">
+                        {cat.tags.map((tag) => (
+                            <a href={tag.href} class="tag-pill">{tag.name}</a>
+                        ))}
+                    </div>
+                </div>
+
+                <div class="card-bottom">
+                    <a href={cat.allLink.href} class="all-link">{cat.allLink.text} <span>›</span></a>
+                </div>
+
+                <!-- Головне посилання розтягнуте на всю картку поверх всього -->
+                <a href={cat.allLink.href} class="card-link-overlay" aria-label={cat.title}></a>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style>
+    .components-container {
+        max-width: 1200px;
+        margin: 40px auto 80px;
+        padding: 0 24px;
+    }
+
+    .page-header {
+        margin-bottom: 32px;
+    }
+
+    .page-title {
+        font-size: 32px;
+        margin: 0 0 8px;
+        color: var(--color-text-main);
+        font-weight: 700;
+    }
+
+    .page-subtitle {
+        color: var(--color-text-muted);
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .components-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        align-items: stretch;
+    }
+
+    .comp-category-card {
+        position: relative; /* Необхідно для позиціонування розтягнутого посилання */
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .comp-category-card:hover {
+        border-color: var(--color-accent);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(0, 255, 204, 0.1);
+    }
+
+    /* Розтягуємо посилання на всю картку поверх усього за допомогою псевдоелемента або абсолютної позиції */
+    .card-link-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1; /* Робимо клікабельним поверх фону, але нижче за теги */
+        border-radius: 16px;
+    }
+
+    .card-content-top {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .image-placeholder {
+        width: 64px;
+        height: 64px;
+        border-radius: 12px;
+        background-color: var(--color-element);
+        border: 1px dashed var(--color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .placeholder-text {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--color-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .category-real-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    .card-titles h3 {
+        margin: 0 0 4px;
+        font-size: 18px;
+        color: var(--color-text-main);
+        font-weight: 600;
+    }
+
+    .card-titles p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--color-text-muted);
+        line-height: 1.4;
+    }
+
+    .tags-list {
+        position: relative;
+        z-index: 2; /* Теги повинні бути вище за оверлей, щоб на них можна було натискати окремо */
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    .tag-pill {
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.15s ease;
+    }
+
+    .tag-pill:hover {
+        background-color: rgba(0, 255, 204, 0.1);
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+    }
+
+    .card-bottom {
+        position: relative;
+        z-index: 2; /* Кнопка «Усі...» теж повинна бути вище */
+        border-top: 1px solid var(--color-border);
+        padding-top: 16px;
+        margin-top: 20px;
+    }
+
+    .all-link {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-accent);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform 0.15s;
+    }
+
+    .all-link:hover {
+        transform: translateX(3px);
+    }
+
+    @media (max-width: 992px) {
+        .components-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .components-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
