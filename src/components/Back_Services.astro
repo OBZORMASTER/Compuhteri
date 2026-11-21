@@ -1,0 +1,791 @@
+---
+---
+
+<main class="feedback-container container">
+    <div class="breadcrumb">
+        <a href="/">Головна</a> /
+        <span>Зворотний зв'язок</span>
+    </div>
+
+    <div class="feedback-header">
+        <h1 class="page-title">Зворотний зв'язок та контакти</h1>
+        <p class="page-subtitle">
+            Допоможемо з підбором комплектуючих, перевіркою сумісності в конфігураторі, статусом замовлення чи гарантією
+        </p>
+    </div>
+
+    <!-- Швидкі картки зв'язку -->
+    <div class="quick-cards">
+        <div class="quick-card">
+            <div class="quick-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+            </div>
+            <div class="quick-content">
+                <span class="quick-label">Гаряча лінія</span>
+                <span class="quick-value">+38 (0800) 11-22-33</span>
+                <span class="quick-meta">Безкоштовно по Україні • Пн–Нд: 10:00 – 20:00</span>
+            </div>
+            <button type="button" class="btn-copy" data-copy="+380800112233" title="Скопіювати номер">
+                Копіювати
+            </button>
+        </div>
+
+        <div class="quick-card">
+            <div class="quick-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </div>
+            <div class="quick-content">
+                <span class="quick-label">Підтримка та запити</span>
+                <span class="quick-value">support@pcstore.ua</span>
+                <span class="quick-meta">Відповідаємо зазвичай протягом 1–2 годин</span>
+            </div>
+            <button type="button" class="btn-copy" data-copy="support@pcstore.ua" title="Скопіювати email">
+                Копіювати
+            </button>
+        </div>
+
+        <div class="quick-card">
+            <div class="quick-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
+                </svg>
+            </div>
+            <div class="quick-content">
+                <span class="quick-label">Точка видачі та шоурум</span>
+                <span class="quick-value">м. Запоріжжя, просп. Соборний, 74</span>
+                <span class="quick-meta">Пн–Нд: з 10:00 до 20:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основна сітка: форма + контактна інформація -->
+    <div class="feedback-grid">
+        <!-- Форма зворотного зв'язку -->
+        <section class="form-panel">
+            <h2>Написати нам</h2>
+            <p class="panel-desc">Заповніть форму нижче — менеджер або технічний спеціаліст зв'яжеться з вами.</p>
+
+            <form id="feedback-form" class="feedback-form" novalidate>
+                <div class="form-row-2">
+                    <div class="form-field">
+                        <label for="client-name">Ваше ім'я <span>*</span></label>
+                        <input
+                            type="text"
+                            id="client-name"
+                            name="name"
+                            placeholder="Наприклад, Олександр"
+                            required
+                        />
+                        <small class="field-error" data-for="client-name"></small>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="client-contact">Телефон або Email <span>*</span></label>
+                        <input
+                            type="text"
+                            id="client-contact"
+                            name="contact"
+                            placeholder="+380 (XX) XXX-XX-XX або name@mail.ua"
+                            required
+                        />
+                        <small class="field-error" data-for="client-contact"></small>
+                    </div>
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-field">
+                        <label for="topic">Тема звернення</label>
+                        <select id="topic" name="topic">
+                            <option value="build-help">Підбір ПК або комплектуючих</option>
+                            <option value="configurator">Питання щодо конфігуратора ПК</option>
+                            <option value="order-status">Статус замовлення та доставка</option>
+                            <option value="warranty">Гарантія, сервіс або повернення</option>
+                            <option value="b2b">Опт / корпоративні замовлення</option>
+                            <option value="other">Інше питання</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="order-number">Номер замовлення (якщо є)</label>
+                        <input
+                            type="text"
+                            id="order-number"
+                            name="orderNumber"
+                            placeholder="Наприклад, PC-2026-4812"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="preferred-channel">Зручний спосіб відповіді</label>
+                    <div class="chips-group" role="group" aria-label="Зручний спосіб відповіді">
+                        <label class="chip-option">
+                            <input type="radio" name="channel" value="phone" checked />
+                            <span>Дзвінок</span>
+                        </label>
+                        <label class="chip-option">
+                            <input type="radio" name="channel" value="messenger" />
+                            <span>Месенджер (Telegram / Viber)</span>
+                        </label>
+                        <label class="chip-option">
+                            <input type="radio" name="channel" value="email" />
+                            <span>Email</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="message">Повідомлення <span>*</span></label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        placeholder="Опишіть задачу: бюджет, ігри або програми, модель товару чи суть запитання..."
+                        required
+                    ></textarea>
+                    <small class="field-error" data-for="message"></small>
+                </div>
+
+                <label class="consent-row">
+                    <input type="checkbox" id="privacy-consent" checked required />
+                    <span>
+                        Погоджуюсь на обробку персональних даних для зворотного зв'язку згідно з
+                        <a href="/info/warranty">умовами обслуговування</a>.
+                    </span>
+                </label>
+                <small class="field-error" data-for="privacy-consent"></small>
+
+                <div class="form-actions">
+                    <button type="submit" id="submit-feedback" class="btn-submit">
+                        Надіслати повідомлення
+                    </button>
+                    <button type="reset" id="clear-feedback" class="btn-secondary">
+                        Очистити
+                    </button>
+                </div>
+            </form>
+
+            <!-- Повідомлення про успішну відправку -->
+            <div id="feedback-success" class="success-box" style="display: none;">
+                <div class="success-badge">✓ Запит прийнято</div>
+                <h3>Дякуємо за звернення!</h3>
+                <p id="success-summary">
+                    Ми отримали ваше повідомлення та зв'яжемося з вами найближчим часом у робочі години (Пн–Нд: 10:00 – 20:00).
+                </p>
+                <button type="button" id="send-another" class="btn-secondary">
+                    Надіслати ще одне повідомлення
+                </button>
+            </div>
+        </section>
+
+        <!-- Права колонка: реквізити, графік та швидкі розділи -->
+        <aside class="info-panel">
+            <div class="info-card">
+                <h3>Контактна інформація</h3>
+                <ul class="contact-details-list">
+                    <li>
+                        <span class="detail-title">Адреса</span>
+                        <span class="detail-value">м. Запоріжжя, просп. Соборний, 74</span>
+                    </li>
+                    <li>
+                        <span class="detail-title">Телефон</span>
+                        <span class="detail-value">+38 (0800) 11-22-33</span>
+                    </li>
+                    <li>
+                        <span class="detail-title">Електронна пошта</span>
+                        <span class="detail-value">support@pcstore.ua</span>
+                    </li>
+                    <li>
+                        <span class="detail-title">Графік роботи</span>
+                        <span class="detail-value">Пн–Нд: 10:00 – 20:00</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Корисні розділи</h3>
+                <p class="info-card-text">
+                    Шукаєте готову відповідь або хочете зібрати ПК самостійно? Зазирніть у ці розділи:
+                </p>
+                <div class="helpful-links">
+                    <a href="/configurator" class="helpful-link-item">
+                        <span>Конфігуратор ПК</span>
+                        <span>→</span>
+                    </a>
+                    <a href="/delivery" class="helpful-link-item">
+                        <span>Доставка та оплата</span>
+                        <span>→</span>
+                    </a>
+                    <a href="/info/warranty" class="helpful-link-item">
+                        <span>Гарантія та повернення</span>
+                        <span>→</span>
+                    </a>
+                    <a href="/info/about" class="helpful-link-item">
+                        <span>Про PC STORE</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<script>
+    const form = document.getElementById('feedback-form') as HTMLFormElement | null;
+    const successBox = document.getElementById('feedback-success');
+    const successSummary = document.getElementById('success-summary');
+    const sendAnotherBtn = document.getElementById('send-another');
+    const clearBtn = document.getElementById('clear-feedback');
+
+    const nameInput = document.getElementById('client-name') as HTMLInputElement | null;
+    const contactInput = document.getElementById('client-contact') as HTMLInputElement | null;
+    const topicSelect = document.getElementById('topic') as HTMLSelectElement | null;
+    const orderInput = document.getElementById('order-number') as HTMLInputElement | null;
+    const messageInput = document.getElementById('message') as HTMLTextAreaElement | null;
+    const consentInput = document.getElementById('privacy-consent') as HTMLInputElement | null;
+
+    function setError(id: string, text: string) {
+        const el = document.querySelector(`.field-error[data-for="${id}"]`);
+        if (el) {
+            el.textContent = text;
+        }
+    }
+
+    function clearErrors() {
+        document.querySelectorAll('.field-error').forEach((el) => {
+            el.textContent = '';
+        });
+    }
+
+    function validateForm(): boolean {
+        clearErrors();
+        let valid = true;
+
+        if (!nameInput || nameInput.value.trim().length < 2) {
+            setError('client-name', "Вкажіть ваше ім'я (мінімум 2 символи).");
+            valid = false;
+        }
+
+        const contactVal = contactInput?.value.trim() || '';
+        const hasPhoneDigits = contactVal.replace(/\D/g, '').length >= 9;
+        const looksLikeEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactVal);
+        if (!hasPhoneDigits && !looksLikeEmail) {
+            setError('client-contact', 'Введіть коректний номер телефону або email.');
+            valid = false;
+        }
+
+        if (!messageInput || messageInput.value.trim().length < 10) {
+            setError('message', 'Опишіть запитання детальніше (мінімум 10 символів).');
+            valid = false;
+        }
+
+        if (!consentInput || !consentInput.checked) {
+            setError('privacy-consent', 'Підтвердіть згоду на обробку персональних даних.');
+            valid = false;
+        }
+
+        return valid;
+    }
+
+    form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!validateForm()) return;
+
+        const topicLabel = topicSelect?.selectedOptions[0]?.textContent || 'Звернення';
+        const contactValue = contactInput?.value.trim() || '';
+        const orderValue = orderInput?.value.trim();
+
+        if (successSummary) {
+            successSummary.textContent = `Тема: «${topicLabel}»${orderValue ? ` (замовлення №${orderValue})` : ''}. Ми зв'яжемося з вами за контактом ${contactValue} у робочі години (Пн–Нд: 10:00 – 20:00).`;
+        }
+
+        form.style.display = 'none';
+        if (successBox) {
+            successBox.style.display = 'block';
+        }
+    });
+
+    clearBtn?.addEventListener('click', () => {
+        clearErrors();
+    });
+
+    sendAnotherBtn?.addEventListener('click', () => {
+        if (successBox) successBox.style.display = 'none';
+        if (form) {
+            form.reset();
+            form.style.display = 'flex';
+        }
+        clearErrors();
+    });
+
+    document.querySelectorAll('.btn-copy').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+            const value = btn.getAttribute('data-copy');
+            if (!value) return;
+
+            try {
+                await navigator.clipboard.writeText(value);
+                const originalText = btn.textContent;
+                btn.textContent = 'Скопійовано';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 1600);
+            } catch {
+                // Fallback, якщо clipboard API заблоковано
+            }
+        });
+    });
+</script>
+
+<style>
+    .feedback-container {
+        max-width: 1200px;
+        margin: 40px auto 80px;
+        padding: 0 24px;
+    }
+
+    .breadcrumb {
+        font-size: 14px;
+        color: var(--color-text-muted);
+        margin-bottom: 20px;
+    }
+    .breadcrumb a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+    }
+    .breadcrumb a:hover {
+        color: var(--color-accent);
+    }
+
+    .feedback-header {
+        margin-bottom: 28px;
+    }
+    .page-title {
+        font-size: 32px;
+        color: var(--color-text-main);
+        margin: 0 0 8px;
+        font-weight: 700;
+    }
+    .page-subtitle {
+        color: var(--color-text-muted);
+        margin: 0;
+        font-size: 15px;
+        max-width: 720px;
+        line-height: 1.5;
+    }
+
+    .quick-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 32px;
+    }
+
+    .quick-card {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .quick-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .quick-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .quick-label {
+        font-size: 12px;
+        color: var(--color-text-muted);
+    }
+
+    .quick-value {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--color-text-main);
+        text-decoration: none;
+        word-break: break-word;
+    }
+    a.quick-value:hover {
+        color: var(--color-accent);
+    }
+
+    .quick-meta {
+        font-size: 12px;
+        color: var(--color-text-muted);
+        line-height: 1.4;
+    }
+
+    .btn-copy {
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: all 0.2s;
+    }
+    .btn-copy:hover {
+        border-color: var(--color-accent);
+        color: var(--color-text-main);
+    }
+    .btn-copy.copied {
+        background-color: rgba(0, 255, 204, 0.12);
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+    }
+
+    .feedback-grid {
+        display: grid;
+        grid-template-columns: 1.55fr 1fr;
+        gap: 32px;
+        align-items: start;
+    }
+
+    .form-panel {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 28px;
+    }
+
+    .form-panel h2 {
+        margin: 0 0 6px;
+        font-size: 22px;
+        color: var(--color-text-main);
+    }
+
+    .panel-desc {
+        margin: 0 0 24px;
+        font-size: 14px;
+        color: var(--color-text-muted);
+    }
+
+    .feedback-form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .form-row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-field label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-text-main);
+    }
+
+    .form-field label span {
+        color: var(--color-accent);
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+        width: 100%;
+        box-sizing: border-box;
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        border-radius: 10px;
+        padding: 11px 14px;
+        color: var(--color-text-main);
+        font-family: inherit;
+        font-size: 14px;
+        transition: border-color 0.2s;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+        outline: none;
+        border-color: var(--color-accent);
+    }
+
+    .form-field textarea {
+        resize: vertical;
+        min-height: 110px;
+    }
+
+    .field-error {
+        color: #ff6b6b;
+        font-size: 12px;
+        min-height: 14px;
+    }
+
+    .chips-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .chip-option {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .chip-option input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .chip-option span {
+        padding: 8px 14px;
+        border-radius: 999px;
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        font-size: 13px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    .chip-option input:checked + span {
+        background-color: rgba(0, 255, 204, 0.12);
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+        font-weight: 600;
+    }
+
+    .consent-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        color: var(--color-text-muted);
+        line-height: 1.5;
+        cursor: pointer;
+    }
+
+    .consent-row input {
+        margin-top: 3px;
+        flex-shrink: 0;
+    }
+
+    .consent-row a {
+        color: var(--color-accent);
+        text-decoration: none;
+    }
+    .consent-row a:hover {
+        text-decoration: underline;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 4px;
+    }
+
+    .btn-submit {
+        flex: 1;
+        background-color: var(--color-accent);
+        color: #000;
+        border: none;
+        padding: 13px 20px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 15px;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+    .btn-submit:hover {
+        opacity: 0.92;
+    }
+
+    .btn-secondary {
+        background-color: var(--color-element);
+        color: var(--color-text-muted);
+        border: 1px solid var(--color-border);
+        padding: 12px 18px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .btn-secondary:hover {
+        color: var(--color-text-main);
+        border-color: var(--color-accent);
+    }
+
+    .success-box {
+        text-align: center;
+        padding: 24px 12px;
+    }
+
+    .success-badge {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background-color: rgba(0, 255, 204, 0.14);
+        border: 1px solid var(--color-accent);
+        color: var(--color-accent);
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 14px;
+    }
+
+    .success-box h3 {
+        margin: 0 0 10px;
+        font-size: 22px;
+        color: var(--color-text-main);
+    }
+
+    .success-box p {
+        margin: 0 0 22px;
+        color: var(--color-text-muted);
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .info-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .info-card {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 24px;
+    }
+
+    .info-card h3 {
+        margin: 0 0 16px;
+        font-size: 18px;
+        color: var(--color-text-main);
+    }
+
+    .info-card-text {
+        margin: 0 0 16px;
+        font-size: 14px;
+        color: var(--color-text-muted);
+        line-height: 1.5;
+    }
+
+    .contact-details-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .contact-details-list li {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .contact-details-list li:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .detail-title {
+        font-size: 12px;
+        color: var(--color-text-muted);
+    }
+
+    .detail-value {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--color-text-main);
+        text-decoration: none;
+    }
+
+    .detail-value.link:hover {
+        color: var(--color-accent);
+    }
+
+    .helpful-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .helpful-link-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px;
+        border-radius: 10px;
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    .helpful-link-item:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+        transform: translateX(3px);
+    }
+
+    @media (max-width: 960px) {
+        .quick-cards {
+            grid-template-columns: 1fr;
+        }
+        .feedback-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .form-row-2 {
+            grid-template-columns: 1fr;
+        }
+        .form-panel {
+            padding: 20px;
+        }
+        .form-actions {
+            flex-direction: column;
+        }
+    }
+</style>

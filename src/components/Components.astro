@@ -4,15 +4,10 @@ const componentCategories = [
     title: "Процесори",
     slug: "processors",
     desc: "Основа продуктивності ПК",
+    icon: "/configurator-icons/procesor.svg",
     tags: [
-      { name: "Intel", href: "/catalog/components/intel-core-i7" },
-      { name: "AMD", href: "/catalog/components/amd-ryzen-7" },
-      { name: "Socket AM4", href: "/catalog/components/amd-ryzen-7" },
-      { name: "AMD Ryzen 5", href: "/catalog/components/amd-ryzen-7" },
-      { name: "Socket 1700", href: "/catalog/components/intel-core-i7" },
-      { name: "Socket AM5", href: "/catalog/components/amd-ryzen-7" },
-      { name: "Intel Core i5", href: "/catalog/components/intel-core-i7" },
-      { name: "Intel Core i7", href: "/catalog/components/intel-core-i7" }
+      { name: "Intel", href: "/catalog/components/processors?filter=intel" },
+      { name: "AMD", href: "/catalog/components/processors?filter=amd" },
     ],
     allLink: { text: "Усі процесори", href: "/catalog/components/processors" }
   },
@@ -20,15 +15,11 @@ const componentCategories = [
     title: "Материнські плати",
     slug: "motherboards",
     desc: "База для сумісної збірки",
+    icon: "/configurator-icons/materinka.svg",
     tags: [
-      { name: "Intel", href: "/catalog/components/msi-z790" },
-      { name: "AMD", href: "/catalog/components/msi-z790" },
-      { name: "Asus", href: "/catalog/components/msi-z790" },
-      { name: "Gigabyte", href: "/catalog/components/msi-z790" },
-      { name: "MSI", href: "/catalog/components/msi-z790" },
-      { name: "Socket AM4", href: "/catalog/components/msi-z790" },
-      { name: "Socket AM5", href: "/catalog/components/msi-z790" },
-      { name: "Socket 1700", href: "/catalog/components/msi-z790" }
+      { name: "Asus", href: "/catalog/components/motherboards?filter=asus" },
+      { name: "Gigabyte", href: "/catalog/components/motherboards?filter=gigabyte" },
+      { name: "MSI", href: "/catalog/components/motherboards?filter=msi" },
     ],
     allLink: { text: "Усі материнські плати", href: "/catalog/components/motherboards" }
   },
@@ -36,12 +27,10 @@ const componentCategories = [
     title: "Відеокарти",
     slug: "gpus",
     desc: "Для ігор, графіки та стрімінгу",
+    icon: "/configurator-icons/videokarta.svg",
     tags: [
-      { name: "NVIDIA (GeForce)", href: "/catalog/components/asus-rtx-4070" },
-      { name: "AMD (Radeon)", href: "/catalog/components/asus-rtx-4070" },
-      { name: "GeForce RTX 5000", href: "/catalog/components/asus-rtx-4070" },
-      { name: "GeForce RTX 4000", href: "/catalog/components/asus-rtx-4070" },
-      { name: "Radeon RX 9000", href: "/catalog/components/asus-rtx-4070" }
+      { name: "NVIDIA (GeForce)", href: "/catalog/components/gpus?filter=nvidia" },
+      { name: "AMD (Radeon)", href: "/catalog/components/gpus?filter=amd" },
     ],
     allLink: { text: "Усі відеокарти", href: "/catalog/components/gpus" }
   },
@@ -49,12 +38,12 @@ const componentCategories = [
     title: "Оперативна пам'ять",
     slug: "ram",
     desc: "Швидкий апгрейд системи",
+    icon: "/configurator-icons/moduli_pamyati.svg",
     tags: [
-      { name: "DDR5 на 64 ГБ", href: "/catalog/components/kingston-ddr5-32gb" },
-      { name: "DDR5 на 32 ГБ", href: "/catalog/components/kingston-ddr5-32gb" },
-      { name: "DDR4 на 32 ГБ", href: "/catalog/components/kingston-ddr5-32gb" },
-      { name: "DDR4 на 16 ГБ", href: "/catalog/components/kingston-ddr5-32gb" },
-      { name: "Для ноутбука", href: "/catalog/components/kingston-ddr5-32gb" }
+      { name: "DDR5 на 64 ГБ", href: "/catalog/components/ram?filter=ddr5-64gb" },
+      { name: "DDR5 на 32 ГБ", href: "/catalog/components/ram?filter=ddr5-32gb" },
+      { name: "DDR4 на 32 ГБ", href: "/catalog/components/ram?filter=ddr4-32gb" },
+      { name: "DDR4 на 16 ГБ", href: "/catalog/components/ram?filter=ddr4-16gb" },
     ],
     allLink: { text: "Усі ОЗП", href: "/catalog/components/ram" }
   },
@@ -62,11 +51,11 @@ const componentCategories = [
     title: "SSD накопичувачі",
     slug: "ssd",
     desc: "Для пришвидшення завантаження та роботи",
+    icon: "/configurator-icons/ssd.svg",
     tags: [
-      { name: "SSD на 2 ТБ", href: "/catalog/components/samsung-990-pro-2tb" },
-      { name: "SSD на 960 ГБ - 1 ТБ", href: "/catalog/components/samsung-990-pro-2tb" },
-      { name: "SSD на 480 ГБ - 512 ГБ", href: "/catalog/components/samsung-990-pro-2tb" },
-      { name: "Зовнішні SSD", href: "/catalog/components/samsung-990-pro-2tb" }
+      { name: "Samsung", href: "/catalog/components/ssd?filter=samsung" },
+      { name: "Kingston", href: "/catalog/components/ssd?filter=kingston" },
+      { name: "2TB", href: "/catalog/components/ssd?filter=2tb" },
     ],
     allLink: { text: "Усі SSD", href: "/catalog/components/ssd" }
   },
@@ -74,10 +63,11 @@ const componentCategories = [
     title: "HDD диск",
     slug: "hdd",
     desc: "Для зберігання великих обсягів даних",
+    icon: "/configurator-icons/hdd.svg",
     tags: [
-      { name: "HDD на 2 ТБ", href: "/catalog/components/wd-blue-2tb" },
-      { name: "HDD на 1 ТБ", href: "/catalog/components/wd-blue-2tb" },
-      { name: "Для ноутбука", href: "/catalog/components/wd-blue-2tb" }
+      { name: "2TB", href: "/catalog/components/hdd?filter=2tb" },
+      { name: "1TB", href: "/catalog/components/hdd?filter=1tb" },
+      { name: "Toshiba", href: "/catalog/components/hdd?filter=toshiba" },
     ],
     allLink: { text: "Усі HDD", href: "/catalog/components/hdd" }
   },
@@ -85,12 +75,12 @@ const componentCategories = [
     title: "Корпуси",
     slug: "cases",
     desc: "Основа зручної та акуратної збірки",
+    icon: "/configurator-icons/korpus.svg",
     tags: [
-      { name: "Без блока живлення", href: "/catalog/components/nzxt-h5-flow" },
-      { name: "З блоками живлення", href: "/catalog/components/nzxt-h5-flow" },
-      { name: "Кастомні", href: "/catalog/components/nzxt-h5-flow" },
-      { name: "Передня панель Airflow-Mesh", href: "/catalog/components/nzxt-h5-flow" },
-      { name: "Прозора бокова панель", href: "/catalog/components/nzxt-h5-flow" }
+      { name: "Без блока живлення", href: "/catalog/components/cases?filter=no-psu" },
+      { name: "З блоком живлення", href: "/catalog/components/cases?filter=with-psu" },
+      { name: "Кастомні", href: "/catalog/components/cases?filter=custom" },
+      { name: "Бокова панель зі скла", href: "/catalog/components/cases?filter=glass-side" }
     ],
     allLink: { text: "Усі корпуси", href: "/catalog/components/cases" }
   },
@@ -98,11 +88,11 @@ const componentCategories = [
     title: "Блоки живлення",
     slug: "psu",
     desc: "Стабільність і запас потужності",
+    icon: "/configurator-icons/blok_jivlennya.svg",
     tags: [
-      { name: "80 PLUS White", href: "/catalog/components/msi-mpg-850w" },
-      { name: "80 PLUS Bronze", href: "/catalog/components/msi-mpg-850w" },
-      { name: "80 PLUS Gold", href: "/catalog/components/msi-mpg-850w" },
-      { name: "80 PLUS Platinum/Titanium", href: "/catalog/components/msi-mpg-850w" }
+      { name: "850W", href: "/catalog/components/psu?filter=850w" },
+      { name: "700W", href: "/catalog/components/psu?filter=700w" },
+      { name: "500W", href: "/catalog/components/psu?filter=500w" },
     ],
     allLink: { text: "Усі блоки живлення", href: "/catalog/components/psu" }
   },
@@ -110,11 +100,11 @@ const componentCategories = [
     title: "Системи охолодження",
     slug: "coolers",
     desc: "Тихіша та холодніша збірка",
+    icon: "/configurator-icons/oholodgennya.svg",
     tags: [
-      { name: "Кулери для процесорів", href: "/catalog/components/deepcool-ak620" },
-      { name: "Баштові кулери", href: "/catalog/components/deepcool-ak620" },
-      { name: "Низькопрофільні", href: "/catalog/components/deepcool-ak620" },
-      { name: "Корпусні вентилятори", href: "/catalog/components/deepcool-ak620" }
+      { name: "Кулери для процесорів", href: "/catalog/components/coolers?filter=cpu-coolers" },
+      { name: "Баштові кулери", href: "/catalog/components/coolers?filter=tower" },
+      { name: "Корпусні вентилятори", href: "/catalog/components/coolers?filter=case-fans" }
     ],
     allLink: { text: "Усі системи охолодження", href: "/catalog/components/coolers" }
   },
@@ -123,8 +113,8 @@ const componentCategories = [
     slug: "sound-cards",
     desc: "Для покращення якості звуку",
     tags: [
-      { name: "Внутрішні звукові карти Asus", href: "/catalog/components/asus-xonar-se" },
-      { name: "Зовнішні USB ЦАП", href: "/catalog/components/asus-xonar-se" }
+      { name: "Внутрішні", href: "/catalog/components/sound-cards?filter=in" },
+      { name: "Зовнішні", href: "/catalog/components/sound-cards?filter=out" }
     ],
     allLink: { text: "Усі звукові карти", href: "/catalog/components/sound-cards" }
   }
@@ -141,10 +131,12 @@ const componentCategories = [
         {componentCategories.map((cat) => (
             <div class="comp-category-card">
                 <div class="card-content-top">
-                    <!-- Заглушка під майбутню картинку -->
                     <div class="image-placeholder">
-                        <!-- <img src="/images/categories/example.png" alt={cat.title} class="category-real-img" /> -->
-                        <span class="placeholder-text">Фото</span>
+                        {cat.icon ? (
+                            <img src={cat.icon} alt={cat.title} class="category-real-img" loading="lazy" />
+                        ) : (
+                            <span class="placeholder-text">Фото</span>
+                        )}
                     </div>
 
                     <div class="card-titles">
@@ -163,7 +155,6 @@ const componentCategories = [
                     <a href={cat.allLink.href} class="all-link">{cat.allLink.text} <span>›</span></a>
                 </div>
 
-                <!-- Головне посилання розтягнуте на всю картку поверх всього -->
                 <a href={cat.allLink.href} class="card-link-overlay" aria-label={cat.title}></a>
             </div>
         ))}
@@ -202,7 +193,7 @@ const componentCategories = [
     }
 
     .comp-category-card {
-        position: relative; /* Необхідно для позиціонування розтягнутого посилання */
+        position: relative;
         background-color: var(--color-card);
         border: 1px solid var(--color-border);
         border-radius: 16px;
@@ -220,11 +211,10 @@ const componentCategories = [
         box-shadow: 0 8px 30px rgba(0, 255, 204, 0.1);
     }
 
-    /* Розтягуємо посилання на всю картку поверх усього за допомогою псевдоелемента або абсолютної позиції */
     .card-link-overlay {
         position: absolute;
         inset: 0;
-        z-index: 1; /* Робимо клікабельним поверх фону, але нижче за теги */
+        z-index: 1;
         border-radius: 16px;
     }
 
@@ -235,15 +225,22 @@ const componentCategories = [
     }
 
     .image-placeholder {
-        width: 64px;
-        height: 64px;
-        border-radius: 12px;
-        background-color: var(--color-element);
-        border: 1px dashed var(--color-border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    background-color: var(--color-element);
+    border: 1.5px solid var(--color-accent); /* зелёная обводка */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .comp-category-card:hover .image-placeholder {
+    border-color: #22c55e;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
     }
 
     .placeholder-text {
@@ -257,8 +254,9 @@ const componentCategories = [
     .category-real-img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        border-radius: 12px;
+        object-fit: contain;
+        padding: 10px;
+        box-sizing: border-box;
     }
 
     .card-titles h3 {
@@ -277,7 +275,7 @@ const componentCategories = [
 
     .tags-list {
         position: relative;
-        z-index: 2; /* Теги повинні бути вище за оверлей, щоб на них можна було натискати окремо */
+        z-index: 2;
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
@@ -304,7 +302,7 @@ const componentCategories = [
 
     .card-bottom {
         position: relative;
-        z-index: 2; /* Кнопка «Усі...» теж повинна бути вище */
+        z-index: 2;
         border-top: 1px solid var(--color-border);
         padding-top: 16px;
         margin-top: 20px;

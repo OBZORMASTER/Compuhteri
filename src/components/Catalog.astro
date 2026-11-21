@@ -3,48 +3,35 @@ const catalogCategories = [
   {
     id: 'computers',
     title: "Комп'ютери",
-    link: '/catalog/prebuilt',
+    link: '/catalog/prebuild',
     icon: `<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><circle cx="12" cy="17" r="1"/>`,
     columns: [
       {
         heading: 'Призначення',
         items: [
-          { name: 'Ігрові ПК', href: '/catalog/prebuilt' },
-          { name: 'ПК для кіберспорту', href: '/catalog/prebuilt' },
-          { name: 'ПК для 4K', href: '/catalog/prebuilt' },
-          { name: 'ПК для стрімінгу', href: '/catalog/prebuilt' },
-          { name: 'ПК для дизайнерів', href: '/catalog/prebuilt' },
-          { name: 'ПК для офісу та роботи', href: '/catalog/prebuilt' },
-          { name: 'ПК для навчання', href: '/catalog/prebuilt' },
+          { name: 'Ігрові ПК', href: '/catalog/prebuild' },
+          { name: 'ПК для стрімінгу', href: '/catalog/prebuild?ramType=ddr5' },
+          { name: 'ПК для дизайнерів', href: '/catalog/prebuild?ramType=ddr5' },
+          { name: 'ПК для офісу та роботи', href: '/catalog/prebuild?formFactor=desktop' },
         ],
-        allLink: { text: 'Усі ПК', href: '/catalog/prebuilt' }
+        allLink: { text: 'Усі ПК', href: '/catalog/prebuild' }
       },
       {
         heading: 'Форм-фактор',
         items: [
-          { name: 'Системні блоки', href: '/catalog/prebuilt' },
-          { name: 'Моноблоки', href: '/catalog/prebuilt' },
-          { name: 'Неттопи', href: '/catalog/prebuilt' },
+          { name: 'Системні блоки', href: '/catalog/prebuild?formFactor=midi-tower,full-tower' },
+          { name: 'Моноблоки', href: '/catalog/prebuild?formFactor=desktop' },
+          { name: 'Неттопи', href: '/catalog/prebuild?formFactor=desktop' },
         ],
       },
       {
         heading: 'За відеокартою',
         items: [
-          { name: 'ПК з RTX 5060', href: '/catalog/prebuilt' },
-          { name: 'ПК з RTX 5070', href: '/catalog/prebuilt' },
-          { name: 'ПК з RTX 5070 Ti', href: '/catalog/prebuilt' },
-          { name: 'ПК з RTX 5080', href: '/catalog/prebuilt' },
-          { name: 'ПК з RTX 5090', href: '/catalog/prebuilt' },
+          { name: 'ПК з RTX 4070', href: '/catalog/prebuild?gpu=rtx-4070' },
+          { name: 'ПК з RTX 3060', href: '/catalog/prebuild?gpu=rtx-3060' },
+          { name: 'ПК з RX 9070 XT', href: '/catalog/prebuild?gpu=rx-9070-xt' },
         ]
       },
-      {
-        heading: 'Інше',
-        items: [
-          { name: 'Швидкий підбір ПК', href: '/configurator' },
-          { name: 'Програмне забезпечення', href: '/catalog/software' },
-          { name: 'Аксесуари для збирання', href: '/catalog/components' },
-        ]
-      }
     ]
   },
   {
@@ -56,27 +43,27 @@ const catalogCategories = [
       {
         heading: 'За типом',
         items: [
-          { name: 'Ігрові ноутбуки', href: '/catalog/laptops' },
-          { name: 'Ультрабуки для роботи', href: '/catalog/laptops' },
-          { name: 'Для навчання та дому', href: '/catalog/laptops' },
+          { name: 'Ігрові ноутбуки', href: '/catalog/laptops?formFactor=gaming' },
+          { name: 'Ультрабуки для роботи', href: '/catalog/laptops?formFactor=ultrabook' },
+          { name: 'Для навчання та дому', href: '/catalog/laptops?formFactor=office' },
         ],
         allLink: { text: 'Усі ноутбуки', href: '/catalog/laptops' }
       },
       {
         heading: 'За діагоналлю',
         items: [
-          { name: 'Компактні 13" - 14"', href: '/catalog/laptops' },
-          { name: 'Універсальні 15.6"', href: '/catalog/laptops' },
-          { name: 'Великі екрани 16" - 17.3"', href: '/catalog/laptops' },
+          { name: 'Компактні 13" - 14"', href: '/catalog/laptops?screenSize=14%22' },
+          { name: 'Універсальні 15.6"', href: '/catalog/laptops?screenSize=15.6%22' },
+          { name: 'Великі екрани 16" - 17.3"', href: '/catalog/laptops?screenSize=16%22' },
         ]
       },
       {
         heading: 'Бренди',
         items: [
-          { name: 'ASUS ROG / TUF', href: '/catalog/laptops' },
-          { name: 'Lenovo Legion / IdeaPad', href: '/catalog/laptops' },
-          { name: 'MSI Gaming', href: '/catalog/laptops' },
-          { name: 'Acer Predator / Nitro', href: '/catalog/laptops' },
+          { name: 'ASUS ROG / TUF', href: '/catalog/laptops?brand=asus' },
+          { name: 'Lenovo Legion / IdeaPad', href: '/catalog/laptops?brand=lenovo' },
+          { name: 'MSI Gaming', href: '/catalog/laptops?brand=msi' },
+          { name: 'Acer Predator / Nitro', href: '/catalog/laptops?brand=acer' },
         ]
       }
     ]
@@ -90,57 +77,47 @@ const catalogCategories = [
       {
         heading: 'Основні компоненти',
         items: [
-          { name: 'Процесори', href: '/catalog/components' },
-          { name: 'Відеокарти', href: '/catalog/components' },
-          { name: 'Материнські плати', href: '/catalog/components' },
-          { name: "Оперативна пам'ять", href: '/catalog/components' },
+          { name: 'Процесори', href: '/catalog/components/processors' },
+          { name: 'Відеокарти', href: '/catalog/components/gpus' },
+          { name: 'Материнські плати', href: '/catalog/components/motherboards' },
+          { name: "Оперативна пам'ять", href: '/catalog/components/ram' },
         ],
         allLink: { text: 'Усі комплектуючі', href: '/catalog/components' }
       },
       {
         heading: 'Накопичувачі, живлення та корпуси',
         items: [
-          { name: 'SSD накопичувачі', href: '/catalog/components' },
-          { name: 'Жорсткі диски HDD', href: '/catalog/components' },
-          { name: 'Блоки живлення', href: '/catalog/components' },
-          { name: 'Корпуси', href: '/catalog/components' },
+          { name: 'SSD накопичувачі', href: '/catalog/components/ssd' },
+          { name: 'Жорсткі диски HDD', href: '/catalog/components/hdd' },
+          { name: 'Блоки живлення', href: '/catalog/components/psu' },
+          { name: 'Корпуси', href: '/catalog/components/cases' },
         ]
       },
       {
         heading: 'Охолодження',
         items: [
-          { name: 'Кулери для процесорів', href: '/catalog/components' },
-          { name: 'Водяне охолодження (СРО)', href: '/catalog/components' },
-          { name: 'Корпусні вентилятори', href: '/catalog/components' },
-          { name: 'Термопаста', href: '/catalog/components' },
+          { name: 'Кулери для процесорів', href: '/catalog/components/coolers?filter=cpu-coolers' },
+          { name: 'Баштові кулери', href: '/catalog/components/coolers?filter=tower' },
+          { name: 'Корпусні вентилятори', href: '/catalog/components/coolers?filter=case-fans' },
         ]
       }
     ]
   },
   {
     id: 'monitors',
-    title: 'Монітори, ТВ і проєктори',
-    link: '/catalog/peripherals',
+    title: 'Монітори',
+    link: '/catalog/peripherals/monitors',
     icon: `<rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>`,
     columns: [
       {
         heading: 'Монітори',
         items: [
-          { name: 'Ігрові монітори (144Hz - 360Hz)', href: '/catalog/peripherals' },
-          { name: 'Монітори 2K QHD', href: '/catalog/peripherals' },
-          { name: 'Монітори 4K UHD', href: '/catalog/peripherals' },
-          { name: 'Вигнуті (Curved) монітори', href: '/catalog/peripherals' },
-          { name: 'Для роботи та дизайну (IPS / OLED)', href: '/catalog/peripherals' },
+          { name: 'Ігрові монітори (4K 144Hz)', href: '/catalog/peripherals/monitors?filter=4k-gaming' },
+          { name: 'Для роботи та дизайну (IPS)', href: '/catalog/peripherals/monitors?filter=design' },
+          { name: 'Для роботи та офісу', href: '/catalog/peripherals/monitors?filter=office' },
         ],
-        allLink: { text: 'Усі монітори', href: '/catalog/peripherals' }
+        allLink: { text: 'Усі монітори', href: '/catalog/peripherals/monitors' }
       },
-      {
-        heading: 'Аксесуари',
-        items: [
-          { name: 'Кронштейни для моніторів', href: '/catalog/peripherals' },
-          { name: 'Кабелі HDMI / DisplayPort', href: '/catalog/peripherals' },
-        ]
-      }
     ]
   },
   {
@@ -152,20 +129,18 @@ const catalogCategories = [
       {
         heading: 'Маніпулятори та ввід',
         items: [
-          { name: 'Ігрові миші', href: '/catalog/peripherals' },
-          { name: 'Механічні клавіатури', href: '/catalog/peripherals' },
-          { name: 'Ігрові поверхні (килимки)', href: '/catalog/peripherals' },
-          { name: 'Геймпади та джойстики', href: '/catalog/peripherals' },
+          { name: 'Ігрові миші', href: '/catalog/peripherals/mice' },
+          { name: 'Механічні клавіатури', href: '/catalog/peripherals/keyboards?filter=mechanical' },
+          { name: 'Ігрові поверхні (килимки)', href: '/catalog/peripherals/accessories?filter=mousepad' },
+          { name: 'Геймпади та джойстики', href: '/catalog/peripherals/gamepads' },
         ],
         allLink: { text: 'Вся периферія', href: '/catalog/peripherals' }
       },
       {
         heading: 'Аудіо та стрімінг',
         items: [
-          { name: 'Ігрові гарнітури та навушники', href: '/catalog/peripherals' },
-          { name: 'Мікрофони для стрімінгу', href: '/catalog/peripherals' },
-          { name: 'Веб-камери', href: '/catalog/peripherals' },
-          { name: 'Акустичні системи', href: '/catalog/peripherals' },
+          { name: 'Ігрові гарнітури та навушники', href: '/catalog/peripherals/headsets' },
+          { name: 'Мікрофони для стрімінгу', href: '/catalog/peripherals/microphones' },
         ]
       }
     ]
@@ -179,17 +154,24 @@ const catalogCategories = [
       {
         heading: 'Ігрові приставки',
         items: [
-          { name: 'PlayStation 5 / PS5 Pro', href: '/catalog/consoles' },
-          { name: 'Xbox Series X / S', href: '/catalog/consoles' },
-          { name: 'Nintendo Switch 2', href: '/catalog/consoles' },
-          { name: 'Steam Deck', href: '/catalog/consoles' },
+          { name: 'PlayStation', href: '/catalog/consoles?brand=sony' },
+          { name: 'Xbox', href: '/catalog/consoles?brand=microsoft' },
+          { name: 'Nintendo Switch', href: '/catalog/consoles?brand=nintendo' },
+          { name: 'Steam Deck', href: '/catalog/consoles?brand=valve' },
+        ]
+      },
+      {
+        heading: 'За портативністю',
+        items: [
+          { name: 'Стаціонарні консолі', href: '/catalog/consoles?portability=home' },
+          { name: 'Портативні консолі', href: '/catalog/consoles?portability=portable' },
+          { name: 'Гібридні консолі', href: '/catalog/consoles?portability=hybrid' },
         ]
       },
       {
         heading: 'Аксесуари до консолей',
         items: [
-          { name: 'Геймпади DualSense / Xbox', href: '/catalog/peripherals' },
-          { name: 'VR-шоломи', href: '/catalog/peripherals' },
+          { name: 'Геймпади DualSense / Xbox', href: '/catalog/peripherals/gamepads' },
         ]
       }
     ]
@@ -311,7 +293,6 @@ const catalogCategories = [
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
-    /* Ліва панель меню */
     .catalog-sidebar {
         width: 310px;
         flex-shrink: 0;
@@ -329,7 +310,6 @@ const catalogCategories = [
         gap: 6px;
     }
 
-    /* Заміна .cat-btn на .cat-link-item (тепер це тег <a>) */
     .cat-link-item {
         width: 100%;
         display: flex;
@@ -451,7 +431,6 @@ const catalogCategories = [
         color: #000;
     }
 
-    /* Сітка колонок як на референсі */
     .subcat-columns {
         display: grid;
         grid-template-columns: repeat(3, 1fr);

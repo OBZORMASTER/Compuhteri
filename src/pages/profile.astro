@@ -1,0 +1,1070 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Особистий кабінет | PC STORE" description="Особистий кабінет: історія замовлень та збережені конфігурації ПК">
+  <section class="cabinet-section">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="/">Головна</a>
+        <span>›</span>
+        <span>Особистий кабінет</span>
+      </div>
+
+      <h1 class="cabinet-title">Мій <span class="accent">PC STORE</span></h1>
+
+      <div class="cabinet-layout">
+        <!-- Ліва колонка: профіль, навігація, бонуси -->
+        <aside class="sidebar">
+          <div class="card profile-card">
+            <div class="greeting">Доброго дня, <strong>Кирило</strong></div>
+            <div class="user-email">kyrylo.pc@example.ua</div>
+
+            <nav class="side-nav" aria-label="Розділи кабінету">
+              <button type="button" class="side-link is-active" data-nav="orders">
+                Історія замовлень
+              </button>
+              <button type="button" class="side-link" data-nav="configs">
+                Збережені конфігурації
+              </button>
+              <button type="button" class="side-link" data-nav="profile-info">
+                Дані профілю
+              </button>
+              <a href="/configurator" class="side-link side-link-external">
+                Конфігуратор ПК ↗
+              </a>
+              <a href="/info/warranty" class="side-link side-link-external">
+                Гарантія та повернення ↗
+              </a>
+            </nav>
+
+            <div class="bonus-box">
+              <div>
+                <div class="bonus-label">Бонусні бали</div>
+                <div class="bonus-sub">PC STORE Club</div>
+              </div>
+              <div class="bonus-value">304</div>
+            </div>
+
+            <div class="session-note">
+              <span class="dot"></span>
+              Сеанс активний (демо-режим)
+            </div>
+          </div>
+
+          <div class="card extra-card">
+            <h2 class="extra-title">Збережені збірки</h2>
+            <p class="extra-desc">Швидкий доступ до конфігурацій із конфігуратора ПК.</p>
+            <button type="button" class="link-btn" data-nav="configs">
+              Перейти до конфігурацій →
+            </button>
+          </div>
+        </aside>
+
+        <!-- Права частина: швидкі картки + історія замовлень / збережені конфігурації -->
+        <div class="main-column">
+          <div class="summary-strip">
+            <button type="button" class="card summary-tile is-selected" data-nav="orders">
+              <div class="tile-head">
+                <span class="tile-icon">📦</span>
+                <span class="tile-title">Історія замовлень</span>
+              </div>
+              <span id="summary-orders-count" class="tile-meta">3 замовлення</span>
+            </button>
+
+            <button type="button" class="card summary-tile" data-nav="configs">
+              <div class="tile-head">
+                <span class="tile-icon">🖥️</span>
+                <span class="tile-title">Збережені конфігурації</span>
+              </div>
+              <span id="summary-configs-count" class="tile-meta">2 збірки</span>
+            </button>
+          </div>
+
+          <!-- Блок 1: Історія замовлень -->
+          <section id="panel-orders" class="card panel is-visible">
+            <div class="panel-header">
+              <div class="panel-heading-group">
+                <span class="panel-badge">Історія замовлень</span>
+                <h2>Мої замовлення</h2>
+              </div>
+
+              <div class="table-controls">
+                <div class="search-box">
+                  <input
+                    id="order-search"
+                    type="search"
+                    placeholder="Пошук за номером або товаром..."
+                    aria-label="Пошук за замовленнями"
+                  />
+                </div>
+                <select id="order-status-filter" class="status-select" aria-label="Фільтр за статусом">
+                  <option value="all">Усі статуси</option>
+                  <option value="Виконано">Виконано</option>
+                  <option value="Доставляється">Доставляється</option>
+                  <option value="Скасовано">Скасовано</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table class="orders-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Замовлення</th>
+                    <th>Кількість</th>
+                    <th>Комплектуючі</th>
+                    <th>Дата</th>
+                    <th>Сума</th>
+                    <th>Статус</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-tbody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Блок 2: Збережені конфігурації -->
+          <section id="panel-configs" class="card panel">
+            <div class="panel-header">
+              <div class="panel-heading-group">
+                <span class="panel-badge">Збережені конфігурації</span>
+                <h2>Збережені збірки ПК</h2>
+              </div>
+
+              <div class="panel-actions">
+                <button id="add-config-btn" type="button" class="btn-secondary">
+                  + Додати конфігурацію
+                </button>
+                <a href="/configurator" class="btn-primary">Відкрити конфігуратор</a>
+              </div>
+            </div>
+
+            <div id="configs-grid" class="configs-grid"></div>
+          </section>
+
+          <!-- Блок 3: Дані профілю (заглушка залогіненого клієнта) -->
+          <section id="panel-profile-info" class="card panel">
+            <div class="panel-header">
+              <div class="panel-heading-group">
+                <span class="panel-badge">Профіль</span>
+                <h2>Дані клієнта</h2>
+              </div>
+            </div>
+
+            <div class="profile-details-grid">
+              <div class="detail-box">
+                <div class="detail-label">Ім'я та прізвище</div>
+                <div class="detail-value">Кирило Коваленко</div>
+              </div>
+              <div class="detail-box">
+                <div class="detail-label">Телефон</div>
+                <div class="detail-value">+38 (067) 000-00-00</div>
+              </div>
+              <div class="detail-box">
+                <div class="detail-label">Місто доставки</div>
+                <div class="detail-value">м. Запоріжжя, просп. Соборний, 74</div>
+              </div>
+              <div class="detail-box">
+                <div class="detail-label">Статус акаунту</div>
+                <div class="detail-value accent">Авторизовано (демо-профіль)</div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const ORDERS_STORAGE_KEY = 'pcstore_cabinet_orders_v1';
+  const CONFIGS_STORAGE_KEY = 'pcstore_cabinet_configs_v1';
+
+  interface OrderItem {
+    id: string;
+    countLabel: string;
+    items: string[];
+    date: string;
+    total: string;
+    status: 'Виконано' | 'Доставляється' | 'Скасовано';
+    deliveryMethod: string;
+  }
+
+  interface SavedConfig {
+    id: string;
+    title: string;
+    cpu: string;
+    gpu: string;
+    ram: string;
+    storage: string;
+    price: string;
+    updatedAt: string;
+  }
+
+  const initialOrders: OrderItem[] = [
+    {
+      id: '00000343270',
+      countLabel: '1 товар',
+      items: ['SSD Kingston NV2 1TB M.2 NVMe PCIe 4.0'],
+      date: 'від 16.05.2026',
+      total: '2 450 ₴',
+      status: 'Виконано',
+      deliveryMethod: 'Нова Пошта — Відділення №12',
+    },
+    {
+      id: '72-00403718',
+      countLabel: '2 товари',
+      items: [
+        'Відеокарта GeForce RTX 4070 Super 12GB',
+        'Блок живлення 850W 80+ Gold Modular',
+      ],
+      date: 'від 29.08.2025',
+      total: '31 800 ₴',
+      status: 'Виконано',
+      deliveryMethod: 'Самовивіз — м. Запоріжжя, просп. Соборний, 74',
+    },
+    {
+      id: '72-00125910',
+      countLabel: '2 товари',
+      items: [
+        'Оперативна памʼять DDR5 32GB (2x16GB) 6000MHz',
+        'Повітряне охолодження процесора Tower ARGB',
+      ],
+      date: 'від 19.03.2025',
+      total: '6 890 ₴',
+      status: 'Доставляється',
+      deliveryMethod: 'Курʼєрська доставка',
+    },
+  ];
+
+  const initialConfigs: SavedConfig[] = [
+    {
+      id: 'cfg-101',
+      title: 'Gaming QHD Build',
+      cpu: 'AMD Ryzen 7 7800X3D',
+      gpu: 'RTX 4070 Ti Super 16GB',
+      ram: '32GB DDR5 6000MHz',
+      storage: '2TB NVMe Gen4',
+      price: '68 400 ₴',
+      updatedAt: '15.11.2026',
+    },
+    {
+      id: 'cfg-102',
+      title: 'Compact Workstation',
+      cpu: 'Intel Core i5-14600KF',
+      gpu: 'RTX 4060 Ti 16GB',
+      ram: '32GB DDR4 3600MHz',
+      storage: '1TB NVMe + 2TB HDD',
+      price: '44 900 ₴',
+      updatedAt: '02.11.2026',
+    },
+  ];
+
+  function readStorage<T>(key: string, fallback: T): T {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) {
+        localStorage.setItem(key, JSON.stringify(fallback));
+        return fallback;
+      }
+      return JSON.parse(raw) as T;
+    } catch {
+      return fallback;
+    }
+  }
+
+  function writeStorage<T>(key: string, value: T): void {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch {
+      // ігноруємо помилки квоти сховища
+    }
+  }
+
+  const expandedOrderIds = new Set<string>();
+
+  function getStatusClass(status: OrderItem['status']): string {
+    if (status === 'Виконано') return 'status-done';
+    if (status === 'Доставляється') return 'status-transit';
+    return 'status-cancel';
+  }
+
+  function renderOrdersTable() {
+    const tbody = document.getElementById('orders-tbody');
+    const searchInput = document.getElementById('order-search') as HTMLInputElement | null;
+    const filterSelect = document.getElementById('order-status-filter') as HTMLSelectElement | null;
+    const summaryCount = document.getElementById('summary-orders-count');
+
+    const orders = readStorage<OrderItem[]>(ORDERS_STORAGE_KEY, initialOrders);
+    if (summaryCount) {
+      summaryCount.textContent = `${orders.length} замовлення`;
+    }
+
+    if (!tbody) return;
+
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    const statusFilter = filterSelect?.value || 'all';
+
+    const filtered = orders.filter((order) => {
+      const matchesStatus = statusFilter === 'all' || order.status === statusFilter;
+      const matchesQuery =
+        !query ||
+        order.id.toLowerCase().includes(query) ||
+        order.items.some((item) => item.toLowerCase().includes(query));
+      return matchesStatus && matchesQuery;
+    });
+
+    if (!filtered.length) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="7" class="empty-cell">За заданими параметрами замовлень не знайдено.</td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = filtered
+      .map((order) => {
+        const isOpen = expandedOrderIds.has(order.id);
+        const previewText = order.items.join(', ');
+        return `
+          <tr class="order-row ${isOpen ? 'is-expanded' : ''}" data-order-id="${order.id}">
+            <td class="chevron-cell">
+              <button type="button" class="expand-btn" aria-label="Деталі замовлення ${order.id}">
+                ${isOpen ? '▾' : '▸'}
+              </button>
+            </td>
+            <td class="order-id-cell">${order.id}</td>
+            <td>${order.countLabel}</td>
+            <td class="items-preview-cell" title="${previewText}">${previewText}</td>
+            <td class="muted-cell">${order.date}</td>
+            <td class="price-cell">${order.total}</td>
+            <td>
+              <span class="status-badge ${getStatusClass(order.status)}">${order.status}</span>
+            </td>
+          </tr>
+          <tr class="order-details-row ${isOpen ? 'is-open' : ''}">
+            <td colspan="7">
+              <div class="order-details-box">
+                <div><strong>Склад замовлення:</strong> ${order.items.join(' • ')}</div>
+                <div class="muted-cell"><strong>Доставка:</strong> ${order.deliveryMethod}</div>
+              </div>
+            </td>
+          </tr>
+        `;
+      })
+      .join('');
+
+    tbody.querySelectorAll('.order-row').forEach((row) => {
+      row.addEventListener('click', () => {
+        const id = row.getAttribute('data-order-id');
+        if (!id) return;
+        if (expandedOrderIds.has(id)) {
+          expandedOrderIds.delete(id);
+        } else {
+          expandedOrderIds.add(id);
+        }
+        renderOrdersTable();
+      });
+    });
+  }
+
+  function renderSavedConfigs() {
+    const grid = document.getElementById('configs-grid');
+    const summaryCount = document.getElementById('summary-configs-count');
+    const configs = readStorage<SavedConfig[]>(CONFIGS_STORAGE_KEY, initialConfigs);
+
+    if (summaryCount) {
+      summaryCount.textContent = `${configs.length} збірки`;
+    }
+
+    if (!grid) return;
+
+    if (!configs.length) {
+      grid.innerHTML = `
+        <div class="empty-box">
+          <p>Збережених конфігурацій поки немає.</p>
+          <a href="/configurator" class="btn-primary">Створити у конфігураторі</a>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = configs
+      .map(
+        (cfg) => `
+        <article class="config-card">
+          <div class="config-top">
+            <div>
+              <h3 class="config-title">${cfg.title}</h3>
+              <span class="config-date">Оновлено: ${cfg.updatedAt}</span>
+            </div>
+            <div class="config-price">${cfg.price}</div>
+          </div>
+
+          <ul class="config-specs">
+            <li><span>CPU:</span> <strong>${cfg.cpu}</strong></li>
+            <li><span>GPU:</span> <strong>${cfg.gpu}</strong></li>
+            <li><span>RAM:</span> <strong>${cfg.ram}</strong></li>
+            <li><span>Накопичувач:</span> <strong>${cfg.storage}</strong></li>
+          </ul>
+
+          <div class="config-actions">
+            <a href="/configurator" class="btn-outline">Відкрити в конфігураторі</a>
+            <button type="button" class="btn-remove" data-remove-cfg="${cfg.id}">Видалити</button>
+          </div>
+        </article>
+      `
+      )
+      .join('');
+
+    grid.querySelectorAll('[data-remove-cfg]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-remove-cfg');
+        const next = readStorage<SavedConfig[]>(CONFIGS_STORAGE_KEY, initialConfigs).filter(
+          (item) => item.id !== id
+        );
+        writeStorage(CONFIGS_STORAGE_KEY, next);
+        renderSavedConfigs();
+      });
+    });
+  }
+
+  function switchSection(sectionKey: string) {
+    const panels: Record<string, HTMLElement | null> = {
+      orders: document.getElementById('panel-orders'),
+      configs: document.getElementById('panel-configs'),
+      'profile-info': document.getElementById('panel-profile-info'),
+    };
+
+    if (!(sectionKey in panels)) return;
+
+    Object.entries(panels).forEach(([key, el]) => {
+      if (!el) return;
+      el.classList.toggle('is-visible', key === sectionKey);
+    });
+
+    document.querySelectorAll('.side-link[data-nav]').forEach((btn) => {
+      btn.classList.toggle('is-active', btn.getAttribute('data-nav') === sectionKey);
+    });
+
+    document.querySelectorAll('.summary-tile[data-nav]').forEach((tile) => {
+      tile.classList.toggle('is-selected', tile.getAttribute('data-nav') === sectionKey);
+    });
+  }
+
+  document.querySelectorAll('[data-nav]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const target = el.getAttribute('data-nav');
+      if (target) switchSection(target);
+    });
+  });
+
+  document.getElementById('order-search')?.addEventListener('input', renderOrdersTable);
+  document.getElementById('order-status-filter')?.addEventListener('change', renderOrdersTable);
+
+  document.getElementById('add-config-btn')?.addEventListener('click', () => {
+    const current = readStorage<SavedConfig[]>(CONFIGS_STORAGE_KEY, initialConfigs);
+    const idx = current.length + 1;
+    current.unshift({
+      id: `cfg-${Date.now()}`,
+      title: `Конфігурація #${idx}`,
+      cpu: 'AMD Ryzen 5 7500F',
+      gpu: 'Radeon RX 7800 XT 16GB',
+      ram: '32GB DDR5 5600MHz',
+      storage: '1TB NVMe PCIe 4.0',
+      price: '49 700 ₴',
+      updatedAt: '19.11.2026',
+    });
+    writeStorage(CONFIGS_STORAGE_KEY, current);
+    renderSavedConfigs();
+  });
+
+  renderOrdersTable();
+  renderSavedConfigs();
+</script>
+
+<style>
+  .cabinet-section {
+    padding: 32px 0 72px;
+    min-height: 65vh;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 14px;
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--color-accent);
+  }
+
+  .cabinet-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 24px;
+  }
+
+  .accent {
+    color: var(--color-accent);
+  }
+
+  .cabinet-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .card {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .greeting {
+    font-size: 17px;
+    color: var(--color-text-main);
+    margin-bottom: 4px;
+  }
+
+  .user-email {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 18px;
+  }
+
+  .side-link {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 12px;
+    color: var(--color-text-muted);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .side-link:hover,
+  .side-link.is-active {
+    background-color: var(--color-element);
+    color: var(--color-accent);
+  }
+
+  .side-link-external {
+    display: block;
+    color: var(--color-text-muted);
+  }
+
+  .bonus-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    margin-bottom: 14px;
+  }
+
+  .bonus-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-main);
+  }
+
+  .bonus-sub {
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+
+  .bonus-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-accent);
+  }
+
+  .session-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .extra-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .extra-desc {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+  }
+
+  .link-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--color-accent);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .link-btn:hover {
+    text-decoration: underline;
+  }
+
+  .main-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+
+  .summary-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .summary-tile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+
+  .summary-tile:hover,
+  .summary-tile.is-selected {
+    border-color: var(--color-accent);
+    background-color: var(--color-element);
+  }
+
+  .tile-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tile-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+
+  .tile-meta {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .panel {
+    display: none;
+    padding: 24px;
+  }
+
+  .panel.is-visible {
+    display: block;
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .panel-heading-group h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+
+  .panel-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-accent);
+    background-color: var(--color-element);
+    border: 1px solid var(--color-border);
+    padding: 2px 10px;
+    border-radius: 999px;
+  }
+
+  .table-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .search-box input,
+  .status-select {
+    padding: 9px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-element);
+    color: var(--color-text-main);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .search-box input {
+    min-width: 220px;
+  }
+
+  .search-box input:focus,
+  .status-select:focus {
+    border-color: var(--color-accent);
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .orders-table th {
+    text-align: left;
+    padding: 12px 10px;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+  }
+
+  .orders-table td {
+    padding: 14px 10px;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+  }
+
+  .order-row {
+    cursor: pointer;
+    transition: background-color 0.15s;
+  }
+
+  .order-row:hover {
+    background-color: var(--color-element);
+  }
+
+  .chevron-cell {
+    width: 28px;
+  }
+
+  .expand-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .order-id-cell {
+    font-weight: 700;
+    color: var(--color-text-main);
+    white-space: nowrap;
+  }
+
+  .items-preview-cell {
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--color-text-muted);
+  }
+
+  .muted-cell {
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .price-cell {
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .status-done {
+    background-color: rgba(0, 255, 204, 0.14);
+    color: var(--color-accent);
+    border: 1px solid rgba(0, 255, 204, 0.35);
+  }
+
+  .status-transit {
+    background-color: rgba(255, 204, 0, 0.14);
+    color: #ffd43b;
+    border: 1px solid rgba(255, 204, 0, 0.35);
+  }
+
+  .status-cancel {
+    background-color: rgba(255, 107, 107, 0.14);
+    color: #ff6b6b;
+    border: 1px solid rgba(255, 107, 107, 0.35);
+  }
+
+  .order-details-row {
+    display: none;
+    background-color: var(--color-surface);
+  }
+
+  .order-details-row.is-open {
+    display: table-row;
+  }
+
+  .order-details-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+    color: var(--color-text-main);
+  }
+
+  .empty-cell {
+    text-align: center;
+    padding: 28px 12px !important;
+    color: var(--color-text-muted);
+  }
+
+  .panel-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .btn-primary {
+    padding: 9px 16px;
+    border-radius: 8px;
+    background-color: var(--color-accent);
+    color: #000;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-accent-hover);
+  }
+
+  .btn-secondary {
+    padding: 9px 16px;
+    border-radius: 8px;
+    background-color: var(--color-element);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-main);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-element-hover);
+  }
+
+  .configs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .config-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .config-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .config-title {
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .config-date {
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+
+  .config-price {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--color-accent);
+    white-space: nowrap;
+  }
+
+  .config-specs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .config-specs strong {
+    color: var(--color-text-main);
+    font-weight: 600;
+  }
+
+  .config-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .btn-outline {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .btn-outline:hover {
+    text-decoration: underline;
+  }
+
+  .btn-remove {
+    background-color: var(--color-element);
+    border: 1px solid var(--color-border);
+    color: #ff6b6b;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .empty-box {
+    background-color: var(--color-surface);
+    border: 1px dashed var(--color-border);
+    border-radius: 10px;
+    padding: 28px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .profile-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .detail-box {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .detail-label {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
+  }
+
+  .detail-value {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 960px) {
+    .cabinet-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .summary-strip,
+    .configs-grid,
+    .profile-details-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .search-box input {
+      min-width: 100%;
+    }
+  }
+</style>

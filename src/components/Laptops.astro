@@ -1,0 +1,1049 @@
+---
+interface LaptopItem {
+  slug: string;
+  title: string;
+  price: string;
+  priceNum: number;
+  imgText: string;
+  img?: string;
+  brand: string;
+  gpuChipset: string;
+  cpuModel: string;
+  screenSize: string;
+  formFactor: string;
+  storageVolume: string;
+  vramVolume: string;
+  ramType: string;
+  cpuCores: string;
+  os: string;
+  shortSpecs: string[];
+}
+
+const laptopsList: LaptopItem[] = [
+  {
+    slug: "laptop-asus-rog-strix-g16-rtx4070",
+    title: "ASUS ROG Strix G16 (2024) 16\" QHD+ 240Hz / Core i7-14650HX / RTX 4070",
+    price: "74 900 ₴",
+    priceNum: 74900,
+    imgText: "16\" 240Hz • i7-14650HX • RTX 4070",
+    brand: "asus",
+    gpuChipset: "rtx-4070-laptop",
+    cpuModel: "intel-i7-14650hx",
+    screenSize: "16\"",
+    formFactor: "gaming",
+    storageVolume: "1000gb",
+    vramVolume: "8000mb",
+    ramType: "ddr5",
+    cpuCores: "16",
+    os: "Windows 11 Pro",
+    shortSpecs: [
+      "Дисплей: 16\" 2560x1600 IPS 240Hz",
+      "CPU: INTEL Core i7-14650HX (16 ядер)",
+      "GPU: GeForce RTX 4070 Laptop (8000MB)",
+      "RAM/SSD: 32 ГБ DDR5 • 1000GB NVMe • Win 11 Pro"
+    ]
+  },
+  {
+    slug: "laptop-gigabyte-aorus-16x-rtx4070",
+    title: "GIGABYTE AORUS 16X 16\" QHD+ 165Hz / Core i7-14650HX / RTX 4070",
+    price: "69 500 ₴",
+    priceNum: 69500,
+    imgText: "16\" 165Hz • i7-14650HX • RTX 4070",
+    brand: "gigabyte",
+    gpuChipset: "rtx-4070-laptop",
+    cpuModel: "intel-i7-14650hx",
+    screenSize: "16\"",
+    formFactor: "gaming",
+    storageVolume: "1000 gb",
+    vramVolume: "8000 mb",
+    ramType: "ddr5",
+    cpuCores: "16",
+    os: "Windows 11 Pro",
+    shortSpecs: [
+      "Дисплей: 16\" 2560x1600 165Hz",
+      "CPU: INTEL Core i7-14650HX (16 ядер)",
+      "GPU: GeForce RTX 4070 Laptop (8000 MB)",
+      "RAM/SSD: 16 ГБ DDR5 • 1000 GB NVMe • Win 11 Pro"
+    ]
+  },
+  {
+    slug: "laptop-msi-katana-15-rtx4060",
+    title: "MSI Katana 15 B13V 15.6\" FHD 144Hz / Core i7-13620H / RTX 4060",
+    price: "49 800 ₴",
+    priceNum: 49800,
+    imgText: "15.6\" 144Hz • i7-13620H • RTX 4060",
+    brand: "msi",
+    gpuChipset: "rtx-4060-laptop",
+    cpuModel: "intel-i7-13620h",
+    screenSize: "15.6\"",
+    formFactor: "gaming",
+    storageVolume: "512gb",
+    vramVolume: "8000mb",
+    ramType: "ddr5",
+    cpuCores: "10",
+    os: "Windows 11 Home",
+    shortSpecs: [
+      "Дисплей: 15.6\" 1920x1080 IPS 144Hz",
+      "CPU: INTEL Core i7-13620H (10 ядер)",
+      "GPU: GeForce RTX 4060 Laptop (8000MB)",
+      "RAM/SSD: 16 ГБ DDR5 • 512GB NVMe • Win 11 Home"
+    ]
+  },
+  {
+    slug: "laptop-asus-tuf-a15-rx7700s",
+    title: "ASUS TUF Gaming A15 15.6\" FHD 144Hz / Ryzen 7 7735HS / RX 7700S",
+    price: "45 900 ₴",
+    priceNum: 45900,
+    imgText: "15.6\" 144Hz • R7 7735HS • RX 7700S",
+    brand: "asus",
+    gpuChipset: "rx-7700s",
+    cpuModel: "ryzen-7-7735hs",
+    screenSize: "15.6\"",
+    formFactor: "gaming",
+    storageVolume: "1000gb",
+    vramVolume: "8000mb",
+    ramType: "ddr5",
+    cpuCores: "8",
+    os: "Без ОС (DOS)",
+    shortSpecs: [
+      "Дисплей: 15.6\" 1920x1080 IPS 144Hz",
+      "CPU: AMD Ryzen 7 7735HS (8 ядер)",
+      "GPU: AMD Radeon RX 7700S (8000MB)",
+      "RAM/SSD: 16 ГБ DDR5 • 1000GB NVMe • Без ОС"
+    ]
+  },
+  {
+    slug: "laptop-msi-cyborg-15-rtx4050",
+    title: "MSI Cyborg 15 A13V 15.6\" FHD 144Hz / Core i5-13420H / RTX 4050",
+    price: "37 900 ₴",
+    priceNum: 37900,
+    imgText: "15.6\" 144Hz • i5-13420H • RTX 4050",
+    brand: "msi",
+    gpuChipset: "rtx-4050-laptop",
+    cpuModel: "intel-i5-13420h",
+    screenSize: "15.6\"",
+    formFactor: "gaming",
+    storageVolume: "512gb",
+    vramVolume: "6000mb",
+    ramType: "ddr5",
+    cpuCores: "8",
+    os: "Windows 11 Home",
+    shortSpecs: [
+      "Дисплей: 15.6\" 1920x1080 IPS 144Hz",
+      "CPU: INTEL Core i5-13420H (8 ядер)",
+      "GPU: GeForce RTX 4050 Laptop (6000MB)",
+      "RAM/SSD: 16 ГБ DDR5 • 512GB NVMe • Win 11 Home"
+    ]
+  },
+  {
+    slug: "laptop-lenovo-loq-15-rtx3050",
+    title: "Lenovo LOQ 15APH8 15.6\" FHD 144Hz / Ryzen 5 7640HS / RTX 3050",
+    price: "32 900 ₴",
+    priceNum: 32900,
+    imgText: "15.6\" 144Hz • R5 7640HS • RTX 3050",
+    brand: "lenovo",
+    gpuChipset: "rtx-3050-laptop",
+    cpuModel: "ryzen-5-7640hs",
+    screenSize: "15.6\"",
+    formFactor: "gaming",
+    storageVolume: "500gb",
+    vramVolume: "6000 mb",
+    ramType: "ddr5",
+    cpuCores: "6",
+    os: "Windows 11 Home",
+    shortSpecs: [
+      "Дисплей: 15.6\" 1920x1080 IPS 144Hz",
+      "CPU: AMD Ryzen 5 7640HS (6 ядер)",
+      "GPU: GeForce RTX 3050 Laptop (6000 MB)",
+      "RAM/SSD: 16 ГБ DDR5 • 500GB NVMe • Win 11 Home"
+    ]
+  },
+  {
+    slug: "laptop-asus-zenbook-14-oled",
+    title: "ASUS Zenbook 14 OLED UX3405 14\" 2.8K OLED / Core Ultra 7 155H",
+    price: "52 400 ₴",
+    priceNum: 52400,
+    imgText: "14\" OLED • Ultra 7 155H • Intel Arc",
+    brand: "asus",
+    gpuChipset: "intel-arc-laptop",
+    cpuModel: "intel-ultra-7-155h",
+    screenSize: "14\"",
+    formFactor: "ultrabook",
+    storageVolume: "1000gb",
+    vramVolume: "4000mb",
+    ramType: "lpddr5x",
+    cpuCores: "16",
+    os: "Windows 11 Pro",
+    shortSpecs: [
+      "Дисплей: 14\" 2880x1800 OLED 120Hz",
+      "CPU: INTEL Core Ultra 7 155H (16 ядер)",
+      "GPU: Intel Arc Graphics (4000MB shared)",
+      "RAM/SSD: 16 ГБ LPDDR5X • 1000GB NVMe • Win 11 Pro"
+    ]
+  },
+  {
+    slug: "laptop-lenovo-thinkpad-e16-r5",
+    title: "Lenovo ThinkPad E16 Gen 1 16\" FHD+ / Ryzen 5 7530U / Radeon",
+    price: "31 200 ₴",
+    priceNum: 31200,
+    imgText: "16\" FHD+ • R5 7530U • Radeon",
+    brand: "lenovo",
+    gpuChipset: "radeon-integrated",
+    cpuModel: "ryzen-5-7530u",
+    screenSize: "16\"",
+    formFactor: "business",
+    storageVolume: "512gb",
+    vramVolume: "4000mb",
+    ramType: "ddr4",
+    cpuCores: "6",
+    os: "Windows 11 Pro",
+    shortSpecs: [
+      "Дисплей: 16\" 1920x1200 IPS Антибліковий",
+      "CPU: AMD Ryzen 5 7530U (6 ядер)",
+      "GPU: AMD Radeon Graphics (4000MB)",
+      "RAM/SSD: 16 ГБ DDR4 • 512GB NVMe • Win 11 Pro"
+    ]
+  },
+  {
+    slug: "laptop-hp-probook-450-g10-i5",
+    title: "HP ProBook 450 G10 15.6\" FHD / Core i5-1335U / Iris Xe",
+    price: "28 600 ₴",
+    priceNum: 28600,
+    imgText: "15.6\" FHD • i5-1335U • Iris Xe",
+    brand: "hp",
+    gpuChipset: "intel-iris-xe",
+    cpuModel: "intel-i5-1335u",
+    screenSize: "15.6\"",
+    formFactor: "business",
+    storageVolume: "500 gb",
+    vramVolume: "4000mb",
+    ramType: "ddr4",
+    cpuCores: "10",
+    os: "Без ОС (DOS)",
+    shortSpecs: [
+      "Дисплей: 15.6\" 1920x1080 IPS",
+      "CPU: INTEL Core i5-1335U (10 ядер)",
+      "GPU: Intel Iris Xe (4000MB)",
+      "RAM/SSD: 16 ГБ DDR4 • 500 GB NVMe • Без ОС"
+    ]
+  },
+  {
+    slug: "laptop-acer-aspire-5-i5",
+    title: "Acer Aspire 5 A515-58M 15.6\" FHD / Core i5-13420H / UHD",
+    price: "23 900 ₴",
+    priceNum: 23900,
+    imgText: "15.6\" FHD • i5-13420H • Office",
+    brand: "acer",
+    gpuChipset: "intel-uhd",
+    cpuModel: "intel-i5-13420h",
+    screenSize: "15.6\"",
+    formFactor: "office",
+    storageVolume: "512gb",
+    vramVolume: "4000mb",
+    ramType: "lpddr5x",
+    cpuCores: "8",
+    os: "Windows 11 Home",
+    shortSpecs: [
+      "Дисплей: 15.6\" 1920x1080 IPS",
+      "CPU: INTEL Core i5-13420H (8 ядер)",
+      "GPU: Intel UHD Graphics (4000MB)",
+      "RAM/SSD: 16 ГБ LPDDR5X • 512GB NVMe • Win 11 Home"
+    ]
+  }
+];
+
+const brandOptions = [
+  { value: "asus", label: "ASUS" },
+  { value: "lenovo", label: "Lenovo" },
+  { value: "msi", label: "MSI" },
+  { value: "gigabyte", label: "GIGABYTE" },
+  { value: "hp", label: "HP" },
+  { value: "acer", label: "Acer" }
+];
+
+const gpuOptions = [
+  { value: "rtx-4070-laptop", label: "GeForce RTX 4070 Laptop" },
+  { value: "rtx-4060-laptop", label: "GeForce RTX 4060 Laptop" },
+  { value: "rtx-4050-laptop", label: "GeForce RTX 4050 Laptop" },
+  { value: "rtx-3050-laptop", label: "GeForce RTX 3050 Laptop" },
+  { value: "rx-7700s", label: "AMD Radeon RX 7700S" },
+  { value: "intel-arc-laptop", label: "Intel Arc Graphics" },
+  { value: "radeon-integrated", label: "AMD Radeon Graphics" },
+  { value: "intel-iris-xe", label: "Intel Iris Xe" },
+  { value: "intel-uhd", label: "Intel UHD Graphics" },
+  { value: "rtx-4080-laptop", label: "GeForce RTX 4080 Laptop" },
+  { value: "rtx-3060-laptop", label: "GeForce RTX 3060 Laptop" }
+];
+
+const cpuOptions = [
+  { value: "intel-i7-14650hx", label: "INTEL Core i7-14650HX" },
+  { value: "intel-i7-13620h", label: "INTEL Core i7-13620H" },
+  { value: "ryzen-7-7735hs", label: "AMD Ryzen 7 7735HS" },
+  { value: "intel-i5-13420h", label: "INTEL Core i5-13420H" },
+  { value: "ryzen-5-7640hs", label: "AMD Ryzen 5 7640HS" },
+  { value: "intel-ultra-7-155h", label: "INTEL Core Ultra 7 155H" },
+  { value: "ryzen-5-7530u", label: "AMD Ryzen 5 7530U" },
+  { value: "intel-i5-1335u", label: "INTEL Core i5-1335U" },
+  { value: "ryzen-9-7940hs", label: "AMD Ryzen 9 7940HS" },
+  { value: "intel-ultra-5-125h", label: "INTEL Core Ultra 5 125H" }
+];
+
+const screenSizeOptions = [
+  { value: "14\"", label: "14\"" },
+  { value: "15.6\"", label: "15.6\"" },
+  { value: "16\"", label: "16\"" }
+];
+
+const formFactorOptions = [
+  { value: "gaming", label: "Ігровий" },
+  { value: "ultrabook", label: "Ультрабук" },
+  { value: "business", label: "Бізнес / Робочий" },
+  { value: "office", label: "Для навчання та офісу" }
+];
+
+const storageVolumeOptions = [
+  { value: "500gb", label: "500GB" },
+  { value: "500 gb", label: "500 GB" },
+  { value: "512gb", label: "512GB" },
+  { value: "1000gb", label: "1000GB" },
+  { value: "1000 gb", label: "1000 GB" },
+  { value: "2000gb", label: "2000GB" }
+];
+
+const vramVolumeOptions = [
+  { value: "4000mb", label: "4000MB" },
+  { value: "6000mb", label: "6000MB" },
+  { value: "6000 mb", label: "6000 MB" },
+  { value: "8000mb", label: "8000MB" },
+  { value: "8000 mb", label: "8000 MB" },
+  { value: "12000mb", label: "12000MB" },
+  { value: "16000mb", label: "16000MB" }
+];
+
+const ramTypeOptions = [
+  { value: "ddr4", label: "DDR4" },
+  { value: "ddr5", label: "DDR5" },
+  { value: "lpddr5x", label: "LPDDR5X" }
+];
+
+const cpuCoresOptions = [
+  { value: "6", label: "6" },
+  { value: "8", label: "8" },
+  { value: "10", label: "10" },
+  { value: "14", label: "14" },
+  { value: "16", label: "16" }
+];
+
+type LaptopFilterField =
+  | "brand"
+  | "gpuChipset"
+  | "cpuModel"
+  | "screenSize"
+  | "formFactor"
+  | "storageVolume"
+  | "vramVolume"
+  | "ramType"
+  | "cpuCores";
+
+const countBy = (key: LaptopFilterField, val: string) =>
+  laptopsList.filter((item) => item[key] === val).length;
+---
+
+<section class="prebuild-container container">
+    <div class="breadcrumb">
+        <a href="/catalog">Каталог</a> / 
+        <span>Ноутбуки</span>
+    </div>
+
+    <div class="catalog-page-header">
+        <h1 class="page-title">Ноутбуки</h1>
+        <p class="page-subtitle">Ігрові, бізнес-моделі та ультрабуки з актуальними процесорами та відеокартами</p>
+    </div>
+
+    <div class="shop-layout">
+        <aside class="filters-sidebar">
+            <h3>Фільтри</h3>
+
+            <!-- 1. Виробник -->
+            <div class="filter-box">
+                <span class="filter-title">Виробник</span>
+                <div class="filter-options">
+                    {brandOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="brand" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("brand", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 2. Графічний чіпсет -->
+            <div class="filter-box">
+                <span class="filter-title">Графічний чіпсет</span>
+                <div class="filter-options" data-expandable-list="gpu">
+                    {gpuOptions.map((opt, idx) => {
+                        const isHiddenInitially = idx >= 10;
+                        return (
+                            <label class:list={["filter-option-row", { "extra-option hidden-option": isHiddenInitially }]}>
+                                <span class="option-left">
+                                    <input type="checkbox" class="filter-checkbox" data-group="gpu" value={opt.value} />
+                                    <span>{opt.label}</span>
+                                </span>
+                                <span class="option-count">{countBy("gpuChipset", opt.value)}</span>
+                            </label>
+                        );
+                    })}
+                </div>
+                {gpuOptions.length > 10 && (
+                    <button
+                        type="button"
+                        class="btn-show-more"
+                        data-target="gpu"
+                        data-more-text={`Показати ще ${gpuOptions.length - 10}`}
+                        data-less-text="Згорнути"
+                    >
+                        Показати ще {gpuOptions.length - 10} ⌄
+                    </button>
+                )}
+            </div>
+
+            <!-- 3. Модель процесора -->
+            <div class="filter-box">
+                <span class="filter-title">Модель процесора</span>
+                <div class="filter-options" data-expandable-list="cpu">
+                    {cpuOptions.map((opt, idx) => {
+                        const isHiddenInitially = idx >= 9;
+                        return (
+                            <label class:list={["filter-option-row", { "extra-option hidden-option": isHiddenInitially }]}>
+                                <span class="option-left">
+                                    <input type="checkbox" class="filter-checkbox" data-group="cpu" value={opt.value} />
+                                    <span>{opt.label}</span>
+                                </span>
+                                <span class="option-count">{countBy("cpuModel", opt.value)}</span>
+                            </label>
+                        );
+                    })}
+                </div>
+                {cpuOptions.length > 9 && (
+                    <button
+                        type="button"
+                        class="btn-show-more"
+                        data-target="cpu"
+                        data-more-text={`Показати ще ${cpuOptions.length - 9}`}
+                        data-less-text="Згорнути"
+                    >
+                        Показати ще {cpuOptions.length - 9} ⌄
+                    </button>
+                )}
+            </div>
+
+            <!-- 4. Діагональ екрана -->
+            <div class="filter-box">
+                <span class="filter-title">Діагональ екрана</span>
+                <div class="filter-options">
+                    {screenSizeOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="screenSize" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("screenSize", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 5. Призначення / Тип -->
+            <div class="filter-box">
+                <span class="filter-title">Призначення / Тип</span>
+                <div class="filter-options">
+                    {formFactorOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="formFactor" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("formFactor", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 6. Об'єм накопичувача (SSD) -->
+            <div class="filter-box">
+                <span class="filter-title">Об'єм накопичувача</span>
+                <div class="filter-options" data-expandable-list="storageVolume">
+                    {storageVolumeOptions.map((opt, idx) => {
+                        const isHiddenInitially = idx >= 6;
+                        return (
+                            <label class:list={["filter-option-row", { "extra-option hidden-option": isHiddenInitially }]}>
+                                <span class="option-left">
+                                    <input type="checkbox" class="filter-checkbox" data-group="storageVolume" value={opt.value} />
+                                    <span>{opt.label}</span>
+                                </span>
+                                <span class="option-count">{countBy("storageVolume", opt.value)}</span>
+                            </label>
+                        );
+                    })}
+                </div>
+                {storageVolumeOptions.length > 6 && (
+                    <button
+                        type="button"
+                        class="btn-show-more"
+                        data-target="storageVolume"
+                        data-more-text={`Показати ще ${storageVolumeOptions.length - 6}`}
+                        data-less-text="Згорнути"
+                    >
+                        Показати ще {storageVolumeOptions.length - 6} ⌄
+                    </button>
+                )}
+            </div>
+
+            <!-- 7. Об'єм відеопам'яті -->
+            <div class="filter-box">
+                <span class="filter-title">Об'єм відеопам'яті</span>
+                <div class="filter-options" data-expandable-list="vramVolume">
+                    {vramVolumeOptions.map((opt, idx) => {
+                        const isHiddenInitially = idx >= 10;
+                        return (
+                            <label class:list={["filter-option-row", { "extra-option hidden-option": isHiddenInitially }]}>
+                                <span class="option-left">
+                                    <input type="checkbox" class="filter-checkbox" data-group="vramVolume" value={opt.value} />
+                                    <span>{opt.label}</span>
+                                </span>
+                                <span class="option-count">{countBy("vramVolume", opt.value)}</span>
+                            </label>
+                        );
+                    })}
+                </div>
+                {vramVolumeOptions.length > 10 && (
+                    <button
+                        type="button"
+                        class="btn-show-more"
+                        data-target="vramVolume"
+                        data-more-text={`Показати ще ${vramVolumeOptions.length - 10}`}
+                        data-less-text="Згорнути"
+                    >
+                        Показати ще {vramVolumeOptions.length - 10} ⌄
+                    </button>
+                )}
+            </div>
+
+            <!-- 8. Тип оперативної пам'яті -->
+            <div class="filter-box">
+                <span class="filter-title">Тип оперативної пам'яті</span>
+                <div class="filter-options">
+                    {ramTypeOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="ramType" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("ramType", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 9. Кількість ядер процесора -->
+            <div class="filter-box">
+                <span class="filter-title">Кількість ядер процесора</span>
+                <div class="filter-options">
+                    {cpuCoresOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="cpuCores" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("cpuCores", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 10. Ціна -->
+            <div class="filter-box">
+                <span class="filter-title">Ціна (₴)</span>
+                <div class="price-inputs">
+                    <input type="number" id="price-min" placeholder="Від" />
+                    <input type="number" id="price-max" placeholder="До" />
+                </div>
+            </div>
+
+            <button type="button" id="apply-filters" class="btn-apply">Застосувати фільтри</button>
+            <button type="button" id="reset-filters" class="btn-reset">Скинути</button>
+
+            <div class="filter-footer-bar">
+                <button type="button" id="cancel-filters-btn" class="btn-cancel-subtle">Скасувати</button>
+                <button type="button" id="select-filters-btn" class="btn-select-subtle">Виберіть фільтри</button>
+            </div>
+        </aside>
+
+        <div class="products-area">
+            <div class="products-grid-list" id="products-grid">
+                {laptopsList.map((item) => {
+                    const imgSrc = item.img || `/products_pics/${item.slug}-1.jpg`;
+                    return (
+                        <div
+                            class="product-card-item"
+                            data-brand={item.brand}
+                            data-gpu={item.gpuChipset}
+                            data-cpu={item.cpuModel}
+                            data-screen-size={item.screenSize}
+                            data-form-factor={item.formFactor}
+                            data-storage-volume={item.storageVolume}
+                            data-vram-volume={item.vramVolume}
+                            data-ram-type={item.ramType}
+                            data-cpu-cores={item.cpuCores}
+                            data-price={item.priceNum}
+                            data-slug={item.slug}
+                        >
+                            <div class="product-card-img">
+                                <img
+                                    src={imgSrc}
+                                    alt={item.title}
+                                    loading="lazy"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
+                                />
+                                <span class="img-fallback-text" style="display: none;">{item.imgText}</span>
+                            </div>
+                            <div class="product-card-info">
+                                <h3>{item.title}</h3>
+                                <ul class="mini-specs">
+                                    {item.shortSpecs.map((s) => <li>{s}</li>)}
+                                </ul>
+                                <div class="price">{item.price}</div>
+                                <button type="button" class="btn-detail">Дивитися ноутбук</button>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+
+            <div id="no-products-message" class="no-products" style="display: none;">
+                <p>Наразі немає ноутбуків з обраними фільтрами.</p>
+                <button type="button" id="empty-reset-btn" class="btn-detail" style="display:inline-block; margin-top:10px; width: auto; padding: 10px 20px;">
+                    Скинути фільтри
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const applyBtn = document.getElementById('apply-filters');
+    const resetBtn = document.getElementById('reset-filters');
+    const cancelBtn = document.getElementById('cancel-filters-btn');
+    const selectFiltersBtn = document.getElementById('select-filters-btn');
+    const emptyResetBtn = document.getElementById('empty-reset-btn');
+    const productCards = document.querySelectorAll('.product-card-item');
+    const minInput = document.getElementById('price-min') as HTMLInputElement;
+    const maxInput = document.getElementById('price-max') as HTMLInputElement;
+    const noProductsMsg = document.getElementById('no-products-message');
+
+    const filterGroups = [
+        { group: 'brand', attr: 'data-brand' },
+        { group: 'gpu', attr: 'data-gpu' },
+        { group: 'cpu', attr: 'data-cpu' },
+        { group: 'screenSize', attr: 'data-screen-size' },
+        { group: 'formFactor', attr: 'data-form-factor' },
+        { group: 'storageVolume', attr: 'data-storage-volume' },
+        { group: 'vramVolume', attr: 'data-vram-volume' },
+        { group: 'ramType', attr: 'data-ram-type' },
+        { group: 'cpuCores', attr: 'data-cpu-cores' }
+    ];
+
+    function getCheckedByGroup(group: string): string[] {
+        return Array.from(
+            document.querySelectorAll(`.filter-checkbox[data-group="${group}"]:checked`)
+        ).map((el) => (el as HTMLInputElement).value);
+    }
+
+    function filterLaptops() {
+        const activeSelections = filterGroups.map((fg) => ({
+            attr: fg.attr,
+            values: getCheckedByGroup(fg.group)
+        }));
+
+        const minPrice = minInput?.value ? parseFloat(minInput.value) : 0;
+        const maxPrice = maxInput?.value ? parseFloat(maxInput.value) : Infinity;
+
+        let visibleCount = 0;
+
+        productCards.forEach((card) => {
+            const matchesGroups = activeSelections.every((sel) => {
+                if (sel.values.length === 0) return true;
+                const cardVal = card.getAttribute(sel.attr) || '';
+                return sel.values.includes(cardVal);
+            });
+
+            const price = parseFloat(card.getAttribute('data-price') || '0');
+            const matchesPrice = price >= minPrice && price <= maxPrice;
+
+            if (matchesGroups && matchesPrice) {
+                (card as HTMLElement).style.display = 'flex';
+                visibleCount++;
+            } else {
+                (card as HTMLElement).style.display = 'none';
+            }
+        });
+
+        if (noProductsMsg) {
+            noProductsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+    }
+
+    document.querySelectorAll('.btn-show-more').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-target');
+            const list = document.querySelector(`[data-expandable-list="${target}"]`);
+            if (!list) return;
+
+            const isExpanded = btn.getAttribute('data-expanded') === 'true';
+            const extraItems = list.querySelectorAll('.extra-option');
+
+            extraItems.forEach((item) => {
+                item.classList.toggle('hidden-option', isExpanded);
+            });
+
+            btn.setAttribute('data-expanded', String(!isExpanded));
+            const moreText = btn.getAttribute('data-more-text') || 'Показати ще';
+            const lessText = btn.getAttribute('data-less-text') || 'Згорнути';
+            btn.textContent = !isExpanded ? `${lessText} ⌃` : `${moreText} ⌄`;
+        });
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        filterGroups.forEach(({ group }) => {
+            const paramVal = params.get(group);
+            if (paramVal) {
+                paramVal.split(',').forEach((val) => {
+                    const cb = document.querySelector(
+                        `.filter-checkbox[data-group="${group}"][value="${val}"]`
+                    ) as HTMLInputElement | null;
+                    if (cb) {
+                        cb.checked = true;
+                        const parentRow = cb.closest('.extra-option');
+                        if (parentRow && parentRow.classList.contains('hidden-option')) {
+                            parentRow.classList.remove('hidden-option');
+                        }
+                    }
+                });
+            }
+        });
+
+        filterLaptops();
+    });
+
+    productCards.forEach((card) => {
+        card.addEventListener('click', () => {
+            const slug = card.getAttribute('data-slug');
+            if (slug) {
+                window.location.href = `/catalog/product/${slug}`;
+            }
+        });
+    });
+
+    applyBtn?.addEventListener('click', filterLaptops);
+
+    function resetAllFilters() {
+        document.querySelectorAll('.filter-checkbox').forEach((cb) => {
+            (cb as HTMLInputElement).checked = false;
+        });
+        if (minInput) minInput.value = '';
+        if (maxInput) maxInput.value = '';
+        window.history.replaceState({}, '', window.location.pathname);
+        filterLaptops();
+    }
+
+    resetBtn?.addEventListener('click', resetAllFilters);
+    cancelBtn?.addEventListener('click', resetAllFilters);
+    emptyResetBtn?.addEventListener('click', resetAllFilters);
+
+    selectFiltersBtn?.addEventListener('click', () => {
+        const firstCheckbox = document.querySelector('.filter-checkbox') as HTMLInputElement | null;
+        firstCheckbox?.focus();
+        firstCheckbox?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+</script>
+
+<style>
+    .prebuild-container {
+        max-width: 1200px;
+        margin: 40px auto 80px;
+        padding: 0 24px;
+    }
+    .breadcrumb {
+        font-size: 14px;
+        color: var(--color-text-muted);
+        margin-bottom: 20px;
+    }
+    .breadcrumb a { color: var(--color-text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--color-accent); }
+
+    .catalog-page-header { margin-bottom: 32px; }
+    .page-title { font-size: 32px; color: var(--color-text-main); margin: 0 0 8px; font-weight: 700; }
+    .page-subtitle { color: var(--color-text-muted); margin: 0; font-size: 15px; }
+
+    .shop-layout {
+        display: grid;
+        grid-template-columns: 290px 1fr;
+        gap: 32px;
+        align-items: start;
+    }
+
+    .filters-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .filters-sidebar > h3 {
+        font-size: 18px;
+        margin: 0;
+        color: var(--color-text-main);
+    }
+
+    .filter-box {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 14px;
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .filter-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--color-text-main);
+    }
+
+    .filter-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-option-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+    }
+    .filter-option-row:hover {
+        color: var(--color-text-main);
+    }
+
+    .option-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .option-count {
+        font-size: 12px;
+        color: var(--color-text-muted);
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        padding: 2px 7px;
+        min-width: 24px;
+        text-align: center;
+    }
+
+    .hidden-option {
+        display: none;
+    }
+
+    .btn-show-more {
+        background: none;
+        border: none;
+        padding: 2px 0 0;
+        text-align: left;
+        font-size: 13px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+        width: fit-content;
+    }
+    .btn-show-more:hover {
+        color: var(--color-accent);
+    }
+
+    .price-inputs { display: flex; gap: 10px; }
+    .price-inputs input {
+        width: 100%;
+        background: var(--color-element);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        padding: 8px 12px;
+        color: var(--color-text-main);
+    }
+
+    .btn-apply {
+        width: 100%;
+        background-color: var(--color-accent);
+        color: #000;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+    .btn-apply:hover { opacity: 0.9; }
+
+    .btn-reset {
+        width: 100%;
+        background-color: var(--color-element);
+        color: var(--color-text-muted);
+        border: 1px solid var(--color-border);
+        padding: 8px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .btn-reset:hover { color: var(--color-text-main); }
+
+    .filter-footer-bar {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 14px;
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .btn-cancel-subtle {
+        background: none;
+        border: none;
+        color: var(--color-text-muted);
+        font-size: 14px;
+        cursor: pointer;
+        padding: 6px 4px;
+    }
+    .btn-cancel-subtle:hover { color: var(--color-text-main); }
+
+    .btn-select-subtle {
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        font-size: 13px;
+        border-radius: 8px;
+        padding: 8px 14px;
+        cursor: pointer;
+    }
+    .btn-select-subtle:hover {
+        border-color: var(--color-accent);
+        color: var(--color-text-main);
+    }
+
+    .products-area {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .products-grid-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .product-card-item {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: border-color 0.2s, transform 0.2s;
+        cursor: pointer;
+    }
+    .product-card-item:hover { border-color: var(--color-accent); transform: translateY(-2px); }
+
+    .product-card-img {
+        width: 100%;
+        height: 160px;
+        background-color: var(--color-element);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-muted);
+        font-weight: 600;
+        margin-bottom: 16px;
+        text-align: center;
+        padding: 10px 12px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .product-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .product-card-info h3 { font-size: 16px; color: var(--color-text-main); margin: 0 0 10px; }
+
+    .mini-specs {
+        margin: 0 0 14px;
+        padding-left: 18px;
+        font-size: 13px;
+        color: var(--color-text-muted);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .price { font-size: 20px; font-weight: 800; color: var(--color-accent); margin-bottom: 16px; }
+
+    .btn-detail {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .product-card-item:hover .btn-detail {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #000;
+    }
+
+    .no-products {
+        width: 100%;
+        text-align: center;
+        padding: 40px;
+        color: var(--color-text-muted);
+        background: var(--color-card);
+        border-radius: 16px;
+        border: 1px solid var(--color-border);
+    }
+
+    @media (max-width: 860px) {
+        .shop-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+        .products-grid-list { grid-template-columns: 1fr; }
+    }
+</style>

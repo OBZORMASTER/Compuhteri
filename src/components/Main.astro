@@ -1,5 +1,5 @@
 ---
-
+// ГОЛОВНИЙ БАНЕР
 ---
 
 <!-- ГОЛОВНИЙ БАНЕР -->
@@ -56,23 +56,6 @@
 <section class="categories-section container">
     <h2 class="section-title">Що ви шукаєте?</h2>
     <div class="categories-grid">
-        <a href="/services/diagnostic" class="category-card">
-            <svg
-                class="category-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            >
-                <path
-                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-                ></path>
-            </svg>
-            <h3>Діагностика</h3>
-        </a>
         <a href="/catalog/components" class="category-card">
             <svg
                 class="category-icon"
@@ -214,23 +197,30 @@
 
     <div class="products-grid">
         <!-- Товар 1 -->
-        <div class="product-card">
-            <a href="/catalog/pc-cyber-neon">
+        <div
+            class="product-card"
+            data-id="pc-storm-rtx4070-r7-7800x3d"
+            data-title="PC STORE Storm Pro RTX 4070 / Ryzen 7 7800X3D / 32GB DDR5"
+            data-price="68 900 ₴"
+            data-category="Готові збірки ПК"
+            data-img="/products_pics/pc-storm-rtx4070-r7-7800x3d-1.jpg"
+        >
+            <a href="/catalog/product/pc-storm-rtx4070-r7-7800x3d">
                 <img
-                    src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&q=80&w=400&h=300"
-                    alt="ПК Cyber Neon"
+                    src="/products_pics/pc-storm-rtx4070-r7-7800x3d-1.jpg"
+                    alt="PC STORE Storm Pro RTX 4070 / Ryzen 7 7800X3D / 32GB DDR5"
                     class="product-img"
                 />
             </a>
             <div class="product-info">
-                <a href="/catalog/pc-cyber-neon" class="product-title-link">
+                <a href="/catalog/product/pc-storm-rtx4070-r7-7800x3d" class="product-title-link">
                     <h4 class="product-title">
-                        Ігровий ПК "Cyber Neon" (RTX 4070, i5-13600K)
+                        PC STORE Storm Pro RTX 4070 / Ryzen 7 7800X3D / 32GB DDR5
                     </h4>
                 </a>
                 <div class="product-bottom">
-                    <span class="price">64 999 ₴</span>
-                    <button class="btn-cart">
+                    <span class="price">68 900 ₴</span>
+                    <button type="button" class="btn-cart" aria-label="Додати в кошик">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -253,24 +243,31 @@
             </div>
         </div>
 
-        <!-- Товар 2 -->
-        <div class="product-card">
-            <a href="/catalog/gpu-rtx-4060-ti">
+        <!-- Товар 2: KCAS 1000W -->
+        <div
+            class="product-card"
+            data-id="kcas-1000w"
+            data-title="Блок живлення KCAS PLUS GOLD 1000W"
+            data-price="8 709 ₴"
+            data-category="Блоки живлення"
+            data-img="/products_pics/kcas-1000w-1.jpg"
+        >
+            <a href="/catalog/product/kcas-1000w">
                 <img
-                    src="https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&q=80&w=400&h=300"
-                    alt="Відеокарта RTX 4060 Ti"
+                    src="/products_pics/kcas-1000w-1.jpg"
+                    alt="Блок живлення KCAS PLUS GOLD 1000W"
                     class="product-img"
                 />
             </a>
             <div class="product-info">
-                <a href="/catalog/gpu-rtx-4060-ti" class="product-title-link">
+                <a href="/catalog/product/kcas-1000w" class="product-title-link">
                     <h4 class="product-title">
-                        Відеокарта NVIDIA GeForce RTX 4060 Ti
+                        Блок живлення KCAS PLUS GOLD 1000W
                     </h4>
                 </a>
                 <div class="product-bottom">
-                    <span class="price">18 500 ₴</span>
-                    <button class="btn-cart">
+                    <span class="price">8 709 ₴</span>
+                    <button type="button" class="btn-cart" aria-label="Додати в кошик">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -294,21 +291,30 @@
         </div>
 
         <!-- Товар 3 -->
-        <div class="product-card">
-            <a href="/catalog/monitor-27-2k">
+        <div
+            class="product-card"
+            data-id="lg-ultragear-27gr93u-4k"
+            data-title='Монітор 27" LG UltraGear 27GR93U-B 4K 144Hz'
+            data-price="24 999 ₴"
+            data-category="Монітори"
+            data-img="/products_pics/lg-ultragear-27gr93u-4k-1.jpg"
+        >
+            <a href="/catalog/product/lg-ultragear-27gr93u-4k">
                 <img
-                    src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=400&h=300"
-                    alt="Ігровий монітор"
+                    src="/products_pics/lg-ultragear-27gr93u-4k-1.jpg"
+                    alt='Монітор 27" LG UltraGear 27GR93U-B 4K 144Hz'
                     class="product-img"
                 />
             </a>
             <div class="product-info">
-                <a href="/catalog/monitor-27-2k" class="product-title-link">
-                    <h4 class="product-title">Ігровий монітор 27" 2K 165Hz</h4>
+                <a href="/catalog/product/lg-ultragear-27gr93u-4k" class="product-title-link">
+                    <h4 class="product-title">
+                        Монітор 27" LG UltraGear 27GR93U-B 4K 144Hz
+                    </h4>
                 </a>
                 <div class="product-bottom">
-                    <span class="price">12 300 ₴</span>
-                    <button class="btn-cart">
+                    <span class="price">24 999 ₴</span>
+                    <button type="button" class="btn-cart" aria-label="Додати в кошик">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -602,16 +608,6 @@
         transform: translateY(-5px);
     }
 
-    .product-img-placeholder {
-        height: 220px;
-        background-color: var(--color-surface);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--color-text-muted);
-        border-bottom: 1px solid var(--color-border);
-    }
-
     .product-info {
         padding: 20px;
     }
@@ -626,14 +622,17 @@
     .product-img {
         width: 100%;
         height: 220px;
-        object-fit: cover;
+        object-fit: contain;
+        padding: 14px;
+        box-sizing: border-box;
+        background-color: var(--color-surface);
         display: block;
         border-bottom: 1px solid var(--color-border);
         transition: transform 0.4s ease;
     }
-    
+
     .product-card:hover .product-img {
-        transform: scale(1.05);
+        transform: scale(1.04);
     }
 
     .product-title-link {
@@ -719,5 +718,54 @@
                 images[currentIndex].classList.add("active");
             }, 4000);
         }
+
+        document.querySelectorAll(".bestsellers-section .btn-cart").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const card = btn.closest(".product-card") as HTMLElement | null;
+                if (!card) return;
+
+                const id = card.dataset.id || "";
+                const title = card.dataset.title || "";
+                const priceStr = card.dataset.price || "0 ₴";
+                const priceNum = parseInt(priceStr.replace(/\D/g, ""), 10) || 0;
+                const category = card.dataset.category || "";
+                const imgUrl = card.dataset.img || "";
+
+                if (!id || !title) return;
+
+                const cart = JSON.parse(localStorage.getItem("pcstore_cart") || "[]");
+                const existingIndex = cart.findIndex((item: any) => item.id === id);
+
+                if (existingIndex > -1) {
+                    cart[existingIndex].quantity += 1;
+                } else {
+                    cart.push({
+                        id,
+                        title,
+                        price: priceStr,
+                        priceNum,
+                        category,
+                        quantity: 1,
+                        img: imgUrl,
+                    });
+                }
+
+                localStorage.setItem("pcstore_cart", JSON.stringify(cart));
+
+                const buttonEl = btn as HTMLElement;
+                const prevBg = buttonEl.style.backgroundColor;
+                const prevColor = buttonEl.style.color;
+                buttonEl.style.backgroundColor = "#10B981";
+                buttonEl.style.color = "#fff";
+
+                window.setTimeout(() => {
+                    buttonEl.style.backgroundColor = prevBg;
+                    buttonEl.style.color = prevColor;
+                }, 900);
+            });
+        });
     });
 </script>

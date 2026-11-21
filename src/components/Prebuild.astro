@@ -1,0 +1,907 @@
+---
+interface PrebuildPc {
+  slug: string;
+  title: string;
+  price: string;
+  priceNum: number;
+  imgText: string;
+  img?: string;
+  brand: string;
+  gpuChipset: string;
+  cpuModel: string;
+  builtInStorage: string;
+  formFactor: string;
+  storageVolume: string;
+  vramVolume: string;
+  ramType: string;
+  cpuCores: string;
+  shortSpecs: string[];
+}
+
+const prebuildPcs: PrebuildPc[] = [
+  {
+    slug: "pc-storm-rtx4070-r7-7800x3d",
+    title: "PC STORE Storm Pro RTX 4070 / Ryzen 7 7800X3D / 32GB DDR5",
+    price: "68 900 ₴",
+    priceNum: 68900,
+    imgText: "RTX 4070 • R7 7800X3D",
+    brand: "asus",
+    gpuChipset: "rtx-4070",
+    cpuModel: "ryzen-7-7800x3d",
+    builtInStorage: "",
+    formFactor: "midi-tower",
+    storageVolume: "1000gb",
+    vramVolume: "12000mb",
+    ramType: "ddr5",
+    cpuCores: "8",
+    shortSpecs: ["GPU: GeForce RTX 4070 (12000MB)", "CPU: AMD Ryzen 7 7800X3D (8 ядер)", "RAM: DDR5", "SSD: 1000GB • Midi-Tower"]
+  },
+  {
+    slug: "pc-titan-rx9070xt-i7-14700k",
+    title: "PC STORE Titan 4K RX 9070 XT / Core i7-14700K / 32GB DDR5",
+    price: "84 500 ₴",
+    priceNum: 84500,
+    imgText: "RX 9070 XT • i7-14700K",
+    brand: "gigabyte",
+    gpuChipset: "rx-9070-xt",
+    cpuModel: "intel-i7-14700k",
+    builtInStorage: "",
+    formFactor: "full-tower",
+    storageVolume: "1000 gb",
+    vramVolume: "16000mb",
+    ramType: "ddr5",
+    cpuCores: "20",
+    shortSpecs: ["GPU: AMD Radeon RX 9070 XT (16000MB)", "CPU: INTEL Core i7-14700K (20 ядер)", "RAM: DDR5", "SSD: 1000 GB • Full-Tower"]
+  },
+  {
+    slug: "pc-pulse-rtx3060-r5-5600",
+    title: "PC STORE Pulse Gaming RTX 3060 / Ryzen 5 5600 / 16GB DDR4",
+    price: "36 400 ₴",
+    priceNum: 36400,
+    imgText: "RTX 3060 • R5 5600",
+    brand: "msi",
+    gpuChipset: "rtx-3060",
+    cpuModel: "ryzen-5-5600",
+    builtInStorage: "",
+    formFactor: "midi-tower",
+    storageVolume: "512gb",
+    vramVolume: "12000 mb",
+    ramType: "ddr4",
+    cpuCores: "6",
+    shortSpecs: ["GPU: GeForce RTX 3060 (12000 MB)", "CPU: AMD Ryzen 5 5600 (6 ядер)", "RAM: DDR4", "SSD: 512GB • Midi-Tower"]
+  },
+  {
+    slug: "pc-apex-rx6700xt-i5-13400f",
+    title: "PC STORE Apex QHD RX 6700 XT / Core i5-13400F / 32GB DDR4",
+    price: "44 200 ₴",
+    priceNum: 44200,
+    imgText: "RX 6700 XT • i5-13400F",
+    brand: "asus",
+    gpuChipset: "rx-6700-xt",
+    cpuModel: "intel-i5-13400f",
+    builtInStorage: "",
+    formFactor: "midi-tower",
+    storageVolume: "1000gb",
+    vramVolume: "12000mb",
+    ramType: "ddr4",
+    cpuCores: "10",
+    shortSpecs: ["GPU: AMD Radeon RX 6700 XT (12000MB)", "CPU: INTEL Core i5-13400F (10 ядер)", "RAM: DDR4", "SSD: 1000GB • Midi-Tower"]
+  },
+  {
+    slug: "pc-creator-rtx3090-r9-7900x",
+    title: "PC STORE Creator Studio RTX 3090 / Ryzen 9 7900X / 64GB DDR5",
+    price: "109 900 ₴",
+    priceNum: 109900,
+    imgText: "RTX 3090 • R9 7900X",
+    brand: "msi",
+    gpuChipset: "rtx-3090",
+    cpuModel: "amd-ryzen-5-5600x",
+    builtInStorage: "825gb",
+    formFactor: "full-tower",
+    storageVolume: "14000gb",
+    vramVolume: "16000 mb",
+    ramType: "ddr5",
+    cpuCores: "12",
+    shortSpecs: ["GPU: GeForce RTX 3090 (16000 MB)", "CPU: AMD Ryzen 5 5600X (12 ядер)", "RAM: DDR5", "SSD: 14000GB • Full-Tower"]
+  },
+];
+
+const brandOptions = [
+  { value: "asus", label: "ASUS" },
+  { value: "gigabyte", label: "GIGABYTE" },
+  { value: "msi", label: "MSI" },
+  { value: "sony", label: "Sony" }
+];
+
+const gpuOptions = [
+  { value: "rx-570", label: "AMD Radeon RX 570" },
+  { value: "rx-580", label: "AMD Radeon RX 580" },
+  { value: "rx-6700-xt", label: "AMD Radeon RX 6700 XT" },
+  { value: "rx-9060-xt", label: "AMD Radeon RX 9060 XT" },
+  { value: "rx-9070-xt", label: "AMD Radeon RX 9070 XT" },
+  { value: "rtx-3060", label: "GeForce RTX 3060" },
+  { value: "rtx-3060-ti", label: "GeForce RTX 3060 Ti" },
+  { value: "rtx-3090", label: "GeForce RTX 3090" },
+  { value: "gtx-1660-super", label: "GTX 1660 super" },
+  { value: "rtx-2060-super", label: "Nvidia GeForce 2060 Super" },
+  { value: "rtx-4070", label: "GeForce RTX 4070" }
+];
+
+const cpuOptions = [
+  { value: "intel-ultra-5-225f", label: "INTEL Ultra 5 225F" },
+  { value: "ryzen-5-4500", label: "AMD Ryzen 5 4500" },
+  { value: "ryzen-5-1600", label: "AMD Ryzen 5 1600" },
+  { value: "ryzen-5-2600", label: "AMD Ryzen 5 2600" },
+  { value: "ryzen-5-3600", label: "AMD Ryzen 5 3600" },
+  { value: "ryzen-5-5500", label: "AMD Ryzen 5 5500" },
+  { value: "ryzen-5-5500x3d", label: "AMD Ryzen 5 5500X3D" },
+  { value: "ryzen-5-5600", label: "AMD Ryzen 5 5600" },
+  { value: "amd-ryzen-5-5600x", label: "AMD Ryzen 5 5600X" },
+  { value: "ryzen-7-7800x3d", label: "AMD Ryzen 7 7800X3D" },
+  { value: "intel-i7-14700k", label: "INTEL Core i7-14700K" },
+  { value: "intel-i5-13400f", label: "INTEL Core i5-13400F" }
+];
+
+const builtInStorageOptions = [
+  { value: "825gb", label: "825GB" }
+];
+
+const formFactorOptions = [
+  { value: "desktop", label: "Desktop" },
+  { value: "full-tower", label: "Full-Tower" },
+  { value: "midi-tower", label: "Midi-Tower" }
+];
+
+const storageVolumeOptions = [
+  { value: "500gb", label: "500GB" },
+  { value: "500 gb", label: "500 GB" },
+  { value: "512gb", label: "512GB" },
+  { value: "825gb", label: "825GB" },
+  { value: "1000gb", label: "1000GB" },
+  { value: "1000 gb", label: "1000 GB" },
+  { value: "14000gb", label: "14000GB" }
+];
+
+const vramVolumeOptions = [
+  { value: "4000mb", label: "4000MB" },
+  { value: "6000mb", label: "6000MB" },
+  { value: "6000 mb", label: "6000 MB" },
+  { value: "8000mb", label: "8000MB" },
+  { value: "8000 mb", label: "8000 MB" },
+  { value: "10000mb", label: "10000MB" },
+  { value: "12000mb", label: "12000MB" },
+  { value: "12000 mb", label: "12000 MB" },
+  { value: "16000mb", label: "16000MB" },
+  { value: "16000 mb", label: "16000 MB" }
+];
+
+const ramTypeOptions = [
+  { value: "ddr3", label: "DDR3" },
+  { value: "ddr4", label: "DDR4" },
+  { value: "ddr5", label: "DDR5" }
+];
+
+const cpuCoresOptions = [
+  { value: "4", label: "4" },
+  { value: "6", label: "6" },
+  { value: "8", label: "8" },
+  { value: "10", label: "10" },
+  { value: "12", label: "12" },
+  { value: "14", label: "14" },
+  { value: "20", label: "20" },
+  { value: "24", label: "24" }
+];
+
+type FilterField =
+  | "brand"
+  | "gpuChipset"
+  | "cpuModel"
+  | "builtInStorage"
+  | "formFactor"
+  | "storageVolume"
+  | "vramVolume"
+  | "ramType"
+  | "cpuCores";
+
+const countBy = (key: FilterField, val: string) =>
+  prebuildPcs.filter((pc) => pc[key] === val).length;
+---
+
+<section class="prebuild-container container">
+    <div class="breadcrumb">
+        <a href="/catalog">Каталог</a> / 
+        <span>Готові збірки ПК</span>
+    </div>
+
+    <div class="catalog-page-header">
+        <h1 class="page-title">Готові збірки ПК</h1>
+        <p class="page-subtitle">Протестовані та збалансовані комп'ютери під ігри, стрімінг і роботу</p>
+    </div>
+
+    <div class="shop-layout">
+        <aside class="filters-sidebar">
+            <h3>Фільтри</h3>
+
+            <!-- 1. Виробник -->
+            <div class="filter-box">
+                <span class="filter-title">Виробник</span>
+                <div class="filter-options">
+                    {brandOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="brand" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("brand", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 2. Графічний чіпсет -->
+            <div class="filter-box">
+                <span class="filter-title">Графічний чіпсет</span>
+                <div class="filter-options" data-expandable-list="gpu">
+                    {gpuOptions.map((opt, idx) => {
+                        const isHiddenInitially = idx >= 10;
+                        return (
+                            <label class:list={["filter-option-row", { "extra-option hidden-option": isHiddenInitially }]}>
+                                <span class="option-left">
+                                    <input type="checkbox" class="filter-checkbox" data-group="gpu" value={opt.value} />
+                                    <span>{opt.label}</span>
+                                </span>
+                                <span class="option-count">{countBy("gpuChipset", opt.value)}</span>
+                            </label>
+                        );
+                    })}
+                </div>
+                {gpuOptions.length > 10 && (
+                    <button
+                        type="button"
+                        class="btn-show-more"
+                        data-target="gpu"
+                        data-more-text={`Показати ще ${gpuOptions.length - 10}`}
+                        data-less-text="Згорнути"
+                    >
+                        Показати ще {gpuOptions.length - 10} ⌄
+                    </button>
+                )}
+            </div>
+
+            <!-- 3. Модель процесора -->
+            <div class="filter-box">
+                <span class="filter-title">Модель процесора</span>
+                <div class="filter-options" data-expandable-list="cpu">
+                    {cpuOptions.map((opt, idx) => {
+                        const isHiddenInitially = idx >= 9;
+                        return (
+                            <label class:list={["filter-option-row", { "extra-option hidden-option": isHiddenInitially }]}>
+                                <span class="option-left">
+                                    <input type="checkbox" class="filter-checkbox" data-group="cpu" value={opt.value} />
+                                    <span>{opt.label}</span>
+                                </span>
+                                <span class="option-count">{countBy("cpuModel", opt.value)}</span>
+                            </label>
+                        );
+                    })}
+                </div>
+                {cpuOptions.length > 9 && (
+                    <button
+                        type="button"
+                        class="btn-show-more"
+                        data-target="cpu"
+                        data-more-text={`Показати ще ${cpuOptions.length - 9}`}
+                        data-less-text="Згорнути"
+                    >
+                        Показати ще {cpuOptions.length - 9} ⌄
+                    </button>
+                )}
+            </div>
+
+            <!-- 4. Об'єм вбудованої пам'яті -->
+            <div class="filter-box">
+                <span class="filter-title">Об'єм вбудованої пам'яті</span>
+                <div class="filter-options">
+                    {builtInStorageOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="builtInStorage" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("builtInStorage", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 5. Типорозмір -->
+            <div class="filter-box">
+                <span class="filter-title">Типорозмір</span>
+                <div class="filter-options">
+                    {formFactorOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="formFactor" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("formFactor", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 6. Об'єм накопичувача -->
+            <div class="filter-box">
+                <span class="filter-title">Об'єм накопичувача</span>
+                <div class="filter-options" data-expandable-list="storageVolume">
+                    {storageVolumeOptions.map((opt, idx) => {
+                        const isHiddenInitially = idx >= 6;
+                        return (
+                            <label class:list={["filter-option-row", { "extra-option hidden-option": isHiddenInitially }]}>
+                                <span class="option-left">
+                                    <input type="checkbox" class="filter-checkbox" data-group="storageVolume" value={opt.value} />
+                                    <span>{opt.label}</span>
+                                </span>
+                                <span class="option-count">{countBy("storageVolume", opt.value)}</span>
+                            </label>
+                        );
+                    })}
+                </div>
+                {storageVolumeOptions.length > 6 && (
+                    <button
+                        type="button"
+                        class="btn-show-more"
+                        data-target="storageVolume"
+                        data-more-text={`Показати ще ${storageVolumeOptions.length - 6}`}
+                        data-less-text="Згорнути"
+                    >
+                        Показати ще {storageVolumeOptions.length - 6} ⌄
+                    </button>
+                )}
+            </div>
+
+            <!-- 7. Об'єм відеопам'яті -->
+            <div class="filter-box">
+                <span class="filter-title">Об'єм відеопам'яті</span>
+                <div class="filter-options" data-expandable-list="vramVolume">
+                    {vramVolumeOptions.map((opt, idx) => {
+                        const isHiddenInitially = idx >= 10;
+                        return (
+                            <label class:list={["filter-option-row", { "extra-option hidden-option": isHiddenInitially }]}>
+                                <span class="option-left">
+                                    <input type="checkbox" class="filter-checkbox" data-group="vramVolume" value={opt.value} />
+                                    <span>{opt.label}</span>
+                                </span>
+                                <span class="option-count">{countBy("vramVolume", opt.value)}</span>
+                            </label>
+                        );
+                    })}
+                </div>
+                {vramVolumeOptions.length > 10 && (
+                    <button
+                        type="button"
+                        class="btn-show-more"
+                        data-target="vramVolume"
+                        data-more-text={`Показати ще ${vramVolumeOptions.length - 10}`}
+                        data-less-text="Згорнути"
+                    >
+                        Показати ще {vramVolumeOptions.length - 10} ⌄
+                    </button>
+                )}
+            </div>
+
+            <!-- 8. Тип оперативної пам'яті -->
+            <div class="filter-box">
+                <span class="filter-title">Тип оперативної пам'яті</span>
+                <div class="filter-options">
+                    {ramTypeOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="ramType" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("ramType", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 9. Кількість ядер процесора -->
+            <div class="filter-box">
+                <span class="filter-title">Кількість ядер процесора</span>
+                <div class="filter-options">
+                    {cpuCoresOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="cpuCores" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("cpuCores", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 10. Ціна -->
+            <div class="filter-box">
+                <span class="filter-title">Ціна (₴)</span>
+                <div class="price-inputs">
+                    <input type="number" id="price-min" placeholder="Від" />
+                    <input type="number" id="price-max" placeholder="До" />
+                </div>
+            </div>
+
+            <button type="button" id="apply-filters" class="btn-apply">Застосувати фільтри</button>
+            <button type="button" id="reset-filters" class="btn-reset">Скинути</button>
+
+            <div class="filter-footer-bar">
+                <button type="button" id="cancel-filters-btn" class="btn-cancel-subtle">Скасувати</button>
+                <button type="button" id="select-filters-btn" class="btn-select-subtle">Виберіть фільтри</button>
+            </div>
+        </aside>
+
+        <div class="products-area">
+            <div class="products-grid-list" id="products-grid">
+                {prebuildPcs.map((pc) => {
+                    const imgSrc = pc.img || `/products_pics/${pc.slug}-1.jpg`;
+                    return (
+                        <div
+                            class="product-card-item"
+                            data-brand={pc.brand}
+                            data-gpu={pc.gpuChipset}
+                            data-cpu={pc.cpuModel}
+                            data-built-in-storage={pc.builtInStorage}
+                            data-form-factor={pc.formFactor}
+                            data-storage-volume={pc.storageVolume}
+                            data-vram-volume={pc.vramVolume}
+                            data-ram-type={pc.ramType}
+                            data-cpu-cores={pc.cpuCores}
+                            data-price={pc.priceNum}
+                            data-slug={pc.slug}
+                        >
+                            <div class="product-card-img">
+                                <img
+                                    src={imgSrc}
+                                    alt={pc.title}
+                                    loading="lazy"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
+                                />
+                                <span class="img-fallback-text" style="display: none;">{pc.imgText}</span>
+                            </div>
+                            <div class="product-card-info">
+                                <h3>{pc.title}</h3>
+                                <ul class="mini-specs">
+                                    {pc.shortSpecs.map((s) => <li>{s}</li>)}
+                                </ul>
+                                <div class="price">{pc.price}</div>
+                                <button type="button" class="btn-detail">Дивитися збірку</button>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+
+            <div id="no-products-message" class="no-products" style="display: none;">
+                <p>Наразі немає готових збірок з обраними фільтрами.</p>
+                <button type="button" id="empty-reset-btn" class="btn-detail" style="display:inline-block; margin-top:10px; width: auto; padding: 10px 20px;">
+                    Скинути фільтри
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const applyBtn = document.getElementById('apply-filters');
+    const resetBtn = document.getElementById('reset-filters');
+    const cancelBtn = document.getElementById('cancel-filters-btn');
+    const selectFiltersBtn = document.getElementById('select-filters-btn');
+    const emptyResetBtn = document.getElementById('empty-reset-btn');
+    const productCards = document.querySelectorAll('.product-card-item');
+    const minInput = document.getElementById('price-min') as HTMLInputElement;
+    const maxInput = document.getElementById('price-max') as HTMLInputElement;
+    const noProductsMsg = document.getElementById('no-products-message');
+
+    const filterGroups = [
+        { group: 'brand', attr: 'data-brand' },
+        { group: 'gpu', attr: 'data-gpu' },
+        { group: 'cpu', attr: 'data-cpu' },
+        { group: 'builtInStorage', attr: 'data-built-in-storage' },
+        { group: 'formFactor', attr: 'data-form-factor' },
+        { group: 'storageVolume', attr: 'data-storage-volume' },
+        { group: 'vramVolume', attr: 'data-vram-volume' },
+        { group: 'ramType', attr: 'data-ram-type' },
+        { group: 'cpuCores', attr: 'data-cpu-cores' }
+    ];
+
+    function getCheckedByGroup(group: string): string[] {
+        return Array.from(
+            document.querySelectorAll(`.filter-checkbox[data-group="${group}"]:checked`)
+        ).map((el) => (el as HTMLInputElement).value);
+    }
+
+    function filterPrebuilds() {
+        const activeSelections = filterGroups.map((fg) => ({
+            attr: fg.attr,
+            values: getCheckedByGroup(fg.group)
+        }));
+
+        const minPrice = minInput?.value ? parseFloat(minInput.value) : 0;
+        const maxPrice = maxInput?.value ? parseFloat(maxInput.value) : Infinity;
+
+        let visibleCount = 0;
+
+        productCards.forEach((card) => {
+            const matchesGroups = activeSelections.every((sel) => {
+                if (sel.values.length === 0) return true;
+                const cardVal = card.getAttribute(sel.attr) || '';
+                return sel.values.includes(cardVal);
+            });
+
+            const price = parseFloat(card.getAttribute('data-price') || '0');
+            const matchesPrice = price >= minPrice && price <= maxPrice;
+
+            if (matchesGroups && matchesPrice) {
+                (card as HTMLElement).style.display = 'flex';
+                visibleCount++;
+            } else {
+                (card as HTMLElement).style.display = 'none';
+            }
+        });
+
+        if (noProductsMsg) {
+            noProductsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+    }
+
+    document.querySelectorAll('.btn-show-more').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-target');
+            const list = document.querySelector(`[data-expandable-list="${target}"]`);
+            if (!list) return;
+
+            const isExpanded = btn.getAttribute('data-expanded') === 'true';
+            const extraItems = list.querySelectorAll('.extra-option');
+
+            extraItems.forEach((item) => {
+                item.classList.toggle('hidden-option', isExpanded);
+            });
+
+            btn.setAttribute('data-expanded', String(!isExpanded));
+            const moreText = btn.getAttribute('data-more-text') || 'Показати ще';
+            const lessText = btn.getAttribute('data-less-text') || 'Згорнути';
+            btn.textContent = !isExpanded ? `${lessText} ⌃` : `${moreText} ⌄`;
+        });
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        filterGroups.forEach(({ group }) => {
+            const paramVal = params.get(group);
+            if (paramVal) {
+                paramVal.split(',').forEach((val) => {
+                    const cb = document.querySelector(
+                        `.filter-checkbox[data-group="${group}"][value="${val}"]`
+                    ) as HTMLInputElement | null;
+                    if (cb) {
+                        cb.checked = true;
+                        const parentRow = cb.closest('.extra-option');
+                        if (parentRow && parentRow.classList.contains('hidden-option')) {
+                            parentRow.classList.remove('hidden-option');
+                        }
+                    }
+                });
+            }
+        });
+
+        filterPrebuilds();
+    });
+
+    productCards.forEach((card) => {
+        card.addEventListener('click', () => {
+            const slug = card.getAttribute('data-slug');
+            if (slug) {
+                window.location.href = `/catalog/product/${slug}`;
+            }
+        });
+    });
+
+    applyBtn?.addEventListener('click', filterPrebuilds);
+
+    function resetAllFilters() {
+        document.querySelectorAll('.filter-checkbox').forEach((cb) => {
+            (cb as HTMLInputElement).checked = false;
+        });
+        if (minInput) minInput.value = '';
+        if (maxInput) maxInput.value = '';
+        window.history.replaceState({}, '', window.location.pathname);
+        filterPrebuilds();
+    }
+
+    resetBtn?.addEventListener('click', resetAllFilters);
+    cancelBtn?.addEventListener('click', resetAllFilters);
+    emptyResetBtn?.addEventListener('click', resetAllFilters);
+
+    selectFiltersBtn?.addEventListener('click', () => {
+        const firstCheckbox = document.querySelector('.filter-checkbox') as HTMLInputElement | null;
+        firstCheckbox?.focus();
+        firstCheckbox?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+</script>
+
+<style>
+    .prebuild-container {
+        max-width: 1200px;
+        margin: 40px auto 80px;
+        padding: 0 24px;
+    }
+    .breadcrumb {
+        font-size: 14px;
+        color: var(--color-text-muted);
+        margin-bottom: 20px;
+    }
+    .breadcrumb a { color: var(--color-text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--color-accent); }
+
+    .catalog-page-header { margin-bottom: 32px; }
+    .page-title { font-size: 32px; color: var(--color-text-main); margin: 0 0 8px; font-weight: 700; }
+    .page-subtitle { color: var(--color-text-muted); margin: 0; font-size: 15px; }
+
+    .shop-layout {
+        display: grid;
+        grid-template-columns: 290px 1fr;
+        gap: 32px;
+        align-items: start;
+    }
+
+    .filters-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .filters-sidebar > h3 {
+        font-size: 18px;
+        margin: 0;
+        color: var(--color-text-main);
+    }
+
+    .filter-box {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 14px;
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .filter-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--color-text-main);
+    }
+
+    .filter-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-option-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+    }
+    .filter-option-row:hover {
+        color: var(--color-text-main);
+    }
+
+    .option-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .option-count {
+        font-size: 12px;
+        color: var(--color-text-muted);
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        padding: 2px 7px;
+        min-width: 24px;
+        text-align: center;
+    }
+
+    .hidden-option {
+        display: none;
+    }
+
+    .btn-show-more {
+        background: none;
+        border: none;
+        padding: 2px 0 0;
+        text-align: left;
+        font-size: 13px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+        width: fit-content;
+    }
+    .btn-show-more:hover {
+        color: var(--color-accent);
+    }
+
+    .price-inputs { display: flex; gap: 10px; }
+    .price-inputs input {
+        width: 100%;
+        background: var(--color-element);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        padding: 8px 12px;
+        color: var(--color-text-main);
+    }
+
+    .btn-apply {
+        width: 100%;
+        background-color: var(--color-accent);
+        color: #000;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+    .btn-apply:hover { opacity: 0.9; }
+
+    .btn-reset {
+        width: 100%;
+        background-color: var(--color-element);
+        color: var(--color-text-muted);
+        border: 1px solid var(--color-border);
+        padding: 8px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .btn-reset:hover { color: var(--color-text-main); }
+
+    .filter-footer-bar {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 14px;
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .btn-cancel-subtle {
+        background: none;
+        border: none;
+        color: var(--color-text-muted);
+        font-size: 14px;
+        cursor: pointer;
+        padding: 6px 4px;
+    }
+    .btn-cancel-subtle:hover { color: var(--color-text-main); }
+
+    .btn-select-subtle {
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        font-size: 13px;
+        border-radius: 8px;
+        padding: 8px 14px;
+        cursor: pointer;
+    }
+    .btn-select-subtle:hover {
+        border-color: var(--color-accent);
+        color: var(--color-text-main);
+    }
+
+    .products-area {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .products-grid-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .product-card-item {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: border-color 0.2s, transform 0.2s;
+        cursor: pointer;
+    }
+    .product-card-item:hover { border-color: var(--color-accent); transform: translateY(-2px); }
+
+    .product-card-img {
+        width: 100%;
+        height: 160px;
+        background-color: var(--color-element);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-muted);
+        font-weight: 600;
+        margin-bottom: 16px;
+        text-align: center;
+        padding: 10px 12px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .product-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .product-card-info h3 { font-size: 16px; color: var(--color-text-main); margin: 0 0 10px; }
+
+    .mini-specs {
+        margin: 0 0 14px;
+        padding-left: 18px;
+        font-size: 13px;
+        color: var(--color-text-muted);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .price { font-size: 20px; font-weight: 800; color: var(--color-accent); margin-bottom: 16px; }
+
+    .btn-detail {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .product-card-item:hover .btn-detail {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #000;
+    }
+
+    .no-products {
+        width: 100%;
+        text-align: center;
+        padding: 40px;
+        color: var(--color-text-muted);
+        background: var(--color-card);
+        border-radius: 16px;
+        border: 1px solid var(--color-border);
+    }
+
+    @media (max-width: 860px) {
+        .shop-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+        .products-grid-list { grid-template-columns: 1fr; }
+    }
+</style>

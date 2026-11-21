@@ -1,0 +1,302 @@
+---
+const peripheralCategories = [
+  {
+    title: "Клавіатури",
+    slug: "keyboards",
+    desc: "Механічні, мембранні та компактні моделі для ігор і роботи",
+    icon: "/configurator-icons/klaviatura.svg",
+    tags: [
+      { name: "Механічні", href: "/catalog/peripherals/keyboards?filter=mechanical" },
+      { name: "Бездротові", href: "/catalog/peripherals/keyboards?filter=wireless" },
+      { name: "HyperX", href: "/catalog/peripherals/keyboards?filter=hyperx" },
+    ],
+    allLink: { text: "Усі клавіатури", href: "/catalog/peripherals/keyboards" }
+  },
+  {
+    title: "Миші",
+    slug: "mice",
+    desc: "Точні сенсори, легкий корпус та швидкий відгук",
+    icon: "/configurator-icons/misha.svg",
+    tags: [
+      { name: "Бездротові", href: "/catalog/peripherals/mice?filter=wireless" },
+      { name: "Дротові", href: "/catalog/peripherals/mice?filter=wired" },
+      { name: "Logitech", href: "/catalog/peripherals/mice?filter=logitech" },
+      { name: "Razer", href: "/catalog/peripherals/mice?filter=razer" },
+    ],
+    allLink: { text: "Усі миші", href: "/catalog/peripherals/mice" }
+  },
+  {
+    title: "Гарнітура та навушники",
+    slug: "headsets",
+    desc: "Об'ємний звук, чистий мікрофон та комфорт при тривалих сесіях",
+    tags: [
+      { name: "Бездротові", href: "/catalog/peripherals/headsets?filter=wireless" },
+      { name: "Дротові", href: "/catalog/peripherals/headsets?filter=wired" },
+      { name: "HyperX", href: "/catalog/peripherals/headsets?filter=hyperx" },
+      { name: "Logitech", href: "/catalog/peripherals/headsets?filter=logitech" },
+    ],
+    allLink: { text: "Усі навушники", href: "/catalog/peripherals/headsets" }
+  },
+  {
+    title: "Монітори",
+    slug: "monitors",
+    desc: "Дисплеї для 4K геймінгу, дизайну, кіберспорту та офісної роботи",
+    icon: "/configurator-icons/monitor.svg",
+    tags: [
+      { name: "4K Геймінг", href: "/catalog/peripherals/monitors?filter=4k-gaming" },
+      { name: "Для дизайну", href: "/catalog/peripherals/monitors?filter=design" },
+      { name: "Для роботи", href: "/catalog/peripherals/monitors?filter=office" },
+    ],
+    allLink: { text: "Усі монітори", href: "/catalog/peripherals/monitors" }
+  },
+  {
+    title: "Мікрофони",
+    slug: "microphones",
+    desc: "Для стрімінгу, подкастів, озвучки та голосового зв'язку",
+    tags: [
+      { name: "USB", href: "/catalog/peripherals/microphones?filter=usb" },
+      { name: "XLR", href: "/catalog/peripherals/microphones?filter=xlr" },
+      { name: "HyperX", href: "/catalog/peripherals/microphones?filter=hyperx" },
+      { name: "FIFINE", href: "/catalog/peripherals/microphones?filter=fifine" },
+    ],
+    allLink: { text: "Усі мікрофони", href: "/catalog/peripherals/microphones" }
+  },
+  {
+    title: "Геймпади",
+    slug: "gamepads",
+    desc: "Зручне керування для ПК та консолей",
+    tags: [
+      { name: "Sony", href: "/catalog/peripherals/gamepads?filter=sony" },
+      { name: "Microsoft", href: "/catalog/peripherals/gamepads?filter=microsoft" },
+    ],
+    allLink: { text: "Усі геймпади", href: "/catalog/peripherals/gamepads" }
+  },
+  {
+    title: "Аксесуари та килимки",
+    slug: "accessories",
+    desc: "Все заради комфорту на робочому місці",
+    tags: [
+      { name: "Килимки", href: "/catalog/peripherals/accessories?filter=mousepad" },
+      { name: "Підставки під зап'ястя", href: "/catalog/peripherals/accessories?filter=rest" },
+      { name: "Тримачі кабелю миші", href: "/catalog/peripherals/accessories?filter=holder" },
+      { name: "SteelSeries", href: "/catalog/peripherals/accessories?filter=steelseries" },
+    ],
+    allLink: { text: "Усі аксесуари", href: "/catalog/peripherals/accessories" }
+  }
+];
+---
+
+<section class="components-container">
+    <div class="page-header">
+        <h1 class="page-title">Периферія для ПК та Консолей</h1>
+        <p class="page-subtitle">Оберіть потрібну категорію пристроїв для комфортної гри та роботи</p>
+    </div>
+
+    <div class="components-grid">
+        {peripheralCategories.map((cat) => (
+            <div class="comp-category-card">
+                <div class="card-content-top">
+                    <div class="image-placeholder">
+                        {cat.icon ? (
+                            <img src={cat.icon} alt={cat.title} class="category-real-img" loading="lazy" />
+                        ) : (
+                            <span class="placeholder-text">Фото</span>
+                        )}
+                    </div>
+
+                    <div class="card-titles">
+                        <h3>{cat.title}</h3>
+                        <p>{cat.desc}</p>
+                    </div>
+
+                    <div class="tags-list">
+                        {cat.tags.map((tag) => (
+                            <a href={tag.href} class="tag-pill">{tag.name}</a>
+                        ))}
+                    </div>
+                </div>
+
+                <div class="card-bottom">
+                    <a href={cat.allLink.href} class="all-link">{cat.allLink.text} <span>›</span></a>
+                </div>
+
+                <a href={cat.allLink.href} class="card-link-overlay" aria-label={cat.title}></a>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style>
+    .components-container {
+        max-width: 1200px;
+        margin: 40px auto 80px;
+        padding: 0 24px;
+    }
+
+    .page-header {
+        margin-bottom: 32px;
+    }
+
+    .page-title {
+        font-size: 32px;
+        margin: 0 0 8px;
+        color: var(--color-text-main);
+        font-weight: 700;
+    }
+
+    .page-subtitle {
+        color: var(--color-text-muted);
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .components-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        align-items: stretch;
+    }
+
+    .comp-category-card {
+        position: relative;
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .comp-category-card:hover {
+        border-color: var(--color-accent);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(0, 255, 204, 0.1);
+    }
+
+    .card-link-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        border-radius: 16px;
+    }
+
+    .card-content-top {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .image-placeholder {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    background-color: var(--color-element);
+    border: 1.5px solid var(--color-accent); /* зелёная обводка */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .comp-category-card:hover .image-placeholder {
+    border-color: #22c55e;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+    }
+
+    .placeholder-text {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--color-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .category-real-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .card-titles h3 {
+        margin: 0 0 4px;
+        font-size: 18px;
+        color: var(--color-text-main);
+        font-weight: 600;
+    }
+
+    .card-titles p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--color-text-muted);
+        line-height: 1.4;
+    }
+
+    .tags-list {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    .tag-pill {
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.15s ease;
+    }
+
+    .tag-pill:hover {
+        background-color: rgba(0, 255, 204, 0.1);
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+    }
+
+    .card-bottom {
+        position: relative;
+        z-index: 2;
+        border-top: 1px solid var(--color-border);
+        padding-top: 16px;
+        margin-top: 20px;
+    }
+
+    .all-link {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-accent);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform 0.15s;
+    }
+
+    .all-link:hover {
+        transform: translateX(3px);
+    }
+
+    @media (max-width: 992px) {
+        .components-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .components-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

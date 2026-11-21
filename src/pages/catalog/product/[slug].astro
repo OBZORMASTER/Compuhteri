@@ -1,127 +1,1029 @@
 ---
-export function getStaticPaths() {
-  return [
-    { params: { slug: "intel-core-i7" } },
-    { params: { slug: "amd-ryzen-7" } },
-    { params: { slug: "asus-rtx-4070" } },
-    { params: { slug: "msi-z790" } },
-    { params: { slug: "kingston-ddr5-32gb" } },
-    { params: { slug: "samsung-990-pro-2tb" } },
-    { params: { slug: "wd-blue-2tb" } },
-    { params: { slug: "nzxt-h5-flow" } },
-    { params: { slug: "msi-mpg-850w" } },
-    { params: { slug: "deepcool-ak620" } },
-    { params: { slug: "asus-xonar-se" } }
-  ];
-}
 import Layout from "../../../layouts/Layout.astro";
 
 const { slug } = Astro.params;
 
-// Карта соответствия категорий для хлебных крошек и ссылок
-const categoryMap: Record<string, { title: string; link: string }> = {
-    "Процесори": { title: "Процесори", link: "/catalog/components/processors" },
-    "Відеокарти": { title: "Відеокарти", link: "/catalog/components/gpus" },
-    "Материнські плати": { title: "Материнські плати", link: "/catalog/components/motherboards" },
-    "Оперативна пам'ять": { title: "Оперативна пам'ять", link: "/catalog/components/ram" },
-    "SSD накопичувачі": { title: "SSD накопичувачі", link: "/catalog/components/ssd" },
-    "Жорсткі диски HDD": { title: "Жорсткі диски HDD", link: "/catalog/components/hdd" },
-    "Корпуси": { title: "Корпуси", link: "/catalog/components/cases" },
-    "Блоки живлення": { title: "Блоки живлення", link: "/catalog/components/psu" },
-    "Системи охолодження": { title: "Системи охолодження", link: "/catalog/components/coolers" },
-    "Звукові карти": { title: "Звукові карти", link: "/catalog/components/sound-cards" }
+type SectionType = "components" | "peripherals" | "prebuild" | "laptops" | "consoles";
+
+const sectionMeta: Record<SectionType, { title: string; link: string }> = {
+    components: { title: "Комплектуючі", link: "/catalog/components" },
+    peripherals: { title: "Периферія", link: "/catalog/peripherals" },
+    prebuild: { title: "Готові збірки ПК", link: "/catalog/prebuild" },
+    laptops: { title: "Ноутбуки", link: "/catalog/laptops" },
+    consoles: { title: "Консолі", link: "/catalog/consoles" },
 };
 
-const productsDatabase: Record<string, { title: string; category: string; price: string; desc: string; specs: string[]; img?: string }> = {
+const categoryMap: Record<string, { title: string; link: string; section: SectionType }> = {
+    "Процесори": { title: "Процесори", link: "/catalog/components/processors", section: "components" },
+    "Відеокарти": { title: "Відеокарти", link: "/catalog/components/gpus", section: "components" },
+    "Материнські плати": { title: "Материнські плати", link: "/catalog/components/motherboards", section: "components" },
+    "Оперативна пам'ять": { title: "Оперативна пам'ять", link: "/catalog/components/ram", section: "components" },
+    "SSD накопичувачі": { title: "SSD накопичувачі", link: "/catalog/components/ssd", section: "components" },
+    "Жорсткі диски HDD": { title: "Жорсткі диски HDD", link: "/catalog/components/hdd", section: "components" },
+    "Корпуси": { title: "Корпуси", link: "/catalog/components/cases", section: "components" },
+    "Блоки живлення": { title: "Блоки живлення", link: "/catalog/components/psu", section: "components" },
+    "Системи охолодження": { title: "Системи охолодження", link: "/catalog/components/coolers", section: "components" },
+    "Звукові карти": { title: "Звукові карти", link: "/catalog/components/sound-cards", section: "components" },
+
+    "Клавіатури": { title: "Клавіатури", link: "/catalog/peripherals/keyboards", section: "peripherals" },
+    "Миші": { title: "Миші", link: "/catalog/peripherals/mice", section: "peripherals" },
+    "Гарнітура та навушники": { title: "Гарнітура та навушники", link: "/catalog/peripherals/headsets", section: "peripherals" },
+    "Монітори": { title: "Монітори", link: "/catalog/peripherals/monitors", section: "peripherals" },
+    "Мікрофони": { title: "Мікрофони", link: "/catalog/peripherals/microphones", section: "peripherals" },
+    "Геймпади": { title: "Геймпади", link: "/catalog/peripherals/gamepads", section: "peripherals" },
+    "Аксесуари та килимки": { title: "Аксесуари та килимки", link: "/catalog/peripherals/accessories", section: "peripherals" },
+
+    "Готові збірки ПК": { title: "Готові збірки ПК", link: "/catalog/prebuild", section: "prebuild" },
+    "Ноутбуки": { title: "Ноутбуки", link: "/catalog/laptops", section: "laptops" },
+    "Консолі": { title: "Консолі", link: "/catalog/consoles", section: "consoles" },
+};
+
+interface ProductEntry {
+    title: string;
+    category: string;
+    price: string;
+    desc: string;
+    specs: string[];
+    img?: string;
+    images?: string[];
+}
+
+export const productsDatabase: Record<string, ProductEntry> = {
     "intel-core-i7": {
         title: "Процесор Intel Core i7-14700K",
         category: "Процесори",
         price: "17 999 ₴",
         desc: "Високопродуктивний процесор для ігор та робочих станцій.",
-        specs: ["Ядра: 20", "Потоки: 28", "Частота: до 5.6 ГГц", "Socket: LGA1700"]
+        specs: ["Ядра: 20", "Потоки: 28", "Частота: до 5.6 ГГц", "Socket: LGA1700"],
+        images: [
+            "/products_pics/intel-core-i7-1.jpg",
+            "/products_pics/intel-core-i7-2.jpg",
+            "/products_pics/intel-core-i7-3.jpg",
+        ]
     },
     "amd-ryzen-7": {
         title: "Процесор AMD Ryzen 7 7800X3D",
         category: "Процесори",
         price: "19 500 ₴",
         desc: "Найкращий ігровий процесор з технологією 3D V-Cache.",
-        specs: ["Ядра: 8", "Потоки: 16", "Частота: до 5.0 ГГц", "Socket: AM5"]
+        specs: ["Ядра: 8", "Потоки: 16", "Частота: до 5.0 ГГц", "Socket: AM5"],
+        images: [
+            "/products_pics/amd-ryzen-7-1.jpg",
+            "/products_pics/amd-ryzen-7-2.jpg",
+            "/products_pics/amd-ryzen-7-3.jpg",
+        ]
     },
     "asus-rtx-4070": {
         title: "Відеокарта ASUS GeForce RTX 4070 12GB",
         category: "Відеокарти",
         price: "28 500 ₴",
         desc: "Сучасна відеокарта з підтримкою DLSS 3 та трасування променів.",
-        specs: ["Пам'ять: 12 GB GDDR6X", "Шина: 192-bit", "Живлення: 1x 16-pin"]
+        specs: ["Пам'ять: 12 GB GDDR6X", "Шина: 192-bit", "Живлення: 1x 16-pin"],
+        images: [
+            "/products_pics/asus-rtx-4070-1.jpg",
+            "/products_pics/asus-rtx-4070-2.jpg",
+            "/products_pics/asus-rtx-4070-3.jpg",
+        ]
+    },
+    "radeon-rx-9070": {
+        title: "Відеокарта Gigabyte Radeon RX 9070 16GB",
+        category: "Відеокарти",
+        price: "47 069 ₴",
+        desc: "Відеокарта побудована на передовій архітектурі AMD RDNA 4, яка забезпечує максимальну продуктивність і вражаючу енергоефективність.",
+        specs: ["Пам'ять: 16 GB GDDR6X", "Шина: 256-bit", "Живлення: 1x 8-pin"],
+        images: [
+            "/products_pics/radeon-rx-9070-1.jpg",
+            "/products_pics/radeon-rx-9070-2.jpg",
+            "/products_pics/radeon-rx-9070-3.jpg",
+        ]
     },
     "msi-z790": {
         title: "Материнська плата MSI MAG Z790 TOMAHAWK",
         category: "Материнські плати",
         price: "11 200 ₴",
         desc: "Надійна основа для потужної ігрової збірки з відмінним охолодженням VRM.",
-        specs: ["Чіпсет: Intel Z790", "Форм-фактор: ATX", "Пам'ять: 4x DDR5"]
+        specs: ["Чіпсет: Intel Z790", "Форм-фактор: ATX", "Пам'ять: 4x DDR5"],
+        images: [
+            "/products_pics/msi-z790-1.jpg",
+            "/products_pics/msi-z790-2.jpg",
+            "/products_pics/msi-z790-3.jpg",
+        ]
     },
     "kingston-ddr5-32gb": {
         title: "Оперативна пам'ять Kingston Fury DDR5 32GB",
         category: "Оперативна пам'ять",
         price: "4 500 ₴",
         desc: "Швидкий комплект пам'яті нового покоління з підтримкою XMP профілів.",
-        specs: ["Об'єм: 32 GB (2x16)", "Частота: 6000 MHz", "Таймінги: CL30"]
+        specs: ["Об'єм: 32 GB (2x16)", "Частота: 6000 MHz", "Таймінги: CL30"],
+        images: [
+            "/products_pics/kingston-ddr5-32gb-1.jpg",
+            "/products_pics/kingston-ddr5-32gb-2.jpg",
+            "/products_pics/kingston-ddr5-32gb-3.jpg",
+        ]
+    },
+    "kingston-ddr4-16gb": {
+        title: "Оперативна пам'ять Kingston Fury DDR4 16GB",
+        category: "Оперативна пам'ять",
+        price: "2 100 ₴",
+        desc: "Оперативна пам’ять Kingston Fury Beast DDR4 втілює поєднання високої продуктивності, надійності та елегантного дизайну, створеного для найвимогливіших користувачів.",
+        specs: ["Об'єм: 16 GB", "Частота: 3200 MHz", "Таймінги: CL16-18-18"],
+        images: [
+            "/products_pics/kingston-ddr4-16gb-1.jpg",
+            "/products_pics/kingston-ddr4-16gb-2.jpg",
+            "/products_pics/kingston-ddr4-16gb-3.jpg",
+        ]
     },
     "samsung-990-pro-2tb": {
         title: "SSD накопичувач Samsung 990 PRO 2TB M.2",
         category: "SSD накопичувачі",
-        price: "7 800 ₴",
+        price: "11 800 ₴",
         desc: "Максимальна швидкість читання та запису для геймерів та професіоналів.",
-        specs: ["Об'єм: 2 TB", "Швидкість читання: 7450 МБ/с", "Інтерфейс: PCIe 4.0 NVMe"]
+        specs: ["Об'єм: 2 TB", "Швидкість читання: 7450 МБ/с", "Інтерфейс: PCIe 4.0 NVMe"],
+        images: [
+            "/products_pics/samsung-990-pro-2tb-1.jpg",
+            "/products_pics/samsung-990-pro-2tb-2.jpg",
+            "/products_pics/samsung-990-pro-2tb-3.jpg",
+        ]
+    },
+    "kingston-nv3-1tb": {
+        title: "SSD накопичувач Kingston NV3 1TB M.2",
+        category: "SSD накопичувачі",
+        price: "7 500 ₴",
+        desc: "Високошвидкісний накопичувач із низьким енергоспоживанням.",
+        specs: ["Об'єм: 1 TB", "Швидкість читання: 6000 МБ/с", "Інтерфейс: PCIe 4.0 NVMe"],
+        images: [
+            "/products_pics/kingston-nv3-1tb-1.jpg",
+            "/products_pics/kingston-nv3-1tb-2.jpg",
+            "/products_pics/kingston-nv3-1tb-3.jpg",        
+        ]
     },
     "wd-blue-2tb": {
         title: "Жорсткий диск WD Blue 2TB HDD",
         category: "Жорсткі диски HDD",
-        price: "2 400 ₴",
+        price: "7 600 ₴",
         desc: "Надійне сховище для зберігання великих файлів, фільмів та архівів.",
-        specs: ["Об'єм: 2 TB", "Швидкість шпинделя: 7200 об/хв", "Буфер: 256 MB"]
+        specs: ["Об'єм: 2 TB", "Швидкість шпинделя: 5400 об/хв", "Буфер: 64 MB"],
+        images: [
+            "/products_pics/wd-blue-2tb-1.jpg",
+            "/products_pics/wd-blue-2tb-2.jpg",
+        ]
     },
-    "nzxt-h5-flow": {
-        title: "Корпус NZXT H5 Flow Black",
+    "toshiba-2tb": {
+        title: "Жорсткий диск Toshiba Canvio Basics Exclusive 2TB HDD",
+        category: "Жорсткі диски HDD",
+        price: "5 400 ₴",
+        desc: "Втілення надійності та функціональності в одному стильному корпусі.",
+        specs: ["Об'єм: 2 TB", "Швидкість шпинделя: 5400 об/хв", "Буфер: 8 MB"],
+        images: [
+            "/products_pics/toshiba-2tb-1.jpg",
+            "/products_pics/toshiba-2tb-2.jpg",
+        ]
+    },
+    "gamdias-gc7-black": {
+        title: "Корпус Gamdias Aura GC7 ARGB Black",
         category: "Корпуси",
-        price: "4 100 ₴",
-        desc: "Стильний корпус з перфорованою передньою панеллю для ідеального продуву.",
-        specs: ["Тип: Midi Tower", "Матеріал: Сталь, загартоване скло", "Вентилятори в комплекті: 2"]
+        price: "1 600 ₴",
+        desc: "Бюджетний ультра-компактний корпус у форм-факторі mid-tower.",
+        specs: ["Тип: Miditower", "Матеріал: Сталь, загартоване скло", "Вентилятори в комплекті: 3", "Без блоку живлення"],
+        images: [
+            "/products_pics/gamdias-gc7-black-1.jpg",
+            "/products_pics/gamdias-gc7-black-2.jpg",
+            "/products_pics/gamdias-gc7-black-3.jpg",
+        ]
     },
     "msi-mpg-850w": {
         title: "Блок живлення MSI MPG A850G PCIE5 850W",
         category: "Блоки живлення",
         price: "5 900 ₴",
         desc: "Повністю модульний блок живлення з сертифікатом 80 PLUS Gold та підтримкою PCIe 5.0.",
-        specs: ["Потужність: 850 W", "Сертифікат: 80 PLUS Gold", "Роз'єм 12VHPWR: Є"]
+        specs: ["Потужність: 850 W", "Сертифікат: 80 PLUS Gold", "Роз'єм 12VHPWR: Є"],
+        images: [
+            "/products_pics/msi-mpg-850w-1.jpg",
+            "/products_pics/msi-mpg-850w-2.jpg",
+            "/products_pics/msi-mpg-850w-3.jpg",
+        ]
+    },
+    "kcas-1000w": {
+        title: "Блок живлення KCAS PLUS GOLD 1000W",
+        category: "Блоки живлення",
+        price: "8 709 ₴",
+        desc: "Потужний блок живлення для великої потужності.",
+        specs: ["Потужність: 1000 W", "Сертифікат: 80 PLUS Gold", "Роз'єм 12VHPWR: Є"],
+        images: [
+            "/products_pics/kcas-1000w-1.jpg",
+            "/products_pics/kcas-1000w-2.jpg"
+        ]
     },
     "deepcool-ak620": {
         title: "Кулер для процесора DeepCool AK620",
         category: "Системи охолодження",
         price: "2 600 ₴",
         desc: "Ефективна двосекційна баштова система охолодження для гарячих процесорів.",
-        specs: ["Розсіювальна потужність (TDP): 260W", "Вентилятори: 2x 120 мм", "Висота: 160 мм"]
+        specs: ["Розсіювальна потужність (TDP): 260W", "Розмір вентилятора: 120 мм", "Розміри: 129 х 138 х 161 мм"],
+        images: [
+            "/products_pics/deepcool-ak620-1.jpg",
+            "/products_pics/deepcool-ak620-2.jpg",
+            "/products_pics/deepcool-ak620-3.jpg",
+        ]
     },
-    "asus-xonar-se": {
-        title: "Звукова карта ASUS Xonar SE",
+    "id-cooling-a400": {
+        title: "Кулер процесорний ID-COOLING Frozn A400 ARGB",
+        category: "Системи охолодження",
+        price: "1 300 ₴",
+        desc: "Поєднання яскравого ARGB-підсвічування та елегантної чорної поверхні забезпечує ідеальну інтеграцію FROZN A400 ARGB у будь-який корпус.",
+        specs: ["Розсіювальна потужність (TDP): 180W", "Розмір вентилятора: 92 мм", "Розміри: 93 х 78 х 123 мм"],
+        images: [
+            "/products_pics/id-cooling-a400-1.jpg",
+            "/products_pics/id-cooling-a400-2.jpg",
+            "/products_pics/id-cooling-a400-3.jpg",
+        ]
+    },
+    "zezzio-prism-6": {
+        title: "Вентилятор Zezzio Prism 6 Pro ARGB Ultra Fan Reverse Black",
+        category: "Системи охолодження",
+        price: "249 ₴",
+        desc: "Вентилятор Zezzio PRISM 6 Pro ARGB Black Ultra Fan REVERSE є реверсивним, що означає інший напрямок повітряного потоку без втрати ефективності.",
+        specs: ["Живлення: 3 pin", "Розмір вентилятора: 120 мм", "Частота обертів: 800 - 1500 ± 10 % об/хв"],
+        images: [
+            "/products_pics/zezzio-prism-6-1.jpg",
+            "/products_pics/zezzio-prism-6-2.jpg",
+            "/products_pics/zezzio-prism-6-3.jpg",
+        ]
+    },
+    "manli-c-media": {
+        title: "Звукова карта Manli C-Media 8738 PCI-E",
         category: "Звукові карти",
-        price: "1 850 ₴",
-        desc: "Внутрішня звукова карта для чистішого звуку та об'ємного звучання в іграх.",
-        specs: ["Інтерфейс: PCIe", "Співвідношення сигнал/шум: 116 дБ", "Підтримка: 5.1 каналів"]
+        price: "599 ₴",
+        desc: "Звукова карта виготовлена на базі чипа, який знімає аудіонавантаження з центрального процесора та, водночас, забезпечує видавання кінематографічного звуку.",
+        specs: ["Інтерфейс: PCI Express", "Звуковий чип: C-Media CMI8738", "Входи і виходи: лінійний вхід, 3 лінійні виходи, мікрофонний вхід"],
+        images: [
+            "/products_pics/manli-c-media-1.jpg",
+            "/products_pics/manli-c-media-2.jpg",
+        ]
+    },
+    "vention-sc-2": {
+        title: "Звукова карта Vention USB Sound Card 2.0",
+        category: "Звукові карти",
+        price: "309 ₴",
+        desc: "Звукова карта підключається за допомогою порту USB і має 2 виходи: мікрофон і навушники.",
+        specs: ["Інтерфейс: USB", "Входи і виходи: 2 х mini-jack (3.5 мм)"],
+        images: [
+            "/products_pics/vention-sc-2-1.jpg",
+            "/products_pics/vention-sc-2-2.jpg",
+        ]
+    },
+
+    // Периферія
+    "hyperx-alloy-origins-65": {
+        title: "Клавіатура HyperX Alloy Origins 65 Mechanical",
+        category: "Клавіатури",
+        price: "4 299 ₴",
+        desc: "Компактна механічна клавіатура з алюмінієвим корпусом та надійними перемикачами для динамічних ігор.",
+        specs: ["Форм-фактор: 65%", "Тип перемикачів: Механічні", "Підключення: Дротове USB-C"],
+        images: [
+            "/products_pics/hyperx-alloy-origins-65-1.jpg",
+            "/products_pics/hyperx-alloy-origins-65-2.jpg",
+            "/products_pics/hyperx-alloy-origins-65-3.jpg",
+        ]
+    },
+    "logitech-g-pro-x-tkl-wireless": {
+        title: "Клавіатура Logitech G PRO X TKL Lightspeed Wireless",
+        category: "Клавіатури",
+        price: "7 499 ₴",
+        desc: "Бездротова кіберспортивна клавіатура з низькою затримкою LIGHTSPEED та виділеними медіаклавішами.",
+        specs: ["Форм-фактор: TKL", "Тип перемикачів: Механічні", "Підключення: LIGHTSPEED / Bluetooth / USB"],
+        images: [
+            "/products_pics/logitech-g-pro-x-tkl-wireless-1.jpg",
+            "/products_pics/logitech-g-pro-x-tkl-wireless-2.jpg",
+            "/products_pics/logitech-g-pro-x-tkl-wireless-3.jpg",
+        ]
+    },
+    "logitech-g-pro-x-superlight-2": {
+        title: "Ігрова миша Logitech G PRO X Superlight 2 Wireless",
+        category: "Миші",
+        price: "5 999 ₴",
+        desc: "Надлегка бездротова миша з сенсором HERO 2 та оптико-механічними перемикачами.",
+        specs: ["Підключення: Бездротове / USB", "Сенсор: HERO 2", "Кнопки: 5"],
+        images: [
+            "/products_pics/logitech-g-pro-x-superlight-2-1.jpg",
+            "/products_pics/logitech-g-pro-x-superlight-2-2.jpg",
+        ]
+    },
+    "razer-deathadder-v3": {
+        title: "Ігрова миша Razer DeathAdder V3",
+        category: "Миші",
+        price: "3 199 ₴",
+        desc: "Ергономічна дротова миша для правшів із оптичним сенсором високої точності.",
+        specs: ["Підключення: Дротове USB", "Сенсор: Focus Pro 30K", "Кнопки: 5"],
+        images: [
+            "/products_pics/razer-deathadder-v3-1.jpg",
+            "/products_pics/razer-deathadder-v3-2.jpg",
+            "/products_pics/razer-deathadder-v3-3.jpg",
+        ]
+    },
+    "hyperx-cloud-iii-wireless": {
+        title: "Ігрова гарнітура HyperX Cloud III Wireless",
+        category: "Гарнітура та навушники",
+        price: "6 499 ₴",
+        desc: "Бездротова ігрова гарнітура з автономністю до 120 годин, об'ємним звучанням DTS Headphone:X та знімним мікрофоном.",
+        specs: ["Підключення: Бездротове 2.4 ГГц (USB-C / USB-A)", "Звук: DTS Headphone:X Spatial Audio", "Вага: 352 г"],
+        images: [
+            "/products_pics/hyperx-cloud-iii-wireless-1.jpg",
+            "/products_pics/hyperx-cloud-iii-wireless-2.jpg",
+            "/products_pics/hyperx-cloud-iii-wireless-3.jpg",
+        ]
+    },
+    "logitech-g-pro-x-2-lightspeed": {
+        title: "Навушники Logitech G PRO X 2 Lightspeed",
+        category: "Гарнітура та навушники",
+        price: "9 799 ₴",
+        desc: "Професійна кіберспортивна гарнітура з 50-мм графеновими драйверами та технологією мікрофона Blue VO!CE.",
+        specs: ["Підключення: LIGHTSPEED / Bluetooth / 3.5 мм", "Звук: стереозвук та віртуальний об'ємний звук 7.1 (DTS Headphone:X 2.0)", "Вага: 345 г"],
+        images: [
+            "/products_pics/logitech-g-pro-x-2-lightspeed-1.jpg",
+            "/products_pics/logitech-g-pro-x-2-lightspeed-2.jpg",
+            "/products_pics/logitech-g-pro-x-2-lightspeed-3.jpg",
+            
+        ]
+    },
+    "razer-blackshark-v2-x": {
+        title: "Гарнітура Razer BlackShark V2 X Black",
+        category: "Гарнітура та навушники",
+        price: "2 499 ₴",
+        desc: "Легка дротова гарнітура з 50-мм динаміками TriForce та пасивним шумозаглушенням амбушур.",
+        specs: ["Підключення: Дротове (3.5 мм)", "Звук: 7.1 Surround Sound", "Вага: 240 г"],
+        images: [
+            "/products_pics/razer-blackshark-v2-x-1.jpg",
+            "/products_pics/razer-blackshark-v2-x-2.jpg",
+            "/products_pics/razer-blackshark-v2-x-3.jpg",
+        ]
+    },
+    "lg-ultragear-27gr93u-4k": {
+        title: "Монітор 27\" LG UltraGear 27GR93U-B 4K 144Hz",
+        category: "Монітори",
+        price: "24 999 ₴",
+        desc: "Ігровий 4K UHD монітор із матрицею IPS, часом відгуку 1 мс (GtG) та підтримкою NVIDIA G-SYNC і FreeSync Premium.",
+        specs: ["Діагональ та роздільна здатність: 27\" 3840x2160 (4K)", "Частота оновлення: 144 Гц", "Матриця: IPS, 1 мс"],
+        images: [
+            "/products_pics/lg-ultragear-27gr93u-4k-1.jpg",
+            "/products_pics/lg-ultragear-27gr93u-4k-2.jpg",
+            "/products_pics/lg-ultragear-27gr93u-4k-3.jpg",
+        ]
+    },
+    "asus-proart-pa279crv": {
+        title: "Монітор 27\" ASUS ProArt Display PA279CRV 4K Design",
+        category: "Монітори",
+        price: "21 499 ₴",
+        desc: "Професійний монітор для дизайнерів, відеомонтажу та кольорокорекції із заводським калібруванням Calman Verified.",
+        specs: ["Діагональ та роздільна здатність: 27\" 3840x2160 (4K)", "Частота оновлення: 60 Гц", "Матриця: IPS"],
+        images: [
+            "/products_pics/asus-proart-pa279crv-1.jpg",
+            "/products_pics/asus-proart-pa279crv-2.jpg",
+            "/products_pics/asus-proart-pa279crv-3.jpg",
+        ]
+    },
+    "dell-ultrasharp-u2724d": {
+        title: "Монітор 27\" Dell UltraSharp U2724D QHD 120Hz для роботи",
+        category: "Монітори",
+        price: "15 899 ₴",
+        desc: "Комфортний офісний та робочий монітор із технологією IPS Black, підвищеною контрастністю 2000:1 та захистом зору ComfortView Plus.",
+        specs: ["Діагональ та роздільна здатність: 27\" 2560x1440 (QHD)", "Частота оновлення: 120 Гц", "Матриця: IPS Black"],
+        images: [
+            "/products_pics/dell-ultrasharp-u2724d-1.jpg",
+            "/products_pics/dell-ultrasharp-u2724d-2.jpg",
+            "/products_pics/dell-ultrasharp-u2724d-3.jpg",
+        ]
+    },
+    "hyperx-quadcast-s": {
+        title: "Мікрофон HyperX QuadCast S USB",
+        category: "Мікрофони",
+        price: "10 800 ₴",
+        desc: "Студійний USB-мікрофон з антивібраційним підвісом, сенсорним вимкненням звуку та RGB-підсвіткою.",
+        specs: ["Інтерфейс: USB", "Тип: Конденсаторні", "Призначення: Студійні"],
+        images: [
+            "/products_pics/hyperx-quadcast-s-1.jpg",
+            "/products_pics/hyperx-quadcast-s-2.jpg",
+            "/products_pics/hyperx-quadcast-s-3.jpg",
+        ]
+    },
+    "fifine-ampligame-am8": {
+        title: "Мікрофон FIFINE AmpliGame AM8 USB/XLR",
+        category: "Мікрофони",
+        price: "3 800 ₴",
+        desc: "Динамічний мікрофон із подвійним підключенням USB та XLR для стрімів, подкастів і голосового спілкування.",
+        specs: ["Інтерфейс: USB / XLR", "Тип: Динамічний", "Призначення: Для комп'ютерів"],
+        images: [
+            "/products_pics/fifine-ampligame-am8-1.jpg",
+            "/products_pics/fifine-ampligame-am8-2.jpg",
+            "/products_pics/fifine-ampligame-am8-3.jpg",
+        ]
+    },
+    "sony-dualsense-wireless": {
+        title: "Геймпад Sony DualSense Wireless Controller",
+        category: "Геймпади",
+        price: "3 299 ₴",
+        desc: "Бездротовий контролер з тактильним відгуком, адаптивними тригерами та вбудованим мікрофоном.",
+        specs: ["Підключення: Бездротове (Bluetooth) / USB-C", "Сумісність: ПК / PS5", "Живлення: акумулятор", "Особливості: Тактильний відгук"],
+        images: [
+            "/products_pics/sony-dualsense-wireless-1.jpg",
+            "/products_pics/sony-dualsense-wireless-2.jpg",
+            "/products_pics/sony-dualsense-wireless-3.jpg",
+        ]
+    },
+    "microsoft-xbox-wireless-controller": {
+        title: "Геймпад Microsoft Xbox Wireless Controller",
+        category: "Геймпади",
+        price: "2 699 ₴",
+        desc: "Класичний бездротовий геймпад з текстурованими тригерами та повною сумісністю з Windows.",
+        specs: ["Підключення: Бездротове (Bluetooth / Xbox Wireless) / USB-C", "Сумісність: ПК / Xbox", "Живлення: Батарейки AA / акумулятор"],
+        images: [
+            "/products_pics/microsoft-xbox-wireless-controller-1.jpg",
+            "/products_pics/microsoft-xbox-wireless-controller-2.jpg",
+            "/products_pics/microsoft-xbox-wireless-controller-3.jpg",
+        ]
+    },
+    "steelseries-qck-heavy-xxl": {
+        title: "Ігровий килимок SteelSeries QcK Heavy XXL",
+        category: "Аксесуари та килимки",
+        price: "1 799 ₴",
+        desc: "Велика ігрова поверхня з мікротканини товщиною 4 мм для максимального контролю та стабільності рухів миші.",
+        specs: ["Розміри: 900 x 400 x 4 мм", "Поверхня: Мікротканина (Control)", "Основа: Нековзна гумова"],
+        images: [
+            "/products_pics/steelseries-qck-heavy-xxl-1.jpg",
+            "/products_pics/steelseries-qck-heavy-xxl-2.jpg",
+            "/products_pics/steelseries-qck-heavy-xxl-3.jpg",
+        ]
+    },
+    "hyperx-wrist-rest": {
+        title: "Підставка ергономічна під зап'ястя HyperX Wrist Rest",
+        category: "Аксесуари та килимки",
+        price: "1 199 ₴",
+        desc: "HyperX Wrist Rest — це комфортна підставка для зап'ясть, створена спеціально для геймерів, які використовують повнорозмірні клавіатури.",
+        specs: ["Розміри: 88 x 457 x 22 мм", "Вага: 311 г", "Колір: Чорний"],
+        images: [
+            "/products_pics/hyperx-wrist-rest-1.jpg",
+            "/products_pics/hyperx-wrist-rest-2.jpg",
+            "/products_pics/hyperx-wrist-rest-3.jpg",
+    ]
+    },
+    "razer-mouse-bungee-v3": {
+        title: "Тримач кабелю миші Razer Mouse Bungee V3",
+        category: "Аксесуари та килимки",
+        price: "1 099 ₴",
+        desc: "Пружинний тримач кабелю з обтяженою основою, що усуває опір дроту та дає відчуття бездротової миші.",
+        specs: ["Призначення: Фіксація кабелю миші", "Особливості: Пружинний кронштейн, протиковзна основа"],
+        images: [
+            "/products_pics/razer-mouse-bungee-v3-1.jpg",
+            "/products_pics/razer-mouse-bungee-v3-2.jpg",
+            "/products_pics/razer-mouse-bungee-v3-3.jpg",
+        ]
+    },
+
+    // Готові збірки ПК
+    "pc-storm-rtx4070-r7-7800x3d": {
+        title: "PC STORE Storm Pro RTX 4070 / Ryzen 7 7800X3D / 32GB DDR5",
+        category: "Готові збірки ПК",
+        price: "68 900 ₴",
+        desc: "Ігрова збірка ASUS для QHD та 4K з високим FPS.",
+        specs: [
+            "Виробник: ASUS",
+            "Операційна система: Windows 11 Pro",
+            "Процесор: AMD Ryzen 7 7800X3D (8 ядер, до 5.0 ГГц)",
+            "Відеокарта: GeForce RTX 4070 (12000MB GDDR6X)",
+            "Материнська плата: ASUS TUF GAMING B650-PLUS WIFI",
+            "Оперативна пам'ять: 32 ГБ DDR5 (6000 МГц)",
+            "Накопичувач: 1000GB NVMe SSD",
+            "Охолодження та БЖ: DeepCool AK620 • БЖ 750W 80+ Gold",
+            "Корпус: Midi-Tower (ASUS TUF Gaming GT301)"
+        ],
+        images: ["/products_pics/pc-storm-rtx4070-r7-7800x3d-1.jpg"]
+    },
+    "pc-titan-rx9070xt-i7-14700k": {
+        title: "PC STORE Titan 4K RX 9070 XT / Core i7-14700K / 32GB DDR5",
+        category: "Готові збірки ПК",
+        price: "84 500 ₴",
+        desc: "Потужна станція GIGABYTE для 4K-ігор, рендерингу та стрімінгу.",
+        specs: [
+            "Виробник: GIGABYTE",
+            "Операційна система: Windows 11 Pro",
+            "Процесор: INTEL Core i7-14700K (20 ядер, до 5.6 ГГц)",
+            "Відеокарта: AMD Radeon RX 9070 XT (16000MB)",
+            "Материнська плата: GIGABYTE Z790 AORUS ELITE AX",
+            "Оперативна пам'ять: 32 ГБ DDR5 (6400 МГц)",
+            "Накопичувач: 1000 GB NVMe SSD",
+            "Охолодження та БЖ: СРО 360 мм • БЖ 850W 80+ Gold",
+            "Корпус: Full-Tower (GIGABYTE AORUS C500 GLASS)"
+        ],
+        images: ["/products_pics/pc-titan-rx9070xt-i7-14700k-1.jpg"]
+    },
+    "pc-pulse-rtx3060-r5-5600": {
+        title: "PC STORE Pulse Gaming RTX 3060 / Ryzen 5 5600 / 16GB DDR4",
+        category: "Готові збірки ПК",
+        price: "36 400 ₴",
+        desc: "Збалансований ПК MSI для комфортного Full HD-геймінгу.",
+        specs: [
+            "Виробник: MSI",
+            "Операційна система: Windows 11 Home",
+            "Процесор: AMD Ryzen 5 5600 (6 ядер, до 4.4 ГГц)",
+            "Відеокарта: GeForce RTX 3060 (12000 MB)",
+            "Материнська плата: MSI B550-A PRO",
+            "Оперативна пам'ять: 16 ГБ DDR4 (3200 МГц)",
+            "Накопичувач: 512GB NVMe SSD",
+            "Охолодження та БЖ: ID-COOLING Frozn A400 • БЖ 650W",
+            "Корпус: Midi-Tower (MSI MAG FORGE 100R)"
+        ],
+        images: ["/products_pics/pc-pulse-rtx3060-r5-5600-1.jpg"]
+    },
+    "pc-apex-rx6700xt-i5-13400f": {
+        title: "PC STORE Apex QHD RX 6700 XT / Core i5-13400F / 32GB DDR4",
+        category: "Готові збірки ПК",
+        price: "44 200 ₴",
+        desc: "Швидка збірка ASUS для QHD-ігор і багатозадачності.",
+        specs: [
+            "Виробник: ASUS",
+            "Операційна система: Windows 11 Pro",
+            "Процесор: INTEL Core i5-13400F (10 ядер, до 4.6 ГГц)",
+            "Відеокарта: AMD Radeon RX 6700 XT (12000MB)",
+            "Материнська плата: ASUS PRIME B760M-A WIFI D4",
+            "Оперативна пам'ять: 32 ГБ DDR4 (3600 МГц)",
+            "Накопичувач: 1000GB NVMe SSD",
+            "Охолодження та БЖ: DeepCool AG400 • БЖ 700W",
+            "Корпус: Midi-Tower (ASUS A21 Black Mesh)"
+        ],
+        images: ["/products_pics/pc-apex-rx6700xt-i5-13400f-1.jpg"]
+    },
+    "pc-creator-rtx4080s-r9-7900x": {
+        title: "PC STORE Creator Studio RTX 4080 Super / Ryzen 9 7900X / 64GB DDR5",
+        category: "Готові збірки ПК",
+        price: "109 900 ₴",
+        desc: "Флагманська станція MSI для 3D, ШІ, монтажу 4K/8K та ігор.",
+        specs: [
+            "Виробник: MSI",
+            "Операційна система: Windows 11 Pro",
+            "Процесор: AMD Ryzen 9 7900X (12 ядер, до 5.6 ГГц)",
+            "Відеокарта: GeForce RTX 4080 Super (16000MB)",
+            "Материнська плата: MSI MAG X670E TOMAHAWK WIFI",
+            "Оперативна пам'ять: 64 ГБ DDR5 (6000 МГц)",
+            "Накопичувач: 2TB NVMe SSD",
+            "Охолодження та БЖ: СРО MSI E360 • БЖ 1000W 80+ Gold",
+            "Корпус: Full-Tower (MSI MPG VELOX 100R)"
+        ],
+        images: ["/products_pics/pc-creator-rtx4080s-r9-7900x-1.jpg"]
+    },
+    "pc-creator-rtx3090-r9-7900x": {
+        title: "PC STORE Creator Studio RTX 3090 / Ryzen 9 7900X / 64GB DDR5",
+        category: "Готові збірки ПК",
+        price: "109 900 ₴",
+        desc: "Робоча станція MSI з великим обсягом пам'яті та сховища.",
+        specs: [
+            "Виробник: MSI",
+            "Операційна система: Windows 11 Pro",
+            "Процесор: AMD Ryzen 5 5600X (12 ядер)",
+            "Відеокарта: GeForce RTX 3090 (16000 MB)",
+            "Материнська плата: MSI MPG X570S CARBON MAX WIFI",
+            "Оперативна пам'ять: 64 ГБ DDR5 (5600 МГц)",
+            "Пам'ять та накопичувач: Вбудована 825GB • Накопичувач 14000GB",
+            "Охолодження та БЖ: СРО MSI 360R • БЖ 1000W 80+ Gold",
+            "Корпус: Full-Tower (MSI MPG SEKIRA 500X)"
+        ],
+        images: ["/products_pics/pc-creator-rtx3090-r9-7900x-1.jpg"]
+    },
+    // Ноутбуки
+    "laptop-asus-rog-strix-g16-rtx4070": {
+        title: "ASUS ROG Strix G16 (2024) 16\" QHD+ 240Hz / Core i7-14650HX / RTX 4070",
+        category: "Ноутбуки",
+        price: "74 900 ₴",
+        desc: "Ігровий ноутбук ASUS з яскравим 240-герцовим екраном та RTX 4070.",
+        specs: [
+            "Виробник: ASUS",
+            "Операційна система: Windows 11 Pro",
+            "Дисплей: 16\" (2560x1600) IPS, 240 Гц, 16:10",
+            "Процесор: INTEL Core i7-14650HX (16 ядер, до 5.2 ГГц)",
+            "Відеокарта: GeForce RTX 4070 Laptop (8000MB GDDR6)",
+            "Оперативна пам'ять: 32 ГБ DDR5 (5600 МГц)",
+            "Накопичувач: 1000GB NVMe PCIe 4.0 SSD",
+            "Батарея та живлення: 90 Вт·год, БЖ 280W",
+            "Призначення: Ігровий"
+        ],
+        images: [
+            "/products_pics/laptop-asus-rog-strix-g16-rtx4070-1.jpg",
+            "/products_pics/laptop-asus-rog-strix-g16-rtx4070-2.jpg",
+            "/products_pics/laptop-asus-rog-strix-g16-rtx4070-3.jpg",
+        ]
+    },
+    "laptop-gigabyte-aorus-16x-rtx4070": {
+        title: "GIGABYTE AORUS 16X 16\" QHD+ 165Hz / Core i7-14650HX / RTX 4070",
+        category: "Ноутбуки",
+        price: "69 500 ₴",
+        desc: "Продуктивний ноутбук GIGABYTE для ігор і творчості у 16:10.",
+        specs: [
+            "Виробник: GIGABYTE",
+            "Операційна система: Windows 11 Pro",
+            "Дисплей: 16\" (2560x1600) IPS, 165 Гц, Pantone Validated",
+            "Процесор: INTEL Core i7-14650HX (16 ядер, до 5.2 ГГц)",
+            "Відеокарта: GeForce RTX 4070 Laptop (8000 MB GDDR6)",
+            "Оперативна пам'ять: 16 ГБ DDR5 (4800 МГц)",
+            "Накопичувач: 1000 GB NVMe PCIe 4.0 SSD",
+            "Батарея та живлення: 99 Вт·год, USB-C PD / БЖ 240W",
+            "Призначення: Ігровий"
+        ],
+        images: [
+            "/products_pics/laptop-gigabyte-aorus-16x-rtx4070-1.jpg",
+            "/products_pics/laptop-gigabyte-aorus-16x-rtx4070-2.jpg",
+            "/products_pics/laptop-gigabyte-aorus-16x-rtx4070-3.jpg",
+        ]
+    },
+    "laptop-msi-katana-15-rtx4060": {
+        title: "MSI Katana 15 B13V 15.6\" FHD 144Hz / Core i7-13620H / RTX 4060",
+        category: "Ноутбуки",
+        price: "49 800 ₴",
+        desc: "Ігровий ноутбук MSI з RTX 4060 та екраном 144 Гц для Full HD.",
+        specs: [
+            "Виробник: MSI",
+            "Операційна система: Windows 11 Home",
+            "Дисплей: 15.6\" (1920x1080) IPS-level, 144 Гц",
+            "Процесор: INTEL Core i7-13620H (10 ядер, до 4.9 ГГц)",
+            "Відеокарта: GeForce RTX 4060 Laptop (8000MB GDDR6)",
+            "Оперативна пам'ять: 16 ГБ DDR5 (5200 МГц)",
+            "Накопичувач: 512GB NVMe PCIe 4.0 SSD",
+            "Батарея та живлення: 53.5 Вт·год, БЖ 200W",
+            "Призначення: Ігровий"
+        ],
+        images: [
+            "/products_pics/laptop-msi-katana-15-rtx4060-1.jpg",
+            "/products_pics/laptop-msi-katana-15-rtx4060-2.jpg",
+            "/products_pics/laptop-msi-katana-15-rtx4060-3.jpg",
+        ]
+    },
+    "laptop-asus-tuf-a15-rx7700s": {
+        title: "ASUS TUF Gaming A15 15.6\" FHD 144Hz / Ryzen 7 7735HS / RX 7700S",
+        category: "Ноутбуки",
+        price: "45 900 ₴",
+        desc: "Захищений ігровий ноутбук ASUS на платформі AMD Advantage.",
+        specs: [
+            "Виробник: ASUS",
+            "Операційна система: Без ОС (DOS)",
+            "Дисплей: 15.6\" (1920x1080) IPS, 144 Гц, Adaptive-Sync",
+            "Процесор: AMD Ryzen 7 7735HS (8 ядер, до 4.75 ГГц)",
+            "Відеокарта: AMD Radeon RX 7700S (8000MB GDDR6)",
+            "Оперативна пам'ять: 16 ГБ DDR5 (4800 МГц)",
+            "Накопичувач: 1000GB NVMe PCIe 4.0 SSD",
+            "Батарея та живлення: 90 Вт·год, швидка зарядка",
+            "Призначення: Ігровий"
+        ],
+        images: [
+            "/products_pics/laptop-asus-tuf-a15-rx7700s-1.jpg",
+            "/products_pics/laptop-asus-tuf-a15-rx7700s-2.jpg",
+        ]
+    },
+    "laptop-msi-cyborg-15-rtx4050": {
+        title: "MSI Cyborg 15 A13V 15.6\" FHD 144Hz / Core i5-13420H / RTX 4050",
+        category: "Ноутбуки",
+        price: "37 900 ₴",
+        desc: "Легкий ігровий ноутбук MSI у футуристичному корпусі.",
+        specs: [
+            "Виробник: MSI",
+            "Операційна система: Windows 11 Home",
+            "Дисплей: 15.6\" (1920x1080) IPS-level, 144 Гц",
+            "Процесор: INTEL Core i5-13420H (8 ядер, до 4.6 ГГц)",
+            "Відеокарта: GeForce RTX 4050 Laptop (6000MB GDDR6)",
+            "Оперативна пам'ять: 16 ГБ DDR5 (5200 МГц)",
+            "Накопичувач: 512GB NVMe PCIe 4.0 SSD",
+            "Батарея та живлення: 53.5 Вт·год, БЖ 120W",
+            "Призначення: Ігровий"
+        ],
+        images: [
+            "/products_pics/laptop-msi-cyborg-15-rtx4050-1.jpg",
+            "/products_pics/laptop-msi-cyborg-15-rtx4050-2.jpg",
+            "/products_pics/laptop-msi-cyborg-15-rtx4050-3.jpg",
+        ]
+    },
+    "laptop-lenovo-loq-15-rtx3050": {
+        title: "Lenovo LOQ 15APH8 15.6\" FHD 144Hz / Ryzen 5 7640HS / RTX 3050",
+        category: "Ноутбуки",
+        price: "32 900 ₴",
+        desc: "Збалансований ігровий ноутбук Lenovo для навчання та ігор.",
+        specs: [
+            "Виробник: Lenovo",
+            "Операційна система: Windows 11 Home",
+            "Дисплей: 15.6\" (1920x1080) IPS, 144 Гц, G-SYNC",
+            "Процесор: AMD Ryzen 5 7640HS (6 ядер, до 5.0 ГГц)",
+            "Відеокарта: GeForce RTX 3050 Laptop (6000 MB GDDR6)",
+            "Оперативна пам'ять: 16 ГБ DDR5 (5600 МГц)",
+            "Накопичувач: 500GB NVMe PCIe 4.0 SSD",
+            "Батарея та живлення: 60 Вт·год, Rapid Charge Pro",
+            "Призначення: Ігровий"
+        ],
+        images: [
+            "/products_pics/laptop-lenovo-loq-15-rtx3050-1.jpg",
+            "/products_pics/laptop-lenovo-loq-15-rtx3050-2.jpg",
+            "/products_pics/laptop-lenovo-loq-15-rtx3050-3.jpg",
+        ]
+    },
+    "laptop-asus-zenbook-14-oled": {
+        title: "ASUS Zenbook 14 OLED UX3405 14\" 2.8K OLED / Core Ultra 7 155H",
+        category: "Ноутбуки",
+        price: "52 400 ₴",
+        desc: "Тонкий металевий ультрабук ASUS з OLED-екраном та автономністю.",
+        specs: [
+            "Виробник: ASUS",
+            "Операційна система: Windows 11 Pro",
+            "Дисплей: 14\" (2880x1800) Lumina OLED, 120 Гц",
+            "Процесор: INTEL Core Ultra 7 155H (16 ядер, NPU AI Boost)",
+            "Відеокарта: Intel Arc Graphics (4000MB)",
+            "Оперативна пам'ять: 16 ГБ LPDDR5X (7467 МГц)",
+            "Накопичувач: 1000GB NVMe PCIe 4.0 SSD",
+            "Батарея та живлення: 75 Вт·год, Thunderbolt 4",
+            "Призначення: Ультрабук"
+        ],
+        images: [
+            "/products_pics/laptop-asus-zenbook-14-oled-1.jpg",
+            "/products_pics/laptop-asus-zenbook-14-oled-2.jpg",
+            "/products_pics/laptop-asus-zenbook-14-oled-3.jpg",
+        ]
+    },
+    "laptop-lenovo-thinkpad-e16-r5": {
+        title: "Lenovo ThinkPad E16 Gen 1 16\" FHD+ / Ryzen 5 7530U / Radeon",
+        category: "Ноутбуки",
+        price: "31 200 ₴",
+        desc: "Надійний бізнес-ноутбук Lenovo з ергономічною клавіатурою та 16\" екраном.",
+        specs: [
+            "Виробник: Lenovo",
+            "Операційна система: Windows 11 Pro",
+            "Дисплей: 16\" (1920x1200) IPS, 60 Гц, 16:10",
+            "Процесор: AMD Ryzen 5 7530U (6 ядер, до 4.5 ГГц)",
+            "Відеокарта: AMD Radeon Graphics (4000MB)",
+            "Оперативна пам'ять: 16 ГБ DDR4 (3200 МГц)",
+            "Накопичувач: 512GB NVMe PCIe 4.0 SSD",
+            "Батарея та живлення: 47 Вт·год, USB-C зарядка",
+            "Призначення: Бізнес / Робочий"
+        ],
+        images: [
+            "/products_pics/laptop-lenovo-thinkpad-e16-r5-1.jpg",
+            "/products_pics/laptop-lenovo-thinkpad-e16-r5-2.jpg",
+            "/products_pics/laptop-lenovo-thinkpad-e16-r5-3.jpg",
+        ]
+    },
+    "laptop-hp-probook-450-g10-i5": {
+        title: "HP ProBook 450 G10 15.6\" FHD / Core i5-1335U / Iris Xe",
+        category: "Ноутбуки",
+        price: "28 600 ₴",
+        desc: "Діловий ноутбук HP для офісної роботи, аналітики та відряджень.",
+        specs: [
+            "Виробник: HP",
+            "Операційна система: Без ОС (DOS)",
+            "Дисплей: 15.6\" (1920x1080) IPS, 60 Гц",
+            "Процесор: INTEL Core i5-1335U (10 ядер, до 4.6 ГГц)",
+            "Відеокарта: Intel Iris Xe Graphics (4000MB)",
+            "Оперативна пам'ять: 16 ГБ DDR4 (3200 МГц)",
+            "Накопичувач: 500 GB NVMe SSD",
+            "Батарея та живлення: 51 Вт·год, HP Fast Charge",
+            "Призначення: Бізнес / Робочий"
+        ],
+        images: [
+            "/products_pics/laptop-hp-probook-450-g10-i5-1.jpg",
+            "/products_pics/laptop-hp-probook-450-g10-i5-2.jpg",
+            "/products_pics/laptop-hp-probook-450-g10-i5-3.jpg",
+        ]
+    },
+    "laptop-acer-aspire-5-i5": {
+        title: "Acer Aspire 5 A515-58M 15.6\" FHD / Core i5-13420H / UHD",
+        category: "Ноутбуки",
+        price: "23 900 ₴",
+        desc: "Практичний ноутбук Acer для навчання, браузера та повсякденних задач.",
+        specs: [
+            "Виробник: Acer",
+            "Операційна система: Windows 11 Home",
+            "Дисплей: 15.6\" (1920x1080) IPS, 60 Гц",
+            "Процесор: INTEL Core i5-13420H (8 ядер, до 4.6 ГГц)",
+            "Відеокарта: Intel UHD Graphics (4000MB)",
+            "Оперативна пам'ять: 16 ГБ LPDDR5X (4800 МГц)",
+            "Накопичувач: 512GB NVMe PCIe 4.0 SSD",
+            "Батарея та живлення: 50 Вт·год, Wi-Fi 6E",
+            "Призначення: Для навчання та офісу"
+        ],
+        images: [
+            "/products_pics/laptop-acer-aspire-5-i5-1.jpg",
+            "/products_pics/laptop-acer-aspire-5-i5-2.jpg",
+            "/products_pics/laptop-acer-aspire-5-i5-3.jpg",
+        ]
+    },
+    // Консолі
+    "console-nintendo-switch-v1": {
+        title: "Nintendo Switch (1-е покоління, 2017) Neon Red/Blue",
+        category: "Консолі",
+        price: "9 400 ₴",
+        desc: "Класичний гібридний Nintendo Switch першого покоління для гри вдома та в дорозі.",
+        specs: [
+            "Виробник: Nintendo",
+            "Портативність: Гібридна (портативна + ТВ-док)",
+            "Внутрішній об'єм: 32GB (підтримка microSD)",
+            "Екран: 6.2\" IPS LCD (1280x720)",
+            "Комплектація: Консоль, Joy-Con (L/R), док-станція, кабель HDMI"
+        ],
+        images: [
+            "/products_pics/console-nintendo-switch-v1-1.jpg",
+            "/products_pics/console-nintendo-switch-v1-2.jpg",
+            "/products_pics/console-nintendo-switch-v1-3.jpg",
+        ]
+    },
+    "console-nintendo-switch-lite": {
+        title: "Nintendo Switch Lite Turquoise",
+        category: "Консолі",
+        price: "7 200 ₴",
+        desc: "Легка та компактна портативна версія Nintendo Switch з вбудованими контролерами.",
+        specs: [
+            "Виробник: Nintendo",
+            "Портативність: Портативна",
+            "Внутрішній об'єм: 32GB (підтримка microSD)",
+            "Екран: 5.5\" LCD (1280x720)",
+            "Автономність: до 3–7 годин"
+        ],
+        images: [
+            "/products_pics/console-nintendo-switch-lite-1.jpg",
+            "/products_pics/console-nintendo-switch-lite-2.jpg",
+            "/products_pics/console-nintendo-switch-lite-3.jpg",
+        ]
+    },
+    "console-nintendo-switch-oled": {
+        title: "Nintendo Switch OLED White 64GB",
+        category: "Консолі",
+        price: "13 800 ₴",
+        desc: "Оновлений Nintendo Switch з 7-дюймовим OLED-дисплеєм, покращеним звуком і 64 ГБ пам'яті.",
+        specs: [
+            "Виробник: Nintendo",
+            "Портативність: Гібридна (портативна + ТВ-док)",
+            "Внутрішній об'єм: 64GB (підтримка microSD)",
+            "Екран: 7\" OLED (1280x720)",
+            "Інтерфейси: Док-станція з LAN-портом, USB-C, HDMI"
+        ],
+        images: [
+            "/products_pics/console-nintendo-switch-oled-1.jpg",
+            "/products_pics/console-nintendo-switch-oled-2.jpg",
+            "/products_pics/console-nintendo-switch-oled-3.jpg",
+        ]
+    },
+    "console-sony-playstation-4-pro-1tb": {
+        title: "Sony PlayStation 4 Pro 1TB Black",
+        category: "Консолі",
+        price: "11 900 ₴",
+        desc: "Потужна домашня консоль минулого покоління з підтримкою 4K-рендерингу та великою бібліотекою хітів.",
+        specs: [
+            "Виробник: Sony",
+            "Портативність: Стаціонарна",
+            "Внутрішній об'єм: 1TB HDD",
+            "Відеовихід: до 4K (2160p), HDR",
+            "Підключення: HDMI, 3x USB 3.1, Wi-Fi, Bluetooth"
+        ],
+        images: [
+            "/products_pics/console-sony-playstation-4-pro-1tb-1.jpg",
+            "/products_pics/console-sony-playstation-4-pro-1tb-2.jpg",
+            "/products_pics/console-sony-playstation-4-pro-1tb-3.jpg",
+        ]
+    },
+    "console-sony-playstation-5-slim-1tb": {
+        title: "Sony PlayStation 5 Slim 1TB Disc Edition",
+        category: "Консолі",
+        price: "21 900 ₴",
+        desc: "Компактна PlayStation 5 з дисководом та швидким SSD на 1 ТБ для ігор поточного покоління.",
+        specs: [
+            "Виробник: Sony",
+            "Портативність: Стаціонарна",
+            "Внутрішній об'єм: 1TB NVMe SSD",
+            "Графіка: Ray Tracing, до 4K 120 Гц, HDR",
+            "Особливості: Геймпад DualSense, Ultra HD Blu-ray привід"
+        ],
+        images: [
+            "/products_pics/console-sony-playstation-5-slim-1tb-1.jpg",
+            "/products_pics/console-sony-playstation-5-slim-1tb-2.jpg",
+            "/products_pics/console-sony-playstation-5-slim-1tb-3.jpg",
+        ]
+    },
+    "console-sony-playstation-5-pro-2tb": {
+        title: "Sony PlayStation 5 Pro 2TB",
+        category: "Консолі",
+        price: "33 500 ₴",
+        desc: "Флагманська стаціонарна консоль Sony з покращеною графікою, трасуванням променів і SSD на 2 ТБ.",
+        specs: [
+            "Виробник: Sony",
+            "Портативність: Стаціонарна",
+            "Внутрішній об'єм: 2TB NVMe SSD",
+            "Графіка: Покращений Ray Tracing, AI Upscaling PSSR",
+            "Мережа: Wi-Fi 7, Bluetooth, HDMI 2.1"
+        ],
+        images: [
+            "/products_pics/console-sony-playstation-5-pro-2tb-1.jpg",
+            "/products_pics/console-sony-playstation-5-pro-2tb-2.jpg",
+            "/products_pics/console-sony-playstation-5-pro-2tb-3.jpg",
+        ]
+    },
+    "console-microsoft-xbox-one-s-500gb": {
+        title: "Microsoft Xbox One S 500GB Robot White",
+        category: "Консолі",
+        price: "7 600 ₴",
+        desc: "Доступна домашня консоль Microsoft з підтримкою HDR та 4K-медіаконтенту.",
+        specs: [
+            "Виробник: Microsoft",
+            "Портативність: Стаціонарна",
+            "Внутрішній об'єм: 500GB HDD",
+            "Привід: 4K Ultra HD Blu-ray",
+            "Підключення: HDMI, 3x USB 3.0, Ethernet"
+        ],
+        images: [
+            "/products_pics/console-microsoft-xbox-one-s-500gb-1.jpg",
+            "/products_pics/console-microsoft-xbox-one-s-500gb-2.jpg",
+            "/products_pics/console-microsoft-xbox-one-s-500gb-3.jpg",
+        ]
+    },
+    "console-microsoft-xbox-series-s-512gb": {
+        title: "Microsoft Xbox Series S 512GB",
+        category: "Консолі",
+        price: "12 400 ₴",
+        desc: "Компактна цифрова консоль нового покоління зі швидким SSD для ігор у 1440p.",
+        specs: [
+            "Виробник: Microsoft",
+            "Портативність: Стаціонарна",
+            "Внутрішній об'єм: 512GB NVMe SSD",
+            "Продуктивність: до 1440p, до 120 FPS, DirectX Raytracing",
+            "Формат: Без дисковода (цифрові ігри / Game Pass)"
+        ],
+        images: [
+            "/products_pics/console-microsoft-xbox-series-s-512gb-1.jpg",
+            "/products_pics/console-microsoft-xbox-series-s-512gb-2.jpg",
+        ]
+    },
+    "console-microsoft-xbox-series-x-1tb": {
+        title: "Microsoft Xbox Series X 1TB Black",
+        category: "Консолі",
+        price: "21 200 ₴",
+        desc: "Флагманська консоль Microsoft для нативного 4K-геймінгу, високого FPS та швидкого завантаження.",
+        specs: [
+            "Виробник: Microsoft",
+            "Портативність: Стаціонарна",
+            "Внутрішній об'єм: 1TB NVMe SSD",
+            "Продуктивність: 4K до 120 FPS, 12 TFLOPS, 4K UHD Blu-ray",
+            "Підключення: HDMI 2.1, 3x USB 3.1, NVMe Expansion Slot"
+        ],
+        images: [
+            "/products_pics/console-microsoft-xbox-series-x-1tb-1.jpg",
+            "/products_pics/console-microsoft-xbox-series-x-1tb-2.jpg",
+            "/products_pics/console-microsoft-xbox-series-x-1tb-3.jpg",
+        ]
+    },
+    "console-valve-steam-deck-512gb": {
+        title: "Valve Steam Deck 512GB OLED",
+        category: "Консолі",
+        price: "25 800 ₴",
+        desc: "Портативний ігровий ПК-консоль з HDR OLED-екраном та доступом до бібліотеки Steam.",
+        specs: [
+            "Виробник: Valve",
+            "Портативність: Портативна",
+            "Внутрішній об'єм: 512GB NVMe SSD (слот microSD)",
+            "Екран: 7.4\" HDR OLED (1280x800), 90 Гц",
+            "Підключення: Wi-Fi 6E, Bluetooth 5.3, USB-C"
+        ],
+        images: [
+            "/products_pics/console-valve-steam-deck-512gb-1.jpg",
+            "/products_pics/console-valve-steam-deck-512gb-2.jpg",
+            "/products_pics/console-valve-steam-deck-512gb-3.jpg",
+        ]
     }
 };
 
+export function getStaticPaths() {
+    return Object.keys(productsDatabase).map((slug) => ({
+        params: { slug },
+    }));
+}
+
 const product = slug ? productsDatabase[slug] : null;
+const productImages: string[] = product
+    ? (product.images && product.images.length > 0
+        ? product.images
+        : product.img
+            ? [product.img]
+            : [])
+    : [];
+
 const currentCategoryInfo = product ? categoryMap[product.category] : null;
+const currentSectionInfo = currentCategoryInfo ? sectionMeta[currentCategoryInfo.section] : null;
+const showCategoryBreadcrumb = currentCategoryInfo && currentCategoryInfo.section !== "prebuild" && currentCategoryInfo.section !== "laptops" && currentCategoryInfo.section !== "consoles";
 ---
 
 <Layout>
     <main class="product-page container">
         <div class="breadcrumb">
             <a href="/catalog">Каталог</a> / 
-            <a href="/catalog/components">Комплектуючі</a> / 
-            {currentCategoryInfo ? (
+            {currentSectionInfo ? (
+                <>
+                    <a href={currentSectionInfo.link}>{currentSectionInfo.title}</a> / 
+                </>
+            ) : (
+                <>
+                    <a href="/catalog/components">Комплектуючі</a> / 
+                </>
+            )}
+            {showCategoryBreadcrumb ? (
                 <>
                     <a href={currentCategoryInfo.link}>{currentCategoryInfo.title}</a> / 
                 </>
@@ -132,9 +1034,63 @@ const currentCategoryInfo = product ? categoryMap[product.category] : null;
         {product ? (
             <div class="product-grid">
                 <div class="product-image-section">
-                    <div class="image-placeholder-large">
-                        <span>Фото товару</span>
-                    </div>
+                    {productImages.length > 0 ? (
+                        <div class="gallery-wrapper" data-images={JSON.stringify(productImages)}>
+                            <div class="main-image-box" id="gallery-zoom-trigger" title="Натисніть, щоб збільшити">
+                                <img
+                                    id="gallery-main-img"
+                                    src={productImages[0]}
+                                    alt={product.title}
+                                    class="product-main-img"
+                                />
+
+                                <span class="zoom-hint" aria-hidden="true">🔍 Збільшити</span>
+
+                                {productImages.length > 1 && (
+                                    <>
+                                        <button
+                                            type="button"
+                                            id="gallery-prev"
+                                            class="gallery-nav-btn prev"
+                                            aria-label="Попереднє фото"
+                                        >
+                                            ‹
+                                        </button>
+                                        <button
+                                            type="button"
+                                            id="gallery-next"
+                                            class="gallery-nav-btn next"
+                                            aria-label="Наступне фото"
+                                        >
+                                            ›
+                                        </button>
+                                        <div class="gallery-counter" id="gallery-counter">
+                                            1 / {productImages.length}
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+
+                            {productImages.length > 1 && (
+                                <div class="gallery-thumbs" id="gallery-thumbs">
+                                    {productImages.map((imgSrc, idx) => (
+                                        <button
+                                            type="button"
+                                            class:list={["thumb-btn", { active: idx === 0 }]}
+                                            data-index={idx}
+                                            aria-label={`Фото ${idx + 1}`}
+                                        >
+                                            <img src={imgSrc} alt={`${product.title} — фото ${idx + 1}`} />
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <div class="image-placeholder-large">
+                            <span>Фото товару</span>
+                        </div>
+                    )}
                 </div>
 
                 <div class="product-details-section">
@@ -150,16 +1106,72 @@ const currentCategoryInfo = product ? categoryMap[product.category] : null;
                         </ul>
                     </div>
 
-                    <button class="btn-buy">Додати в кошик</button>
+                    <button class="btn-buy" data-img={productImages[0] || ""}>Додати в кошик</button>
                 </div>
             </div>
         ) : (
             <div style="text-align: center; padding: 60px 0;">
                 <h2>Товар не знайдено</h2>
-                <a href="/catalog/components" class="btn-back">Повернутися до комплектуючих</a>
+                <a href="/catalog" class="btn-back">Повернутися до каталогу</a>
             </div>
         )}
     </main>
+
+    {product && productImages.length > 0 && (
+        <div
+            id="image-lightbox"
+            class="lightbox-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Збільшене фото: ${product.title}`}
+            aria-hidden="true"
+        >
+            <button
+                type="button"
+                id="lightbox-close"
+                class="lightbox-close-btn"
+                aria-label="Закрити збільшене фото"
+            >
+                ✕
+            </button>
+
+            {productImages.length > 1 && (
+                <>
+                    <button
+                        type="button"
+                        id="lightbox-prev"
+                        class="lightbox-nav-btn prev"
+                        aria-label="Попереднє фото"
+                    >
+                        ‹
+                    </button>
+                    <button
+                        type="button"
+                        id="lightbox-next"
+                        class="lightbox-nav-btn next"
+                        aria-label="Наступне фото"
+                    >
+                        ›
+                    </button>
+                </>
+            )}
+
+            <div class="lightbox-stage" id="lightbox-stage">
+                <img
+                    id="lightbox-img"
+                    src={productImages[0]}
+                    alt={product.title}
+                    class="lightbox-img"
+                />
+            </div>
+
+            {productImages.length > 1 && (
+                <div class="lightbox-counter" id="lightbox-counter">
+                    1 / {productImages.length}
+                </div>
+            )}
+        </div>
+    )}
 </Layout>
 
 <script>
@@ -167,6 +1179,187 @@ const currentCategoryInfo = product ? categoryMap[product.category] : null;
     const currentSlug = pathSegments[pathSegments.length - 1];
     const buyButton = document.querySelector('.btn-buy');
 
+    // Логіка галереї зображень та лайтбоксу
+    const galleryWrapper = document.querySelector('.gallery-wrapper') as HTMLElement | null;
+    const zoomTrigger = document.getElementById('gallery-zoom-trigger');
+    const mainImg = document.getElementById('gallery-main-img') as HTMLImageElement | null;
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+    const counterEl = document.getElementById('gallery-counter');
+    const thumbBtns = document.querySelectorAll('.thumb-btn');
+
+    const lightbox = document.getElementById('image-lightbox') as HTMLElement | null;
+    const lightboxStage = document.getElementById('lightbox-stage');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement | null;
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+
+    if (galleryWrapper && mainImg) {
+        let images: string[] = [];
+        try {
+            images = JSON.parse(galleryWrapper.getAttribute('data-images') || '[]');
+        } catch {
+            images = [];
+        }
+
+        let currentIndex = 0;
+        let isTransitioning = false;
+        let lastFocusedElement: HTMLElement | null = null;
+
+        function animateImageSwap(imgEl: HTMLImageElement | null, nextSrc: string, direction: number, onDone?: () => void) {
+            if (!imgEl) {
+                onDone?.();
+                return;
+            }
+            if (imgEl.getAttribute('src') === nextSrc && imgEl.style.opacity !== '0') {
+                onDone?.();
+                return;
+            }
+
+            isTransitioning = true;
+            const offset = direction >= 0 ? '14px' : '-14px';
+            imgEl.style.opacity = '0';
+            imgEl.style.transform = `translateX(${offset}) scale(0.985)`;
+
+            window.setTimeout(() => {
+                const applyNewSrc = () => {
+                    const enterOffset = direction >= 0 ? '-14px' : '14px';
+                    imgEl.style.transition = 'none';
+                    imgEl.style.transform = `translateX(${enterOffset}) scale(0.985)`;
+                    imgEl.src = nextSrc;
+
+                    void imgEl.offsetWidth;
+
+                    imgEl.style.transition = 'opacity 0.24s ease, transform 0.24s ease';
+                    imgEl.style.opacity = '1';
+                    imgEl.style.transform = 'translateX(0) scale(1)';
+
+                    window.setTimeout(() => {
+                        isTransitioning = false;
+                        onDone?.();
+                    }, 240);
+                };
+
+                if (imgEl.complete && imgEl.naturalWidth > 0 && imgEl.src.endsWith(nextSrc)) {
+                    applyNewSrc();
+                } else {
+                    const preloader = new Image();
+                    preloader.onload = applyNewSrc;
+                    preloader.onerror = applyNewSrc;
+                    preloader.src = nextSrc;
+                }
+            }, 130);
+        }
+
+        function updateGallery(index: number, direction = 1) {
+            if (images.length === 0 || !mainImg || isTransitioning) return;
+            const targetIndex = (index + images.length) % images.length;
+            if (targetIndex === currentIndex) return;
+
+            currentIndex = targetIndex;
+            const nextSrc = images[currentIndex];
+
+            if (counterEl) {
+                counterEl.textContent = `${currentIndex + 1} / ${images.length}`;
+            }
+            if (lightboxCounter) {
+                lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+            }
+
+            thumbBtns.forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === currentIndex);
+            });
+
+            animateImageSwap(mainImg, nextSrc, direction);
+            if (lightbox && lightbox.classList.contains('is-open') && lightboxImg) {
+                animateImageSwap(lightboxImg, nextSrc, direction);
+            }
+        }
+
+        function openLightbox() {
+            if (!lightbox || !lightboxImg || images.length === 0) return;
+            lastFocusedElement = document.activeElement as HTMLElement | null;
+            lightboxImg.style.transition = 'none';
+            lightboxImg.style.opacity = '1';
+            lightboxImg.style.transform = 'translateX(0) scale(1)';
+            lightboxImg.src = images[currentIndex];
+            if (lightboxCounter) {
+                lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+            }
+
+            lightbox.classList.add('is-open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            lightboxClose?.focus();
+        }
+
+        function closeLightbox() {
+            if (!lightbox || !lightbox.classList.contains('is-open')) return;
+            lightbox.classList.remove('is-open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            lastFocusedElement?.focus();
+            lastFocusedElement = null;
+        }
+
+        prevBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            updateGallery(currentIndex - 1, -1);
+        });
+
+        nextBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            updateGallery(currentIndex + 1, 1);
+        });
+
+        thumbBtns.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const idx = parseInt(btn.getAttribute('data-index') || '0', 10);
+                const dir = idx >= currentIndex ? 1 : -1;
+                updateGallery(idx, dir);
+            });
+        });
+
+        zoomTrigger?.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement | null;
+            if (target?.closest('.gallery-nav-btn')) return;
+            openLightbox();
+        });
+
+        lightboxClose?.addEventListener('click', closeLightbox);
+
+        lightboxPrev?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            updateGallery(currentIndex - 1, -1);
+        });
+
+        lightboxNext?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            updateGallery(currentIndex + 1, 1);
+        });
+
+        lightbox?.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target === lightboxStage) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox?.classList.contains('is-open')) {
+                e.preventDefault();
+                closeLightbox();
+                return;
+            }
+            if (images.length <= 1) return;
+            if (e.key === 'ArrowLeft') updateGallery(currentIndex - 1, -1);
+            if (e.key === 'ArrowRight') updateGallery(currentIndex + 1, 1);
+        });
+    }
+
+    // Додавання в кошик
     if (buyButton) {
         buyButton.addEventListener('click', () => {
             const titleElement = document.querySelector('.product-title');
@@ -179,6 +1372,7 @@ const currentCategoryInfo = product ? categoryMap[product.category] : null;
             const priceStr = priceElement.textContent?.trim() || '0 ₴';
             const priceNum = parseInt(priceStr.replace(/\D/g, ''), 10) || 0;
             const category = categoryElement ? categoryElement.textContent?.trim() || '' : '';
+            const imgUrl = buyButton.getAttribute('data-img') || '';
 
             const productItem = {
                 id: currentSlug,
@@ -187,7 +1381,7 @@ const currentCategoryInfo = product ? categoryMap[product.category] : null;
                 priceNum: priceNum,
                 category: category,
                 quantity: 1,
-                img: ""
+                img: imgUrl
             };
 
             let cart = JSON.parse(localStorage.getItem('pcstore_cart') || '[]');
@@ -221,15 +1415,296 @@ const currentCategoryInfo = product ? categoryMap[product.category] : null;
     .breadcrumb a { color: var(--color-text-muted); text-decoration: none; }
     .breadcrumb a:hover { color: var(--color-accent); }
     .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-    .image-placeholder-large { width: 100%; height: 420px; background-color: var(--color-card); border: 1px dashed var(--color-border); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); font-weight: 600; }
+
+    .gallery-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .main-image-box {
+        position: relative;
+        width: 100%;
+        height: 420px;
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        cursor: zoom-in;
+        transition: border-color 0.2s ease;
+    }
+
+    .main-image-box:hover {
+        border-color: var(--color-accent);
+    }
+
+    .product-main-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 20px;
+        box-sizing: border-box;
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        transition: opacity 0.24s ease, transform 0.24s ease;
+        user-select: none;
+    }
+
+    .zoom-hint {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background-color: rgba(15, 17, 21, 0.78);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 5px 10px;
+        border-radius: 999px;
+        opacity: 0.85;
+        transition: opacity 0.2s ease, border-color 0.2s ease;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    .main-image-box:hover .zoom-hint {
+        opacity: 1;
+        border-color: var(--color-accent);
+    }
+
+    .gallery-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba(15, 17, 21, 0.78);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        font-size: 24px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        z-index: 2;
+    }
+
+    .gallery-nav-btn:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+        background-color: rgba(15, 17, 21, 0.95);
+    }
+
+    .gallery-nav-btn.prev { left: 12px; }
+    .gallery-nav-btn.next { right: 12px; }
+
+    .gallery-counter {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        background-color: rgba(15, 17, 21, 0.78);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 999px;
+        pointer-events: none;
+    }
+
+    .gallery-thumbs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .thumb-btn {
+        width: 72px;
+        height: 72px;
+        padding: 6px;
+        border-radius: 10px;
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        cursor: pointer;
+        overflow: hidden;
+        transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .thumb-btn:hover {
+        border-color: var(--color-accent);
+    }
+
+    .thumb-btn.active {
+        border: 2px solid var(--color-accent);
+        box-shadow: 0 0 0 2px rgba(0, 255, 204, 0.15);
+    }
+
+    .thumb-btn img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .image-placeholder-large {
+        width: 100%;
+        height: 420px;
+        background-color: var(--color-card);
+        border: 1px dashed var(--color-border);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-muted);
+        font-weight: 600;
+    }
+
     .product-details-section { display: flex; flex-direction: column; gap: 16px; }
     .product-category-tag { display: inline-block; background-color: var(--color-element); color: var(--color-accent); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; width: fit-content; border: 1px solid var(--color-border); }
     .product-title { font-size: 28px; color: var(--color-text-main); margin: 0; font-weight: 700; }
     .product-price { font-size: 32px; font-weight: 800; color: var(--color-accent); }
-    .product-desc { color: var(--color-text-muted); font-size: 15px; margin: 0; }
+    .product-desc { color: var(--color-text-muted); font-size: 15px; line-height: 1.6; margin: 0; }
     .specs-box { background-color: var(--color-card); border: 1px solid var(--color-border); border-radius: 12px; padding: 16px 20px; }
     .specs-box h3 { font-size: 16px; color: var(--color-text-main); margin: 0 0 10px; }
     .specs-box ul { margin: 0; padding-left: 20px; color: var(--color-text-muted); font-size: 14px; display: flex; flex-direction: column; gap: 6px; }
     .btn-buy { background-color: var(--color-accent); color: #000; border: none; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.2s; }
     .btn-back { display: inline-block; margin-top: 20px; background: var(--color-element); color: var(--color-accent); padding: 10px 20px; border-radius: 8px; text-decoration: none; }
+
+    /* Лайтбокс */
+    .lightbox-overlay {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(9, 11, 15, 0.92);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .lightbox-overlay.is-open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .lightbox-stage {
+        width: 100%;
+        height: 100%;
+        max-width: 1100px;
+        max-height: 82vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .lightbox-img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 14px;
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        padding: 16px;
+        box-sizing: border-box;
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        transition: opacity 0.24s ease, transform 0.24s ease;
+        user-select: none;
+    }
+
+    .lightbox-close-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        z-index: 10001;
+    }
+
+    .lightbox-close-btn:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+        transform: scale(1.05);
+    }
+
+    .lightbox-nav-btn {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        font-size: 28px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        z-index: 10001;
+    }
+
+    .lightbox-nav-btn:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+    }
+
+    .lightbox-nav-btn.prev { left: 20px; }
+    .lightbox-nav-btn.next { right: 20px; }
+
+    .lightbox-counter {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        font-size: 13px;
+        font-weight: 600;
+        padding: 6px 14px;
+        border-radius: 999px;
+        z-index: 10001;
+    }
+
+    @media (max-width: 860px) {
+        .product-grid {
+            grid-template-columns: 1fr;
+        }
+        .main-image-box,
+        .image-placeholder-large {
+            height: 320px;
+        }
+        .lightbox-nav-btn {
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+        }
+        .lightbox-nav-btn.prev { left: 10px; }
+        .lightbox-nav-btn.next { right: 10px; }
+    }
 </style>

@@ -10,7 +10,7 @@ export function getStaticPaths() {
     { params: { category: "cases" } },
     { params: { category: "psu" } },
     { params: { category: "coolers" } },
-    { params: { category: "sound-cards" } }
+    { params: { category: "sound-cards" } },
   ];
 }
 import Layout from "../../../layouts/Layout.astro";
@@ -34,7 +34,7 @@ const categoryTitles: Record<string, string> = {
 
 const currentTitle = (category && categoryTitles[category]) ? categoryTitles[category] : "Товари";
 
-// Динамические списки фильтров по брендам для каждой категории
+// Списки фильтров для каждой категории
 const categoryFilters: Record<string, Array<{ value: string; label: string }>> = {
   "processors": [
     { value: "intel", label: "Intel" },
@@ -43,7 +43,8 @@ const categoryFilters: Record<string, Array<{ value: string; label: string }>> =
   "gpus": [
     { value: "nvidia", label: "NVIDIA" },
     { value: "amd", label: "AMD Radeon" },
-    { value: "asus", label: "ASUS" }
+    { value: "asus", label: "ASUS" },
+    { value: "gigabyte", label: "Gigabyte" },
   ],
   "motherboards": [
     { value: "msi", label: "MSI" },
@@ -51,66 +52,119 @@ const categoryFilters: Record<string, Array<{ value: string; label: string }>> =
     { value: "gigabyte", label: "Gigabyte" }
   ],
   "ram": [
-    { value: "kingston", label: "Kingston" }
+    { value: "kingston", label: "Kingston" },
+    { value: "ddr5-64gb", label: "DDR5 64GB" },
+    { value: "ddr5-32gb", label: "DDR5 32GB" },
+    { value: "ddr4-32gb", label: "DDR4 32GB" },
+    { value: "ddr4-16gb", label: "DDR4 16GB" },
   ],
   "ssd": [
-    { value: "samsung", label: "Samsung" }
+    { value: "samsung", label: "Samsung" },
+    { value: "kingston", label: "Kingston" },
+    { value: "2tb", label: "2TB" },
+    { value: "1tb", label: "1TB" },
+    { value: "500gb", label: "500GB" },
   ],
   "hdd": [
-    { value: "wd", label: "WD (Western Digital)" }
+    { value: "wd", label: "WD (Western Digital)" },
+    { value: "toshiba", label: "Toshiba" },
+    { value: "2tb", label: "2TB" },
+    { value: "1tb", label: "1TB" },
   ],
   "cases": [
-    { value: "nzxt", label: "NZXT" }
+    { value: "gamdias", label: "Gamdias" },
+    { value: "no-psu", label: "Без блока живлення" },
+    { value: "with-psu", label: "З блоком живлення" },
+    { value: "custom", label: "Кастомні" },
+    { value: "glass-side", label: "Бокова панель зі скла" },
   ],
   "psu": [
-    { value: "msi", label: "MSI" }
+    { value: "msi", label: "MSI" },
+    { value: "kcas", label: "KCAS" },
+    { value: "1000w", label: "1000W" },
+    { value: "850w", label: "850W" },
+    { value: "700w", label: "700W" },
+    { value: "500w", label: "500W" },
   ],
   "coolers": [
-    { value: "deepcool", label: "DeepCool" }
+    { value: "deepcool", label: "DeepCool" },
+    { value: "id-cooling", label: "ID-COOLING" },
+    { value: "zezzio", label: "Zezzio" },
+    { value: "cpu-coolers", label: "Кулери для процесорів" },
+    { value: "tower", label: "Баштові кулери" },
+    { value: "case-fans", label: "Корпусні вентилятори" },
   ],
   "sound-cards": [
-    { value: "asus", label: "ASUS" }
+    { value: "manli", label: "Manli" },
+    { value: "vention", label: "Vention" },
+    { value: "in", label: "Внутрішні" },
+    { value: "out", label: "Зовнішні" },
   ]
 };
 
 const currentFilters = (category && categoryFilters[category]) ? categoryFilters[category] : [];
 
-// База данных товаров для ВСЕХ категорий комплектующих
-const database: Record<string, Array<{ slug: string; title: string; price: string; brand: string; priceNum: number; imgText: string }>> = {
+interface ComponentItem {
+  slug: string;
+  title: string;
+  price: string;
+  brands: string[];
+  specs?: string[];
+  priceNum: number;
+  imgText: string;
+  img?: string;
+}
+
+// База данных товаров: разделяем бренд(ы) и заводские характеристики (specs)
+const database: Record<string, Array<ComponentItem>> = {
   "processors": [
-    { slug: "intel-core-i7", title: "Процесор Intel Core i7-14700K", price: "17 999 ₴", brand: "intel", priceNum: 17999, imgText: "Intel CPU" },
-    { slug: "amd-ryzen-7", title: "Процесор AMD Ryzen 7 7800X3D", price: "19 500 ₴", brand: "amd", priceNum: 19500, imgText: "AMD CPU" }
+    { slug: "intel-core-i7", title: "Процесор Intel Core i7-14700K", price: "17 999 ₴", brands: ["intel"], priceNum: 17999, imgText: "Intel CPU" },
+    { slug: "amd-ryzen-7", title: "Процесор AMD Ryzen 7 7800X3D", price: "19 500 ₴", brands: ["amd"], priceNum: 19500, imgText: "AMD CPU" }
   ],
   "gpus": [
-    { slug: "asus-rtx-4070", title: "Відеокарта ASUS GeForce RTX 4070 12GB", price: "28 500 ₴", brand: "nvidia", priceNum: 28500, imgText: "RTX 4070" }
+    { slug: "asus-rtx-4070", title: "Відеокарта ASUS GeForce RTX 4070 12GB", price: "28 500 ₴", brands: ["nvidia", "asus"], priceNum: 28500, imgText: "RTX 4070" },
+    { slug: "radeon-rx-9070", title: "Відеокарта Gigabyte Radeon RX 9070 16GB", price: "47 069 ₴", brands: ["amd", "gigabyte"], priceNum: 47069, imgText: "RX 9070" }
   ],
   "motherboards": [
-    { slug: "msi-z790", title: "Материнська плата MSI MAG Z790 TOMAHAWK", price: "11 200 ₴", brand: "msi", priceNum: 11200, imgText: "Z790" }
+    { slug: "msi-z790", title: "Материнська плата MSI MAG Z790 TOMAHAWK", price: "11 200 ₴", brands: ["msi"], priceNum: 11200, imgText: "Z790" }
   ],
   "ram": [
-    { slug: "kingston-ddr5-32gb", title: "Оперативна пам'ять Kingston Fury DDR5 32GB", price: "4 500 ₴", brand: "kingston", priceNum: 4500, imgText: "DDR5" }
+    { slug: "kingston-ddr5-32gb", title: "Оперативна пам'ять Kingston Fury DDR5 32GB", price: "4 500 ₴", brands: ["kingston"], specs: ["ddr5-32gb"], priceNum: 4500, imgText: "DDR5 32GB" },
+    { slug: "kingston-ddr4-16gb", title: "Оперативна пам'ять Kingston Fury DDR4 16GB", price: "2 100 ₴", brands: ["kingston"], specs: ["ddr4-16gb"], priceNum: 2100, imgText: "DDR4 16GB" }
   ],
   "ssd": [
-    { slug: "samsung-990-pro-2tb", title: "SSD накопичувач Samsung 990 PRO 2TB M.2", price: "7 800 ₴", brand: "samsung", priceNum: 7800, imgText: "SSD 2TB" }
+    { slug: "samsung-990-pro-2tb", title: "SSD накопичувач Samsung 990 PRO 2TB M.2", price: "11 800 ₴", brands: ["samsung"], specs: ["2tb"], priceNum: 11800, imgText: "SSD 2TB" },
+    { slug: "kingston-nv3-1tb", title: "SSD накопичувач Kingston NV3 1TB M.2", price: "7 500 ₴", brands: ["kingston"], specs: ["1tb"], priceNum: 7500, imgText: "SSD 1TB" }
   ],
   "hdd": [
-    { slug: "wd-blue-2tb", title: "Жорсткий диск WD Blue 2TB HDD", price: "2 400 ₴", brand: "wd", priceNum: 2400, imgText: "HDD 2TB" }
+    { slug: "wd-blue-2tb", title: "Жорсткий диск WD Blue 2TB HDD", price: "7 600 ₴", brands: ["wd"], specs: ["2tb"], priceNum: 7600, imgText: "HDD 2TB" },
+    { slug: "toshiba-2tb", title: "Жорсткий диск Toshiba Canvio Basics Exclusive 2TB HDD", price: "5 400 ₴", brands: ["toshiba"], specs: ["2tb"], priceNum: 5400, imgText: "HDD 2TB" },
   ],
   "cases": [
-    { slug: "nzxt-h5-flow", title: "Корпус NZXT H5 Flow Black", price: "4 100 ₴", brand: "nzxt", priceNum: 4100, imgText: "NZXT Case" }
+    { slug: "gamdias-gc7-black", title: "Корпус Gamdias Aura GC7 ARGB Black", price: "1 600 ₴", brands: ["gamdias"], specs: ["no-psu", "glass-side"], priceNum: 1600, imgText: "Gamdias Case" }
   ],
   "psu": [
-    { slug: "msi-mpg-850w", title: "Блок живлення MSI MPG A850G PCIE5 850W", price: "5 900 ₴", brand: "msi", priceNum: 5900, imgText: "PSU 850W" }
+    { slug: "msi-mpg-850w", title: "Блок живлення MSI MPG A850G PCIE5 850W", price: "5 900 ₴", brands: ["msi"], specs: ["850w"], priceNum: 5900, imgText: "PSU 850W" },
+    { slug: "kcas-1000w", title: "Блок живлення KCAS PLUS GOLD 1000W", price: "8 709 ₴", brands: ["kcas"], specs: ["1000w"], priceNum: 8709, imgText: "PSU 1000W" },
   ],
   "coolers": [
-    { slug: "deepcool-ak620", title: "Кулер для процесора DeepCool AK620", price: "2 600 ₴", brand: "deepcool", priceNum: 2600, imgText: "Cooler" }
+    { slug: "deepcool-ak620", title: "Кулер для процесора DeepCool AK620", price: "2 600 ₴", brands: ["deepcool"], specs: ["cpu-coolers", "tower"], priceNum: 2600, imgText: "Cooler deepcool" },
+    { slug: "id-cooling-a400", title: "Кулер процесорний ID-COOLING Frozn A400 ARGB", price: "1 300 ₴", brands: ["id-cooling"], specs: ["cpu-coolers", "tower"], priceNum: 1300, imgText: "Cooler id-cooling" },
+    { slug: "zezzio-prism-6", title: "Вентилятор Zezzio Prism 6 Pro ARGB Ultra Fan Reverse Black", price: "249 ₴", brands: ["zezzio"], specs: ["case-fans"], priceNum: 249, imgText: "Case fan zezzio" },
   ],
   "sound-cards": [
-    { slug: "asus-xonar-se", title: "Звукова карта ASUS Xonar SE", price: "1 850 ₴", brand: "asus", priceNum: 1850, imgText: "Sound Card" }
+    { slug: "manli-c-media", title: "Звукова карта Manli C-Media 8738 PCI-E", price: "599 ₴", brands: ["manli"], specs: ["in"], priceNum: 599, imgText: "Manli Sound Card" },
+    { slug: "vention-sc-2", title: "Звукова карта Vention USB Sound Card 2.0", price: "309 ₴", brands: ["vention"], specs: ["out"], priceNum: 309, imgText: "Vention Sound Card" },
   ]
 };
 
 const categoryProducts = (category && database[category]) ? database[category] : [];
+
+// Подсчет количества товаров в текущей категории для каждого фильтра
+const getFilterCount = (val: string) =>
+  categoryProducts.filter(
+    (prod) => (prod.brands || []).includes(val) || (prod.specs || []).includes(val)
+  ).length;
 ---
 
 <Layout>
@@ -132,12 +186,15 @@ const categoryProducts = (category && database[category]) ? database[category] :
                 <h3>Фільтри</h3>
                 
                 <div class="filter-group">
-                    <span class="filter-title">Бренд</span>
+                    <span class="filter-title">Параметри / Бренд</span>
                     {currentFilters.length > 0 ? (
                         currentFilters.map((filter) => (
-                            <label>
-                                <input type="checkbox" class="filter-checkbox" value={filter.value} /> 
-                                {filter.label}
+                            <label class="filter-option-row">
+                                <span class="option-left">
+                                    <input type="checkbox" class="filter-checkbox" value={filter.value} /> 
+                                    <span>{filter.label}</span>
+                                </span>
+                                <span class="option-count">{getFilterCount(filter.value)}</span>
                             </label>
                         ))
                     ) : (
@@ -158,29 +215,44 @@ const categoryProducts = (category && database[category]) ? database[category] :
             </aside>
 
             <!-- Сетка товаров -->
-            <div class="products-grid-list" id="products-grid">
-                {categoryProducts.length > 0 ? (
-                    categoryProducts.map((prod) => (
-                        <div 
-                            class="product-card-item" 
-                            data-brand={prod.brand} 
-                            data-price={prod.priceNum}
-                            data-slug={prod.slug}
-                        >
-                            <div class="product-card-img">{prod.imgText}</div>
-                            <div class="product-card-info">
-                                <h3>{prod.title}</h3>
-                                <div class="price">{prod.price}</div>
-                                <button type="button" class="btn-detail">Дивитися товар</button>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <div class="no-products">
-                        <p>У цій категорії поки немає товарів.</p>
-                        <a href="/catalog/components" class="btn-detail" style="display:inline-block; margin-top:10px; text-decoration: none;">Назад до комплектуючих</a>
-                    </div>
-                )}
+            <div class="products-area">
+                <div class="products-grid-list" id="products-grid">
+                    {categoryProducts.length > 0 ? (
+                        categoryProducts.map((prod) => {
+                            const imgSrc = prod.img || `/products_pics/${prod.slug}-1.jpg`;
+                            return (
+                                <div 
+                                    class="product-card-item" 
+                                    data-brands={JSON.stringify(prod.brands || [])} 
+                                    data-specs={JSON.stringify(prod.specs || [])}
+                                    data-price={prod.priceNum}
+                                    data-slug={prod.slug}
+                                >
+                                    <div class="product-card-img">
+                                        <img
+                                            src={imgSrc}
+                                            alt={prod.title}
+                                            loading="lazy"
+                                            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
+                                        />
+                                        <span class="img-fallback-text" style="display: none;">{prod.imgText}</span>
+                                    </div>
+                                    <div class="product-card-info">
+                                        <h3>{prod.title}</h3>
+                                        <div class="price">{prod.price}</div>
+                                        <button type="button" class="btn-detail">Дивитися товар</button>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    ) : null}
+                </div>
+
+                <!-- Сообщение, если товаров нет вообще в категории или после фильтра -->
+                <div id="no-products-message" class="no-products" style="display: none;">
+                    <p>У цій категорії наразі немає товарів з обраним фільтром.</p>
+                    <a href="/catalog/components" class="btn-detail" style="display:inline-block; margin-top:10px; text-decoration: none; width: auto; padding: 10px 20px;">Назад до комплектуючих</a>
+                </div>
             </div>
         </div>
     </main>
@@ -192,8 +264,76 @@ const categoryProducts = (category && database[category]) ? database[category] :
     const productCards = document.querySelectorAll('.product-card-item');
     const minInput = document.getElementById('price-min') as HTMLInputElement;
     const maxInput = document.getElementById('price-max') as HTMLInputElement;
+    const noProductsMsg = document.getElementById('no-products-message');
 
-    // Переход на детальную страницу товара при клике на карточку или кнопку
+    // Функция применения фильтров
+    function filterProducts() {
+        const checkedFilters = Array.from(document.querySelectorAll('.filter-checkbox:checked'))
+            .map((cb) => (cb as HTMLInputElement).value);
+        
+        const minPrice = minInput.value ? parseFloat(minInput.value) : 0;
+        const maxPriceParsed = maxInput.value ? parseFloat(maxInput.value) : Infinity;
+
+        let visibleCount = 0;
+
+        productCards.forEach((card) => {
+            // Читаем бренды и характеристики из дата-атрибутов
+            const brandsAttr = card.getAttribute('data-brands') || '[]';
+            const specsAttr = card.getAttribute('data-specs') || '[]';
+            
+            let productBrands: string[] = [];
+            let productSpecs: string[] = [];
+
+            try {
+                productBrands = JSON.parse(brandsAttr);
+                productSpecs = JSON.parse(specsAttr);
+            } catch (e) {
+                productBrands = [];
+                productSpecs = [];
+            }
+
+            const price = parseFloat(card.getAttribute('data-price') || '0');
+
+            // Товар подходит, если выбранный фильтр есть либо в brands, либо в specs
+            const matchesFilter = checkedFilters.length === 0 || checkedFilters.some(f => productBrands.includes(f) || productSpecs.includes(f));
+            const matchesPrice = price >= minPrice && price <= maxPriceParsed;
+
+            if (matchesFilter && matchesPrice) {
+                (card as HTMLElement).style.display = 'flex';
+                visibleCount++;
+            } else {
+                (card as HTMLElement).style.display = 'none';
+            }
+        });
+
+        // Показываем или скрываем сообщение об отсутствии товаров
+        if (noProductsMsg) {
+            if (visibleCount === 0) {
+                noProductsMsg.style.display = 'block';
+            } else {
+                noProductsMsg.style.display = 'none';
+            }
+        }
+    }
+
+    // При загрузке страницы проверяем URL на наличие параметра ?filter=...
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const filterParam = urlParams.get('filter');
+
+        if (filterParam) {
+            filterParam.split(',').forEach((val) => {
+                const targetCheckbox = document.querySelector(`.filter-checkbox[value="${val}"]`) as HTMLInputElement | null;
+                if (targetCheckbox) {
+                    targetCheckbox.checked = true;
+                }
+            });
+        }
+
+        filterProducts();
+    });
+
+    // Переход на детальную страницу товара при клике на карточку
     productCards.forEach((card) => {
         card.addEventListener('click', () => {
             const slug = card.getAttribute('data-slug');
@@ -203,37 +343,23 @@ const categoryProducts = (category && database[category]) ? database[category] :
         });
     });
 
-    // Логика фильтрации
+    // Нажатие на кнопку «Застосувати фільтри»
     if (applyBtn) {
         applyBtn.addEventListener('click', () => {
-            const checkedBrands = Array.from(document.querySelectorAll('.filter-checkbox:checked'))
-                .map((cb) => (cb as HTMLInputElement).value);
-            
-            const minPrice = minInput.value ? parseFloat(minInput.value) : 0;
-            const maxPrice = maxInput.value ? parseFloat(maxInput.value) : Infinity;
-
-            productCards.forEach((card) => {
-                const brand = card.getAttribute('data-brand') || '';
-                const price = parseFloat(card.getAttribute('data-price') || '0');
-
-                const matchesBrand = checkedBrands.length === 0 || checkedBrands.includes(brand);
-                const matchesPrice = price >= minPrice && price <= maxPrice;
-
-                if (matchesBrand && matchesPrice) {
-                    (card as HTMLElement).style.display = 'flex';
-                } else {
-                    (card as HTMLElement).style.display = 'none';
-                }
-            });
+            filterProducts();
         });
     }
 
+    // Сброс фильтров
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
             document.querySelectorAll('.filter-checkbox').forEach((cb) => (cb as HTMLInputElement).checked = false);
             minInput.value = '';
             maxInput.value = '';
-            productCards.forEach((card) => (card as HTMLElement).style.display = 'flex');
+            
+            window.history.replaceState({}, '', window.location.pathname);
+            
+            filterProducts();
         });
     }
 </script>
@@ -270,9 +396,36 @@ const categoryProducts = (category && database[category]) ? database[category] :
         height: fit-content;
     }
     .filters-sidebar h3 { font-size: 18px; margin: 0 0 20px; color: var(--color-text-main); }
-    .filter-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .filter-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
     .filter-title { font-size: 14px; font-weight: 600; color: var(--color-text-main); margin-bottom: 4px; }
-    .filter-group label { font-size: 14px; color: var(--color-text-muted); display: flex; align-items: center; gap: 8px; cursor: pointer; }
+
+    .filter-option-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 14px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+    }
+    .filter-option-row:hover { color: var(--color-text-main); }
+
+    .option-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .option-count {
+        font-size: 12px;
+        color: var(--color-text-muted);
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        padding: 2px 7px;
+        min-width: 24px;
+        text-align: center;
+    }
     
     .price-inputs { display: flex; gap: 10px; }
     .price-inputs input {
@@ -310,6 +463,12 @@ const categoryProducts = (category && database[category]) ? database[category] :
     }
     .btn-reset:hover { color: var(--color-text-main); }
 
+    .products-area {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
     .products-grid-list {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -340,13 +499,21 @@ const categoryProducts = (category && database[category]) ? database[category] :
         color: var(--color-text-muted);
         font-weight: 600;
         margin-bottom: 16px;
+        overflow: hidden;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .product-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .product-card-info h3 { font-size: 16px; color: var(--color-text-main); margin: 0 0 8px; }
     .price { font-size: 20px; font-weight: 800; color: var(--color-accent); margin-bottom: 16px; }
 
     .btn-detail {
-        data-brand: string;
         display: block;
         width: 100%;
         text-align: center;
@@ -367,7 +534,7 @@ const categoryProducts = (category && database[category]) ? database[category] :
     }
 
     .no-products {
-        grid-column: span 2;
+        width: 100%;
         text-align: center;
         padding: 40px;
         color: var(--color-text-muted);
@@ -379,6 +546,5 @@ const categoryProducts = (category && database[category]) ? database[category] :
     @media (max-width: 768px) {
         .shop-layout { grid-template-columns: 1fr; }
         .products-grid-list { grid-template-columns: 1fr; }
-        .no-products { grid-column: span 1; }
     }
 </style>

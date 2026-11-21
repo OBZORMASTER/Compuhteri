@@ -1,0 +1,629 @@
+---
+export function getStaticPaths() {
+  return [
+    { params: { category: "keyboards" } },
+    { params: { category: "mice" } },
+    { params: { category: "headsets" } },
+    { params: { category: "monitors" } },
+    { params: { category: "microphones" } },
+    { params: { category: "gamepads" } },
+    { params: { category: "accessories" } },
+  ];
+}
+import Layout from "../../../layouts/Layout.astro";
+
+const { category } = Astro.params;
+
+const categoryTitles: Record<string, string> = {
+  "keyboards": "Клавіатури",
+  "mice": "Миші",
+  "headsets": "Гарнітура та навушники",
+  "monitors": "Монітори",
+  "microphones": "Мікрофони",
+  "gamepads": "Геймпади",
+  "accessories": "Аксесуари та килимки"
+};
+
+const currentTitle = (category && categoryTitles[category]) ? categoryTitles[category] : "Товари";
+
+const categoryFilters: Record<string, Array<{ value: string; label: string }>> = {
+  "keyboards": [
+    { value: "hyperx", label: "HyperX" },
+    { value: "logitech", label: "Logitech" },
+    { value: "mechanical", label: "Механічні" },
+    { value: "wireless", label: "Бездротові" },
+  ],
+  "mice": [
+    { value: "logitech", label: "Logitech" },
+    { value: "razer", label: "Razer" },
+    { value: "wireless", label: "Бездротові" },
+    { value: "wired", label: "Дротові" }
+  ],
+  "headsets": [
+    { value: "hyperx", label: "HyperX" },
+    { value: "logitech", label: "Logitech" },
+    { value: "razer", label: "Razer" },
+    { value: "wireless", label: "Бездротові" },
+    { value: "wired", label: "Дротові" },
+  ],
+  "monitors": [
+    { value: "lg", label: "LG" },
+    { value: "asus", label: "ASUS" },
+    { value: "dell", label: "Dell" },
+    { value: "4k-gaming", label: "4K Геймінг" },
+    { value: "design", label: "Для дизайну" },
+    { value: "office", label: "Для роботи та офісу" },
+  ],
+  "microphones": [
+    { value: "hyperx", label: "HyperX" },
+    { value: "fifine", label: "FIFINE" },
+    { value: "usb", label: "USB" },
+    { value: "xlr", label: "XLR" }
+  ],
+  "gamepads": [
+    { value: "sony", label: "Sony" },
+    { value: "xbox", label: "XBOX" },
+  ],
+  "accessories": [
+    { value: "steelseries", label: "SteelSeries" },
+    { value: "hyperx", label: "HyperX" },
+    { value: "razer", label: "Razer" },
+    { value: "mousepad", label: "Килимки для миші" },
+    { value: "rest", label: "Підставки під зап'ястя" },
+    { value: "holder", label: "Тримачі кабелю миші" }
+  ]
+};
+
+const currentFilters = (category && categoryFilters[category]) ? categoryFilters[category] : [];
+
+interface PeripheralItem {
+  slug: string;
+  title: string;
+  price: string;
+  brands: string[];
+  specs?: string[];
+  priceNum: number;
+  imgText: string;
+  img?: string;
+}
+
+const database: Record<string, Array<PeripheralItem>> = {
+  "keyboards": [
+    {
+      slug: "hyperx-alloy-origins-65",
+      title: "Клавіатура HyperX Alloy Origins 65 Mechanical",
+      price: "4 299 ₴",
+      brands: ["hyperx"],
+      specs: ["mechanical"],
+      priceNum: 4299,
+      imgText: "HyperX 65%"
+    },
+    {
+      slug: "logitech-g-pro-x-tkl-wireless",
+      title: "Клавіатура Logitech G PRO X TKL Lightspeed Wireless",
+      price: "7 499 ₴",
+      brands: ["logitech"],
+      specs: ["mechanical", "wireless"],
+      priceNum: 7499,
+      imgText: "Logitech TKL"
+    }
+  ],
+  "mice": [
+    {
+      slug: "logitech-g-pro-x-superlight-2",
+      title: "Ігрова миша Logitech G PRO X Superlight 2 Wireless",
+      price: "5 999 ₴",
+      brands: ["logitech"],
+      specs: ["wireless"],
+      priceNum: 5999,
+      imgText: "Superlight 2"
+    },
+    {
+      slug: "razer-deathadder-v3",
+      title: "Ігрова миша Razer DeathAdder V3",
+      price: "3 199 ₴",
+      brands: ["razer"],
+      specs: ["wired"],
+      priceNum: 3199,
+      imgText: "DeathAdder V3"
+    }
+  ],
+  "headsets": [
+    {
+      slug: "hyperx-cloud-iii-wireless",
+      title: "Ігрова гарнітура HyperX Cloud III Wireless",
+      price: "6 499 ₴",
+      brands: ["hyperx"],
+      specs: ["wireless"],
+      priceNum: 6499,
+      imgText: "Cloud III Wireless"
+    },
+    {
+      slug: "logitech-g-pro-x-2-lightspeed",
+      title: "Навушники Logitech G PRO X 2 Lightspeed",
+      price: "9 799 ₴",
+      brands: ["logitech"],
+      specs: ["wireless"],
+      priceNum: 9799,
+      imgText: "G PRO X 2"
+    },
+    {
+      slug: "razer-blackshark-v2-x",
+      title: "Гарнітура Razer BlackShark V2 X Black",
+      price: "2 499 ₴",
+      brands: ["razer"],
+      specs: ["wired"],
+      priceNum: 2499,
+      imgText: "BlackShark V2 X"
+    }
+  ],
+  "monitors": [
+    {
+      slug: "lg-ultragear-27gr93u-4k",
+      title: "Монітор 27\" LG UltraGear 27GR93U-B 4K 144Hz",
+      price: "24 999 ₴",
+      brands: ["lg"],
+      specs: ["4k-gaming"],
+      priceNum: 24999,
+      imgText: "LG 27\" 4K 144Hz"
+    },
+    {
+      slug: "asus-proart-pa279crv",
+      title: "Монітор 27\" ASUS ProArt Display PA279CRV 4K Design",
+      price: "21 499 ₴",
+      brands: ["asus"],
+      specs: ["design", "4k-gaming"],
+      priceNum: 21499,
+      imgText: "ProArt 4K IPS"
+    },
+    {
+      slug: "dell-ultrasharp-u2724d",
+      title: "Монітор 27\" Dell UltraSharp U2724D QHD 120Hz для роботи",
+      price: "15 899 ₴",
+      brands: ["dell"],
+      specs: ["office"],
+      priceNum: 15899,
+      imgText: "Dell UltraSharp"
+    }
+  ],
+  "microphones": [
+    {
+      slug: "hyperx-quadcast-s",
+      title: "Мікрофон HyperX QuadCast S USB",
+      price: "10 800 ₴",
+      brands: ["hyperx"],
+      specs: ["usb"],
+      priceNum: 10800,
+      imgText: "QuadCast S"
+    },
+    {
+      slug: "fifine-ampligame-am8",
+      title: "Мікрофон FIFINE AmpliGame AM8 USB/XLR",
+      price: "3 800 ₴",
+      brands: ["fifine"],
+      specs: ["usb", "xlr"],
+      priceNum: 3800,
+      imgText: "FIFINE AM8"
+    }
+  ],
+  "gamepads": [
+    {
+      slug: "sony-dualsense-wireless",
+      title: "Геймпад Sony DualSense Wireless Controller",
+      price: "3 299 ₴",
+      brands: ["sony"],
+      priceNum: 3299,
+      imgText: "DualSense"
+    },
+    {
+      slug: "microsoft-xbox-wireless-controller",
+      title: "Геймпад Microsoft Xbox Wireless Controller",
+      price: "2 699 ₴",
+      brands: ["xbox"],
+      priceNum: 2699,
+      imgText: "Xbox Pad"
+    }
+  ],
+  "accessories": [
+    {
+      slug: "steelseries-qck-heavy-xxl",
+      title: "Ігровий килимок SteelSeries QcK Heavy XXL",
+      price: "1 799 ₴",
+      brands: ["steelseries"],
+      specs: ["mousepad"],
+      priceNum: 1799,
+      imgText: "QcK Heavy XXL"
+    },
+    {
+      slug: "hyperx-wrist-rest",
+      title: "Підставка ергономічна під зап'ястя HyperX Wrist Rest",
+      price: "1 199 ₴",
+      brands: ["hyperx"],
+      specs: ["rest"],
+      priceNum: 1199,
+      imgText: "Hyperx Wrist Rest"
+    },
+    {
+      slug: "razer-mouse-bungee-v3",
+      title: "Тримач кабелю миші Razer Mouse Bungee V3",
+      price: "1 099 ₴",
+      brands: ["razer"],
+      specs: ["holder"],
+      priceNum: 1099,
+      imgText: "Mouse Bungee V3"
+    }
+  ]
+};
+
+const categoryProducts = (category && database[category]) ? database[category] : [];
+
+const getFilterCount = (val: string) =>
+  categoryProducts.filter(
+    (prod) => (prod.brands || []).includes(val) || (prod.specs || []).includes(val)
+  ).length;
+---
+
+<Layout>
+    <main class="category-list-container container">
+        <div class="breadcrumb">
+            <a href="/catalog">Каталог</a> / 
+            <a href="/catalog/peripherals">Периферія</a> / 
+            <span>{currentTitle}</span>
+        </div>
+
+        <div class="catalog-page-header">
+            <h1 class="page-title">{currentTitle}</h1>
+            <p class="page-subtitle">Оберіть потрібну модель з каталогу PC STORE</p>
+        </div>
+
+        <div class="shop-layout">
+            <aside class="filters-sidebar">
+                <h3>Фільтри</h3>
+                
+                <div class="filter-group">
+                    <span class="filter-title">Параметри / Бренд</span>
+                    {currentFilters.length > 0 ? (
+                        currentFilters.map((filter) => (
+                            <label class="filter-option-row">
+                                <span class="option-left">
+                                    <input type="checkbox" class="filter-checkbox" value={filter.value} /> 
+                                    <span>{filter.label}</span>
+                                </span>
+                                <span class="option-count">{getFilterCount(filter.value)}</span>
+                            </label>
+                        ))
+                    ) : (
+                        <p style="font-size: 13px; color: var(--color-text-muted); margin: 0;">Немає доступних фільтрів</p>
+                    )}
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-title">Ціна (₴)</span>
+                    <div class="price-inputs">
+                        <input type="number" id="price-min" placeholder="Від" />
+                        <input type="number" id="price-max" placeholder="До" />
+                    </div>
+                </div>
+
+                <button id="apply-filters" class="btn-apply">Застосувати фільтри</button>
+                <button id="reset-filters" class="btn-reset">Скинути</button>
+            </aside>
+
+            <div class="products-area">
+                <div class="products-grid-list" id="products-grid">
+                    {categoryProducts.length > 0 ? (
+                        categoryProducts.map((prod) => {
+                            const imgSrc = prod.img || `/products_pics/${prod.slug}-1.jpg`;
+                            return (
+                                <div 
+                                    class="product-card-item" 
+                                    data-brands={JSON.stringify(prod.brands || [])} 
+                                    data-specs={JSON.stringify(prod.specs || [])}
+                                    data-price={prod.priceNum}
+                                    data-slug={prod.slug}
+                                >
+                                    <div class="product-card-img">
+                                        <img
+                                            src={imgSrc}
+                                            alt={prod.title}
+                                            loading="lazy"
+                                            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
+                                        />
+                                        <span class="img-fallback-text" style="display: none;">{prod.imgText}</span>
+                                    </div>
+                                    <div class="product-card-info">
+                                        <h3>{prod.title}</h3>
+                                        <div class="price">{prod.price}</div>
+                                        <button type="button" class="btn-detail">Дивитися товар</button>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    ) : null}
+                </div>
+
+                <div id="no-products-message" class="no-products" style="display: none;">
+                    <p>У цій категорії наразі немає товарів з обраним фільтром.</p>
+                    <a href="/catalog/peripherals" class="btn-detail" style="display:inline-block; margin-top:10px; text-decoration: none; width: auto; padding: 10px 20px;">Назад до периферії</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>
+
+<script>
+    const applyBtn = document.getElementById('apply-filters');
+    const resetBtn = document.getElementById('reset-filters');
+    const productCards = document.querySelectorAll('.product-card-item');
+    const minInput = document.getElementById('price-min') as HTMLInputElement;
+    const maxInput = document.getElementById('price-max') as HTMLInputElement;
+    const noProductsMsg = document.getElementById('no-products-message');
+
+    function filterProducts() {
+        const checkedFilters = Array.from(document.querySelectorAll('.filter-checkbox:checked'))
+            .map((cb) => (cb as HTMLInputElement).value);
+        
+        const minPrice = minInput.value ? parseFloat(minInput.value) : 0;
+        const maxPriceParsed = maxInput.value ? parseFloat(maxInput.value) : Infinity;
+
+        let visibleCount = 0;
+
+        productCards.forEach((card) => {
+            const brandsAttr = card.getAttribute('data-brands') || '[]';
+            const specsAttr = card.getAttribute('data-specs') || '[]';
+            
+            let productBrands: string[] = [];
+            let productSpecs: string[] = [];
+
+            try {
+                productBrands = JSON.parse(brandsAttr);
+                productSpecs = JSON.parse(specsAttr);
+            } catch (e) {
+                productBrands = [];
+                productSpecs = [];
+            }
+
+            const price = parseFloat(card.getAttribute('data-price') || '0');
+
+            const matchesFilter = checkedFilters.length === 0 || checkedFilters.some(f => productBrands.includes(f) || productSpecs.includes(f));
+            const matchesPrice = price >= minPrice && price <= maxPriceParsed;
+
+            if (matchesFilter && matchesPrice) {
+                (card as HTMLElement).style.display = 'flex';
+                visibleCount++;
+            } else {
+                (card as HTMLElement).style.display = 'none';
+            }
+        });
+
+        if (noProductsMsg) {
+            noProductsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const filterParam = urlParams.get('filter');
+
+        if (filterParam) {
+            filterParam.split(',').forEach((val) => {
+                const targetCheckbox = document.querySelector(`.filter-checkbox[value="${val}"]`) as HTMLInputElement | null;
+                if (targetCheckbox) {
+                    targetCheckbox.checked = true;
+                }
+            });
+        }
+
+        filterProducts();
+    });
+
+    productCards.forEach((card) => {
+        card.addEventListener('click', () => {
+            const slug = card.getAttribute('data-slug');
+            if (slug) {
+                window.location.href = `/catalog/product/${slug}`;
+            }
+        });
+    });
+
+    if (applyBtn) {
+        applyBtn.addEventListener('click', () => {
+            filterProducts();
+        });
+    }
+
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-checkbox').forEach((cb) => (cb as HTMLInputElement).checked = false);
+            minInput.value = '';
+            maxInput.value = '';
+            window.history.replaceState({}, '', window.location.pathname);
+            filterProducts();
+        });
+    }
+</script>
+
+<style>
+    .category-list-container {
+        max-width: 1200px;
+        margin: 40px auto 80px;
+        padding: 0 24px;
+    }
+    .breadcrumb {
+        font-size: 14px;
+        color: var(--color-text-muted);
+        margin-bottom: 20px;
+    }
+    .breadcrumb a { color: var(--color-text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--color-accent); }
+    
+    .catalog-page-header { margin-bottom: 32px; }
+    .page-title { font-size: 32px; color: var(--color-text-main); margin: 0 0 8px; font-weight: 700; }
+    .page-subtitle { color: var(--color-text-muted); margin: 0; font-size: 15px; }
+
+    .shop-layout {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 32px;
+    }
+
+    .filters-sidebar {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 24px;
+        height: fit-content;
+    }
+    .filters-sidebar h3 { font-size: 18px; margin: 0 0 20px; color: var(--color-text-main); }
+    .filter-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .filter-title { font-size: 14px; font-weight: 600; color: var(--color-text-main); margin-bottom: 4px; }
+
+    .filter-option-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 14px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+    }
+    .filter-option-row:hover { color: var(--color-text-main); }
+
+    .option-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .option-count {
+        font-size: 12px;
+        color: var(--color-text-muted);
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        padding: 2px 7px;
+        min-width: 24px;
+        text-align: center;
+    }
+    
+    .price-inputs { display: flex; gap: 10px; }
+    .price-inputs input {
+        width: 100%;
+        background: var(--color-element);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        padding: 8px 12px;
+        color: var(--color-text-main);
+    }
+
+    .btn-apply {
+        width: 100%;
+        background-color: var(--color-accent);
+        color: #000;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-bottom: 10px;
+        transition: opacity 0.2s;
+    }
+    .btn-apply:hover { opacity: 0.9; }
+
+    .btn-reset {
+        width: 100%;
+        background-color: var(--color-element);
+        color: var(--color-text-muted);
+        border: 1px solid var(--color-border);
+        padding: 8px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .btn-reset:hover { color: var(--color-text-main); }
+
+    .products-area {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .products-grid-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .product-card-item {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: border-color 0.2s, transform 0.2s;
+        cursor: pointer;
+    }
+    .product-card-item:hover { border-color: var(--color-accent); transform: translateY(-2px); }
+
+    .product-card-img {
+        width: 100%;
+        height: 160px;
+        background-color: var(--color-element);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-muted);
+        font-weight: 600;
+        margin-bottom: 16px;
+        overflow: hidden;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .product-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .product-card-info h3 { font-size: 16px; color: var(--color-text-main); margin: 0 0 8px; }
+    .price { font-size: 20px; font-weight: 800; color: var(--color-accent); margin-bottom: 16px; }
+
+    .btn-detail {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .product-card-item:hover .btn-detail {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #000;
+    }
+
+    .no-products {
+        width: 100%;
+        text-align: center;
+        padding: 40px;
+        color: var(--color-text-muted);
+        background: var(--color-card);
+        border-radius: 16px;
+        border: 1px solid var(--color-border);
+    }
+
+    @media (max-width: 768px) {
+        .shop-layout { grid-template-columns: 1fr; }
+        .products-grid-list { grid-template-columns: 1fr; }
+    }
+</style>

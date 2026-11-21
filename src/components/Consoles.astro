@@ -1,0 +1,687 @@
+---
+interface ConsoleItem {
+  slug: string;
+  title: string;
+  price: string;
+  priceNum: number;
+  imgText: string;
+  img?: string;
+  brand: string;
+  portability: string;
+  storage: string;
+  shortSpecs: string[];
+}
+
+const consolesList: ConsoleItem[] = [
+  {
+    slug: "console-nintendo-switch-v1",
+    title: "Nintendo Switch (1-е покоління, 2017) Neon Red/Blue",
+    price: "9 400 ₴",
+    priceNum: 9400,
+    imgText: "Nintendo Switch v1 • 32GB",
+    brand: "nintendo",
+    portability: "hybrid",
+    storage: "32gb",
+    shortSpecs: [
+      "Виробник: Nintendo",
+      "Формат: Гібридна (портативна + ТВ-док)",
+      "Внутрішній об'єм: 32GB (слот microSD)"
+    ]
+  },
+  {
+    slug: "console-nintendo-switch-lite",
+    title: "Nintendo Switch Lite Turquoise",
+    price: "7 200 ₴",
+    priceNum: 7200,
+    imgText: "Switch Lite • Портативна • 32GB",
+    brand: "nintendo",
+    portability: "portable",
+    storage: "32gb",
+    shortSpecs: [
+      "Виробник: Nintendo",
+      "Формат: Портативна",
+      "Внутрішній об'єм: 32GB (слот microSD)"
+    ]
+  },
+  {
+    slug: "console-nintendo-switch-oled",
+    title: "Nintendo Switch OLED White 64GB",
+    price: "13 800 ₴",
+    priceNum: 13800,
+    imgText: "Switch OLED • 7\" • 64GB",
+    brand: "nintendo",
+    portability: "hybrid",
+    storage: "64gb",
+    shortSpecs: [
+      "Виробник: Nintendo",
+      "Формат: Гібридна (портативна + ТВ-док)",
+      "Внутрішній об'єм: 64GB (слот microSD)"
+    ]
+  },
+  {
+    slug: "console-sony-playstation-4-pro-1tb",
+    title: "Sony PlayStation 4 Pro 1TB Black",
+    price: "11 900 ₴",
+    priceNum: 11900,
+    imgText: "PS4 Pro • Стаціонарна • 1TB",
+    brand: "sony",
+    portability: "home",
+    storage: "1tb",
+    shortSpecs: [
+      "Виробник: Sony",
+      "Формат: Стаціонарна",
+      "Внутрішній об'єм: 1TB HDD"
+    ]
+  },
+  {
+    slug: "console-sony-playstation-5-slim-1tb",
+    title: "Sony PlayStation 5 Slim 1TB Disc Edition",
+    price: "21 900 ₴",
+    priceNum: 21900,
+    imgText: "PS5 Slim • Стаціонарна • 1TB",
+    brand: "sony",
+    portability: "home",
+    storage: "1tb",
+    shortSpecs: [
+      "Виробник: Sony",
+      "Формат: Стаціонарна",
+      "Внутрішній об'єм: 1TB NVMe SSD"
+    ]
+  },
+  {
+    slug: "console-sony-playstation-5-pro-2tb",
+    title: "Sony PlayStation 5 Pro 2TB",
+    price: "33 500 ₴",
+    priceNum: 33500,
+    imgText: "PS5 Pro • Стаціонарна • 2TB",
+    brand: "sony",
+    portability: "home",
+    storage: "2tb",
+    shortSpecs: [
+      "Виробник: Sony",
+      "Формат: Стаціонарна",
+      "Внутрішній об'єм: 2TB NVMe SSD"
+    ]
+  },
+  {
+    slug: "console-microsoft-xbox-one-s-500gb",
+    title: "Microsoft Xbox One S 500GB Robot White",
+    price: "7 600 ₴",
+    priceNum: 7600,
+    imgText: "Xbox One S • Стаціонарна • 500GB",
+    brand: "microsoft",
+    portability: "home",
+    storage: "500gb",
+    shortSpecs: [
+      "Виробник: Microsoft",
+      "Формат: Стаціонарна",
+      "Внутрішній об'єм: 500GB HDD"
+    ]
+  },
+  {
+    slug: "console-microsoft-xbox-series-s-512gb",
+    title: "Microsoft Xbox Series S 512GB",
+    price: "12 400 ₴",
+    priceNum: 12400,
+    imgText: "Xbox Series S • Стаціонарна • 512GB",
+    brand: "microsoft",
+    portability: "home",
+    storage: "512gb",
+    shortSpecs: [
+      "Виробник: Microsoft",
+      "Формат: Стаціонарна",
+      "Внутрішній об'єм: 512GB NVMe SSD"
+    ]
+  },
+  {
+    slug: "console-microsoft-xbox-series-x-1tb",
+    title: "Microsoft Xbox Series X 1TB Black",
+    price: "21 200 ₴",
+    priceNum: 21200,
+    imgText: "Xbox Series X • Стаціонарна • 1TB",
+    brand: "microsoft",
+    portability: "home",
+    storage: "1tb",
+    shortSpecs: [
+      "Виробник: Microsoft",
+      "Формат: Стаціонарна",
+      "Внутрішній об'єм: 1TB NVMe SSD"
+    ]
+  },
+  {
+    slug: "console-valve-steam-deck-512gb",
+    title: "Valve Steam Deck 512GB OLED",
+    price: "25 800 ₴",
+    priceNum: 25800,
+    imgText: "Steam Deck OLED • Портативна • 512GB",
+    brand: "valve",
+    portability: "portable",
+    storage: "512gb",
+    shortSpecs: [
+      "Виробник: Valve",
+      "Формат: Портативна",
+      "Внутрішній об'єм: 512GB NVMe SSD"
+    ]
+  }
+];
+
+const brandOptions = [
+  { value: "sony", label: "Sony" },
+  { value: "microsoft", label: "Microsoft" },
+  { value: "nintendo", label: "Nintendo" },
+  { value: "valve", label: "Valve" }
+];
+
+const portabilityOptions = [
+  { value: "home", label: "Стаціонарна" },
+  { value: "portable", label: "Портативна" },
+  { value: "hybrid", label: "Гібридна" }
+];
+
+const storageOptions = [
+  { value: "32gb", label: "32GB" },
+  { value: "64gb", label: "64GB" },
+  { value: "500gb", label: "500GB" },
+  { value: "512gb", label: "512GB" },
+  { value: "1tb", label: "1TB" },
+  { value: "2tb", label: "2TB" }
+];
+
+type ConsoleFilterField = "brand" | "portability" | "storage";
+
+const countBy = (key: ConsoleFilterField, val: string) =>
+  consolesList.filter((item) => item[key] === val).length;
+---
+
+<section class="consoles-container container">
+    <div class="breadcrumb">
+        <a href="/catalog">Каталог</a> / 
+        <span>Консолі</span>
+    </div>
+
+    <div class="catalog-page-header">
+        <h1 class="page-title">Ігрові консолі</h1>
+        <p class="page-subtitle">Актуальні та перевірені часом стаціонарні, гібридні й портативні консолі</p>
+    </div>
+
+    <div class="shop-layout">
+        <aside class="filters-sidebar">
+            <h3>Фільтри</h3>
+
+            <!-- 1. Виробник -->
+            <div class="filter-box">
+                <span class="filter-title">Виробник</span>
+                <div class="filter-options">
+                    {brandOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="brand" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("brand", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 2. Портативність -->
+            <div class="filter-box">
+                <span class="filter-title">Портативність</span>
+                <div class="filter-options">
+                    {portabilityOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="portability" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("portability", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- 3. Внутрішній об'єм -->
+            <div class="filter-box">
+                <span class="filter-title">Внутрішній об'єм</span>
+                <div class="filter-options">
+                    {storageOptions.map((opt) => (
+                        <label class="filter-option-row">
+                            <span class="option-left">
+                                <input type="checkbox" class="filter-checkbox" data-group="storage" value={opt.value} />
+                                <span>{opt.label}</span>
+                            </span>
+                            <span class="option-count">{countBy("storage", opt.value)}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Ціна -->
+            <div class="filter-box">
+                <span class="filter-title">Ціна (₴)</span>
+                <div class="price-inputs">
+                    <input type="number" id="price-min" placeholder="Від" />
+                    <input type="number" id="price-max" placeholder="До" />
+                </div>
+            </div>
+
+            <button type="button" id="apply-filters" class="btn-apply">Застосувати фільтри</button>
+            <button type="button" id="reset-filters" class="btn-reset">Скинути</button>
+
+            <div class="filter-footer-bar">
+                <button type="button" id="cancel-filters-btn" class="btn-cancel-subtle">Скасувати</button>
+                <button type="button" id="select-filters-btn" class="btn-select-subtle">Виберіть фільтри</button>
+            </div>
+        </aside>
+
+        <div class="products-area">
+            <div class="products-grid-list" id="products-grid">
+                {consolesList.map((item) => {
+                    const imgSrc = item.img || `/products_pics/${item.slug}-1.jpg`;
+                    return (
+                        <div
+                            class="product-card-item"
+                            data-brand={item.brand}
+                            data-portability={item.portability}
+                            data-storage={item.storage}
+                            data-price={item.priceNum}
+                            data-slug={item.slug}
+                        >
+                            <div class="product-card-img">
+                                <img
+                                    src={imgSrc}
+                                    alt={item.title}
+                                    loading="lazy"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
+                                />
+                                <span class="img-fallback-text" style="display: none;">{item.imgText}</span>
+                            </div>
+                            <div class="product-card-info">
+                                <h3>{item.title}</h3>
+                                <ul class="mini-specs">
+                                    {item.shortSpecs.map((s) => <li>{s}</li>)}
+                                </ul>
+                                <div class="price">{item.price}</div>
+                                <button type="button" class="btn-detail">Дивитися консоль</button>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+
+            <div id="no-products-message" class="no-products" style="display: none;">
+                <p>Наразі немає консолей з обраними фільтрами.</p>
+                <button type="button" id="empty-reset-btn" class="btn-detail" style="display:inline-block; margin-top:10px; width: auto; padding: 10px 20px;">
+                    Скинути фільтри
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const applyBtn = document.getElementById('apply-filters');
+    const resetBtn = document.getElementById('reset-filters');
+    const cancelBtn = document.getElementById('cancel-filters-btn');
+    const selectFiltersBtn = document.getElementById('select-filters-btn');
+    const emptyResetBtn = document.getElementById('empty-reset-btn');
+    const productCards = document.querySelectorAll('.product-card-item');
+    const minInput = document.getElementById('price-min') as HTMLInputElement;
+    const maxInput = document.getElementById('price-max') as HTMLInputElement;
+    const noProductsMsg = document.getElementById('no-products-message');
+
+    const filterGroups = [
+        { group: 'brand', attr: 'data-brand' },
+        { group: 'portability', attr: 'data-portability' },
+        { group: 'storage', attr: 'data-storage' }
+    ];
+
+    function getCheckedByGroup(group: string): string[] {
+        return Array.from(
+            document.querySelectorAll(`.filter-checkbox[data-group="${group}"]:checked`)
+        ).map((el) => (el as HTMLInputElement).value);
+    }
+
+    function filterConsoles() {
+        const activeSelections = filterGroups.map((fg) => ({
+            attr: fg.attr,
+            values: getCheckedByGroup(fg.group)
+        }));
+
+        const minPrice = minInput?.value ? parseFloat(minInput.value) : 0;
+        const maxPrice = maxInput?.value ? parseFloat(maxInput.value) : Infinity;
+
+        let visibleCount = 0;
+
+        productCards.forEach((card) => {
+            const matchesGroups = activeSelections.every((sel) => {
+                if (sel.values.length === 0) return true;
+                const cardVal = card.getAttribute(sel.attr) || '';
+                return sel.values.includes(cardVal);
+            });
+
+            const price = parseFloat(card.getAttribute('data-price') || '0');
+            const matchesPrice = price >= minPrice && price <= maxPrice;
+
+            if (matchesGroups && matchesPrice) {
+                (card as HTMLElement).style.display = 'flex';
+                visibleCount++;
+            } else {
+                (card as HTMLElement).style.display = 'none';
+            }
+        });
+
+        if (noProductsMsg) {
+            noProductsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        filterGroups.forEach(({ group }) => {
+            const paramVal = params.get(group);
+            if (paramVal) {
+                paramVal.split(',').forEach((val) => {
+                    const cb = document.querySelector(
+                        `.filter-checkbox[data-group="${group}"][value="${val}"]`
+                    ) as HTMLInputElement | null;
+                    if (cb) {
+                        cb.checked = true;
+                    }
+                });
+            }
+        });
+
+        filterConsoles();
+    });
+
+    productCards.forEach((card) => {
+        card.addEventListener('click', () => {
+            const slug = card.getAttribute('data-slug');
+            if (slug) {
+                window.location.href = `/catalog/product/${slug}`;
+            }
+        });
+    });
+
+    applyBtn?.addEventListener('click', filterConsoles);
+
+    function resetAllFilters() {
+        document.querySelectorAll('.filter-checkbox').forEach((cb) => {
+            (cb as HTMLInputElement).checked = false;
+        });
+        if (minInput) minInput.value = '';
+        if (maxInput) maxInput.value = '';
+        window.history.replaceState({}, '', window.location.pathname);
+        filterConsoles();
+    }
+
+    resetBtn?.addEventListener('click', resetAllFilters);
+    cancelBtn?.addEventListener('click', resetAllFilters);
+    emptyResetBtn?.addEventListener('click', resetAllFilters);
+
+    selectFiltersBtn?.addEventListener('click', () => {
+        const firstCheckbox = document.querySelector('.filter-checkbox') as HTMLInputElement | null;
+        firstCheckbox?.focus();
+        firstCheckbox?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+</script>
+
+<style>
+    .consoles-container {
+        max-width: 1200px;
+        margin: 40px auto 80px;
+        padding: 0 24px;
+    }
+    .breadcrumb {
+        font-size: 14px;
+        color: var(--color-text-muted);
+        margin-bottom: 20px;
+    }
+    .breadcrumb a { color: var(--color-text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--color-accent); }
+
+    .catalog-page-header { margin-bottom: 32px; }
+    .page-title { font-size: 32px; color: var(--color-text-main); margin: 0 0 8px; font-weight: 700; }
+    .page-subtitle { color: var(--color-text-muted); margin: 0; font-size: 15px; }
+
+    .shop-layout {
+        display: grid;
+        grid-template-columns: 290px 1fr;
+        gap: 32px;
+        align-items: start;
+    }
+
+    .filters-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .filters-sidebar > h3 {
+        font-size: 18px;
+        margin: 0;
+        color: var(--color-text-main);
+    }
+
+    .filter-box {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 14px;
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .filter-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--color-text-main);
+    }
+
+    .filter-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-option-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+    }
+    .filter-option-row:hover {
+        color: var(--color-text-main);
+    }
+
+    .option-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .option-count {
+        font-size: 12px;
+        color: var(--color-text-muted);
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        padding: 2px 7px;
+        min-width: 24px;
+        text-align: center;
+    }
+
+    .price-inputs { display: flex; gap: 10px; }
+    .price-inputs input {
+        width: 100%;
+        background: var(--color-element);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        padding: 8px 12px;
+        color: var(--color-text-main);
+    }
+
+    .btn-apply {
+        width: 100%;
+        background-color: var(--color-accent);
+        color: #000;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+    .btn-apply:hover { opacity: 0.9; }
+
+    .btn-reset {
+        width: 100%;
+        background-color: var(--color-element);
+        color: var(--color-text-muted);
+        border: 1px solid var(--color-border);
+        padding: 8px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .btn-reset:hover { color: var(--color-text-main); }
+
+    .filter-footer-bar {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 14px;
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .btn-cancel-subtle {
+        background: none;
+        border: none;
+        color: var(--color-text-muted);
+        font-size: 14px;
+        cursor: pointer;
+        padding: 6px 4px;
+    }
+    .btn-cancel-subtle:hover { color: var(--color-text-main); }
+
+    .btn-select-subtle {
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        font-size: 13px;
+        border-radius: 8px;
+        padding: 8px 14px;
+        cursor: pointer;
+    }
+    .btn-select-subtle:hover {
+        border-color: var(--color-accent);
+        color: var(--color-text-main);
+    }
+
+    .products-area {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .products-grid-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .product-card-item {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: border-color 0.2s, transform 0.2s;
+        cursor: pointer;
+    }
+    .product-card-item:hover { border-color: var(--color-accent); transform: translateY(-2px); }
+
+    .product-card-img {
+        width: 100%;
+        height: 160px;
+        background-color: var(--color-element);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-muted);
+        font-weight: 600;
+        margin-bottom: 16px;
+        text-align: center;
+        padding: 10px 12px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .product-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .product-card-info h3 { font-size: 16px; color: var(--color-text-main); margin: 0 0 10px; }
+
+    .mini-specs {
+        margin: 0 0 14px;
+        padding-left: 18px;
+        font-size: 13px;
+        color: var(--color-text-muted);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .price { font-size: 20px; font-weight: 800; color: var(--color-accent); margin-bottom: 16px; }
+
+    .btn-detail {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-main);
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .product-card-item:hover .btn-detail {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #000;
+    }
+
+    .no-products {
+        width: 100%;
+        text-align: center;
+        padding: 40px;
+        color: var(--color-text-muted);
+        background: var(--color-card);
+        border-radius: 16px;
+        border: 1px solid var(--color-border);
+    }
+
+    @media (max-width: 860px) {
+        .shop-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+        .products-grid-list { grid-template-columns: 1fr; }
+    }
+</style>
