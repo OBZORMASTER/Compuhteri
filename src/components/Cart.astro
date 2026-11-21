@@ -7,7 +7,7 @@
         <!-- Шапка сторінки -->
         <div class="cart-page-header">
             <h1 class="page-title">
-                Ваш кошик <span class="cart-items-badge" id="header-items-badge">2</span>
+                Ваш кошик <span class="cart-items-badge" id="header-items-badge" style="display: none;">0</span>
             </h1>
             <button type="button" class="btn-clear-cart" id="btn-clear-cart" title="Видалити всі товари з кошика">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -111,157 +111,7 @@
             <!-- Ліва частина: Список товарів -->
             <div class="cart-main-col">
                 <div class="cart-items" id="cart-items-container">
-                    <!-- Товар 1 -->
-                    <div class="cart-item" data-id="pc-storm-rtx4070-r7-7800x3d" data-price="68900">
-                        <a href="/catalog/product/pc-storm-rtx4070-r7-7800x3d" class="item-img-link">
-                            <img
-                                src="/products_pics/pc-storm-rtx4070-r7-7800x3d-1.jpg"
-                                alt="PC STORE Storm Pro RTX 4070 / Ryzen 7 7800X3D / 32GB DDR5"
-                                class="item-img"
-                            />
-                        </a>
-                        <div class="item-info">
-                            <a href="/catalog/product/pc-storm-rtx4070-r7-7800x3d" class="item-title"
-                                >PC STORE Storm Pro RTX 4070 / Ryzen 7 7800X3D / 32GB DDR5</a
-                            >
-                            <span class="item-code">Готові збірки ПК</span>
-                            <span class="item-stock">В наявності</span>
-                        </div>
-                        <div class="item-quantity">
-                            <button type="button" class="qty-btn minus" aria-label="Зменшити">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    ><line x1="5" y1="12" x2="19" y2="12"
-                                    ></line></svg
-                                >
-                            </button>
-                            <input
-                                type="text"
-                                value="1"
-                                class="qty-input"
-                                readonly
-                            />
-                            <button type="button" class="qty-btn plus" aria-label="Збільшити">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    ><line x1="12" y1="5" x2="12" y2="19"
-                                    ></line><line x1="5" y1="12" x2="19" y2="12"
-                                    ></line></svg
-                                >
-                            </button>
-                        </div>
-                        <div class="item-price" data-single-price="68900">68 900 ₴</div>
-                        <button type="button" class="item-remove" aria-label="Видалити" title="Видалити товар">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                ><polyline points="3 6 5 6 21 6"></polyline><path
-                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                ></path><line x1="10" y1="11" x2="10" y2="17"
-                                ></line><line x1="14" y1="11" x2="14" y2="17"
-                                ></line></svg
-                            >
-                        </button>
-                    </div>
-
-                    <!-- Товар 2 -->
-                    <div class="cart-item" data-id="asus-rtx-4070" data-price="28500">
-                        <a href="/catalog/product/asus-rtx-4070" class="item-img-link">
-                            <img
-                                src="/products_pics/asus-rtx-4070-1.jpg"
-                                alt="Відеокарта ASUS GeForce RTX 4070 12GB"
-                                class="item-img"
-                            />
-                        </a>
-                        <div class="item-info">
-                            <a href="/catalog/product/asus-rtx-4070" class="item-title"
-                                >Відеокарта ASUS GeForce RTX 4070 12GB</a
-                            >
-                            <span class="item-code">Відеокарти</span>
-                            <span class="item-stock">В наявності</span>
-                        </div>
-                        <div class="item-quantity">
-                            <button type="button" class="qty-btn minus" aria-label="Зменшити">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    ><line x1="5" y1="12" x2="19" y2="12"
-                                    ></line></svg
-                                >
-                            </button>
-                            <input
-                                type="text"
-                                value="1"
-                                class="qty-input"
-                                readonly
-                            />
-                            <button type="button" class="qty-btn plus" aria-label="Збільшити">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    ><line x1="12" y1="5" x2="12" y2="19"
-                                    ></line><line x1="5" y1="12" x2="19" y2="12"
-                                    ></line></svg
-                                >
-                            </button>
-                        </div>
-                        <div class="item-price" data-single-price="28500">28 500 ₴</div>
-                        <button type="button" class="item-remove" aria-label="Видалити" title="Видалити товар">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                ><polyline points="3 6 5 6 21 6"></polyline><path
-                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                ></path><line x1="10" y1="11" x2="10" y2="17"
-                                ></line><line x1="14" y1="11" x2="14" y2="17"
-                                ></line></svg
-                            >
-                        </button>
-                    </div>
+                    <!-- Товари завантажуються динамічно з кошика -->
                 </div>
 
                 <!-- Рекомендовані супутні аксесуари (Cross-sell) -->
@@ -1689,7 +1539,23 @@
 
         const getCartFromStorage = () => {
             try {
-                return JSON.parse(localStorage.getItem("pcstore_cart")) || [];
+                let cart = JSON.parse(localStorage.getItem("pcstore_cart")) || [];
+                // Очищаємо застарілі тестові/демо товари (якщо вони залишилися в локальній пам'яті браузера)
+                const cleaned = cart.filter((item) => {
+                    if (!item) return false;
+                    const title = item.title || "";
+                    const code = item.code || "";
+                    const id = String(item.id || "");
+                    if (title.includes("Cyber Neon") || title.includes("RTX 4060 Ti")) return false;
+                    if (code === "902341" || code === "120558") return false;
+                    if (id === "item-pc-1" || id === "item-gpu-1") return false;
+                    return true;
+                });
+                if (cleaned.length !== cart.length) {
+                    localStorage.setItem("pcstore_cart", JSON.stringify(cleaned));
+                    cart = cleaned;
+                }
+                return cart;
             } catch (e) {
                 return [];
             }
@@ -1716,19 +1582,6 @@
             if (!container) return;
 
             let cart = getCartFromStorage();
-
-            const staticItems = container.querySelectorAll(".cart-item:not([data-dynamic])");
-            if (cart.length === 0 && staticItems.length > 0) {
-                cart = Array.from(staticItems).map(item => ({
-                    id: item.dataset.id || Math.random().toString(36).substr(2, 9),
-                    title: item.querySelector(".item-title")?.textContent.trim() || "",
-                    code: item.querySelector(".item-code")?.textContent.trim() || "",
-                    priceNum: parseInt(item.dataset.price || "0", 10),
-                    quantity: parseInt(item.querySelector(".qty-input")?.value || "1", 10),
-                    img: item.querySelector(".item-img")?.getAttribute("src") || ""
-                }));
-                saveCartToStorage(cart);
-            }
 
             container.innerHTML = "";
 
@@ -1811,13 +1664,17 @@
                 if (freeShippingBanner) freeShippingBanner.style.display = "none";
                 if (clearBtn) clearBtn.style.display = "none";
                 if (cartEmpty) cartEmpty.style.display = "block";
-                if (headerBadge) headerBadge.textContent = "0";
+                if (headerBadge) {
+                    headerBadge.textContent = "0";
+                    headerBadge.style.display = "none";
+                }
                 return;
             }
 
             if (cartLayout) cartLayout.style.display = "flex";
             if (clearBtn) clearBtn.style.display = "inline-flex";
             if (cartEmpty) cartEmpty.style.display = "none";
+            if (headerBadge) headerBadge.style.display = "inline-flex";
 
             let totalQty = 0;
             let subtotal = 0;

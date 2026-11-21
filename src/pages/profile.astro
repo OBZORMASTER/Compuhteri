@@ -64,17 +64,29 @@ import Layout from '../layouts/Layout.astro';
         <!-- Права частина: швидкі картки + історія замовлень / збережені конфігурації -->
         <div class="main-column">
           <div class="summary-strip">
-            <button type="button" class="card summary-tile is-selected" data-nav="orders">
+            <button type="button" class="summary-tile is-selected" data-nav="orders">
               <div class="tile-head">
-                <span class="tile-icon">📦</span>
+                <div class="tile-icon-box">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                </div>
                 <span class="tile-title">Історія замовлень</span>
               </div>
               <span id="summary-orders-count" class="tile-meta">3 замовлення</span>
             </button>
 
-            <button type="button" class="card summary-tile" data-nav="configs">
+            <button type="button" class="summary-tile" data-nav="configs">
               <div class="tile-head">
-                <span class="tile-icon">🖥️</span>
+                <div class="tile-icon-box">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                </div>
                 <span class="tile-title">Збережені конфігурації</span>
               </div>
               <span id="summary-configs-count" class="tile-meta">2 збірки</span>
@@ -91,9 +103,13 @@ import Layout from '../layouts/Layout.astro';
 
               <div class="table-controls">
                 <div class="search-box">
+                  <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
                   <input
                     id="order-search"
-                    type="search"
+                    type="text"
                     placeholder="Пошук за номером або товаром..."
                     aria-label="Пошук за замовленнями"
                   />
@@ -107,22 +123,7 @@ import Layout from '../layouts/Layout.astro';
               </div>
             </div>
 
-            <div class="table-wrap">
-              <table class="orders-table">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Замовлення</th>
-                    <th>Кількість</th>
-                    <th>Комплектуючі</th>
-                    <th>Дата</th>
-                    <th>Сума</th>
-                    <th>Статус</th>
-                  </tr>
-                </thead>
-                <tbody id="orders-tbody"></tbody>
-              </table>
-            </div>
+            <div id="orders-list" class="orders-list"></div>
           </section>
 
           <!-- Блок 2: Збережені конфігурації -->
@@ -182,10 +183,19 @@ import Layout from '../layouts/Layout.astro';
   const ORDERS_STORAGE_KEY = 'pcstore_cabinet_orders_v1';
   const CONFIGS_STORAGE_KEY = 'pcstore_cabinet_configs_v1';
 
+  interface OrderProduct {
+    id: string;
+    title: string;
+    priceNum: number;
+    code?: string;
+    img?: string;
+  }
+
   interface OrderItem {
     id: string;
     countLabel: string;
     items: string[];
+    products?: OrderProduct[];
     date: string;
     total: string;
     status: 'Виконано' | 'Доставляється' | 'Скасовано';
@@ -208,6 +218,15 @@ import Layout from '../layouts/Layout.astro';
       id: '00000343270',
       countLabel: '1 товар',
       items: ['SSD Kingston NV2 1TB M.2 NVMe PCIe 4.0'],
+      products: [
+        {
+          id: 'kingston-nv3-1tb',
+          title: 'SSD накопичувач Kingston NV3 1TB M.2',
+          priceNum: 2450,
+          code: '343270',
+          img: '/products_pics/kingston-nv3-1tb-1.jpg',
+        },
+      ],
       date: 'від 16.05.2026',
       total: '2 450 ₴',
       status: 'Виконано',
@@ -220,6 +239,22 @@ import Layout from '../layouts/Layout.astro';
         'Відеокарта GeForce RTX 4070 Super 12GB',
         'Блок живлення 850W 80+ Gold Modular',
       ],
+      products: [
+        {
+          id: 'asus-rtx-4070',
+          title: 'Відеокарта ASUS GeForce RTX 4070 12GB',
+          priceNum: 28500,
+          code: '407018',
+          img: '/products_pics/asus-rtx-4070-1.jpg',
+        },
+        {
+          id: 'msi-mpg-850w',
+          title: 'Блок живлення MSI MPG A850G PCIE5 850W',
+          priceNum: 3300,
+          code: '850018',
+          img: '/products_pics/msi-mpg-850w-1.jpg',
+        },
+      ],
       date: 'від 29.08.2025',
       total: '31 800 ₴',
       status: 'Виконано',
@@ -231,6 +266,22 @@ import Layout from '../layouts/Layout.astro';
       items: [
         'Оперативна памʼять DDR5 32GB (2x16GB) 6000MHz',
         'Повітряне охолодження процесора Tower ARGB',
+      ],
+      products: [
+        {
+          id: 'kingston-ddr5-32gb',
+          title: "Оперативна пам'ять Kingston Fury DDR5 32GB",
+          priceNum: 4500,
+          code: '125910',
+          img: '/products_pics/kingston-ddr5-32gb-1.jpg',
+        },
+        {
+          id: 'deepcool-ak620',
+          title: 'Кулер для процесора DeepCool AK620',
+          priceNum: 2390,
+          code: '620910',
+          img: '/products_pics/deepcool-ak620-1.jpg',
+        },
       ],
       date: 'від 19.03.2025',
       total: '6 890 ₴',
@@ -249,6 +300,16 @@ import Layout from '../layouts/Layout.astro';
       storage: '2TB NVMe Gen4',
       price: '68 400 ₴',
       updatedAt: '15.11.2026',
+      parts: {
+        cpu: 'amd-ryzen-7',
+        gpu: 'asus-rtx-4070',
+        ram: 'kingston-ddr5-32gb',
+        ssd: 'samsung-990-pro-2tb',
+        mb: 'msi-z790',
+        psu: 'msi-mpg-850w',
+        cooler: 'deepcool-ak620',
+        case: 'gamdias-gc7-black',
+      },
     },
     {
       id: 'cfg-102',
@@ -259,6 +320,17 @@ import Layout from '../layouts/Layout.astro';
       storage: '1TB NVMe + 2TB HDD',
       price: '44 900 ₴',
       updatedAt: '02.11.2026',
+      parts: {
+        cpu: 'intel-core-i7',
+        gpu: 'asus-rtx-4070',
+        ram: 'kingston-ddr4-16gb',
+        ssd: 'kingston-nv3-1tb',
+        hdd: 'wd-blue-2tb',
+        mb: 'msi-z790',
+        psu: 'msi-mpg-850w',
+        cooler: 'id-cooling-a400',
+        case: 'gamdias-gc7-black',
+      },
     },
   ];
 
@@ -283,7 +355,38 @@ import Layout from '../layouts/Layout.astro';
     }
   }
 
-  const expandedOrderIds = new Set<string>();
+  function getPluralWord(count: number, one: string, few: string, many: string): string {
+    const mod10 = count % 10;
+    const mod100 = count % 100;
+    if (mod10 === 1 && mod100 !== 11) return `${count} ${one}`;
+    if (mod10 >= 2 && mod10 <= 4 && !(mod100 >= 12 && mod100 <= 14)) return `${count} ${few}`;
+    return `${count} ${many}`;
+  }
+
+  function formatConfigTitle(title: string): string {
+    if (!title) return 'Збірка ПК';
+    if (title.includes(' + ') && (title.includes('Ryzen') || title.includes('Core'))) {
+      const parts = title.split(' + ');
+      const cpuMatch = parts[0].match(/(Ryzen\s*\d+|Core\s*i\d+)/i);
+      const gpuMatch = (parts[1] || '').match(/(RTX\s*\d+(?:\s*Ti|\s*Super)*|RX\s*\d+(?:\s*XT)*)/i);
+      if (cpuMatch && gpuMatch) {
+        return `Збірка ${cpuMatch[1]} / ${gpuMatch[1]}`;
+      }
+      if (gpuMatch) return `Збірка на ${gpuMatch[1]}`;
+      if (cpuMatch) return `Збірка на ${cpuMatch[1]}`;
+    }
+    return title;
+  }
+
+  function cleanSpecVal(text: string): string {
+    if (!text) return 'Не обрано';
+    return text
+      .replace(/^Процесор\s+/i, '')
+      .replace(/^Відеокарта\s+/i, '')
+      .replace(/^(Оперативна|Модулі)\s+пам['’ʼ]я(ть|ті)\s+/gi, '')
+      .replace(/(Жорсткий диск|SSD накопичувач|HDD накопичувач|SSD|HDD)\s+/gi, '')
+      .trim();
+  }
 
   function getStatusClass(status: OrderItem['status']): string {
     if (status === 'Виконано') return 'status-done';
@@ -291,18 +394,60 @@ import Layout from '../layouts/Layout.astro';
     return 'status-cancel';
   }
 
-  function renderOrdersTable() {
-    const tbody = document.getElementById('orders-tbody');
+  function repeatOrder(orderId: string) {
+    const orders = readStorage<OrderItem[]>(ORDERS_STORAGE_KEY, initialOrders);
+    const target = orders.find((o) => o.id === orderId);
+    if (!target) return;
+
+    let cart: any[] = [];
+    try {
+      cart = JSON.parse(localStorage.getItem('pcstore_cart') || '[]');
+    } catch {
+      cart = [];
+    }
+
+    const itemsToAdd = (target.products && target.products.length > 0)
+      ? target.products
+      : target.items.map((it, idx) => ({
+          id: `re-${target.id}-${idx}`,
+          title: it,
+          priceNum: Math.round(parseInt(target.total.replace(/[^\d]/g, ''), 10) / target.items.length) || 1000,
+          code: target.id,
+          img: '',
+        }));
+
+    itemsToAdd.forEach((prod) => {
+      const existing = cart.find((c: any) => String(c.id) === String(prod.id));
+      if (existing) {
+        existing.quantity = (existing.quantity || 1) + 1;
+      } else {
+        cart.push({
+          id: prod.id,
+          title: prod.title,
+          priceNum: prod.priceNum,
+          code: prod.code || '',
+          img: prod.img || '',
+          quantity: 1,
+        });
+      }
+    });
+
+    localStorage.setItem('pcstore_cart', JSON.stringify(cart));
+    window.location.href = '/cart';
+  }
+
+  function renderOrdersList() {
+    const list = document.getElementById('orders-list');
     const searchInput = document.getElementById('order-search') as HTMLInputElement | null;
     const filterSelect = document.getElementById('order-status-filter') as HTMLSelectElement | null;
     const summaryCount = document.getElementById('summary-orders-count');
 
     const orders = readStorage<OrderItem[]>(ORDERS_STORAGE_KEY, initialOrders);
     if (summaryCount) {
-      summaryCount.textContent = `${orders.length} замовлення`;
+      summaryCount.textContent = getPluralWord(orders.length, 'замовлення', 'замовлення', 'замовлень');
     }
 
-    if (!tbody) return;
+    if (!list) return;
 
     const query = (searchInput?.value || '').trim().toLowerCase();
     const statusFilter = filterSelect?.value || 'all';
@@ -317,56 +462,70 @@ import Layout from '../layouts/Layout.astro';
     });
 
     if (!filtered.length) {
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="7" class="empty-cell">За заданими параметрами замовлень не знайдено.</td>
-        </tr>
+      list.innerHTML = `
+        <div class="empty-box">
+          <p>За заданими параметрами замовлень не знайдено.</p>
+        </div>
       `;
       return;
     }
 
-    tbody.innerHTML = filtered
-      .map((order) => {
-        const isOpen = expandedOrderIds.has(order.id);
-        const previewText = order.items.join(', ');
-        return `
-          <tr class="order-row ${isOpen ? 'is-expanded' : ''}" data-order-id="${order.id}">
-            <td class="chevron-cell">
-              <button type="button" class="expand-btn" aria-label="Деталі замовлення ${order.id}">
-                ${isOpen ? '▾' : '▸'}
-              </button>
-            </td>
-            <td class="order-id-cell">${order.id}</td>
-            <td>${order.countLabel}</td>
-            <td class="items-preview-cell" title="${previewText}">${previewText}</td>
-            <td class="muted-cell">${order.date}</td>
-            <td class="price-cell">${order.total}</td>
-            <td>
+    list.innerHTML = filtered
+      .map(
+        (order) => `
+        <article class="order-card">
+          <div class="order-card-header">
+            <div class="order-card-identity">
+              <span class="order-code-badge">№ ${order.id}</span>
+              <span class="order-card-date">${order.date}</span>
+              <span class="count-pill">${order.countLabel}</span>
+            </div>
+            <div class="order-card-meta">
+              <div class="order-card-price">${order.total}</div>
               <span class="status-badge ${getStatusClass(order.status)}">${order.status}</span>
-            </td>
-          </tr>
-          <tr class="order-details-row ${isOpen ? 'is-open' : ''}">
-            <td colspan="7">
-              <div class="order-details-box">
-                <div><strong>Склад замовлення:</strong> ${order.items.join(' • ')}</div>
-                <div class="muted-cell"><strong>Доставка:</strong> ${order.deliveryMethod}</div>
+            </div>
+          </div>
+
+          <div class="order-card-body">
+            <div class="order-card-section">
+              <span class="order-section-title">Склад замовлення:</span>
+              <div class="order-chips-wrap">
+                ${order.items
+                  .map(
+                    (it) => `
+                  <span class="order-item-chip">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    ${it}
+                  </span>`
+                  )
+                  .join('')}
               </div>
-            </td>
-          </tr>
-        `;
-      })
+            </div>
+
+            <div class="order-card-footer">
+              <div class="delivery-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                <span>Спосіб доставки: <strong>${order.deliveryMethod}</strong></span>
+              </div>
+              <button type="button" class="order-repeat-btn" data-repeat-order="${order.id}" title="Додати товари в кошик та перейти до оформлення">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="1 4 1 10 7 10"></polyline>
+                  <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                </svg>
+                Повторити замовлення
+              </button>
+            </div>
+          </div>
+        </article>
+      `
+      )
       .join('');
 
-    tbody.querySelectorAll('.order-row').forEach((row) => {
-      row.addEventListener('click', () => {
-        const id = row.getAttribute('data-order-id');
-        if (!id) return;
-        if (expandedOrderIds.has(id)) {
-          expandedOrderIds.delete(id);
-        } else {
-          expandedOrderIds.add(id);
-        }
-        renderOrdersTable();
+    list.querySelectorAll('[data-repeat-order]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.getAttribute('data-repeat-order');
+        if (id) repeatOrder(id);
       });
     });
   }
@@ -377,7 +536,7 @@ import Layout from '../layouts/Layout.astro';
     const configs = readStorage<SavedConfig[]>(CONFIGS_STORAGE_KEY, initialConfigs);
 
     if (summaryCount) {
-      summaryCount.textContent = `${configs.length} збірки`;
+      summaryCount.textContent = getPluralWord(configs.length, 'збірка', 'збірки', 'збірок');
     }
 
     if (!grid) return;
@@ -397,28 +556,81 @@ import Layout from '../layouts/Layout.astro';
         (cfg) => `
         <article class="config-card">
           <div class="config-top">
-            <div>
-              <h3 class="config-title">${cfg.title}</h3>
+            <div class="config-title-group">
+              <h3 class="config-title" title="${cfg.title}">${formatConfigTitle(cfg.title)}</h3>
               <span class="config-date">Оновлено: ${cfg.updatedAt}</span>
             </div>
             <div class="config-price">${cfg.price}</div>
           </div>
 
-          <ul class="config-specs">
-            <li><span>CPU:</span> <strong>${cfg.cpu}</strong></li>
-            <li><span>GPU:</span> <strong>${cfg.gpu}</strong></li>
-            <li><span>RAM:</span> <strong>${cfg.ram}</strong></li>
-            <li><span>Накопичувач:</span> <strong>${cfg.storage}</strong></li>
-          </ul>
+          <div class="config-specs-grid">
+            <div class="spec-row">
+              <span class="spec-label">Процесор (CPU)</span>
+              <span class="spec-val" title="${cfg.cpu}">${cleanSpecVal(cfg.cpu)}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Відеокарта (GPU)</span>
+              <span class="spec-val" title="${cfg.gpu}">${cleanSpecVal(cfg.gpu)}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Пам'ять (RAM)</span>
+              <span class="spec-val" title="${cfg.ram}">${cleanSpecVal(cfg.ram)}</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Накопичувач</span>
+              <span class="spec-val" title="${cfg.storage}">${cleanSpecVal(cfg.storage)}</span>
+            </div>
+          </div>
 
           <div class="config-actions">
-            <a href="/configurator" class="btn-outline">Відкрити в конфігураторі</a>
-            <button type="button" class="btn-remove" data-remove-cfg="${cfg.id}">Видалити</button>
+            <a href="/configurator" class="btn-config-open" data-open-cfg="${cfg.id}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              Відкрити в конфігураторі
+            </a>
+            <button type="button" class="btn-config-delete" data-remove-cfg="${cfg.id}" title="Видалити збірку">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+              Видалити
+            </button>
           </div>
         </article>
       `
       )
       .join('');
+
+    grid.querySelectorAll('[data-open-cfg]').forEach((link) => {
+      link.addEventListener('click', () => {
+        const id = link.getAttribute('data-open-cfg');
+        const target = configs.find((c) => c.id === id);
+        if (target) {
+          const partsToLoad = target.parts || {
+            cpu: target.cpu && target.cpu.includes('Ryzen') ? 'amd-ryzen-7' : 'intel-core-i7',
+            gpu: target.gpu && (target.gpu.includes('9070') || target.gpu.includes('7800')) ? 'radeon-rx-9070' : 'asus-rtx-4070',
+            ram: target.ram && target.ram.includes('DDR5') ? 'kingston-ddr5-32gb' : 'kingston-ddr4-16gb',
+            ssd: target.storage && target.storage.includes('2TB') ? 'samsung-990-pro-2tb' : 'kingston-nv3-1tb',
+            mb: 'msi-z790',
+            psu: 'msi-mpg-850w',
+            cooler: 'deepcool-ak620',
+            case: 'gamdias-gc7-black',
+          };
+          // Передаємо id та назву збірки для редагування без дублювання
+          localStorage.setItem(
+            'pcstore_load_config',
+            JSON.stringify({
+              id: target.id,
+              title: target.title,
+              parts: partsToLoad,
+            })
+          );
+        }
+      });
+    });
 
     grid.querySelectorAll('[data-remove-cfg]').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -462,8 +674,8 @@ import Layout from '../layouts/Layout.astro';
     });
   });
 
-  document.getElementById('order-search')?.addEventListener('input', renderOrdersTable);
-  document.getElementById('order-status-filter')?.addEventListener('change', renderOrdersTable);
+  document.getElementById('order-search')?.addEventListener('input', renderOrdersList);
+  document.getElementById('order-status-filter')?.addEventListener('change', renderOrdersList);
 
   document.getElementById('add-config-btn')?.addEventListener('click', () => {
     const current = readStorage<SavedConfig[]>(CONFIGS_STORAGE_KEY, initialConfigs);
@@ -477,16 +689,26 @@ import Layout from '../layouts/Layout.astro';
       storage: '1TB NVMe PCIe 4.0',
       price: '49 700 ₴',
       updatedAt: '19.11.2026',
+      parts: {
+        cpu: 'amd-ryzen-7',
+        gpu: 'radeon-rx-9070',
+        ram: 'kingston-ddr5-32gb',
+        ssd: 'kingston-nv3-1tb',
+        mb: 'msi-z790',
+        psu: 'msi-mpg-850w',
+        cooler: 'deepcool-ak620',
+        case: 'gamdias-gc7-black',
+      },
     });
     writeStorage(CONFIGS_STORAGE_KEY, current);
     renderSavedConfigs();
   });
 
-  renderOrdersTable();
+  renderOrdersList();
   renderSavedConfigs();
 </script>
 
-<style>
+<style is:global>
   .cabinet-section {
     padding: 32px 0 72px;
     min-height: 65vh;
@@ -676,24 +898,55 @@ import Layout from '../layouts/Layout.astro';
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     width: 100%;
     text-align: left;
     cursor: pointer;
     font-family: inherit;
-    transition: border-color 0.2s, background-color 0.2s;
+    padding: 18px 22px;
+    border-radius: 14px;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    transition: all 0.2s ease;
   }
 
-  .summary-tile:hover,
+  .summary-tile:hover {
+    border-color: #444;
+    background-color: var(--color-element);
+    transform: translateY(-2px);
+  }
+
   .summary-tile.is-selected {
     border-color: var(--color-accent);
-    background-color: var(--color-element);
+    background-color: rgba(0, 255, 204, 0.04);
+    box-shadow: 0 4px 20px rgba(0, 255, 204, 0.06);
   }
 
   .tile-head {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 14px;
+  }
+
+  .tile-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background-color: var(--color-element);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .summary-tile:hover .tile-icon-box,
+  .summary-tile.is-selected .tile-icon-box {
+    background-color: rgba(0, 255, 204, 0.12);
+    border-color: rgba(0, 255, 204, 0.35);
+    color: var(--color-accent);
   }
 
   .tile-title {
@@ -704,8 +957,21 @@ import Layout from '../layouts/Layout.astro';
 
   .tile-meta {
     font-size: 13px;
+    font-weight: 500;
     color: var(--color-text-muted);
+    background-color: var(--color-element);
+    border: 1px solid var(--color-border);
+    padding: 4px 10px;
+    border-radius: 999px;
     white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .summary-tile:hover .tile-meta,
+  .summary-tile.is-selected .tile-meta {
+    color: var(--color-accent);
+    border-color: rgba(0, 255, 204, 0.35);
+    background-color: rgba(0, 255, 204, 0.08);
   }
 
   .panel {
@@ -746,173 +1012,320 @@ import Layout from '../layouts/Layout.astro';
   .table-controls {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    align-items: center;
+    gap: 12px;
   }
 
-  .search-box input,
-  .status-select {
-    padding: 9px 14px;
+  .search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    width: 15px;
+    height: 15px;
+    color: var(--color-text-muted);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .search-box input {
+    min-width: 240px;
+    padding: 9px 14px 9px 34px;
     border-radius: 8px;
     border: 1px solid var(--color-border);
     background-color: var(--color-element);
     color: var(--color-text-main);
     font-family: inherit;
-    font-size: 14px;
+    font-size: 13px;
     outline: none;
+    transition: all 0.2s;
   }
 
-  .search-box input {
-    min-width: 220px;
+  .search-box input:focus {
+    border-color: var(--color-accent);
+    background-color: #242424;
+    box-shadow: 0 0 0 2px rgba(0, 255, 204, 0.15);
   }
 
-  .search-box input:focus,
+  .status-select {
+    color-scheme: dark;
+    padding: 9px 36px 9px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-element);
+    color: var(--color-text-main);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2300ffcc' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    transition: all 0.2s;
+  }
+
+  .status-select:hover {
+    border-color: #555;
+    background-color: #242424;
+  }
+
   .status-select:focus {
     border-color: var(--color-accent);
+    background-color: #242424;
+    box-shadow: 0 0 0 2px rgba(0, 255, 204, 0.15);
   }
 
-  .table-wrap {
-    overflow-x: auto;
+  .status-select option {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    padding: 10px 14px;
+    font-size: 13px;
   }
 
-  .orders-table {
+  .orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
   }
 
-  .orders-table th {
-    text-align: left;
-    padding: 12px 10px;
+  .order-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .order-card:hover {
+    border-color: #444;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .order-card-identity {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .order-code-badge {
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: rgba(0, 255, 204, 0.08);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 255, 204, 0.25);
+    display: inline-block;
+  }
+
+  .order-card-date {
+    font-size: 13px;
     color: var(--color-text-muted);
-    font-weight: 600;
-    border-bottom: 1px solid var(--color-border);
+  }
+
+  .count-pill {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    background: var(--color-element);
+    padding: 3px 8px;
+    border-radius: 6px;
     white-space: nowrap;
   }
 
-  .orders-table td {
-    padding: 14px 10px;
-    border-bottom: 1px solid var(--color-border);
-    vertical-align: middle;
+  .order-card-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
-  .order-row {
-    cursor: pointer;
-    transition: background-color 0.15s;
-  }
-
-  .order-row:hover {
-    background-color: var(--color-element);
-  }
-
-  .chevron-cell {
-    width: 28px;
-  }
-
-  .expand-btn {
-    background: none;
-    border: none;
-    color: var(--color-text-muted);
-    font-size: 15px;
-    cursor: pointer;
-  }
-
-  .order-id-cell {
-    font-weight: 700;
+  .order-card-price {
+    font-size: 17px;
+    font-weight: 800;
     color: var(--color-text-main);
-    white-space: nowrap;
-  }
-
-  .items-preview-cell {
-    max-width: 260px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: var(--color-text-muted);
-  }
-
-  .muted-cell {
-    color: var(--color-text-muted);
-    white-space: nowrap;
-  }
-
-  .price-cell {
-    font-weight: 700;
     white-space: nowrap;
   }
 
   .status-badge {
     display: inline-block;
-    padding: 4px 10px;
-    border-radius: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
     font-size: 12px;
     font-weight: 700;
     white-space: nowrap;
   }
 
   .status-done {
-    background-color: rgba(0, 255, 204, 0.14);
+    background-color: rgba(0, 255, 204, 0.12);
     color: var(--color-accent);
     border: 1px solid rgba(0, 255, 204, 0.35);
   }
 
   .status-transit {
-    background-color: rgba(255, 204, 0, 0.14);
+    background-color: rgba(255, 204, 0, 0.12);
     color: #ffd43b;
     border: 1px solid rgba(255, 204, 0, 0.35);
   }
 
   .status-cancel {
-    background-color: rgba(255, 107, 107, 0.14);
+    background-color: rgba(255, 107, 107, 0.12);
     color: #ff6b6b;
     border: 1px solid rgba(255, 107, 107, 0.35);
   }
 
-  .order-details-row {
-    display: none;
-    background-color: var(--color-surface);
+  .order-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .order-details-row.is-open {
-    display: table-row;
-  }
-
-  .order-details-box {
+  .order-card-section {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    padding: 6px 8px;
-    font-size: 13px;
-    color: var(--color-text-main);
   }
 
-  .empty-cell {
-    text-align: center;
-    padding: 28px 12px !important;
+  .order-section-title {
+    font-size: 12px;
+    font-weight: 600;
     color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .order-chips-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .order-item-chip {
+    background-color: var(--color-element);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-main);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    word-break: break-word;
+  }
+
+  .order-item-chip svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .order-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .delivery-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-muted);
+    font-size: 13px;
+  }
+
+  .delivery-badge strong {
+    color: var(--color-text-main);
+    font-weight: 500;
+  }
+
+  .delivery-badge svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .order-repeat-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background-color: rgba(0, 255, 204, 0.08);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    color: var(--color-accent);
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+  }
+
+  .order-repeat-btn:hover {
+    background-color: var(--color-accent);
+    color: #000;
+    border-color: var(--color-accent);
+    transform: translateY(-1px);
   }
 
   .panel-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    align-items: center;
+    gap: 12px;
   }
 
   .btn-primary {
-    padding: 9px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 18px;
     border-radius: 8px;
     background-color: var(--color-accent);
-    color: #000;
+    color: #000000;
     font-weight: 700;
     font-size: 14px;
     border: none;
     cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+    transition: all 0.2s ease;
   }
 
   .btn-primary:hover {
     background-color: var(--color-accent-hover);
+    transform: translateY(-1px);
   }
 
   .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 9px 16px;
     border-radius: 8px;
     background-color: var(--color-element);
@@ -922,26 +1335,41 @@ import Layout from '../layouts/Layout.astro';
     font-weight: 600;
     font-size: 14px;
     cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
   }
 
   .btn-secondary:hover {
     background-color: var(--color-element-hover);
+    border-color: #555;
+    transform: translateY(-1px);
   }
 
   .configs-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
   }
 
   .config-card {
-    background-color: var(--color-surface);
+    background-color: var(--color-card);
     border: 1px solid var(--color-border);
-    border-radius: 10px;
-    padding: 18px;
+    border-radius: 14px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+  }
+
+  .config-card:hover {
+    border-color: #444;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   }
 
   .config-top {
@@ -949,37 +1377,74 @@ import Layout from '../layouts/Layout.astro';
     justify-content: space-between;
     align-items: flex-start;
     gap: 12px;
+    min-width: 0;
+  }
+
+  .config-title-group {
+    min-width: 0;
+    flex: 1;
   }
 
   .config-title {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
+    color: var(--color-text-main);
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .config-date {
     font-size: 12px;
     color: var(--color-text-muted);
+    display: block;
   }
 
   .config-price {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 800;
     color: var(--color-accent);
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
-  .config-specs {
-    list-style: none;
+  .config-specs-grid {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    font-size: 13px;
-    color: var(--color-text-muted);
+    min-width: 0;
   }
 
-  .config-specs strong {
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background-color: var(--color-element);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    font-size: 13px;
+    min-width: 0;
+  }
+
+  .spec-label {
+    color: var(--color-text-muted);
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .spec-val {
     color: var(--color-text-main);
     font-weight: 600;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    flex: 1;
   }
 
   .config-actions {
@@ -987,30 +1452,50 @@ import Layout from '../layouts/Layout.astro';
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    padding-top: 8px;
+    padding-top: 14px;
     border-top: 1px solid var(--color-border);
+    margin-top: auto;
   }
 
-  .btn-outline {
+  .btn-config-open {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(0, 255, 204, 0.08);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    color: var(--color-accent);
+    padding: 8px 14px;
+    border-radius: 8px;
     font-size: 13px;
     font-weight: 600;
-    color: var(--color-accent);
+    text-decoration: none;
+    transition: all 0.2s;
   }
 
-  .btn-outline:hover {
-    text-decoration: underline;
+  .btn-config-open:hover {
+    background-color: var(--color-accent);
+    color: #000;
   }
 
-  .btn-remove {
+  .btn-config-delete {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     background-color: var(--color-element);
     border: 1px solid var(--color-border);
-    color: #ff6b6b;
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
+    color: var(--color-text-muted);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-config-delete:hover {
+    background-color: rgba(255, 77, 77, 0.12);
+    border-color: #ff4d4d;
+    color: #ff4d4d;
   }
 
   .empty-box {

@@ -112,6 +112,7 @@ const componentCategories = [
     title: "Звукові карти",
     slug: "sound-cards",
     desc: "Для покращення якості звуку",
+    icon: "/configurator-icons/sound_cards.svg",
     tags: [
       { name: "Внутрішні", href: "/catalog/components/sound-cards?filter=in" },
       { name: "Зовнішні", href: "/catalog/components/sound-cards?filter=out" }
@@ -257,6 +258,14 @@ const componentCategories = [
         object-fit: contain;
         padding: 10px;
         box-sizing: border-box;
+        filter: brightness(0) invert(1);
+        opacity: 0.9;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .comp-category-card:hover .category-real-img {
+        opacity: 1;
+        transform: scale(1.05);
     }
 
     .card-titles h3 {

@@ -29,6 +29,7 @@ const peripheralCategories = [
     title: "Гарнітура та навушники",
     slug: "headsets",
     desc: "Об'ємний звук, чистий мікрофон та комфорт при тривалих сесіях",
+    icon: "/configurator-icons/gatnitura.svg",
     tags: [
       { name: "Бездротові", href: "/catalog/peripherals/headsets?filter=wireless" },
       { name: "Дротові", href: "/catalog/peripherals/headsets?filter=wired" },
@@ -53,6 +54,7 @@ const peripheralCategories = [
     title: "Мікрофони",
     slug: "microphones",
     desc: "Для стрімінгу, подкастів, озвучки та голосового зв'язку",
+    icon: "/configurator-icons/microphone.svg",
     tags: [
       { name: "USB", href: "/catalog/peripherals/microphones?filter=usb" },
       { name: "XLR", href: "/catalog/peripherals/microphones?filter=xlr" },
@@ -65,6 +67,7 @@ const peripheralCategories = [
     title: "Геймпади",
     slug: "gamepads",
     desc: "Зручне керування для ПК та консолей",
+    icon: "/configurator-icons/gamepad.svg",
     tags: [
       { name: "Sony", href: "/catalog/peripherals/gamepads?filter=sony" },
       { name: "Microsoft", href: "/catalog/peripherals/gamepads?filter=microsoft" },
@@ -75,6 +78,7 @@ const peripheralCategories = [
     title: "Аксесуари та килимки",
     slug: "accessories",
     desc: "Все заради комфорту на робочому місці",
+    icon: "/configurator-icons/kilimok.svg",
     tags: [
       { name: "Килимки", href: "/catalog/peripherals/accessories?filter=mousepad" },
       { name: "Підставки під зап'ястя", href: "/catalog/peripherals/accessories?filter=rest" },
@@ -222,6 +226,14 @@ const peripheralCategories = [
         object-fit: contain;
         padding: 10px;
         box-sizing: border-box;
+        filter: brightness(0) invert(1);
+        opacity: 0.9;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .comp-category-card:hover .category-real-img {
+        opacity: 1;
+        transform: scale(1.05);
     }
 
     .card-titles h3 {

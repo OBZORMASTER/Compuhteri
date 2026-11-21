@@ -12,25 +12,17 @@
             
             <div class="component-list">
                 <!-- Процесор -->
-                <div class="component-row is-selected" data-type="cpu">
+                <div class="component-row" data-type="cpu">
                     <div class="component-info">
                         <div class="icon-wrapper">
                             <img src="/configurator-icons/procesor.svg" alt="Процесор" class="comp-icon" />
                         </div>
                         <div class="component-details">
                             <span class="component-name">Процесор</span>
-                            <span class="selected-item-name">Процесор AMD Ryzen 7 7800X3D 4.2(5.0)GHz</span>
+                            <span class="selected-item-name empty-state">Не обрано</span>
                         </div>
                     </div>
-                    <div class="component-actions">
-                        <span class="item-price">15 999 ₴</span>
-                        <button class="btn-action btn-replace" onclick="openModal('cpu')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-5.67"/></svg>
-                        </button>
-                        <button class="btn-action btn-remove">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                        </button>
-                    </div>
+                    <button class="btn-add" onclick="openModal('cpu')">+ Обрати</button>
                 </div>
 
                 <!-- Материнська плата -->
@@ -79,7 +71,7 @@
 
         <!-- Секція: Обов'язкові -->
         <div class="config-section">
-            <h2 class="section-heading">Обов'язкові <span class="required-asterisk">*</span></h2>
+            <h2 class="section-heading">Обов'язкові комплектуючі <span class="required-asterisk">*</span></h2>
             <div class="component-list">
                 <!-- SSD -->
                 <div class="component-row" data-type="ssd">
@@ -94,20 +86,6 @@
                     </div>
                     <button class="btn-add" onclick="openModal('ssd')">+ Обрати</button>
                 </div>
-
-                <!-- HDD -->
-                <div class="component-row" data-type="hdd">
-                    <div class="component-info">
-                        <div class="icon-wrapper">
-                             <img src="/configurator-icons/hdd.svg" alt="HDD диск" class="comp-icon" />
-                        </div>
-                         <div class="component-details">
-                            <span class="component-name">HDD диск</span>
-                            <span class="selected-item-name empty-state">Не обрано</span>
-                        </div>
-                    </div>
-                    <button class="btn-add" onclick="openModal('hdd')">+ Обрати</button>
-                </div>
                 
                 <!-- Охолодження -->
                 <div class="component-row" data-type="cooler">
@@ -121,34 +99,6 @@
                         </div>
                     </div>
                     <button class="btn-add" onclick="openModal('cooler')">+ Обрати</button>
-                </div>
-
-                <!-- Водяне охолодження -->
-                <div class="component-row" data-type="water-cooler">
-                    <div class="component-info">
-                        <div class="icon-wrapper">
-                             <img src="/configurator-icons/vodyane_oholodgennya.svg" alt="Водяне охолодження" class="comp-icon" />
-                        </div>
-                         <div class="component-details">
-                            <span class="component-name">Водяне охолодження</span>
-                            <span class="selected-item-name empty-state">Не обрано</span>
-                        </div>
-                    </div>
-                    <button class="btn-add" onclick="openModal('water-cooler')">+ Обрати</button>
-                </div>
-
-                <!-- Термопаста -->
-                <div class="component-row" data-type="thermal-paste">
-                    <div class="component-info">
-                        <div class="icon-wrapper">
-                             <img src="/configurator-icons/termopasta.svg" alt="Термопаста" class="comp-icon" />
-                        </div>
-                         <div class="component-details">
-                            <span class="component-name">Термопаста</span>
-                            <span class="selected-item-name empty-state">Не обрано</span>
-                        </div>
-                    </div>
-                    <button class="btn-add" onclick="openModal('thermal-paste')">+ Обрати</button>
                 </div>
                 
                 <!-- Блок живлення -->
@@ -181,46 +131,46 @@
             </div>
         </div>
 
-        <!-- Секція: Додатково -->
+        <!-- Секція: Додаткові комплектуючі -->
         <div class="config-section">
-            <h2 class="section-heading">Додаткові опції</h2>
+            <h2 class="section-heading">Додаткові комплектуючі</h2>
             <div class="component-list">
-                <!-- Вентилятори -->
-                <div class="component-row" data-type="fans">
+                <!-- HDD -->
+                <div class="component-row" data-type="hdd">
                     <div class="component-info">
                         <div class="icon-wrapper">
-                             <img src="/configurator-icons/korpus_ventilyator.svg" alt="Корпусні вентилятори" class="comp-icon" />
+                             <img src="/configurator-icons/hdd.svg" alt="HDD диск" class="comp-icon" />
                         </div>
                          <div class="component-details">
-                            <span class="component-name">Корпусні вентилятори</span>
+                            <span class="component-name">Жорсткий диск (HDD)</span>
                             <span class="selected-item-name empty-state">Не обрано</span>
                         </div>
                     </div>
-                    <button class="btn-add" onclick="openModal('fans')">+ Обрати</button>
+                    <button class="btn-add" onclick="openModal('hdd')">+ Обрати</button>
                 </div>
 
-                <!-- Мережева карта -->
-                <div class="component-row" data-type="network">
+                <!-- Звукова карта -->
+                <div class="component-row" data-type="sound-cards">
                     <div class="component-info">
                         <div class="icon-wrapper">
-                             <img src="/configurator-icons/meregevi_karti.svg" alt="Мережеві карти" class="comp-icon" />
+                             <img src="/configurator-icons/sound_cards.svg" alt="Звукова карта" class="comp-icon" />
                         </div>
                          <div class="component-details">
-                            <span class="component-name">Мережеві карти (Wi-Fi/LAN)</span>
+                            <span class="component-name">Звукова карта</span>
                             <span class="selected-item-name empty-state">Не обрано</span>
                         </div>
                     </div>
-                    <button class="btn-add" onclick="openModal('network')">+ Обрати</button>
+                    <button class="btn-add" onclick="openModal('sound-cards')">+ Обрати</button>
                 </div>
             </div>
         </div>
         
         <!-- Секція: Периферія -->
         <div class="config-section">
-            <h2 class="section-heading">Периферія</h2>
+            <h2 class="section-heading">Периферія та аксесуари</h2>
             <div class="component-list">
                 <!-- Монітор -->
-                <div class="component-row" data-type="monitor">
+                <div class="component-row" data-type="monitors">
                     <div class="component-info">
                         <div class="icon-wrapper">
                              <img src="/configurator-icons/monitor.svg" alt="Монітор" class="comp-icon" />
@@ -230,11 +180,11 @@
                             <span class="selected-item-name empty-state">Не обрано</span>
                         </div>
                     </div>
-                    <button class="btn-add" onclick="openModal('monitor')">+ Обрати</button>
+                    <button class="btn-add" onclick="openModal('monitors')">+ Обрати</button>
                 </div>
 
                 <!-- Клавіатура -->
-                <div class="component-row" data-type="keyboard">
+                <div class="component-row" data-type="keyboards">
                     <div class="component-info">
                         <div class="icon-wrapper">
                              <img src="/configurator-icons/klaviatura.svg" alt="Клавіатура" class="comp-icon" />
@@ -244,11 +194,11 @@
                             <span class="selected-item-name empty-state">Не обрано</span>
                         </div>
                     </div>
-                    <button class="btn-add" onclick="openModal('keyboard')">+ Обрати</button>
+                    <button class="btn-add" onclick="openModal('keyboards')">+ Обрати</button>
                 </div>
 
                 <!-- Миша -->
-                <div class="component-row" data-type="mouse">
+                <div class="component-row" data-type="mice">
                     <div class="component-info">
                         <div class="icon-wrapper">
                              <img src="/configurator-icons/misha.svg" alt="Миша" class="comp-icon" />
@@ -258,7 +208,63 @@
                             <span class="selected-item-name empty-state">Не обрано</span>
                         </div>
                     </div>
-                    <button class="btn-add" onclick="openModal('mouse')">+ Обрати</button>
+                    <button class="btn-add" onclick="openModal('mice')">+ Обрати</button>
+                </div>
+
+                <!-- Гарнітура та навушники -->
+                <div class="component-row" data-type="headsets">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                             <img src="/configurator-icons/gatnitura.svg" alt="Гарнітура та навушники" class="comp-icon" />
+                        </div>
+                         <div class="component-details">
+                            <span class="component-name">Гарнітура та навушники</span>
+                            <span class="selected-item-name empty-state">Не обрано</span>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('headsets')">+ Обрати</button>
+                </div>
+
+                <!-- Мікрофон -->
+                <div class="component-row" data-type="microphones">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                             <img src="/configurator-icons/microphone.svg" alt="Мікрофон" class="comp-icon" />
+                        </div>
+                         <div class="component-details">
+                            <span class="component-name">Мікрофон</span>
+                            <span class="selected-item-name empty-state">Не обрано</span>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('microphones')">+ Обрати</button>
+                </div>
+
+                <!-- Геймпад -->
+                <div class="component-row" data-type="gamepads">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                             <img src="/configurator-icons/gamepad.svg" alt="Геймпад" class="comp-icon" />
+                        </div>
+                         <div class="component-details">
+                            <span class="component-name">Геймпад</span>
+                            <span class="selected-item-name empty-state">Не обрано</span>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('gamepads')">+ Обрати</button>
+                </div>
+
+                <!-- Килимок та аксесуари -->
+                <div class="component-row" data-type="accessories">
+                    <div class="component-info">
+                        <div class="icon-wrapper">
+                             <img src="/configurator-icons/kilimok.svg" alt="Килимок та аксесуари" class="comp-icon" />
+                        </div>
+                         <div class="component-details">
+                            <span class="component-name">Килимок та аксесуари</span>
+                            <span class="selected-item-name empty-state">Не обрано</span>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="openModal('accessories')">+ Обрати</button>
                 </div>
             </div>
         </div>
@@ -269,10 +275,10 @@
         <div class="summary-card">
             <div class="summary-header">
                 <h3>Ваша збірка</h3>
-                <span class="summary-count">1 / 8 обрано</span>
+                <span class="summary-count" id="summaryCount">0 / 8 обрано</span>
             </div>
 
-            <div class="summary-status">
+            <div class="summary-status" id="statusBox">
                 <div class="status-warning">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -296,11 +302,19 @@
 
             <div class="summary-price-block">
                 <span class="total-label">Загальна сума:</span>
-                <span class="total-price">15 999 ₴</span>
+                <span class="total-price" id="totalPriceDisplay">0 ₴</span>
             </div>
 
             <div class="summary-actions">
-                <button class="btn-buy">
+                <div id="editingStateBanner" class="editing-banner hidden">
+                    <div class="editing-banner-content">
+                        <span class="editing-badge-tag">Редагування збірки</span>
+                        <span class="editing-banner-title" id="editingBannerTitle">Моя збірка</span>
+                    </div>
+                    <button type="button" id="btnCancelEdit" class="btn-cancel-edit" title="Вийти з режиму редагування">✕ Нова збірка</button>
+                </div>
+
+                <button class="btn-buy" id="btnBuyConfig">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -320,7 +334,7 @@
                     >
                     У кошик
                 </button>
-                <button class="btn-outline-small">
+                <button class="btn-outline-small" id="btnSaveConfig">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -337,7 +351,14 @@
                         ></polyline><polyline points="7 3 7 8 15 8"
                         ></polyline></svg
                     >
-                    Зберегти конфігурацію
+                    <span id="btnSaveConfigText">Зберегти конфігурацію</span>
+                </button>
+                <button type="button" class="btn-outline-small hidden" id="btnSaveAsNew">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span>Зберегти як нову</span>
                 </button>
             </div>
 
@@ -349,11 +370,11 @@
                     <div class="service-price-box">
                         <span class="price-val">499 ₴</span>
                         <span class="price-plus">+ 1%</span>
-                        <span class="price-desc"
-                            >від вартості комплектуючих</span
+                        <span class="price-desc" id="serviceFeeCalc"
+                            >від вартості комплектуючих (+ 195 ₴)</span
                         >
                     </div>
-                    <p class="service-note">
+                    <p class="service-note" id="serviceNote">
                         Доступно лише для повної та сумісної збірки.
                     </p>
                 </div>
@@ -362,28 +383,31 @@
     </aside>
 </section>
 
-<!-- Модальне вікно вибору (Імітація) -->
+<!-- Модальне вікно вибору -->
 <div id="selectionModal" class="modal-overlay hidden">
     <div class="modal-content">
         <div class="modal-header">
-            <h3>Вибір компонента</h3>
+            <div>
+                <h3 id="modalTitle">Вибір компонента</h3>
+                <span id="modalSubtitle" class="modal-subtitle">Оберіть відповідний товар для вашої збірки</span>
+            </div>
             <button class="btn-close-modal" onclick="closeModal()">✕</button>
         </div>
         <div class="modal-body">
-            <p>
-                Тут буде каталог товарів відповідної категорії з фільтрами та
-                пошуком.
-            </p>
-            <button
-                class="btn-buy"
-                style="margin-top: 20px;"
-                onclick="closeModal()">Закрити</button
-            >
+            <div id="modalProductsList" class="modal-products-list">
+                <!-- Товари завантажуються динамічно -->
+            </div>
+            <div class="modal-footer-catalog">
+                <span>Бажаєте переглянути більше?</span>
+                <a id="modalCatalogBtn" href="/catalog/components" class="catalog-sublink" target="_blank">
+                    Переглянути всі варіанти в каталозі →
+                </a>
+            </div>
         </div>
     </div>
 </div>
 
-<style>
+<style is:global>
     .configurator-container {
         display: flex;
         gap: 40px;
@@ -472,7 +496,7 @@
     .comp-icon {
         width: 37px;
         height: 37px;
-        filter: invert(1);
+        filter: brightness(0) invert(1);
         opacity: 0.85;
         transition: all 0.2s ease;
     }
@@ -631,6 +655,69 @@
         margin-bottom: 32px;
     }
 
+    .editing-banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 10px 14px;
+        background: rgba(0, 255, 204, 0.08);
+        border: 1px solid rgba(0, 255, 204, 0.3);
+        border-radius: 8px;
+    }
+
+    .editing-banner.hidden {
+        display: none;
+    }
+
+    .editing-banner-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    .editing-badge-tag {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        letter-spacing: 0.5px;
+    }
+
+    .editing-banner-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--color-text-main);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .btn-cancel-edit {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.2s;
+        flex-shrink: 0;
+    }
+
+    .btn-cancel-edit:hover {
+        background: rgba(255, 77, 77, 0.15);
+        color: #ff4d4d;
+        border-color: #ff4d4d;
+    }
+
+    .btn-outline-small.hidden {
+        display: none;
+    }
+
     .btn-buy {
         background-color: var(--color-accent);
         color: #000;
@@ -729,12 +816,12 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(0, 0, 0, 0.82);
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 1000;
-        backdrop-filter: blur(4px);
+        backdrop-filter: blur(5px);
     }
 
     .modal-overlay.hidden {
@@ -742,38 +829,246 @@
     }
 
     .modal-content {
-        background-color: var(--color-card);
-        width: 90%;
-        max-width: 600px;
+        background-color: #1a1a1a;
+        width: 92%;
+        max-width: 680px;
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
         border-radius: 16px;
         border: 1px solid var(--color-border);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+        animation: modalFadeIn 0.2s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(12px) scale(0.98);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
     }
 
     .modal-header {
         padding: 20px 24px;
         border-bottom: 1px solid var(--color-border);
+        background-color: #202020;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
     }
 
     .modal-header h3 {
-        margin: 0;
+        margin: 0 0 4px 0;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--color-text-main);
+    }
+
+    .modal-subtitle {
+        font-size: 13px;
+        color: var(--color-text-muted);
     }
 
     .btn-close-modal {
         background: none;
         border: none;
         color: var(--color-text-muted);
-        font-size: 20px;
+        font-size: 22px;
         cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: all 0.2s;
+        line-height: 1;
+    }
+
+    .btn-close-modal:hover {
+        color: var(--color-text-main);
+        background-color: #333;
     }
 
     .modal-body {
-        padding: 40px 24px;
-        text-align: center;
+        padding: 20px 24px;
+        overflow-y: auto;
+        max-height: calc(85vh - 90px);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .modal-products-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .modal-prod-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        background-color: #222;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 14px 18px;
+        transition: all 0.2s ease;
+    }
+
+    .modal-prod-item:hover {
+        border-color: #555;
+        background-color: #262626;
+    }
+
+    .modal-prod-item.is-current {
+        border-color: var(--color-accent);
+        background-color: rgba(0, 255, 204, 0.05);
+    }
+
+    .modal-prod-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .modal-prod-img-wrap {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        max-width: 56px;
+        min-height: 56px;
+        max-height: 56px;
+        background-color: #141414;
+        border: 1px solid #2e2e2e;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+
+    .modal-prod-img {
+        width: 100%;
+        height: 100%;
+        max-width: 48px;
+        max-height: 48px;
+        object-fit: contain;
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .modal-prod-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+    }
+
+    .modal-prod-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-text-main);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.35;
+    }
+
+    .modal-prod-specs {
+        font-size: 12px;
         color: var(--color-text-muted);
+        line-height: 1.35;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .modal-prod-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-shrink: 0;
+    }
+
+    .modal-prod-price {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--color-accent);
+        white-space: nowrap;
+    }
+
+    .btn-select-prod {
+        background-color: var(--color-element);
+        border: 1px solid var(--color-border);
+        color: #fff;
+        padding: 8px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+
+    .btn-select-prod:hover {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #000;
+    }
+
+    .btn-select-prod.selected {
+        background-color: rgba(0, 255, 204, 0.15);
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+    }
+
+    .empty-modal-notice {
+        text-align: center;
+        padding: 30px 10px;
+        color: var(--color-text-muted);
+        font-size: 14px;
+    }
+
+    .modal-footer-catalog {
+        margin-top: 10px;
+        padding-top: 14px;
+        border-top: 1px solid #2a2a2a;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        color: var(--color-text-muted);
+    }
+
+    .catalog-sublink {
+        color: var(--color-accent);
+        text-decoration: none;
+        font-weight: 600;
+        transition: opacity 0.2s;
+    }
+
+    .catalog-sublink:hover {
+        text-decoration: underline;
+    }
+
+    .status-ready {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background-color: rgba(0, 255, 204, 0.1);
+        color: var(--color-accent);
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        margin-bottom: 24px;
+        border: 1px solid rgba(0, 255, 204, 0.25);
     }
 
     @media (max-width: 992px) {
@@ -797,13 +1092,503 @@
             width: 100%;
             justify-content: flex-end;
         }
+        .modal-prod-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .modal-prod-right {
+            width: 100%;
+            justify-content: space-between;
+        }
+        .modal-footer-catalog {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
     }
 </style>
 
 <script>
-    const modal = document.getElementById("selectionModal");
+    interface CatalogProduct {
+        slug: string;
+        title: string;
+        price: string;
+        priceNum: number;
+        img: string;
+        specs: string;
+        code: string;
+        category: string;
+    }
 
-    function openModal(_type?: string) {
+    const configuratorCatalog: Record<string, CatalogProduct[]> = {
+        cpu: [
+            {
+                slug: "amd-ryzen-7",
+                title: "Процесор AMD Ryzen 7 7800X3D",
+                price: "19 500 ₴",
+                priceNum: 19500,
+                img: "/products_pics/amd-ryzen-7-1.jpg",
+                specs: "8 ядер / 16 потоків • до 5.0 ГГц • AM5 • 3D V-Cache",
+                code: "100-100000910WOF",
+                category: "Процесори"
+            },
+            {
+                slug: "intel-core-i7",
+                title: "Процесор Intel Core i7-14700K",
+                price: "17 999 ₴",
+                priceNum: 17999,
+                img: "/products_pics/intel-core-i7-1.jpg",
+                specs: "20 ядер / 28 потоків • до 5.6 ГГц • Socket LGA1700",
+                code: "BX8071514700K",
+                category: "Процесори"
+            }
+        ],
+        mb: [
+            {
+                slug: "msi-z790",
+                title: "Материнська плата MSI MAG Z790 TOMAHAWK",
+                price: "11 200 ₴",
+                priceNum: 11200,
+                img: "/products_pics/msi-z790-1.jpg",
+                specs: "Intel Z790 • Форм-фактор ATX • 4x DDR5 • Wi-Fi 6E",
+                code: "MAG-Z790-TOMAHAWK",
+                category: "Материнські плати"
+            }
+        ],
+        gpu: [
+            {
+                slug: "asus-rtx-4070",
+                title: "Відеокарта ASUS GeForce RTX 4070 12GB",
+                price: "28 500 ₴",
+                priceNum: 28500,
+                img: "/products_pics/asus-rtx-4070-1.jpg",
+                specs: "12 GB GDDR6X • 192-bit • DLSS 3 • 1x 16-pin",
+                code: "DUAL-RTX4070-12G",
+                category: "Відеокарти"
+            },
+            {
+                slug: "radeon-rx-9070",
+                title: "Відеокарта Gigabyte Radeon RX 9070 16GB",
+                price: "47 069 ₴",
+                priceNum: 47069,
+                img: "/products_pics/radeon-rx-9070-1.jpg",
+                specs: "16 GB GDDR6X • 256-bit • RDNA 4 • 1x 8-pin",
+                code: "GV-R9070-16GD",
+                category: "Відеокарти"
+            }
+        ],
+        ram: [
+            {
+                slug: "kingston-ddr5-32gb",
+                title: "Оперативна пам'ять Kingston Fury DDR5 32GB",
+                price: "4 500 ₴",
+                priceNum: 4500,
+                img: "/products_pics/kingston-ddr5-32gb-1.jpg",
+                specs: "32 GB (2x16) • 6000 MHz • CL30 • Intel XMP 3.0",
+                code: "KF560C30BBEK2-32",
+                category: "Оперативна пам'ять"
+            },
+            {
+                slug: "kingston-ddr4-16gb",
+                title: "Оперативна пам'ять Kingston Fury DDR4 16GB",
+                price: "2 100 ₴",
+                priceNum: 2100,
+                img: "/products_pics/kingston-ddr4-16gb-1.jpg",
+                specs: "16 GB • 3200 MHz • CL16 • DDR4",
+                code: "KF432C16BB1-16",
+                category: "Оперативна пам'ять"
+            }
+        ],
+        ssd: [
+            {
+                slug: "samsung-990-pro-2tb",
+                title: "SSD накопичувач Samsung 990 PRO 2TB M.2",
+                price: "11 800 ₴",
+                priceNum: 11800,
+                img: "/products_pics/samsung-990-pro-2tb-1.jpg",
+                specs: "2 TB • 7450 МБ/с • PCIe 4.0 NVMe M.2",
+                code: "MZ-V9P2T0BW",
+                category: "SSD накопичувачі"
+            },
+            {
+                slug: "kingston-nv3-1tb",
+                title: "SSD накопичувач Kingston NV3 1TB M.2",
+                price: "7 500 ₴",
+                priceNum: 7500,
+                img: "/products_pics/kingston-nv3-1tb-1.jpg",
+                specs: "1 TB • 6000 МБ/с • PCIe 4.0 NVMe M.2",
+                code: "SNV3S/1000G",
+                category: "SSD накопичувачі"
+            }
+        ],
+        hdd: [
+            {
+                slug: "wd-blue-2tb",
+                title: "Жорсткий диск WD Blue 2TB HDD",
+                price: "7 600 ₴",
+                priceNum: 7600,
+                img: "/products_pics/wd-blue-2tb-1.jpg",
+                specs: "2 TB • 5400 об/хв • Буфер 64 MB • SATA III",
+                code: "WD20EZAZ",
+                category: "Жорсткі диски HDD"
+            },
+            {
+                slug: "toshiba-2tb",
+                title: "Жорсткий диск Toshiba Canvio Basics 2TB HDD",
+                price: "5 400 ₴",
+                priceNum: 5400,
+                img: "/products_pics/toshiba-2tb-1.jpg",
+                specs: "2 TB • 5400 об/хв • Зовнішній накопичувач USB 3.0",
+                code: "HDTB420EK3AA",
+                category: "Жорсткі диски HDD"
+            }
+        ],
+        cooler: [
+            {
+                slug: "deepcool-ak620",
+                title: "Кулер для процесора DeepCool AK620",
+                price: "2 600 ₴",
+                priceNum: 2600,
+                img: "/products_pics/deepcool-ak620-1.jpg",
+                specs: "TDP 260W • Двосекційний • 2x 120 мм вентилятори",
+                code: "R-AK620-BKNNMT-G",
+                category: "Системи охолодження"
+            },
+            {
+                slug: "id-cooling-a400",
+                title: "Кулер ID-COOLING Frozn A400 ARGB",
+                price: "1 300 ₴",
+                priceNum: 1300,
+                img: "/products_pics/id-cooling-a400-1.jpg",
+                specs: "TDP 180W • 92 мм вентилятор • ARGB підсвітка",
+                code: "FROZN-A400-ARGB",
+                category: "Системи охолодження"
+            },
+            {
+                slug: "zezzio-prism-6",
+                title: "Вентилятор Zezzio Prism 6 Pro ARGB",
+                price: "249 ₴",
+                priceNum: 249,
+                img: "/products_pics/zezzio-prism-6-1.jpg",
+                specs: "120 мм • 800-1500 об/хв • Reverse потік • ARGB",
+                code: "ZEZ-PRISM-6P",
+                category: "Системи охолодження"
+            }
+        ],
+        psu: [
+            {
+                slug: "msi-mpg-850w",
+                title: "Блок живлення MSI MPG A850G 850W",
+                price: "5 900 ₴",
+                priceNum: 5900,
+                img: "/products_pics/msi-mpg-850w-1.jpg",
+                specs: "850 W • 80 PLUS Gold • Модульний • Роз'єм PCIe 5.0",
+                code: "MPG-A850G-PCIE5",
+                category: "Блоки живлення"
+            },
+            {
+                slug: "kcas-1000w",
+                title: "Блок живлення KCAS PLUS GOLD 1000W",
+                price: "8 709 ₴",
+                priceNum: 8709,
+                img: "/products_pics/kcas-1000w-1.jpg",
+                specs: "1000 W • 80 PLUS Gold • Підтримка 12VHPWR",
+                code: "KCAS-PLUS-1000W",
+                category: "Блоки живлення"
+            }
+        ],
+        case: [
+            {
+                slug: "gamdias-gc7-black",
+                title: "Корпус Gamdias Aura GC7 ARGB Black",
+                price: "1 600 ₴",
+                priceNum: 1600,
+                img: "/products_pics/gamdias-gc7-black-1.jpg",
+                specs: "Miditower • Загартоване скло • 3 вентилятори ARGB",
+                code: "AURA-GC7-BK",
+                category: "Корпуси"
+            }
+        ],
+        "sound-cards": [
+            {
+                slug: "manli-c-media",
+                title: "Звукова карта Manli C-Media 8738 PCI-E",
+                price: "599 ₴",
+                priceNum: 599,
+                img: "/products_pics/manli-c-media-1.jpg",
+                specs: "PCI Express • 5.1 звук • C-Media CMI8738",
+                code: "MANLI-CMI8738",
+                category: "Звукові карти"
+            },
+            {
+                slug: "vention-sc-2",
+                title: "Звукова карта Vention USB Sound Card 2.0",
+                price: "309 ₴",
+                priceNum: 309,
+                img: "/products_pics/vention-sc-2-1.jpg",
+                specs: "USB 2.0 • 2 х mini-jack 3.5 мм • Plug & Play",
+                code: "VEN-CDLH0",
+                category: "Звукові карти"
+            }
+        ],
+        monitors: [
+            {
+                slug: "lg-ultragear-27gr93u-4k",
+                title: "Монітор 27\" LG UltraGear 27GR93U-B 4K 144Hz",
+                price: "24 999 ₴",
+                priceNum: 24999,
+                img: "/products_pics/lg-ultragear-27gr93u-4k-1.jpg",
+                specs: "27\" 3840x2160 (4K) • 144 Гц • IPS 1 мс • FreeSync / G-SYNC",
+                code: "27GR93U-B",
+                category: "Монітори"
+            },
+            {
+                slug: "asus-proart-pa279crv",
+                title: "Монітор 27\" ASUS ProArt PA279CRV 4K",
+                price: "21 499 ₴",
+                priceNum: 21499,
+                img: "/products_pics/asus-proart-pa279crv-1.jpg",
+                specs: "27\" 4K UHD • 60 Гц • IPS • Calman Verified • 99% DCI-P3",
+                code: "PA279CRV",
+                category: "Монітори"
+            },
+            {
+                slug: "dell-ultrasharp-u2724d",
+                title: "Монітор 27\" Dell UltraSharp U2724D QHD 120Hz",
+                price: "15 899 ₴",
+                priceNum: 15899,
+                img: "/products_pics/dell-ultrasharp-u2724d-1.jpg",
+                specs: "27\" 2560x1440 (QHD) • 120 Гц • IPS Black 2000:1",
+                code: "U2724D",
+                category: "Монітори"
+            }
+        ],
+        keyboards: [
+            {
+                slug: "hyperx-alloy-origins-65",
+                title: "Клавіатура HyperX Alloy Origins 65",
+                price: "4 299 ₴",
+                priceNum: 4299,
+                img: "/products_pics/hyperx-alloy-origins-65-1.jpg",
+                specs: "Форм-фактор 65% • Механічні перемикачі • RGB • USB-C",
+                code: "4P5D6AA",
+                category: "Клавіатури"
+            },
+            {
+                slug: "logitech-g-pro-x-tkl-wireless",
+                title: "Клавіатура Logitech G PRO X TKL Lightspeed",
+                price: "7 499 ₴",
+                priceNum: 7499,
+                img: "/products_pics/logitech-g-pro-x-tkl-wireless-1.jpg",
+                specs: "Форм-фактор TKL • LIGHTSPEED / BT • GX Brown • Медіаклавіші",
+                code: "920-012140",
+                category: "Клавіатури"
+            }
+        ],
+        mice: [
+            {
+                slug: "logitech-g-pro-x-superlight-2",
+                title: "Миша Logitech G PRO X Superlight 2",
+                price: "5 999 ₴",
+                priceNum: 5999,
+                img: "/products_pics/logitech-g-pro-x-superlight-2-1.jpg",
+                specs: "Бездротова LIGHTSPEED • Сенсор HERO 2 32K DPI • Вага 60 г",
+                code: "910-006630",
+                category: "Миші"
+            },
+            {
+                slug: "razer-deathadder-v3",
+                title: "Миша Razer DeathAdder V3",
+                price: "3 199 ₴",
+                priceNum: 3199,
+                img: "/products_pics/razer-deathadder-v3-1.jpg",
+                specs: "Дротова USB • Сенсор Focus Pro 30K • Вага 59 г • 8000 Гц",
+                code: "RZ01-04640100",
+                category: "Миші"
+            }
+        ],
+        headsets: [
+            {
+                slug: "hyperx-cloud-iii-wireless",
+                title: "Гарнітура HyperX Cloud III Wireless",
+                price: "6 499 ₴",
+                priceNum: 6499,
+                img: "/products_pics/hyperx-cloud-iii-wireless-1.jpg",
+                specs: "Автономність до 120 год • DTS Headphone:X • 2.4 ГГц USB-C",
+                code: "77Z45AA",
+                category: "Гарнітура та навушники"
+            },
+            {
+                slug: "logitech-g-pro-x-2-lightspeed",
+                title: "Навушники Logitech G PRO X 2 Lightspeed",
+                price: "9 799 ₴",
+                priceNum: 9799,
+                img: "/products_pics/logitech-g-pro-x-2-lightspeed-1.jpg",
+                specs: "50-мм графенові драйвери • LIGHTSPEED / BT / 3.5 мм • Blue VO!CE",
+                code: "981-001269",
+                category: "Гарнітура та навушники"
+            },
+            {
+                slug: "razer-blackshark-v2-x",
+                title: "Гарнітура Razer BlackShark V2 X",
+                price: "2 499 ₴",
+                priceNum: 2499,
+                img: "/products_pics/razer-blackshark-v2-x-1.jpg",
+                specs: "Динаміки TriForce 50 мм • 7.1 Surround • Вага 240 г • 3.5 мм",
+                code: "RZ04-03240100",
+                category: "Гарнітура та навушники"
+            }
+        ],
+        microphones: [
+            {
+                slug: "hyperx-quadcast-s",
+                title: "Мікрофон HyperX QuadCast S USB",
+                price: "10 800 ₴",
+                priceNum: 10800,
+                img: "/products_pics/hyperx-quadcast-s-1.jpg",
+                specs: "Конденсаторний USB • Антивібраційний підвіс • RGB-підсвітка",
+                code: "HMIQ1S-XX-RG/G",
+                category: "Мікрофони"
+            },
+            {
+                slug: "fifine-ampligame-am8",
+                title: "Мікрофон FIFINE AmpliGame AM8 USB/XLR",
+                price: "3 800 ₴",
+                priceNum: 3800,
+                img: "/products_pics/fifine-ampligame-am8-1.jpg",
+                specs: "Динамічний кардіоїдний • USB-C / XLR • Сенсорний Mute • RGB",
+                code: "FIFINE-AM8",
+                category: "Мікрофони"
+            }
+        ],
+        gamepads: [
+            {
+                slug: "sony-dualsense-wireless",
+                title: "Геймпад Sony DualSense Wireless",
+                price: "3 299 ₴",
+                priceNum: 3299,
+                img: "/products_pics/sony-dualsense-wireless-1.jpg",
+                specs: "Тактильний відгук • Адаптивні тригери • Bluetooth / USB-C • ПК / PS5",
+                code: "CFI-ZCT1W",
+                category: "Геймпади"
+            },
+            {
+                slug: "microsoft-xbox-wireless-controller",
+                title: "Геймпад Microsoft Xbox Wireless Controller",
+                price: "2 699 ₴",
+                priceNum: 2699,
+                img: "/products_pics/microsoft-xbox-wireless-controller-1.jpg",
+                specs: "Текстуровані тригери • Bluetooth • Сумісність з Windows та Xbox",
+                code: "QAT-00002",
+                category: "Геймпади"
+            }
+        ],
+        accessories: [
+            {
+                slug: "steelseries-qck-heavy-xxl",
+                title: "Килимок SteelSeries QcK Heavy XXL",
+                price: "1 799 ₴",
+                priceNum: 1799,
+                img: "/products_pics/steelseries-qck-heavy-xxl-1.jpg",
+                specs: "900 x 400 x 4 мм • Мікротканина Control • Гумова основа",
+                code: "63008",
+                category: "Аксесуари та килимки"
+            },
+            {
+                slug: "hyperx-wrist-rest",
+                title: "Підставка під зап'ястя HyperX Wrist Rest",
+                price: "1 199 ₴",
+                priceNum: 1199,
+                img: "/products_pics/hyperx-wrist-rest-1.jpg",
+                specs: "Охолоджувальний гель • Піна з ефектом пам'яті • 88 x 457 мм",
+                code: "4P5M9AA",
+                category: "Аксесуари та килимки"
+            },
+            {
+                slug: "razer-mouse-bungee-v3",
+                title: "Тримач кабелю Razer Mouse Bungee V3",
+                price: "1 099 ₴",
+                priceNum: 1099,
+                img: "/products_pics/razer-mouse-bungee-v3-1.jpg",
+                specs: "Пружинний кронштейн • Важка протиковзна основа",
+                code: "RZ21-01560100",
+                category: "Аксесуари та килимки"
+            }
+        ]
+    };
+
+    const categoryMap: Record<string, { title: string; subtitle: string; href: string }> = {
+        cpu: { title: "Вибір процесора", subtitle: "Оберіть процесор AMD або Intel для вашої конфігурації", href: "/catalog/components/processors" },
+        mb: { title: "Вибір материнської плати", subtitle: "Оберіть сумісну материнську плату для процесора", href: "/catalog/components/motherboards" },
+        gpu: { title: "Вибір відеокарти", subtitle: "Оберіть потужну графічну карту для ігор або роботи", href: "/catalog/components/gpus" },
+        ram: { title: "Вибір оперативної пам'яті", subtitle: "Оберіть модуль або комплект оперативної пам'яті", href: "/catalog/components/ram" },
+        ssd: { title: "Вибір SSD накопичувача", subtitle: "Швидкісний накопичувач для системи та ігор", href: "/catalog/components/ssd" },
+        hdd: { title: "Вибір жорсткого диска (HDD)", subtitle: "Містке сховище для ваших файлів", href: "/catalog/components/hdd" },
+        cooler: { title: "Вибір системи охолодження", subtitle: "Повітряні або рідинні системи охолодження", href: "/catalog/components/coolers" },
+        psu: { title: "Вибір блока живлення", subtitle: "Надійне та стабільне живлення компонентів", href: "/catalog/components/psu" },
+        case: { title: "Вибір корпусу", subtitle: "Корпус для збірки з оптимальним продувом", href: "/catalog/components/cases" },
+        "sound-cards": { title: "Вибір звукової карти", subtitle: "Якісне аудіо для навушників та акустики", href: "/catalog/components/sound-cards" },
+        monitors: { title: "Вибір монітора", subtitle: "Ігрові та професійні монітори з якісною матрицею", href: "/catalog/peripherals/monitors" },
+        keyboards: { title: "Вибір клавіатури", subtitle: "Механічні та компактні ігрові клавіатури", href: "/catalog/peripherals/keyboards" },
+        mice: { title: "Вибір миші", subtitle: "Високоточні ігрові сенсори та ергономіка", href: "/catalog/peripherals/mice" },
+        headsets: { title: "Вибір гарнітури та навушників", subtitle: "Об'ємний звук та чистий мікрофон для спілкування", href: "/catalog/peripherals/headsets" },
+        microphones: { title: "Вибір мікрофона", subtitle: "Студійний звук для стрімів, подкастів та ігор", href: "/catalog/peripherals/microphones" },
+        gamepads: { title: "Вибір геймпада", subtitle: "Зручні контролери для ігор на ПК", href: "/catalog/peripherals/gamepads" },
+        accessories: { title: "Вибір аксесуара чи килимка", subtitle: "Килимки для миші, підставки та аксесуари", href: "/catalog/peripherals/accessories" },
+    };
+
+    // Стан поточної конфігурації
+    const selectedConfig: Record<string, CatalogProduct> = {};
+
+    const modal = document.getElementById("selectionModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalSubtitle = document.getElementById("modalSubtitle");
+    const modalProductsList = document.getElementById("modalProductsList");
+    const modalCatalogBtn = document.getElementById("modalCatalogBtn");
+
+    const formatPrice = (num: number) => {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₴";
+    };
+
+    function openModal(type?: string) {
+        if (!type || !categoryMap[type]) return;
+
+        const info = categoryMap[type];
+        if (modalTitle) modalTitle.textContent = info.title;
+        if (modalSubtitle) modalSubtitle.textContent = info.subtitle;
+        if (modalCatalogBtn) modalCatalogBtn.setAttribute("href", info.href);
+
+        const products = configuratorCatalog[type] || [];
+        if (modalProductsList) {
+            if (products.length === 0) {
+                modalProductsList.innerHTML = `<div class="empty-modal-notice">Товари для цієї категорії наразі оновлюються. Перейдіть до каталогу.</div>`;
+            } else {
+                const currentSelected = selectedConfig[type];
+                modalProductsList.innerHTML = products.map((prod) => {
+                    const isSelected = currentSelected && currentSelected.slug === prod.slug;
+                    return `
+                        <div class="modal-prod-item ${isSelected ? 'is-current' : ''}">
+                            <div class="modal-prod-left">
+                                <div class="modal-prod-img-wrap" style="width:56px;height:56px;min-width:56px;max-width:56px;min-height:56px;max-height:56px;flex-shrink:0;overflow:hidden;border-radius:8px;background:#141414;border:1px solid #2e2e2e;display:flex;align-items:center;justify-content:center;padding:4px;">
+                                    <img src="${prod.img}" alt="${prod.title}" class="modal-prod-img" width="48" height="48" style="width:48px;height:48px;max-width:48px;max-height:48px;object-fit:contain;display:block;" onerror="this.style.opacity='0.3'" />
+                                </div>
+                                <div class="modal-prod-info">
+                                    <span class="modal-prod-title" title="${prod.title}">${prod.title}</span>
+                                    <span class="modal-prod-specs">${prod.specs}</span>
+                                </div>
+                            </div>
+                            <div class="modal-prod-right">
+                                <span class="modal-prod-price">${prod.price}</span>
+                                <button type="button" class="btn-select-prod ${isSelected ? 'selected' : ''}" onclick="selectComponent('${type}', '${prod.slug}')">
+                                    ${isSelected ? '✓ Обрано' : 'Обрати'}
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join("");
+            }
+        }
+
         modal?.classList.remove("hidden");
     }
 
@@ -811,8 +1596,407 @@
         modal?.classList.add("hidden");
     }
 
+    function selectComponent(type: string, slug: string) {
+        const productList = configuratorCatalog[type];
+        if (!productList) return;
+
+        const product = productList.find(p => p.slug === slug);
+        if (!product) return;
+
+        selectedConfig[type] = product;
+
+        const row = document.querySelector(`.component-row[data-type="${type}"]`);
+        if (row) {
+            row.classList.add("is-selected");
+            const nameEl = row.querySelector(".selected-item-name");
+            if (nameEl) {
+                nameEl.textContent = product.title;
+                nameEl.classList.remove("empty-state");
+            }
+
+            // Заміна кнопки на блок з ціною та діями
+            let actionsEl = row.querySelector(".component-actions");
+            if (!actionsEl) {
+                const addBtn = row.querySelector(".btn-add");
+                if (addBtn) addBtn.remove();
+                actionsEl = document.createElement("div");
+                actionsEl.className = "component-actions";
+                row.appendChild(actionsEl);
+            }
+
+            actionsEl.innerHTML = `
+                <span class="item-price">${product.price}</span>
+                <button class="btn-action btn-replace" onclick="openModal('${type}')" title="Замінити">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.67-5.67"/></svg>
+                </button>
+                <button class="btn-action btn-remove" onclick="removeComponent('${type}')" title="Видалити">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            `;
+        }
+
+        closeModal();
+        updateSummary();
+    }
+
+    function removeComponent(type: string) {
+        delete selectedConfig[type];
+
+        const row = document.querySelector(`.component-row[data-type="${type}"]`);
+        if (row) {
+            row.classList.remove("is-selected");
+            const nameEl = row.querySelector(".selected-item-name");
+            if (nameEl) {
+                nameEl.textContent = "Не обрано";
+                nameEl.classList.add("empty-state");
+            }
+
+            const actionsEl = row.querySelector(".component-actions");
+            if (actionsEl) {
+                actionsEl.remove();
+            }
+
+            const existingAddBtn = row.querySelector(".btn-add");
+            if (!existingAddBtn) {
+                const addBtn = document.createElement("button");
+                addBtn.className = "btn-add";
+                addBtn.textContent = "+ Обрати";
+                addBtn.setAttribute("onclick", `openModal('${type}')`);
+                row.appendChild(addBtn);
+            }
+        }
+
+        updateSummary();
+    }
+
+    function updateSummary() {
+        const requiredSlots = ["cpu", "mb", "gpu", "ram", "ssd", "cooler", "psu", "case"];
+        const selectedItems = Object.values(selectedConfig);
+
+        const totalPrice = selectedItems.reduce((acc, item) => acc + item.priceNum, 0);
+        const totalPriceEl = document.getElementById("totalPriceDisplay");
+        if (totalPriceEl) totalPriceEl.textContent = formatPrice(totalPrice);
+
+        const readyRequiredCount = requiredSlots.filter(slot => !!selectedConfig[slot]).length;
+        const summaryCountEl = document.getElementById("summaryCount");
+        if (summaryCountEl) {
+            summaryCountEl.textContent = `${readyRequiredCount} / 8 обрано`;
+        }
+
+        const statusBox = document.getElementById("statusBox");
+        if (statusBox) {
+            if (readyRequiredCount === 8) {
+                statusBox.innerHTML = `
+                    <div class="status-ready">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <span>Збірка готова до замовлення</span>
+                    </div>
+                `;
+            } else {
+                statusBox.innerHTML = `
+                    <div class="status-warning">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        <span>Збірка не повна (${8 - readyRequiredCount} обов'язкових залишилось)</span>
+                    </div>
+                `;
+            }
+        }
+
+        const feeEl = document.getElementById("serviceFeeCalc");
+        if (feeEl) {
+            const fee1 = Math.round(totalPrice * 0.01);
+            feeEl.textContent = `від вартості комплектуючих (+ ${formatPrice(fee1)})`;
+        }
+    }
+
+    // Стан редагування існуючої збірки
+    let activeEditingId: string | null = null;
+    let activeEditingTitle: string | null = null;
+
+    function setEditingMode(id: string | null, title: string | null) {
+        activeEditingId = id;
+        activeEditingTitle = title;
+        const banner = document.getElementById("editingStateBanner");
+        const bannerTitle = document.getElementById("editingBannerTitle");
+        const btnSaveText = document.getElementById("btnSaveConfigText");
+        const btnSaveAsNew = document.getElementById("btnSaveAsNew");
+
+        if (id && title) {
+            if (banner) banner.classList.remove("hidden");
+            if (bannerTitle) bannerTitle.textContent = title;
+            if (btnSaveText) btnSaveText.textContent = "Оновити збережену збірку";
+            if (btnSaveAsNew) btnSaveAsNew.classList.remove("hidden");
+        } else {
+            if (banner) banner.classList.add("hidden");
+            if (btnSaveText) btnSaveText.textContent = "Зберегти конфігурацію";
+            if (btnSaveAsNew) btnSaveAsNew.classList.add("hidden");
+        }
+    }
+
+    document.getElementById("btnCancelEdit")?.addEventListener("click", () => {
+        setEditingMode(null, null);
+    });
+
+    // Автоматичне завантаження конфігурації, переданої з особистого кабінету
+    function checkAndLoadInitialConfig() {
+        const loadKey = "pcstore_load_config";
+        const savedRaw = localStorage.getItem(loadKey);
+        if (savedRaw) {
+            try {
+                const toLoad = JSON.parse(savedRaw);
+                localStorage.removeItem(loadKey);
+                if (toLoad && typeof toLoad === "object") {
+                    let parts: Record<string, any> = {};
+                    if (toLoad.parts) {
+                        parts = toLoad.parts;
+                        setEditingMode(toLoad.id || null, toLoad.title || null);
+                    } else {
+                        parts = toLoad;
+                    }
+
+                    Object.entries(parts).forEach(([type, val]: [string, any]) => {
+                        const slug = typeof val === "string" ? val : (val && val.slug ? val.slug : "");
+                        if (slug && configuratorCatalog[type]) {
+                            selectComponent(type, slug);
+                        }
+                    });
+                }
+            } catch (e) {
+                // ігноруємо помилки
+            }
+        }
+        updateSummary();
+    }
+
+    checkAndLoadInitialConfig();
+
+    // Слухач на кнопку додавання у кошик
+    const btnBuy = document.getElementById("btnBuyConfig");
+    btnBuy?.addEventListener("click", () => {
+        const selectedItems = Object.values(selectedConfig);
+        if (selectedItems.length === 0) {
+            alert("Будь ласка, оберіть хоча б один компонент перед додаванням у кошик.");
+            return;
+        }
+
+        let cart: any[] = [];
+        try {
+            const savedCart = localStorage.getItem("pcstore_cart");
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+            }
+        } catch (e) {
+            cart = [];
+        }
+
+        selectedItems.forEach(item => {
+            const existingIndex = cart.findIndex(c => c.id === item.slug);
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({
+                    id: item.slug,
+                    title: item.title,
+                    price: item.price,
+                    priceNum: item.priceNum,
+                    category: item.category,
+                    quantity: 1,
+                    img: item.img,
+                    code: item.code
+                });
+            }
+        });
+
+        localStorage.setItem("pcstore_cart", JSON.stringify(cart));
+        window.location.href = "/cart";
+    });
+
+    // Допоміжна функція формування даних збереженої збірки
+    function prepareConfigPayload() {
+        const selectedItems = Object.values(selectedConfig);
+        const totalPrice = selectedItems.reduce((acc, item) => acc + item.priceNum, 0);
+
+        const parts: Record<string, string> = {};
+        Object.entries(selectedConfig).forEach(([type, prod]) => {
+            if (prod && prod.slug) {
+                parts[type] = prod.slug;
+            }
+        });
+
+        const now = new Date();
+        const dateStr = `${String(now.getDate()).padStart(2, "0")}.${String(now.getMonth() + 1).padStart(2, "0")}.${now.getFullYear()}`;
+
+        let defaultTitle = "Збірка ПК";
+        let cpuShort = "";
+        let gpuShort = "";
+
+        if (selectedConfig.cpu) {
+            const m = selectedConfig.cpu.title.match(/(Ryzen\s*\d+|Core\s*i\d+)/i);
+            cpuShort = m ? m[1] : selectedConfig.cpu.title.replace(/^Процесор\s+/i, "").split(" ")[0];
+        }
+        if (selectedConfig.gpu) {
+            const m = selectedConfig.gpu.title.match(/(RTX\s*\d+(?:\s*Ti|\s*Super)*|RX\s*\d+(?:\s*XT)*)/i);
+            gpuShort = m ? m[1] : selectedConfig.gpu.title.replace(/^Відеокарта\s+/i, "").split(" ")[0];
+        }
+
+        if (cpuShort && gpuShort) {
+            defaultTitle = `Збірка ${cpuShort} / ${gpuShort}`;
+        } else if (gpuShort) {
+            defaultTitle = `Збірка на ${gpuShort}`;
+        } else if (cpuShort) {
+            defaultTitle = `Збірка на ${cpuShort}`;
+        } else {
+            defaultTitle = `Збірка ПК (${dateStr})`;
+        }
+
+        const cpuTitle = selectedConfig.cpu?.title ? selectedConfig.cpu.title.replace(/^Процесор\s+/i, "").trim() : "Не обрано";
+        const gpuTitle = selectedConfig.gpu?.title ? selectedConfig.gpu.title.replace(/^Відеокарта\s+/i, "").trim() : "Не обрано";
+        const ramTitle = selectedConfig.ram?.title ? selectedConfig.ram.title.replace(/^(Оперативна|Модулі)\s+пам['’ʼ]я(ть|ті)\s+/gi, "").trim() : "Не обрано";
+
+        const storages = [
+            selectedConfig.ssd?.title ? selectedConfig.ssd.title.replace(/^(Жорсткий диск|SSD накопичувач|HDD накопичувач|SSD|HDD)\s+/gi, "").trim() : "",
+            selectedConfig.hdd?.title ? selectedConfig.hdd.title.replace(/^(Жорсткий диск|SSD накопичувач|HDD накопичувач|SSD|HDD)\s+/gi, "").trim() : ""
+        ].filter(Boolean);
+        const storageTitle = storages.length > 0 ? storages.join(" + ") : "Не обрано";
+
+        return {
+            totalPrice,
+            parts,
+            dateStr,
+            defaultTitle,
+            cpuTitle,
+            gpuTitle,
+            ramTitle,
+            storageTitle,
+        };
+    }
+
+    // Зберегти або оновити конфігурацію
+    const btnSave = document.getElementById("btnSaveConfig");
+    btnSave?.addEventListener("click", () => {
+        const selectedItems = Object.values(selectedConfig);
+        if (selectedItems.length === 0) {
+            alert("Будь ласка, оберіть хоча б один компонент для збереження конфігурації.");
+            return;
+        }
+
+        localStorage.setItem("pcstore_saved_config", JSON.stringify(selectedConfig));
+        const payload = prepareConfigPayload();
+
+        const CONFIGS_STORAGE_KEY = "pcstore_cabinet_configs_v1";
+        let existingConfigs: any[] = [];
+        try {
+            const raw = localStorage.getItem(CONFIGS_STORAGE_KEY);
+            if (raw) existingConfigs = JSON.parse(raw);
+        } catch {
+            existingConfigs = [];
+        }
+
+        if (activeEditingId) {
+            // Оновлюємо поточну існуючу збірку (без дублювання!)
+            const targetIndex = existingConfigs.findIndex((c: any) => c.id === activeEditingId);
+            const titleToKeep = activeEditingTitle || payload.defaultTitle;
+            const updatedItem = {
+                id: activeEditingId,
+                title: titleToKeep,
+                cpu: payload.cpuTitle,
+                gpu: payload.gpuTitle,
+                ram: payload.ramTitle,
+                storage: payload.storageTitle,
+                price: formatPrice(payload.totalPrice),
+                updatedAt: payload.dateStr,
+                parts: payload.parts,
+            };
+
+            if (targetIndex !== -1) {
+                existingConfigs[targetIndex] = updatedItem;
+            } else {
+                existingConfigs.unshift(updatedItem);
+            }
+        } else {
+            // Створюємо нову збірку
+            const newId = `cfg-${Date.now()}`;
+            const newItem = {
+                id: newId,
+                title: payload.defaultTitle,
+                cpu: payload.cpuTitle,
+                gpu: payload.gpuTitle,
+                ram: payload.ramTitle,
+                storage: payload.storageTitle,
+                price: formatPrice(payload.totalPrice),
+                updatedAt: payload.dateStr,
+                parts: payload.parts,
+            };
+            existingConfigs.unshift(newItem);
+            setEditingMode(newId, payload.defaultTitle);
+        }
+
+        try {
+            localStorage.setItem(CONFIGS_STORAGE_KEY, JSON.stringify(existingConfigs));
+        } catch (e) {
+            console.error("Помилка збереження в профіль:", e);
+        }
+
+        const btn = btnSave as HTMLButtonElement;
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            ${activeEditingId ? "Оновлено в профілі!" : "Збережено в профіль!"}
+        `;
+        setTimeout(() => {
+            btn.innerHTML = originalHtml;
+        }, 2200);
+    });
+
+    // Кнопка: Зберегти як нову збірку (створення окремої копії)
+    document.getElementById("btnSaveAsNew")?.addEventListener("click", () => {
+        const selectedItems = Object.values(selectedConfig);
+        if (selectedItems.length === 0) return;
+
+        const payload = prepareConfigPayload();
+        const newId = `cfg-${Date.now()}`;
+        const newTitle = activeEditingTitle ? `${activeEditingTitle} (копія)` : payload.defaultTitle;
+
+        const newItem = {
+            id: newId,
+            title: newTitle,
+            cpu: payload.cpuTitle,
+            gpu: payload.gpuTitle,
+            ram: payload.ramTitle,
+            storage: payload.storageTitle,
+            price: formatPrice(payload.totalPrice),
+            updatedAt: payload.dateStr,
+            parts: payload.parts,
+        };
+
+        const CONFIGS_STORAGE_KEY = "pcstore_cabinet_configs_v1";
+        let existingConfigs: any[] = [];
+        try {
+            const raw = localStorage.getItem(CONFIGS_STORAGE_KEY);
+            if (raw) existingConfigs = JSON.parse(raw);
+        } catch {
+            existingConfigs = [];
+        }
+
+        existingConfigs.unshift(newItem);
+        try {
+            localStorage.setItem(CONFIGS_STORAGE_KEY, JSON.stringify(existingConfigs));
+        } catch (e) {}
+
+        setEditingMode(newId, newTitle);
+
+        const btnNew = document.getElementById("btnSaveAsNew") as HTMLButtonElement | null;
+        if (btnNew) {
+            const orig = btnNew.innerHTML;
+            btnNew.innerHTML = `✓ Збережено копію!`;
+            setTimeout(() => { btnNew.innerHTML = orig; }, 2000);
+        }
+    });
+
     (window as any).openModal = openModal;
     (window as any).closeModal = closeModal;
+    (window as any).selectComponent = selectComponent;
+    (window as any).removeComponent = removeComponent;
 
     modal?.addEventListener("click", function (e) {
         if (e.target === this) {
